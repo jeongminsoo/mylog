@@ -5,10 +5,12 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
     
-    <mapper namespace="com.project.mylog.model.ReviewReplyBoardDao">
+    <mapper namespace="com.project.mylog.dao.ReviewReplyBoardDao">
     	<resultMap type="ReviewReplyBoard" id="ReviewReplyBoardResult">
 	    	<result property="rpnum" column="rpnum"/>
 	    	<result property="rnum" column="rnum"/>
+	      	<result property="mid" column="mid"/>
+	    	<result property="mname" column="mname"/>
 			<result property="rpcontent" column="rpcontent"/>
 			<result property="rpdate" column="rpdate"/>
 			<result property="rpgroup" column="rpgroup"/>
@@ -63,7 +65,7 @@
 		</update>
 		
 		<!-- 답댓글 쓰기 -->
-		<insert id="ReviewReplyCommnet" parameterType="ReviewReplyBoard">
+		<insert id="ReviewReplyComment" parameterType="ReviewReplyBoard">
 			INSERT INTO RPBOARD (RPNUM,RNUM,MID,RPCONTENT,RPDATE,RPGROUP, RPSTEP, RPINDENT,RPIP)
    			 VALUES(RPSEQ.NEXTVAL, #{rnum}, #{mid}, #{rpcontent}, SYSDATE, #{rpgroup}, #{rpstep}, #{rpindent}, #{rpip})
 		</insert>

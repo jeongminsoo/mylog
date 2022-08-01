@@ -3,9 +3,11 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-    <mapper namespace="com.project.mylog.model.ReviewBoardDao">
+    <mapper namespace="com.project.mylog.dao.ReviewBoardDao">
     	<resultMap type="ReviewBoard" id="ReviewBoardResult">
 	    	<result property="rnum" column="rnum"/>
+	    	<result property="mid" column="mid"/>
+	    	<result property="mname" column="mname"/>
 			<result property="rtitle" column="rtitle"/>
 			<result property="rcontent" column="rcontent"/>
 			<result property="rfilename" column="rfilename"/>
@@ -31,13 +33,13 @@
     	</update>
 		
 		<!-- 삭제 -->
-		<delete id="ReviewDelete" parameterType="int">
+		<delete id="reviewDelete" parameterType="int">
 			DELETE RBOARD WHERE RNUM =#{rnum}
 		</delete>
             
 		<!-- 출력 -->
 		
-		<select id="ReviewList" parameterType="ReviewBoard" resultMap="ReviewBoardResult">
+		<select id="reviewList" parameterType="ReviewBoard" resultMap="ReviewBoardResult">
 			SELECT *
    				 FROM(SELECT ROWNUM RN, A.*
    				FROM(SELECT R.*, MNAME FROM RBOARD R, MEMBER M WHERE M.MID = R.MID ORDER BY RRDATE DESC)A)
@@ -45,18 +47,18 @@
 		</select>
 
 		<!-- 세부내용 -->
-		<select id="ReviewContent" parameterType="int" resultType="ReviewBoard">
+		<select id="reviewContent" parameterType="int" resultType="ReviewBoard">
 			SELECT * FROM RBOARD WHERE RNUM=#{rnum}
 		</select>
 		
 		<!-- 조회수 -->
-		<update id="ReviewHitUp" parameterType="int">
+		<update id="reviewHitUp" parameterType="int">
 			UPDATE RBOARD SET RHIT = RHIT+1 WHERE RNUM=#{rnum}
 		</update>
 		
 		<!-- 글 개수 -->
-		<select id="ReviewCount" resultType="int">
-			SELECT COUNT(*)CNT FROM RBOARD
+		<select id="reviewCount" resultType="int">
+			SELECT COUNT(*) CNT FROM RBOARD
 		</select>
 
     
