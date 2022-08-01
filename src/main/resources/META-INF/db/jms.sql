@@ -19,7 +19,7 @@ CREATE TABLE MEMBER(
 
 INSERT INTO MEMBER (MID, MPW, MNAME, MBIRTH, MEMAIL, MMOTTO, MSTATUS) VALUES ('aaa', '111', '닉네임', '2000-01-01', 'aaa@a.com', '나는 최고다', '1');
 INSERT INTO MEMBER (MID, MPW, MNAME, MBIRTH, MEMAIL, MMOTTO, MSTATUS) VALUES ('bbb', '111', '닉네임', '2000-01-01', 'bbb@b.com', '나는 최고다', '1');
-INSERT INTO MEMBER (MID, MPW, MNAME, MBIRTH, MEMAIL, MMOTTO, MSTATUS) VALUES ('ccc', '111', '닉네임', '2000-01-01', 'ccc@c.com', '나는 최고다');
+INSERT INTO MEMBER (MID, MPW, MNAME, MBIRTH, MEMAIL, MMOTTO) VALUES ('ddd', '111', '닉네임', '2000-01-01', 'ddd@d.com', '나는 최고다');
 
 SELECT * FROM MEMBER;
 
@@ -102,12 +102,22 @@ INSERT INTO NOTICE_BOARD (NNO, NTITLE, NCONTENT, AID, NIP)
     VALUES (NOTICE_SEQ.NEXTVAL, '공지', '내용', 'admin', '127.0.0.1');
     
 SELECT * FROM NOTICE_BOARD;
+
+
+
+INSERT INTO MEMBER (MID, MPW, MNAME, MBIRTH, MEMAIL, MMOTTO)
+				VALUES ('ggg', '111', '닉네임', '2022-08-01', 'ggg@g.com', '나는 최고다');
+
+			INSERT INTO MEMBER (MID, MPW, MNAME, MEMAIL, MMOTTO)
+				VALUES ('hhh', '111', '닉네임', 'hhh@h.com', '나는 최고다');
+                
+			INSERT INTO MEMBER (MID, MPW, MNAME, MBIRTH, MEMAIL)
+				VALUES ('iii', '111', '닉네임', '2022-08-01', 'iii@i.com');
+                
+			INSERT INTO MEMBER (MID, MPW, MNAME, MEMAIL)
+				VALUES ('jjj', '111', '닉네임', 'jjj@j.com');
+
 COMMIT;
-
-
-
-
-
 
 
 
