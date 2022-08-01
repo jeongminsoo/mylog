@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="com.project.mylog.model.HashtagDao">
+	<resultMap type="BoardTag" id="BoardTagResult">
+		<result property="rnum" column="rnum" />
+		<result property="hno" column="hno" />
+
+	</resultMap>
+	
+	<!-- 추가 -->
+    	<insert id="BoardTagConnect" parameterType="BoardTag">
+    		INSERT INTO BOARD_TAG(RNUM, HNO) VALUES(#{rnum}, #{hno})
+    	</insert>
+</mapper>
