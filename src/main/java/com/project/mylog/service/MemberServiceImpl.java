@@ -1,12 +1,14 @@
 package com.project.mylog.service;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.mylog.dao.MemberDao;
 import com.project.mylog.model.Member;
+import com.project.mylog.util.Paging;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -32,6 +34,30 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int idCheck(String mid) {
 		return memberDao.idCheck(mid);
+	}
+
+	@Override
+	public int deleteMember(String pageNum, String mid) {
+		return memberDao.deleteMember(mid);
+	}
+
+	@Override
+	public int recoverMember(String pageNum, String mid) {	
+		return memberDao.recoverMember(mid);
+	}
+
+	@Override
+	public List<Member> memberList(String pageNum) {
+		Paging paging = new Paging(memberDao.countMember(), pageNum);
+		Member member = new Member();
+		member.setStartRow(paging.getStartRow());
+		member.setEndRow(paging.getEndRow());
+		return memberDao.memberList(member);
+	}
+
+	@Override
+	public int countMember() {
+		return memberDao.countMember();
 	}
 
 }

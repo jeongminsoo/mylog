@@ -5,8 +5,31 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.project.mylog.model.Member" alias="Member"/>
+		<typeAlias type="com.project.mylog.model.Admin" alias="Admin"/>
+		<typeAlias type="com.project.mylog.model.TeamMember" alias="TeamMember"/>
+		<typeAlias type="com.project.mylog.model.TeamTodo" alias="TeamTodo"/>
+		<typeAlias type="com.project.mylog.model.Team" alias="Team"/>
+		<typeAlias type="com.project.mylog.model.TeamBoard" alias="TeamBoard"/>
+		<typeAlias type="com.project.mylog.model.TeamCommentBoard" alias="TeamCommentBoard"/>
+		<typeAlias type="com.project.mylog.model.Todo" alias="Todo"/>
+		<typeAlias type="com.project.mylog.model.ReviewBoard" alias="ReviewBoard" />
+		<typeAlias type="com.project.mylog.model.ReviewReplyBoard" alias="ReviewReplyBoard" />
+		<typeAlias type="com.project.mylog.model.Hashtag" alias="Hashtag" />
+		<typeAlias type="com.project.mylog.model.BoardTag" alias="BoardTag" />
+		<typeAlias type="com.project.mylog.model.Timer" alias="Timer" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/Member.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Admin.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/TeamMember.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/TeamTodo.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Team.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/TeamBoard.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/TeamCommentBoard.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Todo.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/ReviewBoard.xml" />
+		<mapper resource="META-INF/sqlmap/mappers/ReviewReplyBoard.xml" />
+		<mapper resource="META-INF/sqlmap/mappers/Hashtag.xml" />
+		<mapper resource="META-INF/sqlmap/mappers/BoardTag.xml" />
 	</mappers>
 </configuration>

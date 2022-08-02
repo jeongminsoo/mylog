@@ -22,6 +22,7 @@ public class MainController {
 	public String home() {
 		return "home";
 	}
+
 	@RequestMapping(value="main", method = {RequestMethod.GET, RequestMethod.POST})
 	public String main() {
 		return "main/main";
