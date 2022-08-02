@@ -2,6 +2,13 @@ package com.project.mylog.model;
 
 import java.sql.Timestamp;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TeaminBoard {
 	private int tinum;
 	private int tno;
@@ -20,4 +27,5 @@ public class TeaminBoard {
 	
 	private int startRow;
 	private int endRow;
+	
 }
