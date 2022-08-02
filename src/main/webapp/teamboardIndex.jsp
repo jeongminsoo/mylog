@@ -17,6 +17,7 @@
 	</script>
 </head>
 <body>
-	<jsp:forward page="joinView.do"/>
+	<%-- <jsp:forward page="joinView.do"/> --%>
+	<jsp:forward page="teamboard/teamboardList.do"></jsp:forward>
 </body>
 </html>
