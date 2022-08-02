@@ -4,8 +4,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Service;
+
 import com.project.mylog.model.TeaminCommentBoard;
 
+@Service
 public interface TeaminCommentBoardService {
 	public List<TeaminCommentBoard> teaminCommentList(String pageNum);
 	public int teaminCommentTotCnt();

@@ -2,10 +2,12 @@ package com.project.mylog.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.mylog.model.TeaminBoard;
 
+@Service
 public interface TeaminBoardService {
 	public List<TeaminBoard> teaminBoardList(String pageNum);
 	public int teaminBoardTotCnt();

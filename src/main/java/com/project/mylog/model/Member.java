@@ -18,4 +18,7 @@ public class Member {
 	private String memail;
 	private String mmotto;
 	private int mstatus;
+	
+	private int startRow;
+	private int endRow;
 }
