@@ -7,13 +7,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MainController {
 
+<<<<<<< HEAD
+
+	@RequestMapping(value = "home", method = RequestMethod.GET)
+	public String home() {
+		return "home";
+
+	@RequestMapping(value="main", method = {RequestMethod.GET, RequestMethod.POST})
+	public String main() {
+		return "main/main";
+
+=======
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public String home() {
 		return "home";
 	}
-	
+
 	@RequestMapping(value="main", method = {RequestMethod.GET, RequestMethod.POST})
 	public String main() {
 		return "main/main";
+>>>>>>> 2bf1bebcbed3f127c57bac30c0c4fb65fb223eeb
 	}
 }

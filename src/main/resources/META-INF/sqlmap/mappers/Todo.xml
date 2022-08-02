@@ -30,7 +30,7 @@
 			VALUES(TODO_SEQ.NEXTVAL, #{mid}, #{tdcontent}, 0, #{tdrdate})
 	</insert>
 	
-	<select id="getTodo" parameterType="int">
+	<select id="getTodo" parameterType="tdno">
 		SELECT * FROM TODO WHERE TDNO = #{tdno}
 	</select>
 	
@@ -39,11 +39,11 @@
     		VALUES(TODO_SEQ.NEXTVAL, #{mid}, #{tdcontent}, 0, (SELECT TDRDATE+1 FROM TODO WHERE TDNO = 1));
 	</insert>
 	
-	<update id="todoChange" parameterType="int">
+	<update id="todoChange" parameterType="tdno">
 		UPDATE TODO SET TDCHECK = #{tdcheck} WHERE TDNO = #{tdno}
 	</update>
 	
-	<delete id="todoDelete" parameterType="int">
+	<delete id="todoDelete" parameterType="tdno">
 		DELETE FROM TODO WHERE TDNO = #{tdno}
 	</delete>
 	
