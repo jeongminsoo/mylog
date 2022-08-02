@@ -11,11 +11,6 @@
 		<result property="mmotto" column="mmotto"/>
 		<result property="mstatus" column="mstatus"/>
 	</resultMap>
-<<<<<<< HEAD
-	<select id="idCheck" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM MEMBER WHERE MID = #{mid}
-	</select>
-=======
 	<select id="memberList" resultType="Member">
 		SELECT * FROM 
 	        (SELECT ROWNUM RN, A.* FROM 
@@ -29,7 +24,6 @@
 	<select id="countMember" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
 	</select>
->>>>>>> 8f035d4d66585db82f0cfe0c2b52a1b762f3c00a
 	<insert id="joinMember" parameterType="Member">
 		<if test="mbirth != null and mmotto != null">
 			INSERT INTO MEMBER (MID, MPW, MNAME, MBIRTH, MEMAIL, MMOTTO)
@@ -48,8 +42,6 @@
 				VALUES (#{mid}, #{mpw}, #{mname}, #{memail})
 		</if>
 	</insert>
-<<<<<<< HEAD
-=======
 	<update id="deleteMember" parameterType="String">
 		UPDATE MEMBER SET MSTATUS = 0
         	WHERE MID=#{mid}
@@ -58,5 +50,4 @@
 		UPDATE MEMBER SET MSTATUS = 1
         	WHERE MID=#{mid}
 	</update>
->>>>>>> 8f035d4d66585db82f0cfe0c2b52a1b762f3c00a
 </mapper>
