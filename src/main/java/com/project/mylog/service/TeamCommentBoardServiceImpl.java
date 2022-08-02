@@ -22,8 +22,8 @@ public class TeamCommentBoardServiceImpl implements TeamCommentBoardService {
 		int teamCommentTotCnt = teamCommentDao.teamCommentTotCnt();
 		Paging paging = new Paging(teamCommentTotCnt, pageNum, 5, 10);
 		TeamCommentBoard teamcomment = new TeamCommentBoard();
-		teamcomment.setCstartRow(paging.getStartRow());
-		teamcomment.setCendRow(paging.getEndRow());
+		teamcomment.setStartRow(paging.getStartRow());
+		teamcomment.setEndRow(paging.getEndRow());
 		return teamCommentDao.teamCommentList(teamcomment);
 	}
 

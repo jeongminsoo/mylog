@@ -310,7 +310,7 @@
     INSERT INTO TEAMBOARD (tNUM, mID, tTITLE, tCONTENT, tFILENAME,
             tGROUP, tSTEP, tINDENT, tIP)
         VALUES (TEAMBOARD_SEQ.NEXTVAL, 'aaa','reply','content', null,
-            1, 1, 1, '192.168.10.151');
+            10, 1, 1, '192.168.10.151');
     
     -- TEAM_COMMENTBOARD
     -- (1) 댓글목록(startRow부터 endRow까지)
@@ -319,7 +319,7 @@
                     ORDER BY tcGROUP DESC, tcSTEP;
     SELECT * FROM 
         (SELECT ROWNUM RN, A.* FROM 
-        (SELECT TC.* FROM TEAM_COMMENTBOARD TC WHERE tNUM=1
+        (SELECT TC.* FROM TEAM_COMMENTBOARD TC WHERE tNUM=15
                     ORDER BY tcGROUP DESC, tcSTEP) A)
         WHERE RN BETWEEN 1 AND 11; -- DAO에 들어갈 QUERY
     -- (2) 댓글갯수

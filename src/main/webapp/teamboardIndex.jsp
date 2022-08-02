@@ -18,6 +18,6 @@
 </head>
 <body>
 	<%-- <jsp:forward page="joinView.do"/> --%>
-	<jsp:forward page="teamboard/teamboardList.do"></jsp:forward>
+	<jsp:forward page="teamboard/list.do"/>
 </body>
 </html>

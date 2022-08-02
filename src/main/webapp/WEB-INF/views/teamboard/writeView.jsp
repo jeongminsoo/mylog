@@ -11,13 +11,9 @@
 	<link href="${conPath }/css/style.css" rel="stylesheet">
 </head>
 <body>
-	<form action="${conPath }/teamboard/teamboardReply.do" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="pageNum" value="${param.pageNum }">
-		<input type="hidden" name="tgroup" value="${teamboard.tgroup }">
-		<input type="hidden" name="tstep" value="${teamboard.tstep }">
-		<input type="hidden" name="tindent" value="${teamboard.tindent }">
+	<form action="${conPath }/teamboard/write.do" method="post" enctype="multipart/form-data">
 		<table>
-			<caption>답글쓰기</caption>
+			<caption>원글쓰기</caption>
 			<tr>
 				<th>작성자</th>
 				<td><input type="text" name="mid" required="required"></td>
@@ -38,7 +34,7 @@
 				<td colspan="2">
 					<input type="submit" value="글쓰기" class="btn">
 					<input type="reset" value="초기화" class="btn">
-					<input type="button" value="목록" onclick="location.href='${conPath}/teamboard/teamboardList.do?pageNum=${param.pageNum }'" class="btn">
+					<input type="button" value="목록" onclick="location.href='${conPath}/teamboard/list.do'" class="btn">
 				</td>
 			</tr>
 		</table>

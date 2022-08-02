@@ -1,5 +1,7 @@
 package com.project.mylog.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,67 +11,121 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.mylog.model.TeamBoard;
+import com.project.mylog.model.TeamCommentBoard;
 import com.project.mylog.service.TeamBoardService;
+import com.project.mylog.service.TeamCommentBoardService;
 import com.project.mylog.util.Paging;
 
 @Controller
-@RequestMapping(value="teamboard")
+@RequestMapping(value = "teamboard")
 public class TeamBoardController {
-	
+
 	@Autowired
 	private TeamBoardService tbService;
-	
-	//teamboardList
-	@RequestMapping(value = "teamboardList", method = { RequestMethod.GET, RequestMethod.POST })
+
+	@Autowired
+	private TeamCommentBoardService tcService;
+
+	// teamboardList
+	@RequestMapping(value = "list", method = { RequestMethod.GET, RequestMethod.POST })
 	public String teamboardList(String pageNum, Model model) {
 		model.addAttribute("teamboardList", tbService.teamBoardList(pageNum));
 		int teamBoardTotCnt = tbService.teamBoardTotCnt();
 		model.addAttribute("paging", new Paging(teamBoardTotCnt, pageNum));
-		return "teamboard/teamboardList";
+		return "teamboard/list";
 	}
-	//teamboardWrite
-	@RequestMapping(value = "teamboardWriteView", method = {RequestMethod.GET, RequestMethod.POST})
+
+	// teamboardWrite
+	@RequestMapping(value = "writeView", method = { RequestMethod.GET, RequestMethod.POST })
 	public String teamboardWriteView() {
-		return "teamboard/teamboardWriteView";
+		return "teamboard/writeView";
 	}
-	@RequestMapping(value = "teamboardWrite", method = RequestMethod.POST)
-	public String teamboardWrite(@ModelAttribute("teamboard") TeamBoard teamboard, MultipartHttpServletRequest mRequest, Model model) { // ip저장위해
-		model.addAttribute("teamboardwriteResult", tbService.teamBoardWrite(mRequest, teamboard)); 
-		return "forward:teamboardList.do";
+
+	@RequestMapping(value = "write", method = RequestMethod.POST)
+	public String teamboardWrite(@ModelAttribute("teamboard") TeamBoard teamboard, MultipartHttpServletRequest mRequest,
+			Model model) { // ip저장위해
+		model.addAttribute("teamboardwriteResult", tbService.teamBoardWrite(mRequest, teamboard));
+		return "forward:list.do";
 	}
-	//teamboardContent
-	@RequestMapping(value = "teamboardContent", method= {RequestMethod.GET, RequestMethod.POST})
-	public String teamboardContent(int tnum, String pageNum, Model model) {
+
+	// teamboardContent
+	@RequestMapping(value = "content", method = { RequestMethod.GET, RequestMethod.POST })
+	public String teamboardContent(int tnum, String pageNum, String tcpageNum, Model model) {
 		model.addAttribute("content", tbService.teamBoardDetail(tnum));
 		model.addAttribute("pageNum", pageNum);
-		return "teamboard/teamboardContent";
+		model.addAttribute("teamcommentList", tcService.teamCommentList(tcpageNum));
+		int teamCommentTotCnt = tcService.teamCommentTotCnt();
+		model.addAttribute("teamCommentTotCnt", teamCommentTotCnt);
+		System.out.println("댓글 수 : " + teamCommentTotCnt);
+		//model.addAttribute("paging", new Paging(teamCommentTotCnt, tcpageNum));
+
+		return "teamboard/content";
 	}
-	//teamboardModify
-	@RequestMapping(value = "teamboardModifyView", method= RequestMethod.GET)
+
+	// teamboardModify
+	@RequestMapping(value = "modifyView", method = RequestMethod.GET)
 	public String teamboardModifyView(int tnum, String pageNum, Model model) {
 		model.addAttribute("teamboard", tbService.teamBoardModifyReplyView(tnum));
-		return "teamboard/teamboardModifyView";
+		return "teamboard/modifyView";
 	}
-	@RequestMapping(value = "teamboardModify", method= RequestMethod.POST)
-	public String teamboardModify(@ModelAttribute("teamboard") TeamBoard teamboard, MultipartHttpServletRequest mRequest, Model model) {
+
+	@RequestMapping(value = "modify", method = RequestMethod.POST)
+	public String teamboardModify(@ModelAttribute("teamboard") TeamBoard teamboard,
+			MultipartHttpServletRequest mRequest, Model model) {
 		model.addAttribute("teamboardmodifyResult", tbService.teamBoardModify(mRequest, teamboard));
-		return "forward:teamboardList.do";
+		return "forward:list.do";
 	}
-	//teamboardDelete
-	@RequestMapping(value = "teamboardDelete", method = RequestMethod.GET)
-	public String delete(int tnum, String pageNum, Model model) {
-		model.addAttribute("teamboarddeleteResult", tbService.teamBoardDelete(tnum));		
-		return "forward:teamboardList.do";
+
+	// teamboardDelete
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String teamboardDelete(int tnum, String pageNum, Model model) {
+		model.addAttribute("teamboarddeleteResult", tbService.teamBoardDelete(tnum));
+		return "forward:list.do";
 	}
-	//teamboardReply
-	@RequestMapping(value = "teamboardReplyView", method = RequestMethod.GET)
+
+	// teamboardReply
+	@RequestMapping(value = "replyView", method = RequestMethod.GET)
 	public String replyView(int tnum, String pageNum, Model model) {
 		model.addAttribute("teamboard", tbService.teamBoardModifyReplyView(tnum));
-		return "teamboard/teamboardReplyView";
+		return "teamboard/replyView";
 	}
-	@RequestMapping(value = "teamboardReply", method = RequestMethod.POST)
-	public String teamboardReply(@ModelAttribute("teamboard") TeamBoard teamboard, MultipartHttpServletRequest mRequest, Model model) { // ip저장위해 request필요
+
+	@RequestMapping(value = "reply", method = RequestMethod.POST)
+	public String teamboardReply(@ModelAttribute("teamboard") TeamBoard teamboard, MultipartHttpServletRequest mRequest,
+			Model model) { // ip저장위해 request필요
 		model.addAttribute("teamboard", tbService.teamBoardReply(mRequest, teamboard));
-		return "forward:teamboardList.do";
+		return "forward:list.do";
 	}
+
+	// teamcommentWrite
+	@RequestMapping(value = "tcwrite", method = RequestMethod.POST)
+	public String teamcommentWrite(@ModelAttribute("teamcomment") TeamCommentBoard teamcomment,
+			HttpServletRequest request, Model model) { // ip저장위해
+		model.addAttribute("teamboardwriteResult", tcService.teamCommentWrite(request, teamcomment));
+		return "forward:content.do";
+	}
+
+	// teamcommentModify
+	@RequestMapping(value = "tcmodify", method = RequestMethod.POST)
+	public String teamcommentModify(@ModelAttribute("teamcomment") TeamCommentBoard teamcomment,
+			HttpServletRequest request, Model model) {
+		model.addAttribute("teamboardmodifyResult", tcService.teamCommentModify(request, teamcomment));
+		return "forward:content.do";
+	}
+
+	// teamcommentDelete
+	@RequestMapping(value = "tcdelete", method = RequestMethod.GET)
+	public String teamcommentDelete(int tcnum, String pageNum, Model model) {
+		model.addAttribute("teamboarddeleteResult", tcService.teamCommentDelete(tcnum));
+		return "forward:content.do";
+	}
+
+	// teamcommentReply
+	@RequestMapping(value = "tcreply", method = RequestMethod.POST)
+	public String teamcommentReply(@ModelAttribute("teamcomment") TeamCommentBoard teamcomment,
+			HttpServletRequest request, Model model) { // ip저장위해 request필요
+		model.addAttribute("teamcomment", tcService.teamCommentReply(request, teamcomment));
+		return "forward:content.do";
+	}
+
 }

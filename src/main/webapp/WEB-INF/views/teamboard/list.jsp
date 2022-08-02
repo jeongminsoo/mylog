@@ -12,7 +12,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
 		function trClicked(tnum){
-			location.href = '${conPath}/teamboard/teamboardContent.do?tnum='+tnum+'&pageNum=${paging.currentPage}';
+			location.href = '${conPath}/teamboard/content.do?tnum='+tnum+'&pageNum=${paging.currentPage}';
 		}
 	</script>
 </head>
@@ -57,7 +57,7 @@
 	</c:if>
 	<table>
 		<tr>
-			<td><a href="${conPath }/teamboard/teamboardWriteView.do">글쓰기</a></td>
+			<td><a href="${conPath }/teamboard/writeView.do">글쓰기</a></td>
 		</tr>
 	</table>
 	<table>
@@ -87,7 +87,6 @@
 	  								&nbsp; &nbsp; &nbsp;
 	  						</c:if>
 	  					</c:forEach>
-	  					${tbDto.tindent }
 	  					${tbDto.ttitle }
 	  				</td>
 					<td>
@@ -103,18 +102,18 @@
 	</table>
 	<div class="paging">
 	  	<c:if test="${paging.startPage > paging.blockSize }">
-	  		[ <a href="${conPath }/teamboard/teamboardList.do?pageNum=${paging.startPage-1 }"> 이 전 </a>]
+	  		[ <a href="${conPath }/teamboard/list.do?pageNum=${paging.startPage-1 }"> 이 전 </a>]
 	  	</c:if>
 	  	<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
 	  		<c:if test="${i eq paging.currentPage }">
 	  			[ <b>${i }</b> ]
 	  		</c:if>
 	  		<c:if test="${i != paging.currentPage }">
-	  			[ <a href="${conPath }/teamboard/teamboardList.do?pageNum=${i }">${i }</a> ]
+	  			[ <a href="${conPath }/teamboard/list.do?pageNum=${i }">${i }</a> ]
 	  		</c:if>
 	  	</c:forEach>
 	  	<c:if test="${paging.endPage < paging.pageCnt }">
-	  		[ <a href="${conPath }/teamboard/teamboardList.do?pageNum=${paging.endPage+1 }"> 다 음 </a>]
+	  		[ <a href="${conPath }/teamboard/list.do?pageNum=${paging.endPage+1 }"> 다 음 </a>]
 	  	</c:if>
   	</div>
 </body>
