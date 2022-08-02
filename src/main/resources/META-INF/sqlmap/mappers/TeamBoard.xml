@@ -38,7 +38,7 @@
 	</insert>
 	<!-- hitUp -->
 	<update id="teamBoardHitUp" parameterType="int">
-		UPDATE TEAMBOARD SET tHIT = tHIT +1 WHERE tNUM=#{tnum}
+		UPDATE TEAMBOARD SET tHIT = tHIT+1 WHERE tNUM=#{tnum}
 	</update>
 	<!-- detail -->
 	<select id="teamBoardDetail" parameterType="int" resultType="TeamBoard">
@@ -67,7 +67,7 @@
 	<!-- reply -->
 	<insert id="teamBoardReply" parameterType="TeamBoard">
 		INSERT INTO TEAMBOARD (tNUM, mID, tTITLE, tCONTENT, tFILENAME, tGROUP, tSTEP, tINDENT, tIP)
-        	VALUES (TEAMBOARD_SEQ.NEXTVAL, #{mid},#{ttitle},#{tcontent}, #{tfilename}, #{tgroup}, #{tstep}, #{tindent}, #{tip})
+        	VALUES (TEAMBOARD_SEQ.NEXTVAL, #{mid},#{ttitle},#{tcontent}, #{tfilename}, #{tgroup}, #{tstep}+1, #{tindent}+1, #{tip})
 	</insert>
 	
 </mapper>

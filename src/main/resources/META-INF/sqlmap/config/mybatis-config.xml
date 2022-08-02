@@ -18,6 +18,8 @@
 		<typeAlias type="com.project.mylog.model.ReviewReplyBoard" alias="ReviewReplyBoard" />
 		<typeAlias type="com.project.mylog.model.Hashtag" alias="Hashtag" />
 		<typeAlias type="com.project.mylog.model.BoardTag" alias="BoardTag" />
+		<typeAlias type="com.project.mylog.model.DiaryBoard" alias="DiaryBoard" />
+		<typeAlias type="com.project.mylog.model.DiaryReply" alias="DiaryReply" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/Member.xml"/>
@@ -34,5 +36,7 @@
 		<mapper resource="META-INF/sqlmap/mappers/ReviewReplyBoard.xml" />
 		<mapper resource="META-INF/sqlmap/mappers/Hashtag.xml" />
 		<mapper resource="META-INF/sqlmap/mappers/BoardTag.xml" />
+		<mapper resource="META-INF/sqlmap/mappers/DiaryBoard.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/DiaryReply.xml"/>
 	</mappers>
 </configuration>
