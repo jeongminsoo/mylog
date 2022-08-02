@@ -78,12 +78,12 @@ public class TeamBoardServiceImpl implements TeamBoardService {
 
 	@Override
 	public int teamBoardHitUp(int tnum) {
-		return teamBoardHitUp(tnum);
+		return teamBoardDao.teamBoardHitUp(tnum);
 	}
 
 	@Override
 	public TeamBoard teamBoardDetail(int tnum) {
-		teamBoardDao.teamBoardHitUp(tnum);
+		int result = teamBoardDao.teamBoardHitUp(tnum);
 		return teamBoardDao.teamBoardDetail(tnum);
 	}
 
@@ -141,7 +141,8 @@ public class TeamBoardServiceImpl implements TeamBoardService {
 
 	@Override
 	public int teamBoardReply(MultipartHttpServletRequest mRequest, TeamBoard teamboard) {
-		teamBoardDao.teamBoardPreReply(teamboard);
+		int results = teamBoardDao.teamBoardPreReply(teamboard);
+		System.out.println(results == 1 ? "성공" : "실패");
 		teamboard.setTip(mRequest.getRemoteAddr());
 		boolean result = false;
 		String uploadPath = mRequest.getRealPath("teamBoardFileUpload/");

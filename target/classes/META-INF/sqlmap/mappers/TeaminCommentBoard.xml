@@ -56,7 +56,7 @@
 	<!-- reply -->
 	<insert id="teaminCommentReply" parameterType="TeaminCommentBoard">
 		INSERT INTO TEAMin_COMMENTBOARD (ticNUM, tiNUM, tmNO, ticCONTENT, ticGROUP, ticSTEP, ticINDENT, ticIP)
-        	VALUES (TEAMin_COMMENTBOARD_SEQ.NEXTVAL, #{tinum}, #{tmno}, #{ticcontent}, #{ticgroup}, #{ticstep}, #{ticindent}, #{ticip})
+        	VALUES (TEAMin_COMMENTBOARD_SEQ.NEXTVAL, #{tinum}, #{tmno}, #{ticcontent}, #{ticgroup}, #{ticstep}+1, #{ticindent}+1, #{ticip})
 	</insert>
 	
 </mapper>

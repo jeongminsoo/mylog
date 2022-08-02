@@ -49,4 +49,9 @@
 		</beans:property>
 	</beans:bean> -->
 	
+	<!-- 파일첨부 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760"/>
+	</beans:bean>
+	
 </beans:beans>

@@ -105,11 +105,11 @@
         tTITLE VARCHAR2(100) NOT NULL,
         tCONTENT CLOB NOT NULL,
         tFILENAME VARCHAR2(100),
-        tHIT NUMBER(8),
+        tHIT NUMBER(8) DEFAULT 0,
         tRDATE DATE DEFAULT SYSDATE,
-        tGROUP NUMBER(8),
-        tSTEP NUMBER(4),
-        tINDENT NUMBER(4),
+        tGROUP NUMBER(8) DEFAULT 0,
+        tSTEP NUMBER(4) DEFAULT 0,
+        tINDENT NUMBER(4) DEFAULT 0,
         tIP VARCHAR2(20)
     );
     -- TEAM_COMMENTBOARD
@@ -124,9 +124,9 @@
         tNUM NUMBER(8) REFERENCES TEAMBOARD(tNUM),
         tcCONTENT VARCHAR2(1000) NOT NULL,
         tcRDATE DATE DEFAULT SYSDATE,
-        tcGROUP NUMBER(8),
-        tcSTEP NUMBER(4),
-        tcINDENT NUMBER(4),
+        tcGROUP NUMBER(8) DEFAULT 0,
+        tcSTEP NUMBER(4) DEFAULT 0,
+        tcINDENT NUMBER(4) DEFAULT 0,
         tcIP VARCHAR2(20)
     );
 
@@ -305,7 +305,7 @@
     ROLLBACK;
     -- (8) 답변글 추가전 STEP a 수행
     UPDATE TEAMBOARD SET tSTEP = tSTEP+1 
-        WHERE tGROUP = 1 AND tSTEP>0;
+        WHERE tGROUP = 10 AND tSTEP>0;
     -- (9) 답변글 쓰기
     INSERT INTO TEAMBOARD (tNUM, mID, tTITLE, tCONTENT, tFILENAME,
             tGROUP, tSTEP, tINDENT, tIP)
