@@ -39,4 +39,10 @@ public class MemberController {
 		model.addAttribute("result", msg);
 		return "member/idCheck";
 	}
+	
+	@RequestMapping(value="memberList", method = RequestMethod.POST)
+	public String memberList(Member member, String tempmbirth, Model model) {
+		model.addAttribute("joinResult", memberService.joinMember(member, tempmbirth));
+		return "forward:main.do";
+	}
 }

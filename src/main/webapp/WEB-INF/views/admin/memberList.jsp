@@ -17,17 +17,6 @@
 	</script>
 </head>
 <body>
-	<c:if test="${joinResult eq 0 }">
-		<script>
-			alert('회원가입 실패');
-		</script>
-	</c:if>
-	<c:if test="${joinResult eq 1 }">
-		<script>
-			alert('회원가입 성공');
-		</script>
-	</c:if>
-	<h1>메인입니다</h1>
-	<a href="location.href='${conPath }/memberList.do">회원목록</a>
+	
 </body>
 </html>

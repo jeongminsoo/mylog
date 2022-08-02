@@ -16,7 +16,6 @@
 		<typeAlias type="com.project.mylog.model.ReviewReplyBoard" alias="ReviewReplyBoard" />
 		<typeAlias type="com.project.mylog.model.Hashtag" alias="Hashtag" />
 		<typeAlias type="com.project.mylog.model.BoardTag" alias="BoardTag" />
-		<typeAlias type="com.project.mylog.model.Timer" alias="Timer" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/Member.xml"/>
