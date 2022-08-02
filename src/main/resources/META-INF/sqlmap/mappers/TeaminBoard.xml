@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mylog.dao.TeaminBoardDao">
+	<resultMap type="TeaminBoard" id="TeaminBoardResult">
+		<result column="tinum" property="tnum"/>
+		<result column="tmno" property="tmno"/>
+		<result column="tititle" property="tititle"/>
+		<result column="ticontent" property="ticontent"/>
+		<result column="tifilename" property="tifilename"/>
+		<result column="tihit" property="tihit"/>
+		<result column="tirdate" property="tirdate"/>
+		<result column="tigroup" property="tigroup"/>
+		<result column="tistep" property="tistep"/>
+		<result column="tiindent" property="tiindent"/>
+		<result column="tiip" property="tiip"/>
+		<result column="miid" property="miid"/>
+		<result column="startRow" property="startRow"/>
+		<result column="endRow" property="endRow"/>
+	</resultMap>
+	
+	<!-- boardList -->
+	<select id="teaminBoardList" parameterType="TeaminBoard" resultType="TeaminBoard">
+		SELECT B.*, TM.mID FROM 
+	        (SELECT ROWNUM RN, A.* FROM 
+	            (SELECT TI.* FROM TEAMinBOARD TI
+	                        ORDER BY tiGROUP DESC, tiSTEP) A) B, TEAM_MEMBER TM
+	        WHERE B.tmNO = TM.tmNO AND RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	<!-- totCnt -->
+	<select id="teaminBoardTotCnt" resultType="int">
+		SELECT COUNT(*) FROM TEAMinBOARD
+	</select>
+	<!-- write -->
+	<insert id="teaminBoardWrite" parameterType="TeaminBoard" >
+		INSERT INTO TEAMinBOARD (tNUM, tNO, tmNO, tiTITLE, tiCONTENT, tiFILENAME, tiGROUP, tiSTEP, tiINDENT, tiIP)
+        	VALUES (TEAMinBOARD_SEQ.NEXTVAL, #{tno}, #{tmo}, #{tititle},#{ticontent}, #{tifilename}, TEAMinBOARD_SEQ.CURRVAL, 0, 0, #{tiip})
+	</insert>
+	<!-- hitUp -->
+	<update id="teaminBoardHitUp" parameterType="int">
+		UPDATE TEAMinBOARD SET tiHIT = tiHIT +1 WHERE tiNUM={tinum}
+	</update>
+	<!-- detail -->
+	<select id="teaminBoardDetail" parameterType="int" resultType="TeaminBoard">
+		SELECT TI.* FROM TEAMinBOARD TI WHERE tiNUM={tinum}
+	</select>
+	<!-- modify -->
+	<update id="teaminBoardModify" parameterType="TeaminBoard">
+		UPDATE TEAMinBOARD SET tiTITLE = #{tititle},
+	                           tiCONTENT = #{ticontent},
+	                           tiFILENAME = #{tifilename},
+	                           tiIP = #{tiip},
+	                           tiRDATE = SYSDATE
+	                      WHERE tiNUM = #{tinum}
+	</update>
+	<!-- delete -->
+	<delete id="teaminBoardDelete" parameterType="int">
+		DELETE FROM TEAMinBOARD WHERE tiNUM={tinum}
+	</delete>
+	<!-- preReply -->
+	<update id="teaminBoardPreReply" parameterType="TeaminBoard">
+		<![CDATA[	
+			UPDATE TEAMinBOARD SET tiSTEP = tiSTEP+1 
+        		WHERE tiGROUP = #{tigroup} AND tiSTEP>#{tistep}
+		]]>
+	</update>
+	<!-- reply -->
+	<insert id="teaminBoardReply" parameterType="TeaminBoard">
+		INSERT INTO TEAMinBOARD (tiNUM, tNO, tmNO, tiTITLE, tiCONTENT, tiFILENAME, tiGROUP, tiSTEP, tiINDENT, tiIP)
+	        VALUES (TEAMinBOARD_SEQ.NEXTVAL, #{tno}, #{tmo}, #{tititle},#{ticontent}, #{tifilename}, #{tigroup}, #{tistep}, #{tiindent}, #{tiip})
+	</insert>
+	
+</mapper>
