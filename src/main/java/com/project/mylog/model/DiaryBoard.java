@@ -18,4 +18,7 @@ public class DiaryBoard {
 	private Date ddate;
 	private Timestamp drdate;
 	private String dip;
+	
+	private int startRow;
+	private int endRow;
 }

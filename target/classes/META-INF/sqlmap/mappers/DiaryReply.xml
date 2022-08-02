@@ -5,10 +5,14 @@
 
 <mapper namespace="package com.project.mylog.dao.DiaryReplyDao">
 	<resultMap type="DiaryReply" id="DiaryReplyResult">
-		<result property="tdno" column="tdno"/>
+		<result property="drnum" column="drnum"/>
+		<result property="dnum" column="dnum"/>
 		<result property="mid" column="mid"/>
-		<result property="tdcontent" column="tdcontent"/>
-		<result property="tdcheck" column="tdcheck"/>
-		<result property="tdrdate" column="tdrdate"/>
+		<result property="drcontent" column="drcontent"/>
+		<result property="drgroup" column="drgroup"/>
+		<result property="drstep" column="drstep"/>
+		<result property="drindent" column="drindent"/>
+		<result property="drrdate" column="drrdate"/>
+		<result property="drip" column="drip"/>
 	</resultMap>
 </mapper>

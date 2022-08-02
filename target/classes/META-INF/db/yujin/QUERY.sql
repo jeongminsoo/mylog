@@ -126,12 +126,12 @@ SELECT * FROM TODO WHERE TDRDATE = '2022-07-28' AND MID = 'aaa';
 -- 투두 삭제하기
 DELETE FROM TODO WHERE TNO = 3;
 
--- 글 작성하기
+-- 글 작성하기(diaryWrite)
 INSERT INTO 
-    DIARYBOARD(DNUM, DTITLE, MID, TNO, DCONTENT, DHIT, DSTATUS, DDATE, DIP)
+    DIARYBOARD(DNUM, DTITLE, MID, DTODOIN, DCONTENT, DHIT, DSTATUS, DDATE, DIP)
     VALUES(DIARYBOARD_SEQ.NEXTVAL, '오늘의 반성일기', 'aaa', NULL, '오늘은 아무것도 하지 못했어요ㅠㅠ', 0, 2, '2022-07-28', '127.00.00.01');
 
--- 글 수정하기
+-- 글 수정하기(diaryModify)
 UPDATE DIARYBOARD 
     SET DTITLE = '오늘을 마무리하며...',
          DTODOIN = 1,
@@ -153,8 +153,16 @@ SELECT D.*, MNAME
     ORDER BY DRDATE DESC;
     
 -- 해당 날짜의 내가 쓴 글 보기(myDirayList)
-SELECT * FROM DIARYBOARD 
-    WHERE DDATE = '2022-07-28' AND MID = 'aaa';
+SELECT A.* 
+    FROM (SELECT ROWNUM RN, D.* FROM DIARYBOARD D
+                WHERE DDATE = '2022-07-28' AND MID = 'aaa'
+                ORDER BY DRDATE DESC) A
+    WHERE RN BETWEEN 1 AND 10;
+
+-- 해당 날짜의 내가 쓴 글 갯수(myDirayCnt)
+SELECT COUNT(*) CNT
+    FROM DIARYBOARD
+        WHERE DDATE = '2022-07-28' AND MID = 'aaa';
 
 -- 일기 상세보기(diaryContent)
 SELECT D.*, MNAME 
@@ -167,13 +175,22 @@ SELECT D.*, MNAME
     WHERE D.MID=F.FID AND M.MID=F.FID AND DSTATUS > 0 AND F.MID='aaa';
 
 -- 나에게 공개된 글 (전체공개/친구공개) 모두 보기(diaryList)
-SELECT D.*, MNAME
+SELECT A.* 
+    FROM (SELECT ROWNUM RN, D.*, MNAME
+                FROM DIARYBOARD D, FRIEND F, MEMBER M
+                WHERE (D.MID=M.MID AND DSTATUS = 2 AND MSTATUS=1)  OR
+                            (D.MID=F.FID AND M.MID=F.FID AND DSTATUS = 1 AND F.MID='aaa' AND MSTATUS=1) OR
+                            (D.MID=M.MID AND M.MID='aaa')
+                ORDER BY DRDATE DESC) A
+    WHERE RN BETWEEN 1 AND 10;
+
+-- 나에게 공개된 글 전체 갯수(diaryCnt)
+SELECT COUNT(*) CNT
     FROM DIARYBOARD D, FRIEND F, MEMBER M
     WHERE (D.MID=M.MID AND DSTATUS = 2 AND MSTATUS=1)  OR
-    (D.MID=F.FID AND M.MID=F.FID AND DSTATUS = 1 AND F.MID='aaa' AND MSTATUS=1) OR
-    (D.MID=M.MID AND M.MID='aaa')
-    ORDER BY DRDATE DESC;
-    
+                (D.MID=F.FID AND M.MID=F.FID AND DSTATUS = 1 AND F.MID='aaa' AND MSTATUS=1) OR
+                (D.MID=M.MID AND M.MID='aaa');
+
 -- 카테고리 생성
 INSERT INTO ACCOUNTCATEGORY VALUES(ACCOUNTCATEGORY_SEQ.NEXTVAL, '월급');
 SELECT * FROM ACCOUNTCATEGORY;

@@ -9,7 +9,7 @@
 	<meta charset="UTF-8">
 </head>
 <body>
-	<form action="${conPath }/todo.do/modify" method="post">
+	<form action="${conPath }/todo/modify.do" method="post">
 		<input type="hidden" name="mid" value="${member.mid }">
 		<input type="hidden" name="tdrdate" value="${param.tdrdate }">
 		<input type="text" name="tdcontent" value="${todo.tdcontent }" autofocus="autofocus">

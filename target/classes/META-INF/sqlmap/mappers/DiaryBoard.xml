@@ -19,18 +19,38 @@
 	
 	<!-- 내 일기 리스트 -->
 	<select id="myDirayList" parameterType="DiaryBoard" resultMap="TodoResult">
-		SELECT * FROM DIARYBOARD 
-    		WHERE DDATE = ${ddate} AND MID = #{mid}
+		SELECT A.* 
+		    FROM (SELECT ROWNUM RN, D.* FROM DIARYBOARD D
+		                WHERE DDATE = #{ddate} AND MID = #{mid}) A
+		    WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 내 일기 갯수 -->
+	<select id="myDirayCnt" parameterType="DiaryBoard" resultType="int">
+		SELECT COUNT(*) CNT
+    		FROM DIARYBOARD
+    		WHERE DDATE = #{ddate} AND MID = #{mid}
 	</select>
 	
 	<!-- 내가 볼 수 있는 일기 리스트 -->
-	<select id="diaryList" parameterType="String" resultMap="TodoResult">
-		SELECT D.*, MNAME
+	<select id="diaryList" parameterType="DiaryBoard" resultMap="TodoResult">
+		SELECT A.* 
+		    FROM (SELECT ROWNUM RN, D.*, MNAME
+		                FROM DIARYBOARD D, FRIEND F, MEMBER M
+		                WHERE (D.MID=M.MID AND DSTATUS = 2 AND MSTATUS = 1)  OR
+		                            (D.MID=F.FID AND M.MID=F.FID AND DSTATUS = 1 AND F.MID = #{mid} AND MSTATUS = 1) OR
+		                            (D.MID=M.MID AND M.MID = #{mid})
+		                ORDER BY DRDATE DESC) A
+		    WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 내가 볼 수 있는 일기 갯수 -->
+	<select id="diaryCnt" parameterType="DiaryBoard" resultType="int">
+		SELECT COUNT(*) CNT
 		    FROM DIARYBOARD D, FRIEND F, MEMBER M
 		    WHERE (D.MID=M.MID AND DSTATUS = 2 AND MSTATUS=1)  OR
-				    (D.MID=F.FID AND M.MID=F.FID AND DSTATUS = 1 AND F.MID=#{mid} AND MSTATUS=1) OR
-				    (D.MID=M.MID AND M.MID=#{mid})
-		    ORDER BY DRDATE DESC
+		                (D.MID=F.FID AND M.MID=F.FID AND DSTATUS = 1 AND F.MID = #{mid} AND MSTATUS=1) OR
+		                (D.MID=M.MID AND M.MID = #{mid})
 	</select>
 	
 	<!-- 일기 자세히 보기 -->
@@ -43,6 +63,24 @@
 	<!-- 조회수 올리기 -->
 	<update id="diaryHitup" parameterType="int">
 		UPDATE DIARYBOARD SET DHIT = DHIT + 1 WHERE DNUM = #{dnum}
+	</update>
+	
+	<!-- 일기 쓰기 -->
+	<insert id="diaryWrite" parameterType="DiaryBoard">
+		INSERT INTO 
+    		DIARYBOARD(DNUM, DTITLE, MID, DTODOIN, DCONTENT, DHIT, DSTATUS, DDATE, DIP)
+    		VALUES(DIARYBOARD_SEQ.NEXTVAL, #{dtitle}, #{mid}, #{dtodoin}, #{dcontent}, 0, #{dstatus}, #{ddate}, #{dip})
+	</insert>
+	
+	<!-- 일기 수정하기 -->
+	<update id="diaryModify" parameterType="DiaryBoard">
+		UPDATE DIARYBOARD 
+		    SET DTITLE = #{dtitle},
+		         DTODOIN = #{dtodoin},
+		         DCONTENT = #{dcontent},
+		         DSTATUS = #{dstatus},
+		         DIP = #{dip}
+		    WHERE DNUM = 1
 	</update>
 	
 	<!-- 글 삭제하기 -->

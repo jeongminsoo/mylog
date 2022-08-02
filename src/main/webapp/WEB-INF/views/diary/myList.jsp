@@ -13,7 +13,7 @@
 		$(document).ready(function(){
 			$('#todo_make').click(function(){
 				$.ajax({
-					url : 'todo.do/make';
+					url : 'todo/make.do';
 					data : 'tdrdate=${nowDate}'
 					type : 'get'
 					sucess : function(data){
@@ -41,7 +41,7 @@
 		<div id="diaryList">
 			<c:if test="${not empty myDiaryList }">
 				<c:forEach var="mine" items="${myDiaryList }">
-					<div class="list" onclick="location.href='${conPath}/diary.do/content?dnum=${mine.dnum }'">
+					<div class="list" onclick="location.href='${conPath}/diary/content.do?dnum=${mine.dnum }'">
 						<span>${mine.dtitle }</span>
 						<c:if test="${mine.dstatus eq 0 }">
 							<span class="status">비밀 일기</span>
@@ -56,7 +56,7 @@
 					</div>
 				</c:forEach>
 			</c:if>
-			<div id="diary_write" onclick="location.href='${conPath}/diary.do/wirte?mid=${member.mid }&drdate=${nowDate }">
+			<div id="diary_write" onclick="location.href='${conPath}/diary/wirte.do?mid=${member.mid }&drdate=${nowDate }">
 				<span>+</span>
 				<span>새로운 일기 쓰기</span>
 			</div>
