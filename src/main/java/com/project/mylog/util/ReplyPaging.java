@@ -3,7 +3,7 @@ package com.project.mylog.util;
 import lombok.Data;
 
 @Data
-public class ReviewPaging {
+public class ReplyPaging {
 	private int currentPage = 1;
 	private int pageSize = 10;
 	private int blockSize= 5;
@@ -14,7 +14,7 @@ public class ReviewPaging {
 	private int startPage;
 	private int endPage;
 	
-	public ReviewPaging(int total, String pageNum) {
+	public ReplyPaging(int total, String pageNum) {
 		this.total = total;
 		if(pageNum != null) {
 			currentPage = Integer.parseInt(pageNum);
@@ -29,7 +29,7 @@ public class ReviewPaging {
 		}
 	} 
 	
-	public ReviewPaging(int total, String pageNum, int pageSize, int blockSize ) {
+	public ReplyPaging(int total, String pageNum, int pageSize, int blockSize ) {
 		this.total = total;
 		if(pageNum != null) {
 			currentPage = Integer.parseInt(pageNum);

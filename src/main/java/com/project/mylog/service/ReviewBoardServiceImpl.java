@@ -15,18 +15,23 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.mylog.dao.ReviewBoardDao;
+import com.project.mylog.dao.ReviewReplyBoardDao;
 import com.project.mylog.model.ReviewBoard;
+import com.project.mylog.model.ReviewReplyBoard;
 import com.project.mylog.util.ReviewPaging;
 
 @Service
 public class ReviewBoardServiceImpl implements ReviewBoardService {
 	@Autowired
 	private ReviewBoardDao rboardDao;
+	@Autowired
+	private ReviewReplyBoardDao replyDao;
+	String backupPath = "D:\\LDSwebPro\\source\\merge\\mylog\\src\\main\\webapp\\ReviewImgUpload/";
 
 	@Override
 	public int reviewWrite(MultipartHttpServletRequest mRequest, ReviewBoard reviewBoard) {
 		String uploadPath = mRequest.getRealPath("ReviewImgUpload/");
-		String backupPath = "D:\\LDSwebPro\\source\\09_2nd Project\\mylog\\src\\main\\webapp\\ReviewImgUpload/";
+		
 		String filename = "";
 		Iterator<String> params = mRequest.getFileNames();
 		if (params.hasNext()) {
@@ -39,8 +44,8 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 
 			try {
 				mFile.transferTo(new File(uploadPath + filename));
-				System.out.println("서버파일 : " + uploadPath + filename);
-				System.out.println("백업파일 : " + backupPath + filename);
+				System.out.println("업로드 : " + uploadPath + filename);
+				System.out.println("백업 : " + backupPath + filename);
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}
@@ -54,21 +59,22 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	@Override
 	public int reviewModify(MultipartHttpServletRequest mRequest, ReviewBoard reviewBoard) {
 		String uploadPath = mRequest.getRealPath("ReviewImgUpload/");
-		String backupPath = "D:\\LDSwebPro\\source\\09_2nd Project\\mylog\\src\\main\\webapp\\ReviewImgUpload/";
 		String filename = "";
 		Iterator<String> params = mRequest.getFileNames();
 		if (params.hasNext()) {
 			String param = params.next();
 			MultipartFile mFile = mRequest.getFile(param);
 			filename = mFile.getOriginalFilename();
-			if (filename != null && !filename.equals("")) {
-				filename = System.currentTimeMillis() + "_" + filename; 
+			if (!filename.isEmpty()) {
+				if(new File(uploadPath + filename).exists()) {
+					filename = System.currentTimeMillis() + "_" + filename; 
+				}
 			}
 
 			try {
 				mFile.transferTo(new File(uploadPath + filename));
-				System.out.println("서버파일 : " + uploadPath + filename);
-				System.out.println("백업파일 : " + backupPath + filename);
+				System.out.println("업로드 : " + uploadPath + filename);
+				System.out.println("백업 : " + backupPath + filename);
 				boolean result = fileCopy(uploadPath + filename, backupPath + filename);
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
@@ -125,6 +131,8 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 
 	@Override
 	public ReviewBoard reviewContent(int rnum) {
+		ReviewReplyBoard replyBoard = new ReviewReplyBoard();
+		replyDao.reviewReplyList(replyBoard);
 		return rboardDao.reviewContent(rnum);
 	}
 
