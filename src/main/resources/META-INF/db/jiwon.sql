@@ -135,10 +135,13 @@
     INSERT INTO MEMBER (mID, mPW, mNAME, mBIRTH, mEMAIL, mMOTTO, mSTATUS) 
         VALUES ('aaa', '111', '박박박', TO_DATE('2000-01-01', 'YYYY-MM-DD'), 'park@park.com', NULL, 1);
     -- ADMIN
+    select * from admin;
     -- 관리자 등록
     INSERT INTO ADMIN (aID, aPW, aGRADE)
         VALUES ('ADMINaaa', '111', 0);
     -- 일반 관리자
+    -- 로그인
+    SELECT * FROM ADMIN WHERE AID='aaa' AND APW='111';
     -- 회원 탈퇴 시키기
     UPDATE MEMBER SET mSTATUS = 0
         WHERE mID='aaa';
@@ -278,9 +281,10 @@
     -- (1) 글목록(startRow부터 endRow까지)
     SELECT * FROM 
         (SELECT ROWNUM RN, A.* FROM 
-        (SELECT T.* FROM TEAMBOARD T
-                    ORDER BY tGROUP DESC, tSTEP) A)
+            (SELECT T.* FROM TEAMBOARD T
+                        ORDER BY tGROUP DESC, tSTEP) A)
         WHERE RN BETWEEN 1 AND 11; -- DAO에 들어갈 QUERY
+       
     -- (2) 글갯수
     SELECT COUNT(*) FROM TEAMBOARD;
     -- (3) 글쓰기(원글)
@@ -310,18 +314,22 @@
     INSERT INTO TEAMBOARD (tNUM, mID, tTITLE, tCONTENT, tFILENAME,
             tGROUP, tSTEP, tINDENT, tIP)
         VALUES (TEAMBOARD_SEQ.NEXTVAL, 'aaa','reply','content', null,
-            1, 1, 1, '192.168.10.151');
+            10, 1, 1, '192.168.10.151');
     
     -- TEAM_COMMENTBOARD
+    select tnum from teamboard;
     -- (1) 댓글목록(startRow부터 endRow까지)
+        SELECT TR.* FROM TEAM_COMMENTBOARD TR
+                    ORDER BY tcGROUP DESC, tcSTEP;
         -- 그냥 출력 시 사용
-        SELECT TR.* FROM TEAM_COMMENTBOARD TR WHERE tNUM=1 
+        SELECT TR.* FROM TEAM_COMMENTBOARD TR WHERE tNUM=12
                     ORDER BY tcGROUP DESC, tcSTEP;
     SELECT * FROM 
         (SELECT ROWNUM RN, A.* FROM 
-        (SELECT TC.* FROM TEAM_COMMENTBOARD TC WHERE tNUM=1
+        (SELECT TC.* FROM TEAM_COMMENTBOARD TC WHERE tNUM=12
                     ORDER BY tcGROUP DESC, tcSTEP) A)
         WHERE RN BETWEEN 1 AND 11; -- DAO에 들어갈 QUERY
+    select * from TEAM_COMMENTBOARD where tcnum=2;
     -- (2) 댓글갯수
     SELECT COUNT(*) FROM TEAM_COMMENTBOARD;
     -- (3) 댓글쓰기(원글)
