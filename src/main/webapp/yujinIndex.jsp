@@ -17,6 +17,10 @@
 	</script>
 </head>
 <body>
+<<<<<<< HEAD:src/main/webapp/index.jsp
 	<jsp:forward page="main.do"/>
+=======
+	<jsp:forward page="diary/myList.do"/>
+>>>>>>> ca4bd39a5edb239c4ff9a131fc2a01c431683b31:src/main/webapp/yujinIndex.jsp
 </body>
 </html>

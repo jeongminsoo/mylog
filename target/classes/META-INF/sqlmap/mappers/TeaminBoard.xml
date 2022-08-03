@@ -68,7 +68,7 @@
 	<!-- reply -->
 	<insert id="teaminBoardReply" parameterType="TeaminBoard">
 		INSERT INTO TEAMinBOARD (tiNUM, tNO, tmNO, tiTITLE, tiCONTENT, tiFILENAME, tiGROUP, tiSTEP, tiINDENT, tiIP)
-	        VALUES (TEAMinBOARD_SEQ.NEXTVAL, #{tno}, #{tmo}, #{tititle},#{ticontent}, #{tifilename}, #{tigroup}, #{tistep}, #{tiindent}, #{tiip})
+	        VALUES (TEAMinBOARD_SEQ.NEXTVAL, #{tno}, #{tmo}, #{tititle},#{ticontent}, #{tifilename}, #{tigroup}, #{tistep}+1, #{tiindent}+1, #{tiip})
 	</insert>
 	
 </mapper>
