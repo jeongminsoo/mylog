@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,10 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 	@Override
 	public int diaryWrite(MultipartHttpServletRequest mRequest, DiaryBoard diaryBoard) {
 		diaryBoard.setDip(mRequest.getLocalAddr());
+		boolean result = false;
+		String uploadPath = mRequest.getRealPath("diaryBoardFileUpload/");
+		Iterator<String> params = mRequest.getFileNames(); // 파라미터이름 받음
+		String tfilename = "";
 		return 0;
 	}
 
