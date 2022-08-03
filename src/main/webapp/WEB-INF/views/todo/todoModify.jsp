@@ -11,8 +11,9 @@
 <body>
 	<form action="${conPath }/todo/modify.do" method="post">
 		<input type="hidden" name="mid" value="${member.mid }">
+		<input type="hidden" name="tdno" value="${param.tdno }">
 		<input type="hidden" name="tdrdate" value="${param.tdrdate }">
-		<input type="text" name="tdcontent" value="${todo.tdcontent }" autofocus="autofocus">
+		<input type="text" name="tdcontent" value="${param.tdcontent }" autofocus="autofocus">
 		<input type="submit" value="수정">
 	</form>
 </body>

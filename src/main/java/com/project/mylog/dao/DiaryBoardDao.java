@@ -8,7 +8,7 @@ import com.project.mylog.model.DiaryBoard;
 
 @Mapper
 public interface DiaryBoardDao {
-	public List<DiaryBoard> myDirayList(DiaryBoard diaryBoard);
+	public List<DiaryBoard> myDiaryList(DiaryBoard diaryBoard);
 	public List<DiaryBoard> diaryList(DiaryBoard diaryBoard);
 	public int myDiaryCnt(DiaryBoard diaryBoard);
 	public int diaryCnt(DiaryBoard diaryBoard);

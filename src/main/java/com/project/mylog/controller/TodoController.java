@@ -31,7 +31,7 @@ public class TodoController {
 	
 	@RequestMapping(value = "modify", method = RequestMethod.GET)
 	public String todoModify() {
-		return "todo/modify";
+		return "todo/todoModify";
 	}
 	@RequestMapping(value = "modify", method = RequestMethod.POST)
 	public String todoModify(int tdno, String tdcontent) {

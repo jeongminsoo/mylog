@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="package com.project.mylog.dao.TodoDao">
+<mapper namespace="com.project.mylog.dao.TodoDao">
 	<resultMap type="Todo" id="TodoResult">
 		<result property="tdno" column="tdno"/>
 		<result property="mid" column="mid"/>
@@ -36,6 +36,12 @@
 	
 	<update id="todoChange" parameterType="Todo">
 		UPDATE TODO SET TDCHECK = #{tdcheck} WHERE TDNO = #{tdno}
+	</update>
+	
+	<update id="todoModify" parameterType="Todo">
+		UPDATE TODO
+		    SET TDCONTENT = #{tdcontent}
+		    WHERE TDNO = #{tdno}
 	</update>
 	
 	<delete id="todoDelete" parameterType="int">

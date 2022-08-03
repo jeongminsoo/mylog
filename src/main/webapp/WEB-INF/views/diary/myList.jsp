@@ -11,71 +11,101 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
 		$(document).ready(function(){
+			$('.toggle').hide();
 			$('#todo_make').click(function(){
+				var nowDate =  '${nowDate }';
 				$.ajax({
-					url : 'todo/make.do';
-					data : 'tdrdate=${nowDate}'
-					type : 'get'
-					sucess : function(data){
-						$('#todo_make').html(data);
+					url : '${conPath}/todo/make.do',
+					data : 'tdrdate='+nowDate,
+					type : 'get',
+					success : function(data){
+						alert(data);
+						$('#todo_make_form').html(data);
 					}
 				})
 			});
-			$('.todo_menu').click(function(){
+			$('.toggle_button').click(function(){
 				var tdno = $(this).attr('id');
-				$('.toggle'+tdno).toggle():
+				$('.toggle'+tdno).toggle();
+				$('.toggle:not(.toggle'+tdno+')').hide();
 			})
-			$('body:not(.todo_menu)').click(function(){
-				$('#toggle').hide():
-			})
+			$('.todoModify').click(function(){
+				var tdno = $(this).attr('name');
+				var tdcontent = $('tdcontent'+tdno).text();
+				$.ajax({
+					url : '${conPath}/todo/modify.do',
+					data : 'tdno='+tdno+'tdcontent='+tdcontent,
+					type : 'get',
+					success : function(data){
+						$('.tdcontent'+tdno).html(data);
+					}
+				})
+			});
 		});
 	</script>
 </head>
 <body>
 	<div id="main_wrap">
 		<div id="date">
-			<button>이전</button>
+			<button onclick="location.href='myList.do?ddate=${before }'">이전</button>
 			<div class="nowDate">${nowDate }</div>
-			<button>이후</button>
+			<button onclick="location.href='myList.do?ddate=${after }'">이후</button>
 		</div>
 		<div id="diaryList">
-			<c:if test="${not empty myDiaryList }">
-				<c:forEach var="mine" items="${myDiaryList }">
-					<div class="list" onclick="location.href='${conPath}/diary/content.do?dnum=${mine.dnum }'">
-						<span>${mine.dtitle }</span>
-						<c:if test="${mine.dstatus eq 0 }">
+			<c:if test="${not empty diaryList }">
+				<c:forEach var="diary" items="${diaryList }">
+					<div class="list" onclick="location.href='content.do?dnum=${diary.dnum }'">
+						<span>${diary.dtitle }</span>
+						<c:if test="${diary.dstatus eq 0 }">
 							<span class="status">비밀 일기</span>
 						</c:if>
-						<c:if test="${mine.dstatus eq 1 }">
+						<c:if test="${diary.dstatus eq 1 }">
 							<span class="status">친구 공개</span>
 						</c:if>
-						<c:if test="${mine.dstatus eq 0 }">
+						<c:if test="${diary.dstatus eq 2 }">
 							<span class="status">전체 공개</span>
-							<span class="hit">조회수 : ${mine.dhit }</span>
+							<span class="hit">조회수 : ${diary.dhit }</span>
 						</c:if>
+						<span class="drdate">작성일 : ${diary.drdate }</span>
 					</div>
 				</c:forEach>
 			</c:if>
-			<div id="diary_write" onclick="location.href='${conPath}/diary/wirte.do?mid=${member.mid }&drdate=${nowDate }">
+			<div id="diary_write" onclick="location.href='write.do?mid=${member.mid }&ddate=${nowDate }">
 				<span>+</span>
 				<span>새로운 일기 쓰기</span>
+			</div>
+			<div class="paging">
+				<c:if test="${paging.startPage > paging.blockSize }">
+					<a href="myList.do?ddate=${nowDate }&pageNum=${paging.startPage-1 }">[ 이전 ]</a>
+				</c:if>
+				<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
+					<c:if test="${i eq paging.currentPage }">
+						[ <b>${i }</b> ]
+					</c:if>
+					<c:if test="${i != paging.currentPage }">
+						<a href="myList.do?ddate=${nowDate }&pageNum=${i}">[ ${i } ]</a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${ paging.endPage < paging.pageCnt }">
+					<a href="myList.do?ddate=${nowDate }&pageNum=${paging.endPage + 1 }">[ 다음 ]</a>
+				</c:if>
 			</div>
 		</div>
 		<div id="todo_list">
 			<c:forEach var="todo" items="${todoList }">
-				<div id="todo_${todo.tdno }">
+				<div id="todo${todo.tdno }">
 					<span>
-						<img alt="체크이미지 넣을거임" src="${conPath }/img/checkImg${todo.tdcontent }" id="checkBox" class="${todo.tdno }">
+						<img alt="체크이미지 넣을거임" src="${conPath }/img/checkImg${todo.tdcontent }" class="${todo.tdno }">
 					</span>
-					<span>${todo.tdcontent }</span>
-					<div class="todo_menu" id="${todo.tdno }"><span>...</span>
-						<div id="toggle" class="toggle${todo.tdno}">
-							<span id="todo_modify" class="${todo.tdno }">수정</span>
-							<span id="todo_delete" class="${todo.tdno }">삭제</span>
-						</div>
+					<span class="tdcontent${todo.tdno }">${todo.tdcontent }</span>
+					<span class="toggle_button" id="${todo.tdno }">...</span>
+					<div class="toggle toggle${todo.tdno}">
+						<button class="todoModify" name="${todo.tdno}">수정</button>
+						<button onclick="location.href='${conPath}/todo/delete.do?tdno=${todo.tdno }'">삭제</button>
 					</div>
 				</div>
 			</c:forEach>
+			<div id="todo_make_form"></div>
 			<div id="todo_make">
 				<span>+</span>
 				<span>새로운 투두 만들기</span>

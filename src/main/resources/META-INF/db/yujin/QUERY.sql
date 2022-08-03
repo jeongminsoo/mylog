@@ -119,6 +119,10 @@ INSERT INTO TODO
 -- 투두 완료하기
 UPDATE TODO SET TCHECK = 2 WHERE TNO = 2;
 
+-- 투두 수정하기
+UPDATE TODO
+    SET TDCONTENT = '영어 노트 정리하기'
+    WHERE TDNO = 2;
 
 -- 날짜로 내 투두리스트 가져오기(
 SELECT * FROM TODO WHERE TDRDATE = '2022-07-28' AND MID = 'aaa';
@@ -129,8 +133,13 @@ DELETE FROM TODO WHERE TNO = 3;
 -- 글 작성하기(diaryWrite)
 INSERT INTO 
     DIARYBOARD(DNUM, DTITLE, MID, DTODOIN, DCONTENT, DHIT, DSTATUS, DDATE, DIP)
-    VALUES(DIARYBOARD_SEQ.NEXTVAL, '오늘의 반성일기', 'aaa', NULL, '오늘은 아무것도 하지 못했어요ㅠㅠ', 0, 2, '2022-07-28', '127.00.00.01');
-
+    VALUES(DIARYBOARD_SEQ.NEXTVAL, '오늘의 반성일기', 'aaa', NULL, '오늘은 아무것도 하지 못했어요ㅠㅠ', 0, 0, '2022-07-28', '127.00.00.01');
+    
+-- 글 정보 가져오기
+SELECT *
+    FROM DIARYBOARD
+    WHERE DNUM = 1;
+    
 -- 글 수정하기(diaryModify)
 UPDATE DIARYBOARD 
     SET DTITLE = '오늘을 마무리하며...',
@@ -160,7 +169,7 @@ SELECT A.*
     WHERE RN BETWEEN 1 AND 10;
 
 -- 해당 날짜의 내가 쓴 글 갯수(myDirayCnt)
-SELECT COUNT(*) CNT
+SELECT COUNT(*)
     FROM DIARYBOARD
         WHERE DDATE = '2022-07-28' AND MID = 'aaa';
 
