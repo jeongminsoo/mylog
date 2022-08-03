@@ -13,6 +13,10 @@
 		INSERT INTO ADMIN (aID, aPW, aGRADE)
         	VALUES (#{aid}, #{apw}, 0)
 	</insert>
+	<!-- loginAdmin -->
+	<select id="loginAdmin">
+	
+	</select>
 
 	<!-- member에서 갖다쓸 예정 -->	
 		<!-- deleteMember -->

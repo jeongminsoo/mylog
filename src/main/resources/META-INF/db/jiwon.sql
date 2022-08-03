@@ -139,6 +139,8 @@
     INSERT INTO ADMIN (aID, aPW, aGRADE)
         VALUES ('ADMINaaa', '111', 0);
     -- 일반 관리자
+    -- 로그인
+    SELECT * FROM ADMIN WHERE AID='aaa' AND APW='111';
     -- 회원 탈퇴 시키기
     UPDATE MEMBER SET mSTATUS = 0
         WHERE mID='aaa';
