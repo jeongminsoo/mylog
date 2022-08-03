@@ -21,53 +21,34 @@ public class TeamCommentController {
 	@Autowired
 	private TeamCommentBoardService tcService;
 	
-	//teamcommentList
-	@RequestMapping(value = "teamcommentList", method = { RequestMethod.GET, RequestMethod.POST })
-	public String teamcommentList(String pageNum, Model model) {
-		model.addAttribute("teamcommentList", tcService.teamCommentList(pageNum));
-		int teamCommentTotCnt = tcService.teamCommentTotCnt();
-		model.addAttribute("paging", new Paging(teamCommentTotCnt, pageNum));
-		return "forward:teamboardContent.do";
-	}
 	//teamcommentWrite
-	@RequestMapping(value = "teamboardWrite", method = RequestMethod.POST)
-	public String teamboardWrite(@ModelAttribute("teamcomment") TeamCommentBoard teamcomment, HttpServletRequest request, Model model) { // ip저장위해
-		model.addAttribute("teamboardwriteResult", tcService.teamCommentWrite(request, teamcomment)); 
-		return "forward:teamboardList.do";
-	}
-	//teamboardContent
-	/*@RequestMapping(value = "teamboardContent", method= {RequestMethod.GET, RequestMethod.POST})
-	public String teamboardContent(int tnum, String pageNum, Model model) {
-		model.addAttribute("content", tbService.teamBoardDetail(tnum));
-		model.addAttribute("pageNum", pageNum);
-		return "teamboard/teamboardContent";
+	@RequestMapping(value = "write", method = RequestMethod.POST)
+	public String teamcommentWrite(@ModelAttribute("teamcomment") TeamCommentBoard teamcomment, HttpServletRequest request, Model model) { // ip저장위해
+		model.addAttribute("teamcommentwriteResult", tcService.teamCommentWrite(request, teamcomment)); 
+		return "forward:../teamboard/content.do";
 	}
 	//teamboardModify
-	@RequestMapping(value = "teamboardModifyView", method= RequestMethod.GET)
-	public String teamboardModifyView(int tnum, String pageNum, Model model) {
-		model.addAttribute("teamboard", tbService.teamBoardModifyReplyView(tnum));
-		return "teamboard/teamboardModifyView";
-	}
-	@RequestMapping(value = "teamboardModify", method= RequestMethod.POST)
-	public String teamboardModify(@ModelAttribute("teamboard") TeamBoard teamboard, MultipartHttpServletRequest mRequest, Model model) {
-		model.addAttribute("teamboardmodifyResult", tbService.teamBoardModify(mRequest, teamboard));
-		return "forward:teamboardList.do";
+	@RequestMapping(value = "modify", method= RequestMethod.POST)
+	public String teamcommentModify(@ModelAttribute("teamcomment") TeamCommentBoard teamcomment, HttpServletRequest request, Model model) {
+		model.addAttribute("teamcommentmodifyResult", tcService.teamCommentModify(request, teamcomment));
+		return "forward:../teamboard/content.do";
 	}
 	//teamboardDelete
-	@RequestMapping(value = "teamboardDelete", method = RequestMethod.GET)
-	public String delete(int tnum, String pageNum, Model model) {
-		model.addAttribute("teamboarddeleteResult", tbService.teamBoardDelete(tnum));		
-		return "forward:teamboardList.do";
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String delete(int tnum, String pageNum, int tcnum, String tcpageNum, Model model) {
+		model.addAttribute("teamcommentdeleteResult", tcService.teamCommentDelete(tcnum));
+		return "forward:../teamboard/content.do";
 	}
 	//teamboardReply
-	@RequestMapping(value = "teamboardReplyView", method = RequestMethod.GET)
-	public String replyView(int tnum, String pageNum, Model model) {
-		model.addAttribute("teamboard", tbService.teamBoardModifyReplyView(tnum));
-		return "teamboard/teamboardReplyView";
+	@RequestMapping(value = "replyView", method = {RequestMethod.GET, RequestMethod.POST})
+	public String teamboardReplyView(int tcnum, Model model) {
+		model.addAttribute("teamcomment", tcService.teamCommentDetail(tcnum));
+		System.out.println("replyView단 : "+tcnum);
+		return "teamcomment/replyView";
 	}
-	@RequestMapping(value = "teamboardReply", method = RequestMethod.POST)
-	public String teamboardReply(@ModelAttribute("teamboard") TeamBoard teamboard, MultipartHttpServletRequest mRequest, Model model) { // ip저장위해 request필요
-		model.addAttribute("teamboard", tbService.teamBoardReply(mRequest, teamboard));
-		return "forward:teamboardList.do";
-	}*/
+	@RequestMapping(value = "reply", method = RequestMethod.POST)
+	public String teamboardReply(@ModelAttribute("teamcomment") TeamCommentBoard teamcomment, HttpServletRequest request, Model model) { // ip저장위해 request필요
+		model.addAttribute("teamcomment", tcService.teamCommentReply(request, teamcomment));
+		return "forward:../teamboard/content.do";
+	}
 }
