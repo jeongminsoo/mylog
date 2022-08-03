@@ -17,6 +17,10 @@
 	</script>
 </head>
 <body>
+<<<<<<<< HEAD:src/main/webapp/WEB-INF/views/member/logout.jsp
 
+========
+	<jsp:forward page="main.do"/>
+>>>>>>>> c69487c10f9bd49d435a6a4dfacf2a8730d9cdee:src/main/webapp/index.jsp
 </body>
 </html>
