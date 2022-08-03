@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CalendarController {
 
 	@RequestMapping(value="calendar", method = {RequestMethod.GET, RequestMethod.POST})
-	public String calendar(int year, int month, Model model) {
+	public String calendar(String year, String month, Model model) {
 
 		return "claendar/calendar";
 	}
