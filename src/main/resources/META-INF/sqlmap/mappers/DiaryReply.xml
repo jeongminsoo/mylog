@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="package com.project.mylog.dao.DiaryReplyDao">
+	<resultMap type="DiaryReply" id="DiaryReplyResult">
+		<result property="drnum" column="drnum"/>
+		<result property="dnum" column="dnum"/>
+		<result property="mid" column="mid"/>
+		<result property="drcontent" column="drcontent"/>
+		<result property="drgroup" column="drgroup"/>
+		<result property="drstep" column="drstep"/>
+		<result property="drindent" column="drindent"/>
+		<result property="drrdate" column="drrdate"/>
+		<result property="drip" column="drip"/>
+	</resultMap>
+</mapper>

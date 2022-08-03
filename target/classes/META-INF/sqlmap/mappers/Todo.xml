@@ -16,12 +16,7 @@
 		SELECT *
 			FROM TODO
 		    WHERE MID = #{mid}
-		    <if test="tdrdate == null">
-		        AND TDRDATE = SYSDATE
-		    </if>
-		    <if test="tdrdate != null">
 		        AND TDRDATE = #{tdrdate}
-		    </if>
 		    ORDER BY TDCHECK, TDNO
 	</select>
 	
@@ -39,7 +34,7 @@
     		VALUES(TODO_SEQ.NEXTVAL, #{mid}, #{tdcontent}, 0, (SELECT TDRDATE+1 FROM TODO WHERE TDNO = 1));
 	</insert>
 	
-	<update id="todoChange" parameterType="int">
+	<update id="todoChange" parameterType="Todo">
 		UPDATE TODO SET TDCHECK = #{tdcheck} WHERE TDNO = #{tdno}
 	</update>
 	
