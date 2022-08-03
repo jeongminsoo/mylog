@@ -16,7 +16,7 @@ public class ReviewReplyBoard {
 	private int rpgroup;
 	private int rpstep;
 	private int rpindent;
-	private String rip;
+	private String rpip;
 	private int startRow;
 	private int endRow;
 

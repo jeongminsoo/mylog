@@ -3,10 +3,12 @@ package com.project.mylog.service;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.project.mylog.dao.AdminDao;
 import com.project.mylog.model.Admin;
 
+@Service
 public class AdminServiceImpl implements AdminService {
 
 	@Autowired
@@ -35,6 +37,7 @@ public class AdminServiceImpl implements AdminService {
 			httpSession.setAttribute("admin", admin);
 			httpSession.setAttribute("aid", aid);
 		}
+		System.out.println("관리자 로그인 : "+result);
 		return result;
 	}
 

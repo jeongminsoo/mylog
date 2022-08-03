@@ -22,10 +22,17 @@ public class AdminController {
 		return "admin/login";
 	}
 	
-	@RequestMapping(value="login", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="login", method = RequestMethod.POST)
 	public String adminLogin(String aid, String apw, HttpSession httpSession, Model model) {
 		model.addAttribute("loginResult", adminService.loginAdmin(aid, apw, httpSession));
-		return "forward:main.do";
+		return "forward:../main.do";
+	}
+	
+	@RequestMapping(value="logout", method = {RequestMethod.GET, RequestMethod.POST})
+	public String adminLogout(HttpSession httpSession, Model model) {
+		httpSession.invalidate();
+		model.addAttribute("logoutResult", "관리자 로그아웃 성공");
+		return "forward:../main.do";
 	}
 	
 }

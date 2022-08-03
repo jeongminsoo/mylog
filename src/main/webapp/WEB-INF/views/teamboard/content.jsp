@@ -10,8 +10,39 @@
 	<title>Insert title here</title>
 	<link href="${conPath}/css/style.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script>
+		function replyComment(tcnum) {
+			$.ajax({
+				url : '${conPath}/teamcomment/replyView.do',
+				data : 'tcnum=' + tcnum,
+				type : 'post',
+				dataType : 'html',
+				success : function(data, status) {
+					$('#replyDiv').html(data);
+				}
+			});
+		}
+		$(document).ready(function(){
+			$('button#hide').click(function(){
+				$('.commentReply').hide();
+			});
+			$('button#show').click(function(){
+				$('.commentReply').show();
+			});
+		});
+	</script>
 </head>
 <body>
+	<c:if test="${teamboarddeleteResult eq 1 }">
+		<script>
+			alert('댓글삭제 성공');
+		</script>
+	</c:if>
+	<c:if test="${teamboarddeleteResult eq 0 }">
+		<script>
+			alert('댓글삭제 실패');
+		</script>
+	</c:if>
 	<div id="content">
 		<table>
 			<caption>${content.tnum }번상세보기</caption>
@@ -45,18 +76,26 @@
 				<td>${content.trdate }</td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="button" value="목록"
+				<th>ip</th>
+				<td>${content.tip }</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<input type="button" value="목록"
 					onclick="location.href='${conPath}/teamboard/list.do?pageNum=${pageNum }'"
-					class="btn"> <input type="button" value="답변"
+					class="btn"> 
+				<input type="button" value="답변"
 					onclick="location.href='${conPath}/teamboard/replyView.do?tnum=${content.tnum}&pageNum=${pageNum }'"
-					class="btn"> <input type="button" value="수정"
+					class="btn"> 
+				<input type="button" value="수정"
 					onclick="location.href='${conPath}/teamboard/modifyView.do?tnum=${content.tnum}&pageNum=${pageNum }'"
-					class="btn"> <input type="button" value="삭제"
+					class="btn"> 
+				<input type="button" value="삭제"
 					onclick="location.href='${conPath}/teamboard/delete.do?tnum=${content.tnum}&pageNum=${pageNum }'"
 					class="btn"></td>
 			</tr>
 		</table>
-		<form action="${conPath }/teamboard/tcwrite.do" method="post">
+		<form action="${conPath }/teamcomment/write.do" method="post">
 			<input type="hidden" name="tnum" value="${content.tnum }">
 			<input type="hidden" name="pageNum" value="${param.pageNum }">
 			<table>
@@ -71,23 +110,38 @@
 		<table>
 			<c:if test="${teamCommentTotCnt eq 0 }">
 				<tr>
-					<td>등록된 댓이 없습니다</td>
+					<td>등록된 댓글이 없습니다</td>
 				</tr>
 			</c:if>
-			<c:if test="${teamCommentTotCnt != 0 }">
+			<c:if test="${teamCommentTotCnt ne 0 or teamCommentTotCnt ne null}">
 				<c:forEach items="${teamcommentList }" var="tcDto">
 					<tr>
+						<td id="tcnum">${tcDto.tcnum }</td>
 						<td>${tcDto.mid }</td>
-						<td class="left"><c:forEach var="i" begin="1"
-								end="${tcDto.tcndent }">
-								<c:if test="${i==tcDto.tcndent }">
-			  							└
-			  						</c:if>
-								<c:if test="${i!=tcDto.tcndent }">
-			  								&nbsp; &nbsp; &nbsp;
-			  						</c:if>
-							</c:forEach> ${tcDto.tccontent }</td>
+						<td class="left">
+							<c:forEach var="i" begin="1" end="${tcDto.tcindent }">
+								<c:if test="${i==tcDto.tcindent }">
+				  					└
+				  				</c:if>
+								<c:if test="${i!=tcDto.tcindent }">
+				  					&nbsp; &nbsp; &nbsp;
+				  				</c:if>
+							</c:forEach> 
+							${tcDto.tccontent }
+						</td>
+						<td>
+						
+							<button 
+								onclick="replyComment(${tcDto.tcnum})">답댓글</button>
+							<button 
+								id="hide">hide</button>
+							<button 
+								onclick="location.href='${conPath}/teamcomment/modifyView.do?tnum=${content.tnum}&pageNum=${pageNum }&tcnum=${tcDto.tcnum }'">수정</button>
+							<button 
+								onclick="location.href='${conPath}/teamcomment/delete.do?tnum=${content.tnum}&pageNum=${pageNum }&tcnum=${tcDto.tcnum }'">삭제</button>
+						</td>
 					</tr>
+					<div id="replyDiv"></div>
 				</c:forEach>
 			</c:if>
 		</table>

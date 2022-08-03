@@ -1,7 +1,5 @@
 package com.project.mylog.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.mylog.model.TeamBoard;
-import com.project.mylog.model.TeamCommentBoard;
 import com.project.mylog.service.TeamBoardService;
 import com.project.mylog.service.TeamCommentBoardService;
 import com.project.mylog.util.Paging;
+import com.project.mylog.util.Paging2;
 
 @Controller
 @RequestMapping(value = "teamboard")
@@ -53,12 +51,15 @@ public class TeamBoardController {
 	public String teamboardContent(int tnum, String pageNum, String tcpageNum, Model model) {
 		model.addAttribute("content", tbService.teamBoardDetail(tnum));
 		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("teamcommentList", tcService.teamCommentList(tcpageNum));
-		int teamCommentTotCnt = tcService.teamCommentTotCnt();
+		//comment
+		model.addAttribute("teamcommentList", tcService.teamCommentList(tcpageNum, tnum));
+		int teamCommentTotCnt = tcService.teamCommentTotCnt(tnum);
 		model.addAttribute("teamCommentTotCnt", teamCommentTotCnt);
-		System.out.println("댓글 수 : " + teamCommentTotCnt);
-		//model.addAttribute("paging", new Paging(teamCommentTotCnt, tcpageNum));
-
+		model.addAttribute("paging", new Paging2(teamCommentTotCnt, tcpageNum));
+		System.out.println("2tnum : "+tnum);
+		System.out.println("2pageNum : "+pageNum);
+		System.out.println("2tcpageNum : "+tcpageNum);
+		
 		return "teamboard/content";
 	}
 
@@ -95,37 +96,6 @@ public class TeamBoardController {
 			Model model) { // ip저장위해 request필요
 		model.addAttribute("teamboard", tbService.teamBoardReply(mRequest, teamboard));
 		return "forward:list.do";
-	}
-
-	// teamcommentWrite
-	@RequestMapping(value = "tcwrite", method = RequestMethod.POST)
-	public String teamcommentWrite(@ModelAttribute("teamcomment") TeamCommentBoard teamcomment,
-			HttpServletRequest request, Model model) { // ip저장위해
-		model.addAttribute("teamboardwriteResult", tcService.teamCommentWrite(request, teamcomment));
-		return "forward:content.do";
-	}
-
-	// teamcommentModify
-	@RequestMapping(value = "tcmodify", method = RequestMethod.POST)
-	public String teamcommentModify(@ModelAttribute("teamcomment") TeamCommentBoard teamcomment,
-			HttpServletRequest request, Model model) {
-		model.addAttribute("teamboardmodifyResult", tcService.teamCommentModify(request, teamcomment));
-		return "forward:content.do";
-	}
-
-	// teamcommentDelete
-	@RequestMapping(value = "tcdelete", method = RequestMethod.GET)
-	public String teamcommentDelete(int tcnum, String pageNum, Model model) {
-		model.addAttribute("teamboarddeleteResult", tcService.teamCommentDelete(tcnum));
-		return "forward:content.do";
-	}
-
-	// teamcommentReply
-	@RequestMapping(value = "tcreply", method = RequestMethod.POST)
-	public String teamcommentReply(@ModelAttribute("teamcomment") TeamCommentBoard teamcomment,
-			HttpServletRequest request, Model model) { // ip저장위해 request필요
-		model.addAttribute("teamcomment", tcService.teamCommentReply(request, teamcomment));
-		return "forward:content.do";
 	}
 
 }

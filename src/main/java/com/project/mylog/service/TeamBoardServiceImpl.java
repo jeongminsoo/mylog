@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.mylog.dao.TeamBoardDao;
+import com.project.mylog.dao.TeamCommentBoardDao;
 import com.project.mylog.model.TeamBoard;
 import com.project.mylog.util.Paging;
 
@@ -23,6 +24,9 @@ public class TeamBoardServiceImpl implements TeamBoardService {
 	@Autowired
 	private TeamBoardDao teamBoardDao;
 	String backupPath = "D:\\pjw\\webPro\\source\\10_2ndProject\\mylog\\src\\main\\webapp\\teamBoardFileUpload\\";
+	
+	@Autowired
+	private TeamCommentBoardDao teamcommentDao;
 
 	@Override
 	public List<TeamBoard> teamBoardList(String pageNum) {

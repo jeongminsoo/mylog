@@ -26,7 +26,12 @@
 			</tr>
 			<tr>
 				<th>비밀번호</th>
-				<td><input type="text" name="apw" required="required"></td>
+				<td><input type="password" name="apw" required="required"></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="로그인">
+				</td>
 			</tr>
 		</table>
 	</form>

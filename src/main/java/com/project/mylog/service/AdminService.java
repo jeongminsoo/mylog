@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.project.mylog.model.Admin;
 
-@Service
 public interface AdminService {
 	
 	public int joinAdmin(Admin admin);
