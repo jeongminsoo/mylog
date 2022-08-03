@@ -21,7 +21,7 @@ public class ReviewReplyController {
 	public String reviewReplyList(String pageNum, Model model, int rnum) {
 		
 		model.addAttribute("replylist", replyservice.reviewReplyList(rnum, pageNum));
-		model.addAttribute("replyPaging", new Paging(replyservice.reviewReplyCount(), pageNum));
+		model.addAttribute("replyPaging", new Paging(replyservice.reviewReplyCount(rnum), pageNum));
 		return "forward:content.do";
 	}
 	

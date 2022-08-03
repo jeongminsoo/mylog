@@ -16,6 +16,7 @@ public class ReviewReplyBoardServiceImpl implements ReveiwReplyBoardService {
 	@Autowired
 	private ReviewReplyBoardDao replyboardDao;
 	
+	
 	@Override
 	public int reviewReplyWrite(ReviewReplyBoard replyBoard) {
 		// TODO Auto-generated method stub
@@ -29,15 +30,16 @@ public class ReviewReplyBoardServiceImpl implements ReveiwReplyBoardService {
 	}
 
 	@Override
-	public int reviewReplyDelete(ReviewReplyBoard replyBoard) {
+	public int reviewReplyDelete(int rpnum) {
 		// TODO Auto-generated method stub
-		return replyboardDao.reviewReplyDelete(replyBoard);
+		return replyboardDao.reviewReplyDelete(rpnum);
 	}
 
 	@Override
-	public List<ReviewReplyBoard> reviewReplyList(int rnum, String pageNum) {
-		Paging paging = new Paging(reviewReplyCount(), pageNum);
+	public List<ReviewReplyBoard> reviewReplyList(int rnum, String repageNum) {
+		ReplyPaging paging = new ReplyPaging(reviewReplyCount(rnum), repageNum);
 		ReviewReplyBoard replyBoard = new ReviewReplyBoard();
+		replyBoard.setRnum(rnum);
 		replyBoard.setStartRow(paging.getStartRow());
 		replyBoard.setEndRow(paging.getEndRow());
 		return replyboardDao.reviewReplyList(replyBoard);
@@ -50,9 +52,9 @@ public class ReviewReplyBoardServiceImpl implements ReveiwReplyBoardService {
 	}
 
 	@Override
-	public int reviewReplyCount() {
+	public int reviewReplyCount(int rnum) {
 		// TODO Auto-generated method stub
-		return replyboardDao.reviewReplyCount();
+		return replyboardDao.reviewReplyCount(rnum);
 	}
 
 	@Override
