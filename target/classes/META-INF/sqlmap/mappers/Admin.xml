@@ -13,9 +13,9 @@
 		INSERT INTO ADMIN (aID, aPW, aGRADE)
         	VALUES (#{aid}, #{apw}, 0)
 	</insert>
-	<!-- loginAdmin -->
-	<select id="loginAdmin">
-	
+	<!-- getDetail -->
+	<select id="getAdminDetail" parameterType="String" resultType="Admin">
+		SELECT * FROM ADMIN WHERE AID=#{aid}
 	</select>
 
 	<!-- member에서 갖다쓸 예정 -->	

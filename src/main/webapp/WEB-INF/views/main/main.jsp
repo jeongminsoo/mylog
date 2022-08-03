@@ -28,5 +28,15 @@
 			alert('회원가입 성공');
 		</script>
 	</c:if>
+	<c:if test="${loginResult eq 0 }">
+		<script>
+			alert('로그인 실패');
+		</script>
+	</c:if>
+	<c:if test="${loginResult eq 1 }">
+		<script>
+			alert('로그인 성공');
+		</script>
+	</c:if>
 </body>
 </html>
