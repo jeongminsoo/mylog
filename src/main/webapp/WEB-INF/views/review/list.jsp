@@ -18,7 +18,7 @@
 	</script>
 </head>
 <body>
-	<button onclick="location.href='${conPath}/reviewWrite.do'">글쓰기</button>
+	<button onclick="location.href='${conPath}/review/write.do'">글쓰기</button>
 	<table>
 		<tr>
 			<th>No</th>
@@ -31,7 +31,7 @@
 		<c:forEach var="review" items="${reviewList }">
 		<tr>
 			<td>${review.rnum }</td>
-			<td><a href="${conPath }/reviewContent.do?rnum=${review.rnum}&pageNum=${reviewPaging.currentPage}">${review.rtitle }</a></td>
+			<td><a href="${conPath }/review/content.do?rnum=${review.rnum}&pageNum=${reviewPaging.currentPage}">${review.rtitle }</a></td>
 			<td>${review.mname }</td>
 			<td>${review.rrdate }</td>
 			<td>1</td>
