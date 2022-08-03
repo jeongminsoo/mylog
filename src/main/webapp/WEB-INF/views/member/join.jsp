@@ -48,9 +48,11 @@
 				<caption>회원가입</caption>
 				<tr>
 					<th><label for="mid">아이디</label></th>
-					<td><input type="text" name="mid" id="mid"> <input
-						type="button" value="중복확인" class="btn" onclick="idCheck(mid)">
-						<div id="idCheckResult"></div></td>
+					<td>
+						<input type="text" name="mid" id="mid"> 
+						<input type="button" value="중복확인" class="btn" onclick="idCheck(mid)">
+						<div id="idCheckResult"></div>
+					</td>
 				</tr>
 				<tr>
 					<th><label for="mpw">비밀번호</label></th>

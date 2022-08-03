@@ -28,5 +28,31 @@
 			alert('회원가입 성공');
 		</script>
 	</c:if>
+	<c:if test="${loginResult eq '관리자 로그인 실패' or loginResult eq '유효하지 않은 아이디입니다' or loginResult eq '비밀번호가 맞지 않습니다'}">
+		<script>
+			alert('${loginResult}');
+			history.back();
+		</script>
+	</c:if>
+	<c:if test="${loginResult eq '관리자 로그인 성공' }">
+		<script>
+			alert('${loginResult}');
+		</script>
+	</c:if>
+	<c:if test="${logoutResult eq '관리자 로그아웃 실패'}">
+		<script>
+			alert('${logoutResult}');
+			history.back();
+		</script>
+	</c:if>
+	<c:if test="${logoutResult eq '관리자 로그아웃 성공' }">
+		<script>
+			alert('${logoutResult}');
+		</script>
+	</c:if>
+	<h1>메인입니다</h1>
+	<c:if test="${not empty admin }">
+		<button onclick="location.href='${conPath }/admin/logout.do'">관리자 로그아웃</button>
+	</c:if>
 </body>
 </html>
