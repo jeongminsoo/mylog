@@ -22,4 +22,12 @@ public interface MemberDao {
 	public List<Member> memberList(Member member);
 	
 	public int countMember();
+	
+	public Member getMember(String mid);
+	
+	public Member loginCheck(String mid, String mpw);
+	
+	public Member searchIdPw(String mname, String memail);
+	
+	public Member getMemberForMname(String mname);
 }

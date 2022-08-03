@@ -29,7 +29,7 @@
 	function idCheck(mid) {
 		var mid = $('#mid').val();
 		$.ajax({
-			url : '${conPath}/idCheck.do',
+			url : '${conPath}/member/idCheck.do',
 			data : 'mid=' + mid,
 			type : 'get',
 			dataType : 'html',
@@ -43,7 +43,7 @@
 </head>
 <body>
 	<div>
-		<form action="${conPath }/join.do" method="post">
+		<form action="member/join.do" method="post">
 			<table>
 				<caption>회원가입</caption>
 				<tr>
