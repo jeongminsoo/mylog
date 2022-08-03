@@ -6,5 +6,8 @@ import com.project.mylog.model.Admin;
 
 @Mapper
 public interface AdminDao {
+	
 	public int joinAdmin(Admin admin);
+	
+	public Admin getAdminDetail(String aid);
 }

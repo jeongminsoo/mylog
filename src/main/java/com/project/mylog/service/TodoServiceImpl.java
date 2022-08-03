@@ -29,7 +29,10 @@ public class TodoServiceImpl implements TodoService {
 	
 	@Override
 	public int todoModify(int tdno, String tdcontent) {
-		return todoDao.todoModify(tdno, tdcontent);
+		Todo todo = new Todo();
+		todo.setTdno(tdno);
+		todo.setTdcontent(tdcontent);
+		return todoDao.todoModify(todo);
 	}
 	
 	@Override
@@ -44,10 +47,13 @@ public class TodoServiceImpl implements TodoService {
 
 	@Override
 	public int todoChange(int tdno, int tdcheck) {
-		int result = todoDao.todoChange(tdno, tdcheck);
+		Todo todo = new Todo();
+		todo.setTdno(tdno);
+		todo.setTdcheck(tdcheck);
+		int result = todoDao.todoChange(todo);
 		if(tdcheck == 1) {
-			Todo todo = getTodo(tdno);
-			result = todoDelayMake(todo);
+			Todo todo2 = getTodo(tdno);
+			result = todoDao.todoDelayMake(todo2);
 		}
 		return result;
 	}

@@ -17,7 +17,7 @@
 	</script>
 </head>
 <body>
-	<form action="${conPath }/teamboard/teamboardModify.do" method="post" enctype="multipart/form-data">
+	<form action="${conPath }/teamboard/modify.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="pageNum" value="${param.pageNum }">
 		<input type="hidden" name="tnum" value="${teamboard.tnum }">
 		<table>
@@ -42,7 +42,7 @@
 				<td colspan="2">
 					<input type="submit" value="저장" class="btn">
 					<input type="reset" value="취소" class="btn" onclick="history.back()">
-					<input type="button" value="목록" class="btn" onclick="location='${conPath}/teamboard/teamboardList.do?pageNum=${param.pageNum }'">
+					<input type="button" value="목록" class="btn" onclick="location='${conPath}/teamboard/list.do?pageNum=${param.pageNum }'">
 				</td>
 			</tr>
 		</table>

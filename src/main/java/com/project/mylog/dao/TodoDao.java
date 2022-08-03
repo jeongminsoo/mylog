@@ -11,8 +11,8 @@ public interface TodoDao {
 	public List<Todo> todoList(Todo todo);
 	public Todo getTodo(int tdno);
 	public int todoMake(Todo todo);
-	public int todoModify(int tdno, String tdcontent);
+	public int todoModify(Todo todo);
 	public int todoDelayMake(Todo todo);
-	public int todoChange(int tdno, int tdcheck);
+	public int todoChange(Todo todo);
 	public int todoDelete(int tdno);
 }

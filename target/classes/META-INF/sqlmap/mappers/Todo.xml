@@ -38,6 +38,12 @@
 		UPDATE TODO SET TDCHECK = #{tdcheck} WHERE TDNO = #{tdno}
 	</update>
 	
+	<update id="todoModify" parameterType="Todo">
+		UPDATE TODO
+		    SET TDCONTENT = #{tdcontent}
+		    WHERE TDNO = #{tdno}
+	</update>
+	
 	<delete id="todoDelete" parameterType="int">
 		DELETE FROM TODO WHERE TDNO = #{tdno}
 	</delete>
