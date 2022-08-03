@@ -14,13 +14,13 @@ public interface ReviewReplyBoardDao {
 
 	public int reviewReplyModify(ReviewReplyBoard replyBoard);
 
-	public int reviewReplyDelete(ReviewReplyBoard replyBoard);
+	public int reviewReplyDelete(int rpnum);
 
 	public List<ReviewReplyBoard> reviewReplyList(ReviewReplyBoard replyBoard);
 
 	public ReviewReplyBoard reviewReplyContent(int rpnum);
 
-	public int reviewReplyCount();
+	public int reviewReplyCount(int rnum);
 
 	public void reviewReplyStepA(ReviewReplyBoard replyBoard);
 
