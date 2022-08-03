@@ -17,6 +17,6 @@
 	</script>
 </head>
 <body>
-	<jsp:forward page="diary/myList.do"/>
+	<jsp:forward page="review/list.do"/>
 </body>
 </html>
