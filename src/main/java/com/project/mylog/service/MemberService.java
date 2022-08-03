@@ -2,6 +2,8 @@ package com.project.mylog.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.project.mylog.model.Member;
 
 public interface MemberService {
@@ -19,4 +21,12 @@ public interface MemberService {
 	public List<Member> memberList(String pageNum);
 	
 	public int countMember();
+	
+	public Member getMember(String mid);
+	
+	public String loginCheck(String mid, String mpw, HttpSession session);
+	
+	public String searchIdPw(String mname, String memail);
+	
+	public Member getMemberForMname(String mname);
 }

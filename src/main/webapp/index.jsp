@@ -17,6 +17,6 @@
 	</script>
 </head>
 <body>
-	<jsp:forward page="joinView.do"/>
+	<jsp:forward page="main.do"/>
 </body>
 </html>
