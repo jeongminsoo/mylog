@@ -1,14 +1,12 @@
-package com.project.mylog.dao;
-
-import org.apache.ibatis.annotations.Mapper;
+package com.project.mylog.service;
 
 import com.project.mylog.model.Hashtag;
 
-@Mapper
-public interface HashtagDao {
+public interface HashtagService {
+
+	
 	public int hashtagWrite(String tname);
 	public int hashtagModify(Hashtag hashtag);
 	public int hashtagDelete(int tno);
 	
-
 }
