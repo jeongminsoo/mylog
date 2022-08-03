@@ -49,13 +49,13 @@
 
 		<!-- 세부내용 -->
 		<select id="reviewReplyContent" parameterType="int" resultType="ReviewReplyBoard">
-			SELECT * FROM RPBOARD WHERE RPNUM=#{rpnum}
+			SELECT * FROM RPBOARD WHERE RPNUM =#{rpnum}
 		</select>
 	
 		
 		<!-- 글 개수 -->
-		<select id="reviewReplyCount" resultType="int">
-			SELECT COUNT(*) FROM RPBOARD
+		<select id="reviewReplyCount" parameterType="int" resultType="int">
+			SELECT COUNT(*) FROM RPBOARD WHERE RNUM=#{rnum}
 		</select>
 		
 		<!-- 답댓글 전 -->

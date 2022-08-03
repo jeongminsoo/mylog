@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ReplyPaging {
 	private int currentPage = 1;
-	private int pageSize = 10;
+	private int pageSize = 5;
 	private int blockSize= 5;
 	private int startRow;
 	private int endRow;

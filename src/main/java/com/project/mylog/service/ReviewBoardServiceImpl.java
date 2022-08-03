@@ -26,7 +26,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	private ReviewBoardDao rboardDao;
 	@Autowired
 	private ReviewReplyBoardDao replyDao;
-	String backupPath = "D:\\LDSwebPro\\source\\merge\\mylog\\src\\main\\webapp\\ReviewImgUpload/";
+	String backupPath = "D:\\LDSwebPro\\source\\09_2nd Project\\mylog\\src\\main\\webapp\\WEB-INF\\ReviewImgUpload/";
 
 	@Override
 	public int reviewWrite(MultipartHttpServletRequest mRequest, ReviewBoard reviewBoard) {
@@ -131,8 +131,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 
 	@Override
 	public ReviewBoard reviewContent(int rnum) {
-		ReviewReplyBoard replyBoard = new ReviewReplyBoard();
-		replyDao.reviewReplyList(replyBoard);
+
 		return rboardDao.reviewContent(rnum);
 	}
 
