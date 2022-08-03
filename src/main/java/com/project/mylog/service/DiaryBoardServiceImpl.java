@@ -8,6 +8,8 @@ import java.sql.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,14 +27,17 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 	String backupPath = "D:\\yujin\\teamproject\\mylog\\src\\main\\webapp\\WEB-INF\\diaryBoardFileUpload/";
 
 	@Override
-	public List<DiaryBoard> myDirayList(String mid, Date ddate, String pageNum) {
+	public List<DiaryBoard> myDiaryList(String mid, Date ddate, String pageNum) {
 		DiaryBoard diaryBoard = new DiaryBoard();
 		diaryBoard.setMid(mid);
 		diaryBoard.setDdate(ddate);
+		if(pageNum == null) {
+			pageNum = "1";
+		}
 		Paging paging = new Paging(diaryDao.myDiaryCnt(diaryBoard), pageNum, 5, 1);
 		diaryBoard.setStartRow(paging.getStartRow());
 		diaryBoard.setEndRow(paging.getEndRow());
-		return diaryDao.myDirayList(diaryBoard);
+		return diaryDao.myDiaryList(diaryBoard);
 	}
 
 	@Override
@@ -67,6 +72,12 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 
 	@Override
 	public DiaryBoard diaryContent(int dnum) {
+		diaryHitup(dnum);
+		return diaryDao.diaryContent(dnum);
+	}
+	
+	@Override
+	public DiaryBoard getDiary(int dnum) {
 		return diaryDao.diaryContent(dnum);
 	}
 
@@ -103,8 +114,33 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 
 	@Override
 	public int diaryModify(MultipartHttpServletRequest mRequest, DiaryBoard diaryBoard) {
-		// TODO Auto-generated method stub
-		return 0;
+		diaryBoard.setDip(mRequest.getLocalAddr());
+		boolean result = false;
+		String path = mRequest.getRealPath("diaryBoardFileUpload/");
+		Iterator<String> params = mRequest.getFileNames(); // 파라미터이름 받음
+		String filename = "";
+		while (params.hasNext()) {
+			String param = params.next();
+			MultipartFile mFile = mRequest.getFile(param); // 파라미터의 첨부된 파일 객체
+			System.out.println("파라미터 이름 : " + param);
+			filename = mFile.getOriginalFilename(); // param으로 첨부한 파일의 원래 이름
+			if (filename != null && !filename.equals("")) { // 첨부한 파일이 있을 경우
+				// 저장할 파일이름이 서버의 파일과 중복될 경우 -> 파일명 변경
+				if (new File(path + filename).exists()) {
+					filename = System.currentTimeMillis() + "_" + filename;
+				}
+				try {
+					mFile.transferTo(new File(path + filename));
+					result = fileCopy(path + filename, backupPath + filename);
+					System.out.println(result == true ? filename + " 백업성공" : filename + "번째 백업실패");
+				} catch (IOException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				result = true;
+			}
+		} // if
+		return diaryDao.diaryModify(diaryBoard);
 	}
 
 	@Override
