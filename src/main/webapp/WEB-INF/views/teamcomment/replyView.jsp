@@ -15,7 +15,7 @@
 		<input type="hidden" name="pageNum" value="${param.pageNum }">
 		<%-- <input type="hidden" name="tcpageNum" value="${param.tcpageNum }"> --%>
 		<input type="hidden" name="tcgroup" value="${teamcomment.tcgroup }">
-		<input type="hidden" name="tcstep" value="${teamcomment.tcDto.tcstep }"> <input
+		<input type="hidden" name="tcstep" value="${teamcomment.tcstep }"> <input
 			type="hidden" name="tcindent" value="${teamcomment.tcindent }">
 		<table>
 			<tr>

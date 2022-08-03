@@ -44,6 +44,7 @@ public class TeamCommentController {
 	public String teamboardReplyView(int tcnum, Model model) {
 		model.addAttribute("teamcomment", tcService.teamCommentDetail(tcnum));
 		System.out.println("replyView단 : "+tcnum);
+		System.out.println("원댓글 정보 : " + tcService.teamCommentDetail(tcnum));
 		return "teamcomment/replyView";
 	}
 	@RequestMapping(value = "reply", method = RequestMethod.POST)

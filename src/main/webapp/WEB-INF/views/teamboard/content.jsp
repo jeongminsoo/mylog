@@ -12,10 +12,11 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
 		function replyComment(tcnum) {
+			alert(tcnum);
 			$.ajax({
 				url : '${conPath}/teamcomment/replyView.do',
 				data : 'tcnum=' + tcnum,
-				type : 'post',
+				type : 'get',
 				dataType : 'html',
 				success : function(data, status) {
 					$('#replyDiv').html(data);
@@ -132,7 +133,7 @@
 						<td>
 						
 							<button 
-								onclick="replyComment(${tcDto.tcnum})">답댓글</button>
+								onclick="replyComment('${tcDto.tcnum}')">답댓글</button>
 							<button 
 								id="hide">hide</button>
 							<button 
