@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.mylog.dao.DiaryBoardDao;
@@ -20,6 +21,8 @@ import com.project.mylog.util.Paging;
 public class DiaryBoardServiceImpl implements DiaryBoardService {
 	@Autowired
 	private DiaryBoardDao diaryDao;
+	
+	String backupPath = "D:\\yujin\\teamproject\\mylog\\src\\main\\webapp\\WEB-INF\\diaryBoardFileUpload/";
 
 	@Override
 	public List<DiaryBoard> myDirayList(String mid, Date ddate, String pageNum) {
@@ -71,10 +74,31 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 	public int diaryWrite(MultipartHttpServletRequest mRequest, DiaryBoard diaryBoard) {
 		diaryBoard.setDip(mRequest.getLocalAddr());
 		boolean result = false;
-		String uploadPath = mRequest.getRealPath("diaryBoardFileUpload/");
+		String path = mRequest.getRealPath("diaryBoardFileUpload/");
 		Iterator<String> params = mRequest.getFileNames(); // 파라미터이름 받음
-		String tfilename = "";
-		return 0;
+		String filename = "";
+		while (params.hasNext()) {
+			String param = params.next();
+			MultipartFile mFile = mRequest.getFile(param); // 파라미터의 첨부된 파일 객체
+			System.out.println("파라미터 이름 : " + param);
+			filename = mFile.getOriginalFilename(); // param으로 첨부한 파일의 원래 이름
+			if (filename != null && !filename.equals("")) { // 첨부한 파일이 있을 경우
+				// 저장할 파일이름이 서버의 파일과 중복될 경우 -> 파일명 변경
+				if (new File(path + filename).exists()) {
+					filename = System.currentTimeMillis() + "_" + filename;
+				}
+				try {
+					mFile.transferTo(new File(path + filename));
+					result = fileCopy(path + filename, backupPath + filename);
+					System.out.println(result == true ? filename + " 백업성공" : filename + "번째 백업실패");
+				} catch (IOException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				result = true;
+			}
+		} // if
+		return diaryDao.diaryWrite(diaryBoard);
 	}
 
 	@Override
