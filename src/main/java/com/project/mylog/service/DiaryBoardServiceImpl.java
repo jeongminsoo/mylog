@@ -22,14 +22,14 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 	private DiaryBoardDao diaryDao;
 
 	@Override
-	public List<DiaryBoard> myDirayList(String mid, Date ddate, String pageNum) {
+	public List<DiaryBoard> myDiaryList(String mid, Date ddate, String pageNum) {
 		DiaryBoard diaryBoard = new DiaryBoard();
 		diaryBoard.setMid(mid);
 		diaryBoard.setDdate(ddate);
 		Paging paging = new Paging(diaryDao.myDiaryCnt(diaryBoard), pageNum, 5, 1);
 		diaryBoard.setStartRow(paging.getStartRow());
 		diaryBoard.setEndRow(paging.getEndRow());
-		return diaryDao.myDirayList(diaryBoard);
+		return diaryDao.myDiaryList(diaryBoard);
 	}
 
 	@Override

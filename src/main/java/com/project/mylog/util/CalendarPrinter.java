@@ -56,6 +56,22 @@ public class CalendarPrinter {
 		
 	}
 
+	public int getStartday() {
+		return startday;
+	}
+
+	public void setStartday(int startday) {
+		this.startday = startday;
+	}
+
+	public int getLastday() {
+		return lastday;
+	}
+
+	public void setLastday(int lastday) {
+		this.lastday = lastday;
+	}
+
 	public String[][] getCalDate() {
 		return calDate;
 	}

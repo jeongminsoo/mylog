@@ -14,7 +14,7 @@
 		session.removeAttribute("member");
 	%>
 	<script>
-		location.href='${conPath}/loginView.do';
+		location.href='${conPath}/member/loginView.do';
 	</script>
 </body>
 </html>

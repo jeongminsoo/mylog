@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.project.mylog.model.DiaryBoard;
 
 public interface DiaryBoardService {
-	public List<DiaryBoard> myDirayList(String mid, Date ddate, String pageNum);
+	public List<DiaryBoard> myDiaryList(String mid, Date ddate, String pageNum);
 	public List<DiaryBoard> diaryList(String mid, String pageNum);
 	public int myDiaryCnt(String mid, Date ddate);
 	public int diaryCnt(String mid);

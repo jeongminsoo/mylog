@@ -18,9 +18,9 @@
 </head>
 <body>
 	<h1>메인입니다</h1>
-	<jsp:include page="calendar.do"/>
-	<a href="${conPath }/memberList.do">회원목록</a>
-	<a href="${conPath }/joinView.do">회원가입</a>
-	<a href="${conPath }/loginView.do">로그인</a>
+	<a href="${conPath }/member/memberList.do">회원목록</a>
+	<a href="${conPath }/member/joinView.do">회원가입</a>
+	<a href="${conPath }/member/loginView.do">로그인</a>
+	<a href="${conPath }/calendar.do">캘린더</a>
 </body>
 </html>

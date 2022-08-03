@@ -16,7 +16,10 @@ public class TodoServiceImpl implements TodoService {
 	
 	@Override
 	public List<Todo> todoList(String mid, Date tdrdate) {
-		return todoDao.todoList(mid, tdrdate);
+		Todo todo = new Todo();
+		todo.setMid(mid);
+		todo.setTdrdate(tdrdate);
+		return todoDao.todoList(todo);
 	}
 
 	@Override

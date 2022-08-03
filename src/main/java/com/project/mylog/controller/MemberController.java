@@ -14,6 +14,7 @@ import com.project.mylog.service.MemberService;
 import com.project.mylog.util.Paging;
 
 @Controller
+@RequestMapping("member")
 public class MemberController {
 
 	@Autowired
@@ -48,7 +49,8 @@ public class MemberController {
 	 public String memberList(String pageNum, Model model) {
 		 Paging paging = new Paging(memberService.countMember(), pageNum);
 		 model.addAttribute("memberList", memberService.memberList(pageNum));
-		 model.addAttribute("paging", paging); return "admin/memberList";
+		 model.addAttribute("paging", paging);
+		 return "member/memberList";
 	 }
 	 
 	
@@ -73,7 +75,7 @@ public class MemberController {
 	public String login(String mid, String mpw, HttpSession session, Model model) {
 		String result = memberService.loginCheck(mid, mpw, session);
 		if (result.equals("로그인 성공")) {
-			return "forward:main.do";
+			return "main/main";
 		} else {
 			model.addAttribute("mid", mid);
 			model.addAttribute("mpw", mpw);

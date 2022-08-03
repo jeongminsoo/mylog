@@ -23,7 +23,7 @@
 		</script>
 	</c:if>
 	<div>
-		<form action="${conPath }/searchIdPw.do" method="post">
+		<form action="${conPath }/member/searchIdPw.do" method="post">
 			<table>
 				<caption>아이디 찾기</caption>
 				<col style="width : 200px;">

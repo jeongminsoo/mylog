@@ -15,7 +15,7 @@
 				var id = $(this).attr('id');
 				var answer = confirm('해당 아이디를 복구하시겠습니까?');
 				if (answer == true) {
-					location.href='${conPath}/recoverMember.do?pageNum=${param.pageNum}&mid=' + id;
+					location.href='${conPath}/member/recoverMember.do?pageNum=${param.pageNum}&mid=' + id;
 				} else {
 					return false;
 				}
@@ -25,7 +25,7 @@
 				var id = $(this).attr('id');
 				var answer = confirm('정말 해당 아이디를 사용중단하시겠습니까?');
 				if (answer == true) {
-					location.href='${conPath}/deleteMember.do?pageNum=${param.pageNum}&mid=' + id;
+					location.href='${conPath}/member/deleteMember.do?pageNum=${param.pageNum}&mid=' + id;
 				} else {
 					return false;
 				}
@@ -104,18 +104,18 @@
 		</table>
 		<div>
 			<c:if test="${paging.startPage > paging.blockSize }">
-				[ <a href="${conPath }/memberList.do?pageNum=${paging.startPage - 1}">이전</a> ]
+				[ <a href="${conPath }/member/memberList.do?pageNum=${paging.startPage - 1}">이전</a> ]
 			</c:if>
 			<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
 				<c:if test="${i eq paging.currentPage }">
 					<span class="curr">[ <b>${i }</b> ]</span>
 				</c:if>
 				<c:if test="${i != paging.currentPage }">
-					[ <a href="${conPath }/memberList.do?pageNum=${i}">${i }</a> ]
+					[ <a href="${conPath }/member/memberList.do?pageNum=${i}">${i }</a> ]
 				</c:if>
 			</c:forEach>
 			<c:if test="${paging.endPage < pageCnt }">
-				[ <a href="${conPath }/memberList.do?pageNum=${paging.endPage + 1}">다음</a> ]
+				[ <a href="${conPath }/member/memberList.do?pageNum=${paging.endPage + 1}">다음</a> ]
 			</c:if>
 		</div>
 	</div>
