@@ -7,6 +7,7 @@
 	<resultMap type="DiaryBoard" id="DiaryBoardResult">
 		<result property="dnum" column="dnum"/>
 		<result property="dtitle" column="dtitle"/>
+		<result property="mid" column="mid"/>
 		<result property="mname" column="mname"/>
 		<result property="dtodoin" column="dtodoin"/>
 		<result property="dcontent" column="dcontent"/>
