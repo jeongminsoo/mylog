@@ -30,7 +30,10 @@
 		<update id="timerEnd" parameterType="Timer">
     		UPDATE TIMER SET TEND = #{tend} WHERE TNO = #{tno}
     	</update>
-		
+		<!-- 시작끝 같이 -->
+		<update id="startEnd" parameterType="Timer">
+    		UPDATE TIMER SET TSTART = #{tstart} AND TEND = #{tend} WHERE TNO = #{tno}
+    	</update>
            
     
     </mapper>

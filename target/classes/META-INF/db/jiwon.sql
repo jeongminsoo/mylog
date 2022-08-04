@@ -25,6 +25,7 @@
     DROP TABLE TEAM CASCADE CONSTRAINTS;
     CREATE TABLE TEAM(
         tNO NUMBER(8) PRIMARY KEY,
+        mID VARCHAR2(15) REFERENCES  MEMBER(mID),
         tNAME VARCHAR2(100) NOT NULL,
         tGOAL VARCHAR2(100)
     );
@@ -37,7 +38,8 @@
     CREATE TABLE TEAM_MEMBER(
         tmNO NUMBER(8) PRIMARY KEY,
         mID VARCHAR2(15) REFERENCES MEMBER(mID) NOT NULL,
-        tNO NUMBER(8) REFERENCES TEAM(tNO) NOT NULL
+        tNO NUMBER(8) REFERENCES TEAM(tNO) NOT NULL,
+        tmCHECK NUMBER(1) DEFAULT 0 NOT NULL
     );
     --TEAM_TODO
     DROP SEQUENCE TEAM_TODO_SEQ;
@@ -149,36 +151,55 @@
     -- 회원 복구
     UPDATE MEMBER SET mSTATUS = 1
         WHERE mID='aaa';
+        commit;
     -- 회원 리스트 출력
     SELECT * FROM 
         (SELECT ROWNUM RN, A.* FROM 
         (SELECT M.* FROM MEMBER M
                     ORDER BY mID, mSTATUS DESC) A)
         WHERE RN BETWEEN 1 AND 11;
-    SELECT * FROM MEMBER;
+    commit;
     -- TEAM(make TEAM)
     -- (1) 팀 만들기
-    INSERT INTO TEAM (tNO, tNAME, tGOAL) 
-        VALUES (TEAM_SEQ.NEXTVAL, 'myLOG', '팀프빠샤');
-    select * from team;
+    INSERT INTO TEAM (tNO, mID, tNAME, tGOAL) 
+        VALUES (TEAM_SEQ.NEXTVAL, 'aaa', 'myLOG', '팀프빠샤');
+        -- 팀 번호 가져오기(팀 생성 후 바로, 팀장 가입하기 위함)
+        SELECT MAX(tNO) tNO FROM TEAM;
     -- (2) 팀 삭제
     DELETE FROM TEAM WHERE tNO=2;
-    COMMIT;
-    -- (3) 팀명 변경, 팀목표 쓰기, 팀목표 변경
-    UPDATE TEAM SET tNAME = 'mylog',
+    -- (3) 팀장 변경, 팀명 변경, 팀목표 쓰기, 팀목표 변경
+    UPDATE TEAM SET mID = 'aaa',
+                    tNAME = 'mylog',
                     tGOAL = '팀프빠샤빠샤!'
-                WHERE tNO = 1;
-    
+                WHERE tNO = 32;
+    -- 팀 디테일
+    SELECT * FROM TEAM WHERE tNO=2;
     -- TEAM_MEMBER(join team)
-    -- (1) 팀원 가입
-    INSERT INTO TEAM_MEMBER (tmNO, mID, tNO)
-        VALUES (TEAM_MEMBER_SEQ.NEXTVAL, 'aaa', 1);
+    -- 내 팀 리스트
+    SELECT T.tNAME, T.MID FROM TEAM_MEMBER TM, TEAM T WHERE TM.tNO = T.tNO AND TM.tmCHECK=1 AND TM.mID='aaa';
+    -- 가입신청한 팀 리스트
+    SELECT T.tNAME, T.MID FROM TEAM_MEMBER TM, TEAM T WHERE TM.tNO = T.tNO AND TM.tmCHECK=0 AND TM.mID='aaa';
+    SELECT * FROM TEAM_MEMBER;
+    COMMIT;
+    -- (1) 팀원 가입 신청
+    INSERT INTO TEAM_MEMBER (tmNO, mID, tNO, tmCHECK)
+        VALUES (TEAM_MEMBER_SEQ.NEXTVAL, 'aaa', 1, 0);
+    -- (2) 팀원 가입 신청 취소
+    DELETE FROM TEAM_MEMBER WHERE tmNO='' AND tNO=4;
+    DELETE FROM TEAM_MEMBER WHERE mID='aaa' AND tNO=4; 
+    -- (2) 팀원 가입(가입허가/팀원 가입)
+    UPDATE TEAM_MEMBER SET tmCHECK = 1
+                    WHERE tmNO='' AND tNO='';
+    INSERT INTO TEAM_MEMBER (tmNO, mID, tNO, tmCHECK)
+        VALUES (TEAM_MEMBER_SEQ.NEXTVAL, 'aaa', 1, 1);
+    -- 팀 가입신청자 리스트(팀장만 가입허가 가능)
+    SELECT * FROM TEAM_MEMBER WHERE tmCHECK = 0 AND tNO = 1; 
     SELECT * FROM TEAM_MEMBER;
     -- (2) 팀원 탈퇴
-    DELETE FROM TEAM_MEMBER WHERE tmNO=1;
+    DELETE FROM TEAM_MEMBER WHERE tmNO=1 AND tNO='';
     DELETE FROM TEAM_MEMBER WHERE mID='aaa' AND tNO=1;
     -- (3) 팀원 리스트
-    SELECT mID FROM TEAM_MEMBER WHERE tNO=1;
+    SELECT * FROM TEAM_MEMBER WHERE tmCHECK=1 AND tNO=1;
     -- (4) 팀 인원수
     SELECT COUNT(*) FROM TEAM_MEMBER WHERE tNO=1;
 
@@ -329,7 +350,7 @@
         (SELECT TC.* FROM TEAM_COMMENTBOARD TC WHERE tNUM=12
                     ORDER BY tcGROUP DESC, tcSTEP) A)
         WHERE RN BETWEEN 1 AND 11; -- DAO에 들어갈 QUERY
-    select * from TEAM_COMMENTBOARD where tcnum=2;
+    select * from TEAM_COMMENTBOARD where tcnum=1;
     -- (2) 댓글갯수
     SELECT COUNT(*) FROM TEAM_COMMENTBOARD;
     -- (3) 댓글쓰기(원글)
