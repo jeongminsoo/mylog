@@ -15,6 +15,7 @@ import com.project.mylog.model.Member;
 import com.project.mylog.service.DiaryBoardService;
 import com.project.mylog.service.TodoService;
 import com.project.mylog.util.CalendarPrinter;
+import com.project.mylog.util.Paging;
 
 @Controller
 @RequestMapping("calendar")
@@ -24,7 +25,7 @@ public class CalendarController {
 	private TodoService todoService;
 	
 	@Autowired
-	private DiaryBoardService diaryboardService;
+	private DiaryBoardService dbService;
 	
 	@RequestMapping(value="calendar", method = {RequestMethod.GET, RequestMethod.POST})
 	public String calendar(String year, String month, Model model) {
@@ -55,40 +56,12 @@ public class CalendarController {
 		int yearInt = Integer.parseInt(year);
 		int monthInt = Integer.parseInt(month);
 		int dayInt = Integer.parseInt(day);
-		
-		Member member = (Member) session.getAttribute("member");
-		String mid = member.getMid();
-		
-		CalendarPrinter calPrint = new CalendarPrinter(yearInt, monthInt);
-		
-		if (dayInt == 0) {
-			if (monthInt-1 == 0) {
-				monthInt = 12;
-				yearInt -= 1;
-				calPrint = new CalendarPrinter(yearInt, monthInt);
-			} else {
-				monthInt -= 1;
-				calPrint = new CalendarPrinter(yearInt, monthInt);
-			}
-			dayInt = calPrint.getLastday();
-		} else if (dayInt > calPrint.getLastday()  ) {
-			if (monthInt + 1 > 11) {
-				monthInt = 1;
-				yearInt += 1;
-			} else {
-				monthInt += 1;
-			}
-			dayInt = 1;
-		}
-		
+
 		Date tdrdate = new Date(yearInt-1900, monthInt - 1, dayInt);
 		Date ddate = new Date(yearInt-1900, monthInt - 1, dayInt);
-		
-		model.addAttribute("todos", todoService.todoList(mid, tdrdate));
-		model.addAttribute("diarys", diaryboardService.myDiaryList(mid, ddate, pageNum));
-		model.addAttribute("year", yearInt);
-		model.addAttribute("month", monthInt);
-		model.addAttribute("day", dayInt);
-		return "calendar/dailyList";
+		model.addAttribute("todos", todoService.todoList(session, tdrdate));
+		model.addAttribute("diarys", dbService.myDiaryList(session, ddate, pageNum));
+		model.addAttribute("ddate", ddate);
+		return "forward:../diary/myList.do";
 	}
 }
