@@ -141,18 +141,18 @@
 			</c:if>
 		</table>
 		<div id="paging">
-				<c:if test="${paging.startPage > paging.blockSize }">
+				<c:if test="${tcpaging.startPage > tcpaging.blockSize }">
 					[<a href="">이전</a>]
 				</c:if>
-				<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
-					<c:if test="${paging.currentPage == i }">
+				<c:forEach var="i" begin="${tcpaging.startPage }" end="${tcpaging.endPage }">
+					<c:if test="${tcpaging.currentPage == i }">
 						${i }
 					</c:if>
-					<c:if test="${paging.currentPage != i }">
+					<c:if test="${tcpaging.currentPage != i }">
 					<a href="${conPath }/teamboard/content.do?tnum=${content.tnum}&pageNum=${param.pageNum }&tcpageNum=${tcpageNum }'">${i }</a>
 					</c:if>
 				</c:forEach>
-				<c:if test="${paging.endPage < paging.pageCnt }">
+				<c:if test="${tcpaging.endPage < tcpaging.pageCnt }">
 					[<a href="">다음</a>]
 				</c:if>
 				

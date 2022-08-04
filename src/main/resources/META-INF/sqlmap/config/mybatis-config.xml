@@ -21,6 +21,9 @@
 		<typeAlias type="com.project.mylog.model.DiaryBoard" alias="DiaryBoard" />
 		<typeAlias type="com.project.mylog.model.DiaryReply" alias="DiaryReply" />
 		<typeAlias type="com.project.mylog.model.DiaryReply" alias="DiaryReply" /> 
+		<typeAlias type="com.project.mylog.model.QnaBoard" alias="QnaBoard" />
+		<typeAlias type="com.project.mylog.model.NoticeBoard" alias="NoticeBoard" />
+		<typeAlias type="com.project.mylog.model.Timer" alias="Timer" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/Member.xml"/>
@@ -40,5 +43,8 @@
 		<mapper resource="META-INF/sqlmap/mappers/DiaryBoard.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/DiaryReply.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/DiaryReply.xml"/> 
+		<mapper resource="META-INF/sqlmap/mappers/QnaBoard.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/NoticeBoard.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Timer.xml"/>
 	</mappers>
 </configuration>
