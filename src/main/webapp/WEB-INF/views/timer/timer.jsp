@@ -95,7 +95,7 @@
 								if(time < 0){
 				                   
 				                    time = 0;
-				                    clearTimeout(timer);
+				                    clearInterval(timer);
 				                    var enow = end.toLocaleTimeString('ko-kr');
 				                    $.ajax({
 				        				type : 'get', // 타입 (get, post, put 등등)
