@@ -2,7 +2,7 @@ package com.project.mylog.controller;
 
 import java.sql.Date;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,18 +28,17 @@ public class DiaryController {
 	private TodoService todoService;
 	
 	@RequestMapping( value = "myList", method = {RequestMethod.GET, RequestMethod.POST})
-	public String myList(Date ddate, HttpServletRequest session, String pageNum, Model model) {
+	public String myList(Date ddate, HttpSession session, String pageNum, Model model) {
 		ddate = new Date(122, 6, 28);
 		Date before = new Date(ddate.getTime() - (1000 * 60 * 60 * 24));
 		Date after = new Date(ddate.getTime() + (1000 * 60 * 60 * 24));
-		/*
-		 * Member member = (Member) session.getAttribute("member");
-		 * String mid = member.getMid();
-		 */
-		// "aaa" mid로 수정하기
-		model.addAttribute("diaryList", dbService.myDiaryList("aaa", ddate, pageNum));
-		model.addAttribute("paging", new Paging(dbService.myDiaryCnt("aaa", ddate), pageNum, 5, 5));
-		model.addAttribute("todoList", todoService.todoList("aaa", ddate));
+		
+		Member member = (Member) session.getAttribute("member");
+		String mid = member.getMid();
+		 
+		model.addAttribute("diaryList", dbService.myDiaryList(session, ddate, pageNum));
+		model.addAttribute("paging", new Paging(dbService.myDiaryCnt(session, ddate), pageNum, 5, 5));
+		model.addAttribute("todoList", todoService.todoList(session, ddate));
 		model.addAttribute("nowDate", ddate);
 		model.addAttribute("before", before);
 		model.addAttribute("after", after);
@@ -48,10 +47,10 @@ public class DiaryController {
 	
 	
 	@RequestMapping( value = "content", method = {RequestMethod.GET, RequestMethod.POST})
-	public String content(int dnum, Model model) {
+	public String content(int dnum, HttpSession session, Model model) {
 		DiaryBoard diaryboard = dbService.diaryContent(dnum);
 		if(diaryboard.getDtodoin() == 1) {
-			model.addAttribute("todoList", todoService.todoList(diaryboard.getMid(), diaryboard.getDdate()));
+			model.addAttribute("todoList", todoService.todoList(session, diaryboard.getDdate()));
 		}
 		model.addAttribute("diary", diaryboard);
 		return "diary/content";

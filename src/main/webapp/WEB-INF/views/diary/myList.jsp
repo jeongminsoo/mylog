@@ -19,11 +19,13 @@
 					data : 'tdrdate='+nowDate,
 					type : 'get',
 					success : function(data){
-						alert(data);
 						$('#todo_make_form').html(data);
 					}
 				})
 			});
+			$('#diary_write').click(function(){
+				location.href="${conPath}/diary/write.do?ddate=${nowDate }";
+			})
 			$('.toggle_button').click(function(){
 				var tdno = $(this).attr('id');
 				$('.toggle'+tdno).toggle();
@@ -31,10 +33,10 @@
 			})
 			$('.todoModify').click(function(){
 				var tdno = $(this).attr('name');
-				var tdcontent = $('tdcontent'+tdno).text();
+				var tdcontent = $('.tdcontent'+tdno).text();
 				$.ajax({
 					url : '${conPath}/todo/modify.do',
-					data : 'tdno='+tdno+'tdcontent='+tdcontent,
+					data : 'tdno='+tdno+'&tdcontent='+tdcontent,
 					type : 'get',
 					success : function(data){
 						$('.tdcontent'+tdno).html(data);
@@ -47,14 +49,14 @@
 <body>
 	<div id="main_wrap">
 		<div id="date">
-			<button onclick="location.href='myList.do?ddate=${before }'">이전</button>
+			<button onclick="location.href='${conPath }/diary/myList.do?ddate=${before }'">이전</button>
 			<div class="nowDate">${nowDate }</div>
-			<button onclick="location.href='myList.do?ddate=${after }'">이후</button>
+			<button onclick="location.href='${conPath }/diary/myList.do?ddate=${after }'">이후</button>
 		</div>
 		<div id="diaryList">
 			<c:if test="${not empty diaryList }">
 				<c:forEach var="diary" items="${diaryList }">
-					<div class="list" onclick="location.href='content.do?dnum=${diary.dnum }'">
+					<div class="list" onclick="location.href='${conPath }/list/content.do?dnum=${diary.dnum }'">
 						<span>${diary.dtitle }</span>
 						<c:if test="${diary.dstatus eq 0 }">
 							<span class="status">비밀 일기</span>
@@ -70,24 +72,24 @@
 					</div>
 				</c:forEach>
 			</c:if>
-			<div id="diary_write" onclick="location.href='write.do?mid=${member.mid }&ddate=${nowDate }">
+			<div id="diary_write">
 				<span>+</span>
 				<span>새로운 일기 쓰기</span>
 			</div>
 			<div class="paging">
 				<c:if test="${paging.startPage > paging.blockSize }">
-					<a href="myList.do?ddate=${nowDate }&pageNum=${paging.startPage-1 }">[ 이전 ]</a>
+					<a href="${conPath }/diary/myList.do?ddate=${nowDate }&pageNum=${paging.startPage-1 }">[ 이전 ]</a>
 				</c:if>
 				<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
 					<c:if test="${i eq paging.currentPage }">
 						[ <b>${i }</b> ]
 					</c:if>
 					<c:if test="${i != paging.currentPage }">
-						<a href="myList.do?ddate=${nowDate }&pageNum=${i}">[ ${i } ]</a>
+						<a href="${conPath }/diary/myList.do?ddate=${nowDate }&pageNum=${i}">[ ${i } ]</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${ paging.endPage < paging.pageCnt }">
-					<a href="myList.do?ddate=${nowDate }&pageNum=${paging.endPage + 1 }">[ 다음 ]</a>
+					<a href="${conPath }/diary/myList.do?ddate=${nowDate }&pageNum=${paging.endPage + 1 }">[ 다음 ]</a>
 				</c:if>
 			</div>
 		</div>
