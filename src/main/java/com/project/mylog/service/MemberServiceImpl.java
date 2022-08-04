@@ -141,4 +141,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.getMemberForMname(mname);
 	}
 
+	@Override
+	public int emailCheck(String memail) {
+		return memberDao.emailCheck(memail);
+	}
+
 }

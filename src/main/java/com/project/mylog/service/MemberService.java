@@ -29,4 +29,6 @@ public interface MemberService {
 	public String searchIdPw(String mname, String memail);
 	
 	public Member getMemberForMname(String mname);
+	
+	public int emailCheck(String memail);
 }
