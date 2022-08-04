@@ -163,10 +163,11 @@ SELECT D.*, MNAME
     
 -- 해당 날짜의 내가 쓴 글 보기(myDirayList)
 SELECT A.* 
-    FROM (SELECT ROWNUM RN, D.* FROM DIARYBOARD D
-                WHERE DDATE = '2022-07-28' AND MID = 'aaa'
-                ORDER BY DRDATE DESC) A
-    WHERE RN BETWEEN 1 AND 10;
+    FROM (SELECT ROWNUM RN, D.* 
+                FROM (SELECT * FROM DIARYBOARD
+                            WHERE DDATE = '2022-07-28' AND MID = 'aaa'
+                            ORDER BY DRDATE DESC) D ) A
+    WHERE RN BETWEEN 1 AND 5;
 
 -- 해당 날짜의 내가 쓴 글 갯수(myDirayCnt)
 SELECT COUNT(*)

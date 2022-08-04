@@ -1,6 +1,7 @@
 package com.project.mylog.controller;
 
 import java.sql.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.mylog.model.DiaryBoard;
-import com.project.mylog.model.Member;
 import com.project.mylog.service.DiaryBoardService;
 import com.project.mylog.service.TodoService;
 import com.project.mylog.util.Paging;
@@ -29,13 +29,9 @@ public class DiaryController {
 	
 	@RequestMapping( value = "myList", method = {RequestMethod.GET, RequestMethod.POST})
 	public String myList(Date ddate, HttpSession session, String pageNum, Model model) {
-		ddate = new Date(122, 6, 28);
 		Date before = new Date(ddate.getTime() - (1000 * 60 * 60 * 24));
 		Date after = new Date(ddate.getTime() + (1000 * 60 * 60 * 24));
 		
-		Member member = (Member) session.getAttribute("member");
-		String mid = member.getMid();
-		 
 		model.addAttribute("diaryList", dbService.myDiaryList(session, ddate, pageNum));
 		model.addAttribute("paging", new Paging(dbService.myDiaryCnt(session, ddate), pageNum, 5, 5));
 		model.addAttribute("todoList", todoService.todoList(session, ddate));
@@ -62,8 +58,8 @@ public class DiaryController {
 	}
 	
 	@RequestMapping(value = "write", method = RequestMethod.POST)
-	public String write(DiaryBoard diaryBoard, MultipartHttpServletRequest mRequest, Model model) {
-		dbService.diaryWrite(mRequest, diaryBoard);
+	public String write(DiaryBoard diaryBoard, HttpSession session, MultipartHttpServletRequest mRequest, Model model) {
+		dbService.diaryWrite(session, mRequest, diaryBoard);
 		return "forward:myList.do";
 	}
 	
@@ -75,7 +71,7 @@ public class DiaryController {
 	
 	@RequestMapping(value = "modify", method = RequestMethod.POST)
 	public String modify(DiaryBoard diaryBoard, MultipartHttpServletRequest mRequest, Model model) {
-		dbService.diaryWrite(mRequest, diaryBoard);
+		dbService.diaryModify(mRequest, diaryBoard);
 		return "forward:myList.do";
 	}
 	

@@ -9,11 +9,10 @@
 	<meta charset="UTF-8">
 </head>
 <body>
-	<form action="${conPath }/todo/modify.do" method="post">
-		<input type="hidden" name="mid" value="${member.mid }">
+	<form action="${conPath }/todo/modify.do" method="post" id="todo_form">
 		<input type="hidden" name="tdno" value="${param.tdno }">
-		<input type="hidden" name="tdrdate" value="${param.tdrdate }">
-		<input type="text" name="tdcontent" value="${param.tdcontent }" autofocus="autofocus">
+		<input type="hidden" name="ddate" value="${param.ddate }">
+		<input type="text" id="tdcontent" name="tdcontent" value="${param.tdcontent }" autofocus="autofocus">
 		<input type="submit" value="수정">
 	</form>
 </body>

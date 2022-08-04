@@ -7,11 +7,19 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>MyLog : My List 날짜 파라미터 넘어오는거 보고 수정해야함</title>
+	<title>MyLog : My List</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
 		$(document).ready(function(){
+			// 토글
 			$('.toggle').hide();
+			$('.toggle_button').click(function(){
+				var tdno = $(this).attr('id');
+				$('.toggle'+tdno).toggle();
+				$('.toggle:not(.toggle'+tdno+')').hide();
+			})
+			
+			// 투두 만들기
 			$('#todo_make').click(function(){
 				var nowDate =  '${nowDate }';
 				$.ajax({
@@ -23,26 +31,27 @@
 					}
 				})
 			});
-			$('#diary_write').click(function(){
-				location.href="${conPath}/diary/write.do?ddate=${nowDate }";
-			})
-			$('.toggle_button').click(function(){
-				var tdno = $(this).attr('id');
-				$('.toggle'+tdno).toggle();
-				$('.toggle:not(.toggle'+tdno+')').hide();
-			})
+			
+			// 투두 수정
 			$('.todoModify').click(function(){
 				var tdno = $(this).attr('name');
 				var tdcontent = $('.tdcontent'+tdno).text();
+				var nowDate =  '${nowDate }';
 				$.ajax({
 					url : '${conPath}/todo/modify.do',
-					data : 'tdno='+tdno+'&tdcontent='+tdcontent,
+					data : 'tdno='+tdno+'&tdcontent='+tdcontent+'&ddate='+nowDate,
 					type : 'get',
 					success : function(data){
 						$('.tdcontent'+tdno).html(data);
 					}
 				})
 			});
+						
+			// 다이어리 쓰기로 이동
+			$('#diary_write').click(function(){
+				location.href="${conPath}/diary/write.do?ddate=${nowDate }";
+			})
+			
 		});
 	</script>
 </head>
@@ -56,7 +65,7 @@
 		<div id="diaryList">
 			<c:if test="${not empty diaryList }">
 				<c:forEach var="diary" items="${diaryList }">
-					<div class="list" onclick="location.href='${conPath }/list/content.do?dnum=${diary.dnum }'">
+					<div class="list" onclick="location.href='${conPath }/diary/content.do?dnum=${diary.dnum }'">
 						<span>${diary.dtitle }</span>
 						<c:if test="${diary.dstatus eq 0 }">
 							<span class="status">비밀 일기</span>

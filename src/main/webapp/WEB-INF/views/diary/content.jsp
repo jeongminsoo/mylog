@@ -17,39 +17,47 @@
 </head>
 <body>
 	<div id="main_wrap">
-		<table>
-			<tr>
-				<th>제목</th>
-				<td>${diary.dtitle }</td>
-			</tr>
-			<c:if test="${not empty todoList }">
-				<tr> 
-					<th rowspan="${todoList.size()+1 }">투두리스트</th>
-					<td>내용</td>
+		<div id="content_wrap">
+			<table>
+				<tr>
+					<th>제목</th>
+					<td>${diary.dtitle }</td>
 				</tr>
-				<c:forEach var="todo" items="${todoList }">
-					<tr>
-						<td>${todo.tdcontent }</td>
-						<td>${todo.tdcheck }</td>
+				<c:if test="${not empty todoList }">
+					<tr> 
+						<th rowspan="${todoList.size()+1 }">투두리스트</th>
+						<td>내용</td>
 					</tr>
-				</c:forEach>
-			</c:if>
-			<tr>
-				<th>내용</th>
-				<td>${diary.dcontent }</td>
-			</tr>
-			<tr>
-				<th>작성일</th>
-				<td>${diary.drdate }</td>
-			</tr>
-			<tr>
-				<th>해당일</th>
-				<td>${diary.ddate }</td>
-			</tr>
-		</table>
-		<button onclick="location.href='myList.do'">목록</button>
-		<button onclick="location.href='modify.do?dnum=${diary.dnum}'">수정</button>
-		<button onclick="location.href='delete.do?dnum=${diary.dnum}'">삭제</button>
+					<c:forEach var="todo" items="${todoList }">
+						<tr>
+							<td>${todo.tdcontent }</td>
+							<td>${todo.tdcheck }</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+				<tr>
+					<th>내용</th>
+					<td>${diary.dcontent }</td>
+				</tr>
+				<tr>
+					<th>작성일</th>
+					<td>${diary.drdate }</td>
+				</tr>
+				<tr>
+					<th>해당일</th>
+					<td>${diary.ddate }</td>
+				</tr>
+			</table>
+			<button onclick="location.href='myList.do'">목록</button>
+			<button onclick="location.href='modify.do?dnum=${diary.dnum}&ddate=${diary.ddate }'">수정</button>
+			<button onclick="location.href='delete.do?dnum=${diary.dnum}&ddate=${diary.ddate }'">삭제</button>
+		</div>
+		<div id="reply_wrap">
+			<c:forEach var="reply" items="${diaryReplyList }">
+				<div>닉네임</div>
+			
+			</c:forEach>
+		</div>
 	</div>
 </body>
 </html>
