@@ -28,8 +28,13 @@ public class TeamCommentController {
 		return "forward:../teamboard/content.do";
 	}
 	//teamboardModify
+	@RequestMapping(value = "modifyView", method= {RequestMethod.GET, RequestMethod.POST})
+	public String teamcommentModifyView(int tnum, String pageNum, int tcnum, String tcpageNum, Model model) {
+		model.addAttribute("teamcomment",tcService.teamCommentDetail(tcnum));
+		return "teamcomment/modifyView";
+	}
 	@RequestMapping(value = "modify", method= RequestMethod.POST)
-	public String teamcommentModify(@ModelAttribute("teamcomment") TeamCommentBoard teamcomment, HttpServletRequest request, Model model) {
+	public String teamcommentModify(@ModelAttribute("teamcomment") TeamCommentBoard teamcomment, String pageNum, String tcpageNum, HttpServletRequest request, Model model) {
 		model.addAttribute("teamcommentmodifyResult", tcService.teamCommentModify(request, teamcomment));
 		return "forward:../teamboard/content.do";
 	}

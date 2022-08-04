@@ -16,6 +16,7 @@
    	<a href="${conPath }/review/list.do">감상문</a>
    	<a href="${conPath }/diary/myList.do">내 다이어리</a>
    	<a href="${conPath }/teamboard/list.do">팀 보드</a>
+   	<a href="${conPath}/teammember/myteamList.do">나의 그룹(로그인 후)</a>
    	<a href="${conPath }/admin/loginView.do">관리자 로그인</a>
 </body>
 </html>

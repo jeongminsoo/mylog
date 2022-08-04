@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.mylog.dao.DiaryBoardDao;
 import com.project.mylog.model.DiaryBoard;
+import com.project.mylog.model.Member;
 import com.project.mylog.util.Paging;
 
 @Service
@@ -27,9 +29,9 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 	String backupPath = "D:\\yujin\\teamproject\\mylog\\src\\main\\webapp\\WEB-INF\\diaryBoardFileUpload/";
 
 	@Override
-	public List<DiaryBoard> myDiaryList(String mid, Date ddate, String pageNum) {
+	public List<DiaryBoard> myDiaryList(HttpSession session, Date ddate, String pageNum) {
 		DiaryBoard diaryBoard = new DiaryBoard();
-		diaryBoard.setMid(mid);
+		diaryBoard.setMid(((Member) session.getAttribute("member")).getMid());
 		diaryBoard.setDdate(ddate);
 		if(pageNum == null) {
 			pageNum = "1";
@@ -41,9 +43,9 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 	}
 
 	@Override
-	public List<DiaryBoard> diaryList(String mid, String pageNum) {
+	public List<DiaryBoard> diaryList(HttpSession session, String pageNum) {
 		DiaryBoard diaryBoard = new DiaryBoard();
-		diaryBoard.setMid(mid);
+		diaryBoard.setMid(((Member) session.getAttribute("member")).getMid());
 		Paging paging = new Paging(diaryDao.myDiaryCnt(diaryBoard), pageNum, 5, 1);
 		diaryBoard.setStartRow(paging.getStartRow());
 		diaryBoard.setEndRow(paging.getEndRow());
@@ -51,17 +53,17 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 	}
 
 	@Override
-	public int myDiaryCnt(String mid, Date ddate) {
+	public int myDiaryCnt(HttpSession session, Date ddate) {
 		DiaryBoard diaryBoard = new DiaryBoard();
-		diaryBoard.setMid(mid);
+		diaryBoard.setMid(((Member) session.getAttribute("member")).getMid());
 		diaryBoard.setDdate(ddate);
 		return diaryDao.myDiaryCnt(diaryBoard);
 	}
 
 	@Override
-	public int diaryCnt(String mid) {
+	public int diaryCnt(HttpSession session) {
 		DiaryBoard diaryBoard = new DiaryBoard();
-		diaryBoard.setMid(mid);
+		diaryBoard.setMid(((Member) session.getAttribute("member")).getMid());
 		return diaryDao.diaryCnt(diaryBoard);
 	}
 

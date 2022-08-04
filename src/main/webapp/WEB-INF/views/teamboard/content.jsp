@@ -11,20 +11,27 @@
 	<link href="${conPath}/css/style.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
-		function replyComment(tcnum, pageNum, tnum) {
-			$('#show').click(function(){
-				$('#replyDiv').show();
-			});
+		function replyComment(tcnum, pageNum, tnum, tcpageNum) {
 			$.ajax({
 				url : '${conPath}/teamcomment/replyView.do',
-				data : { 'tcnum': tcnum, 'pageNum': pageNum, 'tnum':tnum },
+				data : { 'tcnum': tcnum, 'pageNum': pageNum, 'tnum':tnum , 'tcpageNum':tcpageNum },
 				type : 'get',
 				dataType : 'html',
 				success : function(data, status) {
 					$('#replyDiv').html(data);
 				}
 			});
-			
+		}
+		function modifyComment(tcnum, pageNum, tnum, tcpageNum) {
+			$.ajax({
+				url : '${conPath}/teamcomment/modifyView.do',
+				data : { 'tcnum': tcnum, 'pageNum': pageNum, 'tnum':tnum , 'tcpageNum':tcpageNum },
+				type : 'get',
+				dataType : 'html',
+				success : function(data, status) {
+					$('#modifyDiv').html(data);
+				}
+			});
 		}
 	</script>
 </head>
@@ -127,15 +134,16 @@
 						</td>
 						<td>
 							<button
-								onclick="replyComment('${tcDto.tcnum}', '${param.pageNum}', '${content.tnum }')">답댓글</button>
+								onclick="replyComment('${tcDto.tcnum}', '${param.pageNum}', '${content.tnum }', '${param.tcpageNum }')">답댓글</button>
 							<!-- <button 
 								id="hide">취소</button> -->
 							<button 
-								onclick="location.href='${conPath}/teamcomment/modifyView.do?tnum=${content.tnum}&pageNum=${pageNum }&tcnum=${tcDto.tcnum }'">수정</button>
+								onclick="modifyComment('${tcDto.tcnum}', '${param.pageNum}', '${content.tnum }', '${param.tcpageNum }')">수정</button>
 							<button 
 								onclick="location.href='${conPath}/teamcomment/delete.do?tnum=${content.tnum}&pageNum=${pageNum }&tcnum=${tcDto.tcnum }'">삭제</button>
 						</td>
 					</tr>
+					<div id="modifyDiv"></div>
 				</c:forEach>
 					<div id="replyDiv"></div>
 			</c:if>

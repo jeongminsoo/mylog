@@ -3,10 +3,13 @@ package com.project.mylog.service;
 import java.sql.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.mylog.dao.TodoDao;
+import com.project.mylog.model.Member;
 import com.project.mylog.model.Todo;
 
 @Service
@@ -15,9 +18,9 @@ public class TodoServiceImpl implements TodoService {
 	private TodoDao todoDao;
 	
 	@Override
-	public List<Todo> todoList(String mid, Date tdrdate) {
+	public List<Todo> todoList(HttpSession session, Date tdrdate) {
 		Todo todo = new Todo();
-		todo.setMid(mid);
+		todo.setMid(((Member) session.getAttribute("member")).getMid());
 		todo.setTdrdate(tdrdate);
 		return todoDao.todoList(todo);
 	}

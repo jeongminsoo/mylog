@@ -26,7 +26,7 @@ public class TodoController {
 	@RequestMapping(value = "make", method = RequestMethod.POST)
 	public String todoMake(Todo todo, Model model) {
 		todoService.todoMake(todo);
-		return "forward:diary/myList.do";
+		return "forward:../diary/myList.do";
 	}
 	
 	@RequestMapping(value = "modify", method = RequestMethod.GET)
@@ -36,18 +36,18 @@ public class TodoController {
 	@RequestMapping(value = "modify", method = RequestMethod.POST)
 	public String todoModify(int tdno, String tdcontent) {
 		todoService.todoModify(tdno, tdcontent);
-		return "forward:diary/myList.do";
+		return "forward:../diary/myList.do";
 	}
 	
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
 	public String todoDelete(int tdno) {
 		todoService.todoDelete(tdno);
-		return "forward:diary/myList.do";
+		return "forward:../diary/myList.do";
 	}
 	
 	@RequestMapping(value = "check", method = RequestMethod.GET)
 	public String todoChange(int tdno, int tdcheck) {
 		todoService.todoChange(tdno, tdcheck);
-		return "forward:diary/myList.do";
+		return "forward:../diary/myList.do";
 	}
 }
