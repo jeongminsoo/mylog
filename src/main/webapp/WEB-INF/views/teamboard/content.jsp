@@ -11,25 +11,28 @@
 	<link href="${conPath}/css/style.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
-		function replyComment(tcnum) {
+		function replyComment(tcnum, pageNum, tnum, tcpageNum) {
 			$.ajax({
 				url : '${conPath}/teamcomment/replyView.do',
-				data : 'tcnum=' + tcnum,
-				type : 'post',
+				data : { 'tcnum': tcnum, 'pageNum': pageNum, 'tnum':tnum , 'tcpageNum':tcpageNum },
+				type : 'get',
 				dataType : 'html',
 				success : function(data, status) {
 					$('#replyDiv').html(data);
 				}
 			});
 		}
-		$(document).ready(function(){
-			$('button#hide').click(function(){
-				$('.commentReply').hide();
+		function modifyComment(tcnum, pageNum, tnum, tcpageNum) {
+			$.ajax({
+				url : '${conPath}/teamcomment/modifyView.do',
+				data : { 'tcnum': tcnum, 'pageNum': pageNum, 'tnum':tnum , 'tcpageNum':tcpageNum },
+				type : 'get',
+				dataType : 'html',
+				success : function(data, status) {
+					$('#modifyDiv').html(data);
+				}
 			});
-			$('button#show').click(function(){
-				$('.commentReply').show();
-			});
-		});
+		}
 	</script>
 </head>
 <body>
@@ -130,21 +133,38 @@
 							${tcDto.tccontent }
 						</td>
 						<td>
-						
+							<button
+								onclick="replyComment('${tcDto.tcnum}', '${param.pageNum}', '${content.tnum }', '${param.tcpageNum }')">답댓글</button>
+							<!-- <button 
+								id="hide">취소</button> -->
 							<button 
-								onclick="replyComment(${tcDto.tcnum})">답댓글</button>
-							<button 
-								id="hide">hide</button>
-							<button 
-								onclick="location.href='${conPath}/teamcomment/modifyView.do?tnum=${content.tnum}&pageNum=${pageNum }&tcnum=${tcDto.tcnum }'">수정</button>
+								onclick="modifyComment('${tcDto.tcnum}', '${param.pageNum}', '${content.tnum }', '${param.tcpageNum }')">수정</button>
 							<button 
 								onclick="location.href='${conPath}/teamcomment/delete.do?tnum=${content.tnum}&pageNum=${pageNum }&tcnum=${tcDto.tcnum }'">삭제</button>
 						</td>
 					</tr>
-					<div id="replyDiv"></div>
+					<div id="modifyDiv"></div>
 				</c:forEach>
+					<div id="replyDiv"></div>
 			</c:if>
 		</table>
+		<div id="paging">
+				<c:if test="${tcpaging.startPage > tcpaging.blockSize }">
+					[<a href="">이전</a>]
+				</c:if>
+				<c:forEach var="i" begin="${tcpaging.startPage }" end="${tcpaging.endPage }">
+					<c:if test="${tcpaging.currentPage == i }">
+						${i }
+					</c:if>
+					<c:if test="${tcpaging.currentPage != i }">
+					<a href="${conPath }/teamboard/content.do?tnum=${content.tnum}&pageNum=${param.pageNum }&tcpageNum=${tcpageNum }'">${i }</a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${tcpaging.endPage < tcpaging.pageCnt }">
+					[<a href="">다음</a>]
+				</c:if>
+				
+			</div>
 	</div>
 </body>
 </html>
