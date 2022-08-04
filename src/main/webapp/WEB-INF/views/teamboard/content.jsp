@@ -149,7 +149,7 @@
 						${i }
 					</c:if>
 					<c:if test="${paging.currentPage != i }">
-					<a href="${conPath }/teamboard/content.do?tnum=${content.tnum}&pageNum=${pageNum }&tcnum=${tcDto.tcnum }'">${i }</a>
+					<a href="${conPath }/teamboard/content.do?tnum=${content.tnum}&pageNum=${param.pageNum }&tcpageNum=${tcpageNum }'">${i }</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${paging.endPage < paging.pageCnt }">

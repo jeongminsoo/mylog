@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.project.mylog.dao.TimerDao">
+    	<resultMap type="Timer" id="TimerResult">
+	    	<result property="tno" column="tno"/>
+	    	<result property="mid" column="mid"/>
+	    	<result property="mname" column="mname"/>
+			<result property="tname" column="tname"/>
+			<result property="ttoday" column="ttoday"/>
+			<result property="tstart" column="tstart"/>
+			<result property="tend" column="tend"/>
+			<result property="tdo" column="tdo"/>
+    	</resultMap>
+    	
+    	<!-- 추가 -->
+    	<insert id="timerMake" parameterType="Timer">
+    		INSERT INTO TIMER(TNO, MID, TTODAY, TNAME, TDO, TSTART, TEND) 
+    		VALUES(TSEQ.NEXTVAL,#{mid}, SYSDATE, #{tname} ,#{tdo} ,0,0 )
+    	</insert>
+    		
+    	<!-- 시작시간 수정 -->
+    	<update id="timerStart" parameterType="Timer">
+    		UPDATE TIMER SET TSTART = #{tstart} WHERE TNO = #{tno}
+    	</update>
+		
+		<!-- 끝나는 시간 수정 -->
+		<update id="timerEnd" parameterType="Timer">
+    		UPDATE TIMER SET TEND = #{tend} WHERE TNO = #{tno}
+    	</update>
+		
+           
+    
+    </mapper>
+    

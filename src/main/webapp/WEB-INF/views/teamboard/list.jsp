@@ -12,7 +12,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
 		function trClicked(tnum){
-			location.href = '${conPath}/teamboard/content.do?tnum='+tnum+'&pageNum=${paging.currentPage}';
+			location.href = '${conPath}/teamboard/content.do?tnum='+tnum+'&pageNum=${paging.currentPage}'+'&tcpageNum=1';
 		}
 	</script>
 </head>
