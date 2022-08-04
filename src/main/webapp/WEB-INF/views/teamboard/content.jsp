@@ -11,26 +11,21 @@
 	<link href="${conPath}/css/style.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
-		function replyComment(tcnum) {
-			alert(tcnum);
+		function replyComment(tcnum, pageNum, tnum) {
+			$('#show').click(function(){
+				$('#replyDiv').show();
+			});
 			$.ajax({
 				url : '${conPath}/teamcomment/replyView.do',
-				data : 'tcnum=' + tcnum,
+				data : { 'tcnum': tcnum, 'pageNum': pageNum, 'tnum':tnum },
 				type : 'get',
 				dataType : 'html',
 				success : function(data, status) {
 					$('#replyDiv').html(data);
 				}
 			});
+			
 		}
-		$(document).ready(function(){
-			$('button#hide').click(function(){
-				$('.commentReply').hide();
-			});
-			$('button#show').click(function(){
-				$('.commentReply').show();
-			});
-		});
 	</script>
 </head>
 <body>
@@ -131,21 +126,37 @@
 							${tcDto.tccontent }
 						</td>
 						<td>
-						
-							<button 
-								onclick="replyComment('${tcDto.tcnum}')">답댓글</button>
-							<button 
-								id="hide">hide</button>
+							<button
+								onclick="replyComment('${tcDto.tcnum}', '${param.pageNum}', '${content.tnum }')">답댓글</button>
+							<!-- <button 
+								id="hide">취소</button> -->
 							<button 
 								onclick="location.href='${conPath}/teamcomment/modifyView.do?tnum=${content.tnum}&pageNum=${pageNum }&tcnum=${tcDto.tcnum }'">수정</button>
 							<button 
 								onclick="location.href='${conPath}/teamcomment/delete.do?tnum=${content.tnum}&pageNum=${pageNum }&tcnum=${tcDto.tcnum }'">삭제</button>
 						</td>
 					</tr>
-					<div id="replyDiv"></div>
 				</c:forEach>
+					<div id="replyDiv"></div>
 			</c:if>
 		</table>
+		<div id="paging">
+				<c:if test="${paging.startPage > paging.blockSize }">
+					[<a href="">이전</a>]
+				</c:if>
+				<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
+					<c:if test="${paging.currentPage == i }">
+						${i }
+					</c:if>
+					<c:if test="${paging.currentPage != i }">
+					<a href="${conPath }/teamboard/content.do?tnum=${content.tnum}&pageNum=${pageNum }&tcnum=${tcDto.tcnum }'">${i }</a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${paging.endPage < paging.pageCnt }">
+					[<a href="">다음</a>]
+				</c:if>
+				
+			</div>
 	</div>
 </body>
 </html>

@@ -329,7 +329,7 @@
         (SELECT TC.* FROM TEAM_COMMENTBOARD TC WHERE tNUM=12
                     ORDER BY tcGROUP DESC, tcSTEP) A)
         WHERE RN BETWEEN 1 AND 11; -- DAO에 들어갈 QUERY
-    select * from TEAM_COMMENTBOARD where tcnum=2;
+    select * from TEAM_COMMENTBOARD where tcnum=1;
     -- (2) 댓글갯수
     SELECT COUNT(*) FROM TEAM_COMMENTBOARD;
     -- (3) 댓글쓰기(원글)
