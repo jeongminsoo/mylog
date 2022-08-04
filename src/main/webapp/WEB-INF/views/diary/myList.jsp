@@ -106,7 +106,7 @@
 			<c:forEach var="todo" items="${todoList }">
 				<div id="todo${todo.tdno }">
 					<span>
-						<img alt="체크이미지 넣을거임" src="${conPath }/img/checkImg${todo.tdcontent }" class="${todo.tdno }">
+						<img alt="체크이미지 넣을거임" src="${conPath }/img/checkImg${todo.tdcontent }" class="check${todo.tdno }">
 					</span>
 					<span class="tdcontent${todo.tdno }">${todo.tdcontent }</span>
 					<span class="toggle_button" id="${todo.tdno }">...</span>

@@ -54,7 +54,7 @@
 		</div>
 		<div id="reply_wrap">
 			<c:forEach var="reply" items="${diaryReplyList }">
-				<div>닉네임</div>
+				<span>${reply. }</span>
 			
 			</c:forEach>
 		</div>

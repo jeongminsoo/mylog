@@ -8,11 +8,13 @@
 		<result property="drnum" column="drnum"/>
 		<result property="dnum" column="dnum"/>
 		<result property="mid" column="mid"/>
+		<result property="mname" column="mname"/>
 		<result property="drcontent" column="drcontent"/>
 		<result property="drgroup" column="drgroup"/>
-		<result property="drstep" column="drstep"/>
 		<result property="drindent" column="drindent"/>
 		<result property="drrdate" column="drrdate"/>
 		<result property="drip" column="drip"/>
 	</resultMap>
+	
+	
 </mapper>
