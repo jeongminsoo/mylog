@@ -14,8 +14,10 @@
     <a href="${conPath }/member/loginView.do">로그인</a>
     <a href="${conPath }/calendar.do">캘린더</a>
    	<a href="${conPath }/review/list.do">감상문</a>
-   	<a href="${conPath }/diary/myList.do">내 다이어리</a>
    	<a href="${conPath }/teamboard/list.do">팀 보드</a>
    	<a href="${conPath }/admin/loginView.do">관리자 로그인</a>
+   	<a href="${conPath }/timer/setting.do">타이머</a>
+   	<a href="${conPath }/notice/list.do">공지사항</a>
+    <a href="${conPath }/qna/list.do">QNA</a>
 </body>
 </html>
