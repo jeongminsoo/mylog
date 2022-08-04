@@ -21,6 +21,7 @@
 		<typeAlias type="com.project.mylog.model.DiaryBoard" alias="DiaryBoard" />
 		<typeAlias type="com.project.mylog.model.DiaryReply" alias="DiaryReply" />
 	</typeAliases>
+	
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/Member.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/Admin.xml"/>
