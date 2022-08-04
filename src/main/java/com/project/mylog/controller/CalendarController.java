@@ -56,16 +56,11 @@ public class CalendarController {
 		int yearInt = Integer.parseInt(year);
 		int monthInt = Integer.parseInt(month);
 		int dayInt = Integer.parseInt(day);
-		
-		Member member = (Member) session.getAttribute("member");
-		String mid = member.getMid();
 
 		Date tdrdate = new Date(yearInt-1900, monthInt - 1, dayInt);
 		Date ddate = new Date(yearInt-1900, monthInt - 1, dayInt);
-		Paging paging = new Paging(dbService.myDiaryCnt(mid, ddate), pageNum, 5, 1);
-		model.addAttribute("todos", todoService.todoList(mid, tdrdate));
-		model.addAttribute("diarys", dbService.myDiaryList(mid, ddate, pageNum));
-		model.addAttribute("paging", paging);
+		model.addAttribute("todos", todoService.todoList(session, tdrdate));
+		model.addAttribute("diarys", dbService.myDiaryList(session, ddate, pageNum));
 		model.addAttribute("ddate", ddate);
 		return "forward:../diary/myList.do";
 	}
