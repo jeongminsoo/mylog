@@ -40,7 +40,7 @@
     	
     	<!-- 중간 시간 저장 -->
     	<update id="timerSave" parameterType="Timer">
-    		UPDATE TIMER SET TDURING = #{tduring} WHERE TNO = #{tno}
+    		UPDATE TIMER SET TDURING = TDURING+#{tduring} WHERE TNO = #{tno}
     	</update>
 		<!-- 시작끝 같이 -->
 		<update id="startEnd" parameterType="Timer">

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.project.mylog.dao.Timetable">
+    	<resultMap type="Timetable" id="TimetableResult">
+	    	<result property="tbno" column="tbno"/>
+			<result property="tno" column="tno"/>
+	    	<result property="mid" column="mid"/>
+	    	<result property="mname" column="mname"/>
+			<result property="tname" column="tname"/>
+			<result property="tduring" column="tduring"/>
+			<result property="tbshour" column="tbshour"/>
+			<result property="tbsmin" column="tbsmin"/>
+			<result property="tbehour" column="tbehour"/>
+			<result property="tbemin" column="tbemin"/>
+    	</resultMap>
+   
+    	
+    </mapper>

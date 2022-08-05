@@ -124,10 +124,8 @@
 						var	snow = new Date();
 							start = snow.getTime();
 							stime = snow.toLocaleTimeString('ko-kr');
-				             console.log(start);
-				             console.log(stime);
-				             ssecond=Math.floor((start/1000)%60);
-					         console.log(ssecond);
+				            ssecond=Math.floor((start/1000)%60);
+					         
 					        
 					         $.ajax({
 			        				type : 'get', // 타입 (get, post, put 등등)
@@ -152,8 +150,9 @@
 					clearInterval(timer);
 					
 					dnow = new Date();
-					dtime = Math.floor((dnow.getTime()/1000)%60);
+					dtime = dnow.getTime();
 					during = Math.floor(((dtime-start)/1000)%60);
+					console.log(dtime);
 				
 					 $.ajax({
 	        				type : 'get', // 타입 (get, post, put 등등)
