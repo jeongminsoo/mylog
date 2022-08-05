@@ -16,7 +16,7 @@
 	</script>
 </head>
 <body>
-	<jsp:include page="../main/header.jsp"/>
+	<jsp:include page="../main/header2.jsp"/>
 	<h1>메인입니다</h1>
 	<c:if test="${joinResult eq 0 }">
 		<script>

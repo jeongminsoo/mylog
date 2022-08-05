@@ -146,4 +146,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.emailCheck(memail);
 	}
 
+	@Override
+	public List<Member> findFriend(String mname) {
+		return memberDao.findFriend(mname);
+	}
+
 }

@@ -40,6 +40,9 @@
 	<select id="emailCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM MEMBER WHERE MEMAIL = #{memail}
 	</select>
+	<select id="findFriend" parameterType="String" resultMap="MemberResult">
+		SELECT * FROM MEMBER WHERE MNAME LIKE '%'||#{mname}||'%'
+	</select>
 	<insert id="joinMember" parameterType="Member">
 		<if test="mbirth != null and mmotto != ''">
 			INSERT INTO MEMBER (MID, MPW, MNAME, MBIRTH, MEMAIL, MMOTTO)

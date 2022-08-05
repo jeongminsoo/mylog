@@ -31,4 +31,6 @@ public interface MemberService {
 	public Member getMemberForMname(String mname);
 	
 	public int emailCheck(String memail);
+	
+	public List<Member> findFriend(String mname);
 }
