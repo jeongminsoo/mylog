@@ -28,6 +28,7 @@
 			
 			$('.follow').click(function() {
 				var id = $(this).attr('id');
+				alert(id);
 				var answer = confirm('정말 해당 친구를 팔로우하시겠습니까?');
 				if (answer == true) {
 					location.href='${conPath}/friend/follow.do?fid=' + id + '&mid=' + mid;
@@ -41,7 +42,7 @@
 <body>
 	<div>
 		<form>
-			<p>친구검색 <input type="text" name="mname" id="searchNname"></p>
+			<p>친구검색 <input type="text" name="mname" id="searchNname" placeholder="닉네임을 입력하세요"></p>
 		</form>
 		<div id="findResult"></div>
 	</div>

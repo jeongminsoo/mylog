@@ -33,26 +33,6 @@
 				}
 			});
 			
-			$('.unfollow').click(function() {
-				var id = $(this).attr('id');
-				var answer = confirm('정말 해당 친구를 언팔로우하시겠습니까?');
-				if (answer == true) {
-					location.href='${conPath}/friend/unfollow.do?fid=' + id;
-				} else {
-					return false;
-				}
-			});
-			
-			$('.follow').click(function() {
-				var id = $(this).attr('id');
-				var answer = confirm('정말 해당 친구를 팔로우하시겠습니까?');
-				if (answer == true) {
-					location.href='${conPath}/friend/follow.do?fid=' + id + '&mid=' + mid;
-				} else {
-					return false;
-				}
-			});
-			
 			$('input[name="mname"]').keyup(function(){
 				var mname = $('input[name="mname"]').val();
 				$.ajax({
@@ -92,7 +72,7 @@
 	<div>
 		<a href="${conPath }/friend/findView.do">친구찾기</a>
 		<form>
-			<p>친구검색 <input type="text" name="mname" id="searchNname"></p>
+			<p>친구검색 <input type="text" name="mname" id="searchNname" placeholder="닉네임을 입력하세요"></p>
 		</form>
 		<div id="listResult"></div>
 		<div id="myFollow"></div>
