@@ -12,23 +12,20 @@
 </head>
 <body>
 	<form action="${conPath }/teamboard/write.do" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="mid" value="${member.mid }">
 		<table>
-			<caption>원글쓰기</caption>
-			<tr>
-				<th>작성자</th>
-				<td><input type="text" name="mid" required="required"></td>
-			</tr>
+			<caption>팀모집 게시판 글쓰기</caption>
 			<tr>
 				<th>제목</th>
 				<td><input type="text" name="ttitle" required="required"></td>
 			</tr>
 			<tr>
-				<th>본문</th>
-				<td><textarea rows="5" cols="20" name="tcontent"></textarea></td>
+				<th>작성자</th>
+				<td><input type="text" name="mname" value="${member.mname }" readonly="readonly"></td>
 			</tr>
 			<tr>
-				<td>파일</td>
-				<td><input type="file" name="tempTfilename"></td>
+				<th>본문</th>
+				<td><textarea rows="5" cols="20" name="tcontent" required="required"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2">

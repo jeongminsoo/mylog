@@ -20,4 +20,6 @@ public interface TeamMemberService {
 	public List<TeamMember> teamMemberList(int tno);
 	public int teamMemberTotCnt(int tno);
 	
+	public TeamMember getTeamMemberDetail(TeamMember teammember);
+	
 }

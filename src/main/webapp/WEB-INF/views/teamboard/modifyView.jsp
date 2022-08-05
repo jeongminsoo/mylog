@@ -21,22 +21,15 @@
 		<input type="hidden" name="pageNum" value="${param.pageNum }">
 		<input type="hidden" name="tnum" value="${teamboard.tnum }">
 		<table>
-			<caption>${teamboard.tnum }번 글 수정</caption>
+			<caption>글 수정(${teamboard.tnum }번)</caption>
 			<tr>
-				<th>작성자</th>
-				<td><input type="text" name="mid" value="${teamboard.mid }"></td>
-			</tr>
-			<tr>
-				<th>글제목</th>
 				<td><input type="text" name="ttitle" value="${teamboard.ttitle }"></td>
 			</tr>
 			<tr>
-				<th>본문</th>
-				<td><textarea rows="5" cols="5" name="tcontent">${teamboard.tcontent }</textarea> </td>
+				<td>작성자 <input type="text" name="mid" value="${teamboard.mname }" readonly="readonly"></td>
 			</tr>
 			<tr>
-				<th>파일</th>
-				<td><input type="file" name="tempTfilename" value="${teamboard.tfilename }"></td>
+				<td><textarea rows="5" cols="5" name="tcontent">${teamboard.tcontent }</textarea> </td>
 			</tr>
 			<tr>
 				<td colspan="2">

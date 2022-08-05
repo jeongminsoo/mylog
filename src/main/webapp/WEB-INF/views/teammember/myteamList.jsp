@@ -66,5 +66,6 @@
 			</c:forEach>
 		</c:if>
 	</table>
+	<button onclick="location.href='${conPath }/main.do'">메인으로</button>
 </body>
 </html>

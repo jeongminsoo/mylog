@@ -106,12 +106,8 @@
         mID VARCHAR2(15) REFERENCES MEMBER(mID),
         tTITLE VARCHAR2(100) NOT NULL,
         tCONTENT CLOB NOT NULL,
-        tFILENAME VARCHAR2(100),
         tHIT NUMBER(8) DEFAULT 0,
         tRDATE DATE DEFAULT SYSDATE,
-        tGROUP NUMBER(8) DEFAULT 0,
-        tSTEP NUMBER(4) DEFAULT 0,
-        tINDENT NUMBER(4) DEFAULT 0,
         tIP VARCHAR2(20)
     );
     -- TEAM_COMMENTBOARD
@@ -123,11 +119,11 @@
     CREATE TABLE TEAM_COMMENTBOARD(
         tcNUM NUMBER(8) PRIMARY KEY,
         mID VARCHAR2(15) REFERENCES MEMBER(mID),
+        tcMENTION VARCHAR2(30),
         tNUM NUMBER(8) REFERENCES TEAMBOARD(tNUM),
         tcCONTENT VARCHAR2(1000) NOT NULL,
         tcRDATE DATE DEFAULT SYSDATE,
         tcGROUP NUMBER(8) DEFAULT 0,
-        tcSTEP NUMBER(4) DEFAULT 0,
         tcINDENT NUMBER(4) DEFAULT 0,
         tcIP VARCHAR2(20)
     );
@@ -136,6 +132,10 @@
     -- Member
     INSERT INTO MEMBER (mID, mPW, mNAME, mBIRTH, mEMAIL, mMOTTO, mSTATUS) 
         VALUES ('aaa', '111', '박박박', TO_DATE('2000-01-01', 'YYYY-MM-DD'), 'park@park.com', NULL, 1);
+    INSERT INTO MEMBER (mID, mPW, mNAME, mBIRTH, mEMAIL, mMOTTO, mSTATUS) 
+        VALUES ('ddd', '111', '디디', TO_DATE('2002-02-02', 'YYYY-MM-DD'), 'DDD@DDD.com', NULL, 1);
+    COMMIT;
+    SELECT * FROM MEMBER;
     -- ADMIN
     select * from admin;
     -- 관리자 등록
@@ -160,6 +160,14 @@
         WHERE RN BETWEEN 1 AND 11;
     commit;
     -- TEAM(make TEAM)
+    -- teamList
+    SELECT * FROM 
+	        (SELECT ROWNUM RN, A.* FROM 
+	            (SELECT T.*, M.mNAME FROM TEAM T, MEMBER M
+	            			WHERE T.MID = M.MID
+	                        ORDER BY TNO DESC) A)
+		        WHERE RN BETWEEN 1 AND 3;
+    SELECT * FROM TEAM ORDER BY TNO DESC;
     -- (1) 팀 만들기
     INSERT INTO TEAM (tNO, mID, tNAME, tGOAL) 
         VALUES (TEAM_SEQ.NEXTVAL, 'aaa', 'myLOG', '팀프빠샤');
@@ -181,6 +189,8 @@
     SELECT T.tNAME, T.MID FROM TEAM_MEMBER TM, TEAM T WHERE TM.tNO = T.tNO AND TM.tmCHECK=0 AND TM.mID='aaa';
     SELECT * FROM TEAM_MEMBER;
     COMMIT;
+    -- detail
+    SELECT * FROM TEAM_MEMBER WHERE TNO=1 AND MID='aaa';
     -- (1) 팀원 가입 신청
     INSERT INTO TEAM_MEMBER (tmNO, mID, tNO, tmCHECK)
         VALUES (TEAM_MEMBER_SEQ.NEXTVAL, 'aaa', 1, 0);
@@ -302,25 +312,23 @@
     -- (1) 글목록(startRow부터 endRow까지)
     SELECT * FROM 
         (SELECT ROWNUM RN, A.* FROM 
-            (SELECT T.* FROM TEAMBOARD T
-                        ORDER BY tGROUP DESC, tSTEP) A)
+            (SELECT T.*, M.mNAME FROM TEAMBOARD T, MEMBER M
+                                 WHERE T.MID = M.MID
+                        ORDER BY trdate DESC) A)
         WHERE RN BETWEEN 1 AND 11; -- DAO에 들어갈 QUERY
        
     -- (2) 글갯수
     SELECT COUNT(*) FROM TEAMBOARD;
     -- (3) 글쓰기(원글)
-    INSERT INTO TEAMBOARD (tNUM, mID, tTITLE, tCONTENT, tFILENAME,  
-            tGROUP, tSTEP, tINDENT, tIP)
-        VALUES (TEAMBOARD_SEQ.NEXTVAL, 'aaa','title','content', null, 
-            TEAMBOARD_SEQ.CURRVAL, 0, 0, '192.168.10.01');
+    INSERT INTO TEAMBOARD (tNUM, mID, tTITLE, tCONTENT, tIP)
+        VALUES (TEAMBOARD_SEQ.NEXTVAL, 'aaa','title','content', '192.168.10.01');
     -- (4) Hit 하나 올리기(1번글 조회수 하나 올리기)
     UPDATE TEAMBOARD SET tHIT = tHIT +1 WHERE tNUM=1;
     -- (5) NUM으로 글 dto보기
-    SELECT T.* FROM TEAMBOARD T WHERE tNUM=1;
+    SELECT T.*, M.mNAME FROM TEAMBOARD T, MEMBER M WHERE tNUM=1;
     -- (6) 글 수정하기
     UPDATE TEAMBOARD SET tTITLE = '바뀐제목',
                         tCONTENT = '본문',
-                        tFILENAME = NULL,
                         tIP = '192.168.151.10',
                         tRDATE = SYSDATE
                 WHERE tNUM = 1;
@@ -328,53 +336,43 @@
     COMMIT;
     DELETE FROM TEAMBOARD WHERE tNUM=3;
     ROLLBACK;
-    -- (8) 답변글 추가전 STEP a 수행
-    UPDATE TEAMBOARD SET tSTEP = tSTEP+1 
-        WHERE tGROUP = 10 AND tSTEP>0;
-    -- (9) 답변글 쓰기
-    INSERT INTO TEAMBOARD (tNUM, mID, tTITLE, tCONTENT, tFILENAME,
-            tGROUP, tSTEP, tINDENT, tIP)
-        VALUES (TEAMBOARD_SEQ.NEXTVAL, 'aaa','reply','content', null,
-            10, 1, 1, '192.168.10.151');
     
     -- TEAM_COMMENTBOARD
     select tnum from teamboard;
     -- (1) 댓글목록(startRow부터 endRow까지)
         SELECT TR.* FROM TEAM_COMMENTBOARD TR
-                    ORDER BY tcGROUP DESC, tcSTEP;
+                    ORDER BY tcGROUP DESC, tcRDATE;
         -- 그냥 출력 시 사용
         SELECT TR.* FROM TEAM_COMMENTBOARD TR WHERE tNUM=12
-                    ORDER BY tcGROUP DESC, tcSTEP;
+                    ORDER BY tcGROUP DESC, tcRDATE;
     SELECT * FROM 
         (SELECT ROWNUM RN, A.* FROM 
         (SELECT TC.* FROM TEAM_COMMENTBOARD TC WHERE tNUM=12
-                    ORDER BY tcGROUP DESC, tcSTEP) A)
+                    ORDER BY tcGROUP DESC, tcINDENT, tcRDATE) A)
         WHERE RN BETWEEN 1 AND 11; -- DAO에 들어갈 QUERY
     select * from TEAM_COMMENTBOARD where tcnum=1;
     -- (2) 댓글갯수
-    SELECT COUNT(*) FROM TEAM_COMMENTBOARD;
+    SELECT COUNT(*) FROM TEAM_COMMENTBOARD WHERE tNUM=12;
     -- (3) 댓글쓰기(원글)
     INSERT INTO TEAM_COMMENTBOARD (tcNUM, mID, tNUM, tcCONTENT, 
-            tcGROUP, tcSTEP, tcINDENT, tcIP)
+            tcGROUP, tcINDENT, tcIP)
         VALUES (TEAM_COMMENTBOARD_SEQ.NEXTVAL, 'aaa', 1, 'commentContent',
-            TEAM_COMMENTBOARD_SEQ.CURRVAL, 0, 0, '192.168.10.01');
+            TEAM_COMMENTBOARD_SEQ.CURRVAL, 0, '192.168.10.01');
     -- (4) 댓글 수정하기
     UPDATE TEAM_COMMENTBOARD SET tcCONTENT = '바뀐댓글',
-                         tcIP = '192.168.151.10',
-                         tcRDATE = SYSDATE
+                         tcIP = '192.168.151.10'
                 WHERE tcNUM = 1;
     -- (5) 글 삭제하기(NUM으로 삭제하기)
     COMMIT;
     DELETE FROM TEAM_COMMENTBOARD WHERE tcNUM=1;
     ROLLBACK;
-    -- (6) 답댓글 추가전 STEP a 수행
-    UPDATE TEAM_COMMENTBOARD SET tcSTEP = tcSTEP+1 
-        WHERE tcGROUP = 1 AND tcSTEP>0;
+    -- (6) 답댓글 추가전 STEP a 수행(TNUM으로 작성자 ID가져오기)
+    SELECT TC.*, M.mNAME FROM TEAM_COMMENTBOARD TC, MEMBER M WHERE TC.MID=M.MID AND TCNUM=1;
     -- (7) 답댓글 쓰기
-    INSERT INTO TEAM_COMMENTBOARD (tcNUM, mID, tNUM, tcCONTENT,
-            tcGROUP, tcSTEP, tcINDENT, tcIP)
-        VALUES (TEAM_COMMENTBOARD_SEQ.NEXTVAL, 'aaa', 1, 'reply',
-            1, 1, 1, '192.168.10.151');
+    INSERT INTO TEAM_COMMENTBOARD (tcNUM, mID, tcMENTION, tNUM, tcCONTENT, 
+            tcGROUP, tcINDENT, tcIP)
+        VALUES (TEAM_COMMENTBOARD_SEQ.NEXTVAL, 'aaa', 'ddd',1, 'reply',
+           1, 1, '192.168.10.151');
     
     
     

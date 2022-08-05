@@ -36,11 +36,14 @@ public class TeamController {
 	@RequestMapping(value = "teamDetailView", method = RequestMethod.GET)
 	public String teamDetailView(int tno, Model model) {
 		model.addAttribute("teamDetail", teamService.getTeamDetail(tno));
-		System.out.println("디테일 : "+teamService.getTeamDetail(tno));
 		model.addAttribute("teamMemberTotCnt", teamMservice.teamMemberTotCnt(tno));
-		System.out.println("명수 : "+teamMservice.teamMemberTotCnt(tno));
 		model.addAttribute("teamMemberList", teamMservice.teamMemberList(tno));
-		System.out.println("그룹원 : "+teamMservice.teamMemberList(tno));
 		return "team/teamDetailView";
+	}
+	//teamList
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public String teamList(@ModelAttribute("team") Team team, Model model) {
+		model.addAttribute("makeTeamResult", teamService.makeTeam(team));
+		return "forward:../teammember/firstJoin.do";
 	}
 }

@@ -5,10 +5,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.mylog.model.Member;
+import com.project.mylog.model.Team;
 import com.project.mylog.model.TeamMember;
 import com.project.mylog.service.TeamMemberService;
 import com.project.mylog.service.TeamService;
@@ -33,6 +35,17 @@ public class TeamMemberController {
 		return "teammember/myteamList";
 	}
 	
+	//applyTeamMember
+	
+	//deleteApplyTeam(조장도 인위적으로 가능)
+	@RequestMapping(value = "deleteApplyTeam", method = RequestMethod.GET)
+	public String deleteApplyTeam(@ModelAttribute("teammember") TeamMember teammember, Model model) {
+		model.addAttribute("deleteApplyTeamResult", teamMservice.deleteApplyTeam(teammember));
+		return "forward:myteamList.do";
+	}
+	
+	//permitApplyTeam
+	
 	//join
 	@RequestMapping(value = "firstJoin", method = {RequestMethod.GET, RequestMethod.POST})
 	public String firstJoinTeamMember(HttpSession session, Model model) {
@@ -46,4 +59,15 @@ public class TeamMemberController {
 		System.out.println(teamMservice.myTeamList(session));
 		return "teammember/myteamList";
 	}
+	
+	//teamApplyList(조장만 확인가능)
+	
+	//drawalTeamMember(팀 탈퇴)
+	
+	//teamMemberList
+	
+	//teamMemberTotCnt
+	
+	
+	
 }

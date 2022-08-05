@@ -55,47 +55,36 @@
 			history.back();
 		</script>
 	</c:if>
+	<div>
+		<ul>
+			<li><a href="${conPath }/teamboard/list.do">그룹 모집 게시판</a></li>
+			<li><a href="${conPath }/team/list.do">그룹원 모집</a></li>
+		</ul>
+	</div>
 	<table>
 		<tr>
 			<td><a href="${conPath }/teamboard/writeView.do">글쓰기</a></td>
 		</tr>
 	</table>
 	<table>
-		<tr>
-			<th>글번호</th>
-			<th>작성자</th>
-			<th>제목</th>
-			<th>작성일</th>
-			<th>조회수</th>
-		</tr>
 		<c:if test="${teamBoardTotCnt eq 0 }">
 			<tr>
-				<td colspan="5">등록된 글이 없습니다</td>
+				<td>등록된 글이 없습니다</td>
 			</tr>
 		</c:if>
 		<c:if test="${teamBoardTotCnt != 0 }">
 			<c:forEach items="${teamboardList }" var="tbDto">
 				<tr	onclick="trClicked(${tbDto.tnum})">
-	  				<td>${tbDto.tnum }</td>
-	  				<td>${tbDto.mid }</td>
-					<td class="left">
-	  					<c:forEach var="i" begin="1" end="${tbDto.tindent }">
-	  						<c:if test="${i==tbDto.tindent }">
-	  							└
-	  						</c:if>
-	  						<c:if test="${i!=tbDto.tindent }">
-	  								&nbsp; &nbsp; &nbsp;
-	  						</c:if>
-	  					</c:forEach>
-	  					${tbDto.ttitle }
-	  				</td>
 					<td>
-	  					<fmt:formatDate value="${tbDto.trdate }" pattern="yy/MM/dd(E)"/>
-	  				</td>
-	  				<td>
-	  					<fmt:formatNumber value="${tbDto.thit }" groupingUsed="true"/>	<!-- 3자리수 마다 , -->
-	  				</td>
-						
+						<table style="border: 1px solid black;">
+							<tr>
+								<td>${tbDto.ttitle }(<fmt:formatNumber value="${tbDto.thit }" groupingUsed="true"/>)</td>
+							</tr>
+							<tr>
+								<td>${tbDto.mname }</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 			</c:forEach>
 		</c:if>

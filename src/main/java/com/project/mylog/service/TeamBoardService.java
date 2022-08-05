@@ -15,6 +15,4 @@ public interface TeamBoardService {
 	public TeamBoard teamBoardModifyReplyView(int tnum);
 	public int teamBoardModify(MultipartHttpServletRequest mRequest, TeamBoard teamboard);
 	public int teamBoardDelete(int tnum);
-	public int teamBoardPreReply(TeamBoard teamboard);
-	public int teamBoardReply(MultipartHttpServletRequest mRequest, TeamBoard teamboard);
 }

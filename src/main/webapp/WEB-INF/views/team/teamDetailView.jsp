@@ -22,12 +22,14 @@
 			<caption>${teamDetail.tname }그룹상세보기</caption>
 			<tr>
 				<th>그룹명(인원)</th>
-				<th>그룹 팀장</th>
-				<th>그룹 조원</th>
+				<td>${teamDetail.tname }(${teamMemberTotCnt }명)</td>
 			</tr>
 			<tr>
-				<td>${teamDetail.tname }(${teamMemberTotCnt }명)</td>
+				<th>그룹 팀장</th>
 				<td>${teamDetail.mid }</td>
+			</tr>
+			<tr>
+				<th>그룹원</th>
 				<td>
 					<table>
 						<c:forEach items="${teamMemberList }" var="tmList">
@@ -36,6 +38,13 @@
 							</tr>
 						</c:forEach>
 					</table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					${member.mid }
+					${teamDetail.tno }
+					<button onclick="location.href='${conPath }/teammember/deleteApplyTeam.do?mid=${member.mid }&tno=${teamDetail.tno }'">그룹가입 신청 철회</button>
 				</td>
 			</tr>
 		</table>

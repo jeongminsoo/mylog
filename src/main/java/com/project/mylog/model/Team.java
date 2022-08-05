@@ -12,4 +12,7 @@ public class Team {
 	private String mid;
 	private String tname;
 	private String tgoal;
+	
+	private String startRow;
+	private String endRow;
 }

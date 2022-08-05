@@ -8,6 +8,8 @@
 		<result column="mid" property="mid"/>
 		<result column="tname" property="tname"/>
 		<result column="tgoal" property="tgoal"/>
+		<result column="startRow" property="startRow"/>
+		<result column="endRow" property="endRow"/>
 	</resultMap>
 	
 	<!-- makeTeam -->
@@ -33,5 +35,14 @@
 	<!-- getTeamDetail -->
 	<select id="getTeamDetail" parameterType="int" resultType="Team">
 		SELECT * FROM TEAM WHERE tNO=#{tno}
+	</select>
+	<!-- teamList -->
+	<select id="teamList" resultType="Team">
+		SELECT * FROM 
+	        (SELECT ROWNUM RN, A.* FROM 
+	            (SELECT T.*, M.mNAME FROM TEAM T, MEMBER M
+	            			WHERE T.MID = M.MID
+	                        ORDER BY TNO DESC) A)
+		        WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>
 </mapper>

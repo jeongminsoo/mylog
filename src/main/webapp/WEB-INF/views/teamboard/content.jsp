@@ -48,69 +48,51 @@
 	</c:if>
 	<div id="content">
 		<table>
-			<caption>${content.tnum }번상세보기</caption>
 			<tr>
-				<th>작성자</th>
-				<td>${content.mid }</td>
+				<td>${content.ttitle }(${content.thit })</td>
+			</tr>
+			<tr class="left">
+				<td>${content.mname }</td>
 			</tr>
 			<tr>
-				<th>제목</th>
-				<td>${content.ttitle }</td>
-			</tr>
-			<tr>
-				<th>내용</th>
 				<td>${content.tcontent }</td>
 			</tr>
 			<tr>
-				<th>파일</th>
-				<c:if test="${content.tfilename eq null }">
-					<td>파일 없음</td>
-				</c:if>
-				<c:if test="${content.tfilename != null }">
-					<td>${content.tfilename }</td>
-				</c:if>
+				<td>작성일 : ${content.trdate }</td>
 			</tr>
 			<tr>
-				<th>조회수</th>
-				<td>${content.thit }</td>
-			</tr>
-			<tr>
-				<th>작성일</th>
-				<td>${content.trdate }</td>
-			</tr>
-			<tr>
-				<th>ip</th>
-				<td>${content.tip }</td>
+				<td>ip : ${content.tip }</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-				<input type="button" value="목록"
-					onclick="location.href='${conPath}/teamboard/list.do?pageNum=${pageNum }'"
-					class="btn"> 
-				<input type="button" value="답변"
-					onclick="location.href='${conPath}/teamboard/replyView.do?tnum=${content.tnum}&pageNum=${pageNum }'"
-					class="btn"> 
-				<input type="button" value="수정"
-					onclick="location.href='${conPath}/teamboard/modifyView.do?tnum=${content.tnum}&pageNum=${pageNum }'"
-					class="btn"> 
-				<input type="button" value="삭제"
-					onclick="location.href='${conPath}/teamboard/delete.do?tnum=${content.tnum}&pageNum=${pageNum }'"
-					class="btn"></td>
+					<input type="button" value="목록"
+						onclick="location.href='${conPath}/teamboard/list.do?pageNum=${pageNum }'"
+						class="btn"> 
+					<c:if test="${member.mid eq content.mid }">
+						<input type="button" value="수정"
+							onclick="location.href='${conPath}/teamboard/modifyView.do?tnum=${content.tnum}&pageNum=${pageNum }'"
+							class="btn"> 
+						<input type="button" value="삭제"
+							onclick="location.href='${conPath}/teamboard/delete.do?tnum=${content.tnum}&pageNum=${pageNum }'"
+							class="btn">
+					</c:if>
+				</td>
 			</tr>
 		</table>
 		<form action="${conPath }/teamcomment/write.do" method="post">
+			<input type="hidden" name="mid" value="${member.mid }">
 			<input type="hidden" name="tnum" value="${content.tnum }">
 			<input type="hidden" name="pageNum" value="${param.pageNum }">
 			<table>
 				<tr>
-					<th><input type="text" name="mid" required="required">
-					<%-- ${param.mid } --%></th>
+					<td><input type="text" name="mname" value="${member.mname }" readonly="readonly"></td>
 					<td><input type="text" name="tccontent" required="required"></td>
-					<td><input type="submit" value="글쓰기" class="btn"></td>
+					<td><input type="submit" value="댓글쓰기" class="btn"></td>
 				</tr>
 			</table>
 		</form>
 		<table>
+			<caption>댓글</caption>
 			<c:if test="${teamCommentTotCnt eq 0 }">
 				<tr>
 					<td>등록된 댓글이 없습니다</td>
@@ -118,53 +100,46 @@
 			</c:if>
 			<c:if test="${teamCommentTotCnt ne 0 or teamCommentTotCnt ne null}">
 				<c:forEach items="${teamcommentList }" var="tcDto">
+					
 					<tr>
-						<td id="tcnum">${tcDto.tcnum }</td>
-						<td>${tcDto.mid }</td>
-						<td class="left">
-							<c:forEach var="i" begin="1" end="${tcDto.tcindent }">
-								<c:if test="${i==tcDto.tcindent }">
-				  					└
-				  				</c:if>
-								<c:if test="${i!=tcDto.tcindent }">
-				  					&nbsp; &nbsp; &nbsp;
-				  				</c:if>
-							</c:forEach> 
-							${tcDto.tccontent }
-						</td>
+						<c:if test="${tcDto.tcindent eq 1 }">
+				  			&nbsp; &nbsp;
+				  			<td style="color:red;">@${tcDto.tcmention }</td>
+				  		</c:if>
+						<td>${tcDto.mname }</td>
+				  		<td>${tcDto.tccontent }</td>
 						<td>
 							<button
-								onclick="replyComment('${tcDto.tcnum}', '${param.pageNum}', '${content.tnum }', '${param.tcpageNum }')">답댓글</button>
-							<!-- <button 
-								id="hide">취소</button> -->
-							<button 
-								onclick="modifyComment('${tcDto.tcnum}', '${param.pageNum}', '${content.tnum }', '${param.tcpageNum }')">수정</button>
-							<button 
-								onclick="location.href='${conPath}/teamcomment/delete.do?tnum=${content.tnum}&pageNum=${pageNum }&tcnum=${tcDto.tcnum }'">삭제</button>
+								onclick="replyComment('${tcDto.tcnum}', '${param.pageNum}', '${content.tnum }', '${tcpaging.currentPage }')">답댓글</button>
+							<c:if test="${member.mid eq tcDto.mid }">
+								<button 
+									onclick="modifyComment('${tcDto.tcnum}', '${param.pageNum}', '${content.tnum }', '${tcpaging.currentPage }')">수정</button>
+								<button 
+									onclick="location.href='${conPath}/teamcomment/delete.do?tnum=${content.tnum}&pageNum=${pageNum }&tcnum=${tcDto.tcnum }'">삭제</button>
+							</c:if>
 						</td>
 					</tr>
-					<div id="modifyDiv"></div>
 				</c:forEach>
-					<div id="replyDiv"></div>
+				<div id="modifyDiv"></div>
+				<div id="replyDiv"></div>
 			</c:if>
 		</table>
 		<div id="paging">
-				<c:if test="${tcpaging.startPage > tcpaging.blockSize }">
-					[<a href="">이전</a>]
-				</c:if>
-				<c:forEach var="i" begin="${tcpaging.startPage }" end="${tcpaging.endPage }">
-					<c:if test="${tcpaging.currentPage == i }">
-						${i }
-					</c:if>
-					<c:if test="${tcpaging.currentPage != i }">
-					<a href="${conPath }/teamboard/content.do?tnum=${content.tnum}&pageNum=${param.pageNum }&tcpageNum=${tcpageNum }'">${i }</a>
-					</c:if>
-				</c:forEach>
-				<c:if test="${tcpaging.endPage < tcpaging.pageCnt }">
-					[<a href="">다음</a>]
-				</c:if>
-				
-			</div>
+			<c:if test="${tcpaging.startPage > tcpaging.blockSize }">
+	  			[ <a href="${conPath }/teamboard/content.do?tnum=${content.tnum}&pageNum=${param.pageNum }&tcpageNum=${tcpaging.startPage-1 }"> 이 전 </a>]
+	  		</c:if>
+		  	<c:forEach var="i" begin="${tcpaging.startPage }" end="${tcpaging.endPage }">
+		  		<c:if test="${i eq tcpaging.currentPage }">
+		  			[ <b>${i }</b> ]
+		  		</c:if>
+		  		<c:if test="${i != tcpaging.currentPage }">
+		  			[ <a href="${conPath }/teamboard/content.do?tnum=${content.tnum}&pageNum=${param.pageNum }&tcpageNum=${i }">${i }</a> ]
+		  		</c:if>
+		  	</c:forEach>
+		  	<c:if test="${tcpaging.endPage < tcpaging.pageCnt }">
+		  		[ <a href="${conPath }/teamboard/content.do?tnum=${content.tnum}&pageNum=${param.pageNum }&tcpageNum=${tcpaging.endPage+1 }"> 다 음 </a>]
+		  	</c:if>
+		</div>
 	</div>
 </body>
 </html>

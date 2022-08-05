@@ -43,6 +43,8 @@ public class TeamMemberServiceImpl implements TeamMemberService {
 
 	@Override
 	public int deleteApplyTeam(TeamMember teammember) {
+		TeamMember teamMember = new TeamMember();
+		teamMember.setTmno(teamMemberDao.getTeamMemberDetail(teammember).getTmno());
 		return teamMemberDao.deleteApplyTeam(teammember);
 	}
 
@@ -77,6 +79,11 @@ public class TeamMemberServiceImpl implements TeamMemberService {
 	@Override
 	public int teamMemberTotCnt(int tno) {
 		return teamMemberDao.teamMemberTotCnt(tno);
+	}
+
+	@Override
+	public TeamMember getTeamMemberDetail(TeamMember teammember) {
+		return teamMemberDao.getTeamMemberDetail(teammember);
 	}
 
 
