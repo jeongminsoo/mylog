@@ -162,7 +162,7 @@ UPDATE DIARYREPLY
 -- 댓글 삭제(replyDelete)
 DELETE FROM DIARYREPLY
     WHERE DRNUM = 1;
-   
+
 
 
 
