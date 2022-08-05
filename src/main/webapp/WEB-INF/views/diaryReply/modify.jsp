@@ -9,12 +9,11 @@
 	<meta charset="UTF-8">
 </head>
 <body>
-	<form action="${conPath }/todo/make.do" method="post" id="todo_form">
-		<input type="hidden" name="mid" value="${member.mid }">
-		<input type="hidden" name="ddate" value="${param.tdrdate }">
-		<input type="hidden" name="tdrdate" value="${param.tdrdate }">
-		<input type="text" id="tdcontent" name="tdcontent" autofocus="autofocus">
-		<input type="submit" value="등록">
+	<form action="${conPath }/diaryReply/modify.do" method="post">
+		<input type="hidden" name="drnum" value="${param.drnum }">
+		<input type="hidden" name="dnum" value="${reply.dnum }">
+		<input type="text" name="drcontent" value="${reply.drcontent }">
+		<input type="submit" value="수정">
 	</form>
 </body>
 </html>

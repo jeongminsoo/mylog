@@ -15,5 +15,7 @@ public class Timer {
 	private int tstart;
 	private int tend;
 	private int tdo;
+	private int tpause;
+	private int tduring;
 
 }

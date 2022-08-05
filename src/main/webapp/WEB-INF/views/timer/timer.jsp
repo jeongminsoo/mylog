@@ -37,6 +37,8 @@
 
 	}
 
+	
+	
 	$(document).ready(function() {
 				$('#pause').hide();
 				//기록될 시간
@@ -48,6 +50,8 @@
 				
 				//타이머
 				var tdo = $('input[name=tdo]').val();
+				var tname = $('input[name=tname]').val();
+				var tno = $('input[name=tno]').val();
 				//var time = tdo * 3600;
 				var time = tdo * 6
 				var hour = 0;
@@ -67,7 +71,7 @@
 							$('#play').hide();
 							$('#pause').show();
 
-							timer = setInterval(function() {
+							 timer = setInterval(function() {
 								time--;
 
 								min = Math.floor(time / 60);
@@ -90,13 +94,15 @@
 								}
 								document.getElementById('timer').innerHTML = ph
 										+ ":" + pm + ":" + ps;
-								
+								 
 								//타이머 시간이 다 된 경우
-								if(time < 0){
+								/* if(time < 0){
 				                   
-				                    time = 0;
-				                    clearTimeout(timer);
+				                    
+				                    clearInterval(timer);
 				                    var enow = end.toLocaleTimeString('ko-kr');
+				                    document.getElementById('timer').innerHTML = tdo
+									+ ":00:00";
 				                    $.ajax({
 				        				type : 'get', // 타입 (get, post, put 등등)
 				        				url : 'timewrite.do', // 요청할 서버url
@@ -110,17 +116,30 @@
 
 				        			})
 				                    
-								}
+								} */
 								
 							}, 1000);
 							
 							//시작 시간 보내기
 						var	snow = new Date();
-							start = snow.toLocaleTimeString('ko-kr');
-							var snowmilli = snow.getMilliseconds();
+							start = snow.getTime();
+							stime = snow.toLocaleTimeString('ko-kr');
 				             console.log(start);
-				             console.log(snowmilli);
-							
+				             console.log(stime);
+				             ssecond=Math.floor((start/1000)%60);
+					         console.log(ssecond);
+					        
+					         $.ajax({
+			        				type : 'get', // 타입 (get, post, put 등등)
+			        				url : 'timestart.do', // 요청할 서버url
+			        				dataType : 'text', // 데이터 타입 (html, xml, json, text 등등)
+			        				data : {'tstart':ssecond, 'tdo':tdo, 'tname':tname,'tno':tno },
+			        				success : function(data) { // 결과 성공 콜백함수
+			        					alert(data);
+		
+			        				},
+
+			        			})
 							
 							
 						});
@@ -132,11 +151,23 @@
 
 					clearInterval(timer);
 					
-					during = new Date();
-		             var dnow = during.toLocaleTimeString('ko-kr');
-		             var dnowmilli = during.getMilliseconds();
-		             console.log(dnow);
-		             console.log(dnowmilli);
+					dnow = new Date();
+					dtime = Math.floor((dnow.getTime()/1000)%60);
+					during = Math.floor(((dtime-start)/1000)%60);
+				
+					 $.ajax({
+	        				type : 'get', // 타입 (get, post, put 등등)
+	        				url : 'timesave.do', // 요청할 서버url
+	        				dataType : 'text', // 데이터 타입 (html, xml, json, text 등등)
+	        				data : {'tduring':during, 'tname':tname, 'tno':tno },
+	        				success : function(data) { // 결과 성공 콜백함수
+	        					//
+	        					
+
+	        				},
+
+	        			})  
+					
 				});
 
 				//■ 누른 경우
@@ -145,29 +176,30 @@
 							$('#play').show();
 							$('#pause').hide();
 							clearInterval(timer);
-							timer = 0;
+							time = tdo * 6;
 							document.getElementById('timer').innerHTML = tdo
 									+ ":00:00";
 							
 							
 							var enow = new Date();
-				            end = enow.toLocaleTimeString('ko-kr');
-				             var enowmilli = enow.getMilliseconds();
-				             console.log(enow);
-				             console.log(enowmilli);
+				            end = enow.getTime();
+				            etime = enow.toLocaleTimeString('ko-kr');
+				            tduring = Math.floor(((end-start)/1000)%60);
+				            esecond=Math.floor((end/1000)%60);
+
 				             
-				             $.ajax({
+				               $.ajax({
 			        				type : 'get', // 타입 (get, post, put 등등)
 			        				url : 'timewrite.do', // 요청할 서버url
-			        				dataType : 'html', // 데이터 타입 (html, xml, json, text 등등)
-			        				data : {'start':start, 'end':end },
+			        				dataType : 'text', // 데이터 타입 (html, xml, json, text 등등)
+			        				data : {'tstart':ssecond, 'tend':esecond, 'tname':tname, 'tno':tno, 'tduring':tduring },
 			        				success : function(data) { // 결과 성공 콜백함수
 			        					//
-			        					console.log(data);
+			        					
 
 			        				},
 
-			        			})
+			        			})  
 						});
 				
 				
@@ -180,59 +212,17 @@
 <body>
 	${member.mname }님의 타이머 태그 ${param.tname }
 	<div id="time">시간 ${param.tdo }</div>
+	<input type="hidden" name="tname" value="${param.tname }">
 	<input type="hidden" name="tdo" value="${param.tdo }">
+	<input type=hidden name="tno" value="${tno }">
 	<div id="timer"></div>
 	<div id="tbtn">
 		<button id="play">▶</button>
 		<button id="pause">◇</button>
 		<button id="stop">■</button>
 	</div>
-	<div id="timetable">
-	<div class="col-sm-6">
-		<c:if test="${not empty param.start }">
-		
-		${param.start }</c:if>
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th scope="col">시간</th>
-					<th scope="col">10</th>
-					<th scope="col">20</th>
-					<th scope="col">30</th>
-					<th scope="col">40</th>
-					<th scope="col">50</th>
-					<th scope="col">60</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="i" begin="5" end="24">
-					<tr class="${i}">
-						<th>${i }</th>
-						<td class="${i}10"></td>
-						<td class="${i}20"></td>
-						<td class="${i}30"></td>
-						<td class="${i}40"></td>
-						<td class="${i}50"></td>
-						<td class="${i}60"></td>
-					</tr>
-
-				</c:forEach>
-				<c:forEach var="i" begin="1" end="4">
-					<tr class="${i}">
-						<th>${i }</th>
-						<td class="${i}10"></td>
-						<td class="${i}20"></td>
-						<td class="${i}30"></td>
-						<td class="${i}40"></td>
-						<td class="${i}50"></td>
-						<td class="${i}60"></td>
-					</tr>
-
-				</c:forEach>
-			</tbody>
-		</table>
-    </div>
-
-	</div>
+	
+	
+	<button onclick="location.href='${conPath}/timer/tableview.do'">이동</button>
 </body>
 </html>
