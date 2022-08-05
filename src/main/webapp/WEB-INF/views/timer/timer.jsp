@@ -92,11 +92,13 @@
 										+ ":" + pm + ":" + ps;
 								
 								//타이머 시간이 다 된 경우
-								if(time < 0){
+								/* if(time < 0){
 				                   
 				                    time = 0;
 				                    clearInterval(timer);
 				                    var enow = end.toLocaleTimeString('ko-kr');
+				                    document.getElementById('timer').innerHTML = tdo
+									+ ":00:00";
 				                    $.ajax({
 				        				type : 'get', // 타입 (get, post, put 등등)
 				        				url : 'timewrite.do', // 요청할 서버url
@@ -110,16 +112,16 @@
 
 				        			})
 				                    
-								}
+								} */
 								
 							}, 1000);
 							
 							//시작 시간 보내기
 						var	snow = new Date();
-							start = snow.toLocaleTimeString('ko-kr');
-							var snowmilli = snow.getMilliseconds();
+							start = snow.getTime();
+							stime = snow.toLocaleTimeString('ko-kr');
 				             console.log(start);
-				             console.log(snowmilli);
+				             console.log(stime);
 							
 							
 							
@@ -131,12 +133,12 @@
 					$('#play').show();
 
 					clearInterval(timer);
-					
+					/* 
 					during = new Date();
 		             var dnow = during.toLocaleTimeString('ko-kr');
 		             var dnowmilli = during.getMilliseconds();
 		             console.log(dnow);
-		             console.log(dnowmilli);
+		             console.log(dnowmilli); */
 				});
 
 				//■ 누른 경우
@@ -145,21 +147,21 @@
 							$('#play').show();
 							$('#pause').hide();
 							clearInterval(timer);
-							timer = 0;
+							time = 0;
 							document.getElementById('timer').innerHTML = tdo
 									+ ":00:00";
 							
 							
 							var enow = new Date();
-				            end = enow.toLocaleTimeString('ko-kr');
-				             var enowmilli = enow.getMilliseconds();
-				             console.log(enow);
-				             console.log(enowmilli);
+				            end = enow.getTime;
+				            etime = enow.toLocaleTimeString('ko-kr')
+				             console.log(end);
+				             console.log(etime);
 				             
-				             $.ajax({
+				            /*  $.ajax({
 			        				type : 'get', // 타입 (get, post, put 등등)
 			        				url : 'timewrite.do', // 요청할 서버url
-			        				dataType : 'html', // 데이터 타입 (html, xml, json, text 등등)
+			        				dataType : 'text', // 데이터 타입 (html, xml, json, text 등등)
 			        				data : {'start':start, 'end':end },
 			        				success : function(data) { // 결과 성공 콜백함수
 			        					//
@@ -167,7 +169,7 @@
 
 			        				},
 
-			        			})
+			        			}) */
 						});
 				
 				

@@ -55,11 +55,7 @@ public class TeamBoardController {
 		model.addAttribute("teamcommentList", tcService.teamCommentList(tcpageNum, tnum));
 		int teamCommentTotCnt = tcService.teamCommentTotCnt(tnum);
 		model.addAttribute("teamCommentTotCnt", teamCommentTotCnt);
-		model.addAttribute("paging", new Paging2(teamCommentTotCnt, tcpageNum));
-		System.out.println("2tnum : "+tnum);
-		System.out.println("2pageNum : "+pageNum);
-		System.out.println("2tcpageNum : "+tcpageNum);
-		
+		model.addAttribute("tcpaging", new Paging2(teamCommentTotCnt, tcpageNum));
 		return "teamboard/content";
 	}
 
