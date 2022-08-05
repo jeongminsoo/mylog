@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,7 +25,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="join", method = RequestMethod.POST)
-	public String joinMember(@ModelAttribute("member") Member member, String tempmbirth, Model model) {
+	public String joinMember(Member member, String tempmbirth, Model model) {
 		model.addAttribute("joinResult", memberService.joinMember(member, tempmbirth));
 		return "forward:loginView.do";
 	}
@@ -107,5 +106,17 @@ public class MemberController {
 	@RequestMapping(value="searchResult", method = {RequestMethod.GET, RequestMethod.POST})
 	public String searchResult() {
 		return "member/searchResult";
+	}
+	
+	@RequestMapping(value="emailCheck", method = {RequestMethod.GET, RequestMethod.POST})
+	public String emailCheck(String memail, Model model) {
+		String msg;
+		if (memberService.emailCheck(memail) == 1) {
+			msg = "중복된 이메일입니다";
+		} else {
+			msg = "사용가능한 이메일입니다";
+		}
+		model.addAttribute("result", msg);
+		return "member/idCheck";
 	}
 }

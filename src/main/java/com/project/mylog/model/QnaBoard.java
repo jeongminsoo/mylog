@@ -14,6 +14,7 @@ public class QnaBoard {
 	private int qno;
 	private String mid;
 	private String aid;
+	private String qwriter;
 	private String qtitle;
 	private String qcontent;
 	private Date qrdate;
@@ -22,4 +23,8 @@ public class QnaBoard {
 	private int qstep;
 	private int qindent;
 	private String qip;
+	private String mname;
+	
+	private int startRow;
+	private int endRow;
 }
