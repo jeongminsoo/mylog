@@ -21,10 +21,11 @@
 	<!-- 내 일기 리스트 -->
 	<select id="myDiaryList" parameterType="DiaryBoard" resultMap="DiaryBoardResult">
 		SELECT A.* 
-		    FROM (SELECT ROWNUM RN, D.* FROM DIARYBOARD D
-		            WHERE DDATE = #{ddate} AND MID = #{mid}
-		            ORDER BY DRDATE DESC) A
-		    WHERE RN BETWEEN #{startRow} AND #{endRow}
+			FROM (SELECT ROWNUM RN, D.* 
+					FROM (SELECT * FROM DIARYBOARD
+			               WHERE DDATE = #{ddate} AND MID = #{mid}
+			               ORDER BY DRDATE DESC) D ) A
+			WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
 	<!-- 내 일기 갯수 -->
@@ -88,7 +89,7 @@
 		         DCONTENT = #{dcontent},
 		         DSTATUS = #{dstatus},
 		         DIP = #{dip}
-		    WHERE DNUM = 1
+		    WHERE DNUM = #{dnum}
 	</update>
 	
 	<!-- 글 삭제하기 -->
