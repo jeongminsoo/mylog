@@ -173,7 +173,7 @@
                     tGOAL = '팀프빠샤빠샤!'
                 WHERE tNO = 32;
     -- 팀 디테일
-    SELECT * FROM TEAM WHERE tNO=2;
+    SELECT * FROM TEAM WHERE tNO=1;
     -- TEAM_MEMBER(join team)
     -- 내 팀 리스트
     SELECT T.tNAME, T.MID FROM TEAM_MEMBER TM, TEAM T WHERE TM.tNO = T.tNO AND TM.tmCHECK=1 AND TM.mID='aaa';
