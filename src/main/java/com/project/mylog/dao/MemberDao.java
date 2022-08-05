@@ -32,4 +32,6 @@ public interface MemberDao {
 	public Member getMemberForMname(String mname);
 	
 	public int emailCheck(String memail);
+	
+	public List<Member> findFriend(String mname);
 }

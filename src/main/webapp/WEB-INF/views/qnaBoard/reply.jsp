@@ -20,6 +20,8 @@
 	<div>
 		<form action="${conPath }/qna/reply.do" method="post">
 			<input type="hidden" name="pageNum" value="${param.pageNum }">
+			<input type="hidden" name="aid" value="${admin.aid }">
+			<input type="hidden" name="mid" value="${qna.mid }">
 			<input type="hidden" name="qgroup" value="${qna.qgroup }">
 			<input type="hidden" name="qstep" value="${qna.qstep }">
 			<input type="hidden" name="qindent" value="${qna.qindent }">

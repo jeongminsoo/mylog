@@ -119,4 +119,12 @@ public class MemberController {
 		model.addAttribute("result", msg);
 		return "member/idCheck";
 	}
+	
+	@RequestMapping(value="find", method = {RequestMethod.GET, RequestMethod.POST})
+	public String findFriend(String mname, Model model) {
+		Paging paging = new Paging(memberService.countMember(), "1");
+		model.addAttribute("paging", paging);
+		model.addAttribute("members", memberService.findFriend(mname));
+		return "forward:../friend/findResult.do";
+	}
 }
