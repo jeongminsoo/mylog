@@ -6,6 +6,7 @@
 	<resultMap type="TeamMember" id="TeamMemberResult">
 		<result column="tmno" property="tmno"/>
 		<result column="mid" property="mid"/>
+		<result column="mname" property="mname"/>
 		<result column="tno" property="tno"/>
 		<result column="tmcheck" property="tmcheck"/>
 		<result column="tname" property="tname"/>
@@ -13,12 +14,12 @@
 	
 	<!-- myTeamList -->
 	<select id="myTeamList" parameterType="String" resultType="TeamMember">
-		SELECT T.* FROM TEAM_MEMBER TM, TEAM T WHERE TM.tNO = T.tNO AND TM.tmCHECK=1 AND TM.mID=#{mid}
+		SELECT T.*, M.mNAME FROM TEAM_MEMBER TM, TEAM T, MEMBER M WHERE TM.tNO = T.tNO AND T.mID=M.mID AND TM.tmCHECK=1 AND TM.mID=#{mid}
 	</select>
 	
 	<!-- myApplyTeamList -->
 	<select id="myApplyTeamList" parameterType="String" resultType="TeamMember">
-		SELECT T.* FROM TEAM_MEMBER TM, TEAM T WHERE TM.tNO = T.tNO AND TM.tmCHECK=0 AND TM.mID=#{mid}
+		SELECT T.*, M.mNAME FROM TEAM_MEMBER TM, TEAM T, MEMBER M WHERE TM.tNO = T.tNO AND T.mID=M.mID AND TM.tmCHECK=0 AND TM.mID=#{mid}
 	</select>
 	
 	<!-- applyTeamMember -->

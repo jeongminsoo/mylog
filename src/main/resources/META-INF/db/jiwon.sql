@@ -168,6 +168,10 @@
 	                        ORDER BY TNO DESC) A)
 		        WHERE RN BETWEEN 1 AND 3;
     SELECT * FROM TEAM ORDER BY TNO DESC;
+    -- teamTotCnt
+    SELECT COUNT(*) FROM TEAM;
+    -- 가입신청 한 팀인지 아닌지
+    SELECT * FROM TEAM_MEMBER WHERE MID='aaa' AND tNO=2;
     -- (1) 팀 만들기
     INSERT INTO TEAM (tNO, mID, tNAME, tGOAL) 
         VALUES (TEAM_SEQ.NEXTVAL, 'aaa', 'myLOG', '팀프빠샤');
@@ -190,13 +194,14 @@
     SELECT * FROM TEAM_MEMBER;
     COMMIT;
     -- detail
-    SELECT * FROM TEAM_MEMBER WHERE TNO=1 AND MID='aaa';
+    SELECT * FROM TEAM_MEMBER WHERE TNO=2 AND MID='aaa';
     -- (1) 팀원 가입 신청
     INSERT INTO TEAM_MEMBER (tmNO, mID, tNO, tmCHECK)
         VALUES (TEAM_MEMBER_SEQ.NEXTVAL, 'aaa', 1, 0);
     -- (2) 팀원 가입 신청 취소
     DELETE FROM TEAM_MEMBER WHERE tmNO='' AND tNO=4;
-    DELETE FROM TEAM_MEMBER WHERE mID='aaa' AND tNO=4; 
+    DELETE FROM TEAM_MEMBER WHERE mID='ddd' AND tNO=4;
+    commit;
     -- (2) 팀원 가입(가입허가/팀원 가입)
     UPDATE TEAM_MEMBER SET tmCHECK = 1
                     WHERE tmNO='' AND tNO='';

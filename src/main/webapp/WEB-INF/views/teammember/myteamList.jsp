@@ -12,14 +12,36 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
 		function teamDetail(tno){
-			location.href = '${conPath}/team/teamDetailView.do?tno='+tno;
+			location.href = '${conPath}/team/teamDetailView.do?tno='+tno+'&mid=${member.mid}';
 		}
 		function myteamDetail(tno){
-			location.href = '${conPath}/team/teamDetailView.do?tno='+tno;
+			location.href = '${conPath}/team/teamDetailView.do?tno='+tno+'&mid=${member.mid}';
 		}
 	</script>
 </head>
 <body>
+	<c:if test="${applyTeamMemberResult  eq 1}">
+		<script>
+			alert('그룹가입 신청 완료');
+		</script>
+	</c:if>
+	<c:if test="${applyTeamMemberResult  eq 0}">
+		<script>
+			alert('그룹가입 신청 실패');
+			history.back();
+		</script>
+	</c:if>
+	<c:if test="${deleteApplyTeamResult  eq 1}">
+		<script>
+			alert('그룹가입 신청철회 완료');
+		</script>
+	</c:if>
+	<c:if test="${deleteApplyTeamResult  eq 0}">
+		<script>
+			alert('그룹가입 신청철회 실패');
+			history.back();
+		</script>
+	</c:if>
 	<table>
 		<tr>
 			<td><a href="${conPath}/team/makeTeamView.do">그룹만들기</a></td>
@@ -31,16 +53,16 @@
 			<th>그룹명</th>
 			<th>팀장</th>
 		</tr>
-		<c:if test="${myteamList.size() eq 0 }">
+		<c:if test="${empty myteamList }">
 			<tr>
 				<td colspan="2">등록된 그룹이 없습니다.</td>
 			</tr>
 		</c:if>
-		<c:if test="${myteamList.size() ne 0 }">
+		<c:if test="${not empty myteamList }">
 			<c:forEach items="${myteamList }" var="list">
 				<tr	onclick="myteamDetail(${list.tno})">
 	  				<td>${list.tname }</td>
-	  				<td>${list.mid }</td>
+	  				<td>${list.mname }</td>
 				</tr>
 			</c:forEach>
 		</c:if>
@@ -61,7 +83,7 @@
 			<c:forEach items="${myapplyteamList }" var="applylist">
 				<tr	onclick="teamDetail(${applylist.tno})">
 	  				<td>${applylist.tname }</td>
-	  				<td>${applylist.mid }</td>
+	  				<td>${applylist.mname }</td>
 				</tr>
 			</c:forEach>
 		</c:if>

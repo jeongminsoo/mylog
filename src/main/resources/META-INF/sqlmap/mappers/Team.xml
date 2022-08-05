@@ -6,6 +6,7 @@
 	<resultMap type="Team" id="TeamResult">
 		<result column="tno" property="tno"/>
 		<result column="mid" property="mid"/>
+		<result column="mname" property="mname"/>
 		<result column="tname" property="tname"/>
 		<result column="tgoal" property="tgoal"/>
 		<result column="startRow" property="startRow"/>
@@ -45,4 +46,9 @@
 	                        ORDER BY TNO DESC) A)
 		        WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>
+	<!-- teamTotCnt -->
+	<select id="teamTotCnt" resultType="int">
+		SELECT COUNT(*) FROM TEAM
+	</select>
+	
 </mapper>

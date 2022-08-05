@@ -42,9 +42,12 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					${member.mid }
-					${teamDetail.tno }
-					<button onclick="location.href='${conPath }/teammember/deleteApplyTeam.do?mid=${member.mid }&tno=${teamDetail.tno }'">그룹가입 신청 철회</button>
+					<c:if test="${empty tMemberDetail }">
+						<button onclick="location.href='${conPath }/teammember/applyTeamMember.do?mid=${member.mid }&tno=${teamDetail.tno }'">그룹가입 신청</button>
+					</c:if>
+					<c:if test="${tMemberDetail.tmcheck eq 0 }">
+						<button onclick="location.href='${conPath }/teammember/deleteApplyTeam.do?mid=${member.mid }&tno=${teamDetail.tno }'">그룹가입 신청 철회</button>
+					</c:if>
 				</td>
 			</tr>
 		</table>

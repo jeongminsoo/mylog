@@ -10,9 +10,10 @@ import lombok.NoArgsConstructor;
 public class Team {
 	private int tno;
 	private String mid;
+	private String mname;
 	private String tname;
 	private String tgoal;
 	
-	private String startRow;
-	private String endRow;
+	private int startRow;
+	private int endRow;
 }

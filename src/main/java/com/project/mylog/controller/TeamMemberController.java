@@ -36,6 +36,11 @@ public class TeamMemberController {
 	}
 	
 	//applyTeamMember
+	@RequestMapping(value = "applyTeamMember", method = RequestMethod.GET)
+	public String applyTeamMember(int tno, HttpSession session, Model model) {
+		model.addAttribute("applyTeamMemberResult", teamMservice.applyTeamMember(session, tno));
+		return "forward:myteamList.do";
+	}
 	
 	//deleteApplyTeam(조장도 인위적으로 가능)
 	@RequestMapping(value = "deleteApplyTeam", method = RequestMethod.GET)
@@ -53,7 +58,7 @@ public class TeamMemberController {
 		model.addAttribute("jointeamResult", teamMservice.joinTeamMember(session, tno));
 		return "forward:myteamList.do";
 	}
-	@RequestMapping(value = "Join", method = RequestMethod.GET)
+	@RequestMapping(value = "join", method = RequestMethod.GET)
 	public String joinTeamMember(int tno, HttpSession session, Model model) {
 		model.addAttribute("jointeam", teamMservice.joinTeamMember(session, tno));
 		System.out.println(teamMservice.myTeamList(session));

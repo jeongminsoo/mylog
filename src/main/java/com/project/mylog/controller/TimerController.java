@@ -27,16 +27,44 @@ public class TimerController {
 		return "timer/timersetting";
 	}
 	
+	@RequestMapping(value="tableview", method=RequestMethod.GET)
+	public String tableView() {
+		
+		return "timer/timetable";
+	}
+	
 	@RequestMapping(value="view", method=RequestMethod.GET)
 	public String timerView(HttpSession session, Timer timer, Model model) {
 		model.addAttribute("timerset",timerService.timerMake(session, timer));
+		model.addAttribute("tno", timerService.getTno());
+		return "timer/timer";
+	}
+	
+	@RequestMapping(value="timestart", method=RequestMethod.GET)
+	public String timerStart(Timer timer, Model model) {
+		model.addAttribute("timestart",timerService.timerStart(timer));
+		System.out.println(1);
 		return "timer/timer";
 	}
 	
 	@RequestMapping(value="timewrite", method=RequestMethod.GET)
 	public String timerWrite(HttpSession session, Timer timer, Model model) {
-		
+		int tno = timerService.endTno();
 		model.addAttribute("timing", timerService.startEnd(session, timer));
+		
+		model.addAttribute("ttablewrite", timerService.timerTno(tno));
+		
 		return "forward:view.do";
 	}
+	
+	@RequestMapping(value="timesave", method=RequestMethod.GET)
+	public String timerSave(HttpSession session, Timer timer, Model model) {
+		int tno = timerService.endTno();
+		
+		model.addAttribute("ttablewrite", timerService.timerSave(timer));
+		
+		return "forward:view.do";
+	}
+	
+	
 }
