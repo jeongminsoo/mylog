@@ -25,13 +25,13 @@
 			VALUES(TODO_SEQ.NEXTVAL, #{mid}, #{tdcontent}, 0, #{tdrdate})
 	</insert>
 	
-	<select id="getTodo" parameterType="int">
+	<select id="getTodo" parameterType="int" resultType="Todo">
 		SELECT * FROM TODO WHERE TDNO = #{tdno}
 	</select>
 	
 	<insert id="todoDelayMake" parameterType="Todo">
-		INSERT INTO TODO 
-    		VALUES(TODO_SEQ.NEXTVAL, #{mid}, #{tdcontent}, 0, (SELECT TDRDATE+1 FROM TODO WHERE TDNO = 1));
+		INSERT INTO TODO(TDNO, MID, TDCONTENT, TDCHECK, TDRDATE)
+    		VALUES(TODO_SEQ.NEXTVAL, #{mid}, #{tdcontent}, 0, (SELECT TDRDATE+1 FROM TODO WHERE TDNO = #{tdno}))
 	</insert>
 	
 	<update id="todoChange" parameterType="Todo">

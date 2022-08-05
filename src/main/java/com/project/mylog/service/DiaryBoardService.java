@@ -18,7 +18,7 @@ public interface DiaryBoardService {
 	public int diaryHitup(int dnum);
 	public DiaryBoard diaryContent(int dnum);
 	public DiaryBoard getDiary(int dnum);
-	public int diaryWrite(MultipartHttpServletRequest mRequest, DiaryBoard diaryBoard);
+	public int diaryWrite(HttpSession session, MultipartHttpServletRequest mRequest, DiaryBoard diaryBoard);
 	public int diaryModify(MultipartHttpServletRequest mRequest, DiaryBoard diaryBoard);
 	public int diaryDelete(int dnum);
 }

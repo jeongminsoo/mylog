@@ -84,8 +84,9 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 	}
 
 	@Override
-	public int diaryWrite(MultipartHttpServletRequest mRequest, DiaryBoard diaryBoard) {
+	public int diaryWrite(HttpSession session, MultipartHttpServletRequest mRequest, DiaryBoard diaryBoard) {
 		diaryBoard.setDip(mRequest.getLocalAddr());
+		diaryBoard.setMid(((Member) session.getAttribute("member")).getMid());
 		boolean result = false;
 		String path = mRequest.getRealPath("diaryBoardFileUpload/");
 		Iterator<String> params = mRequest.getFileNames(); // 파라미터이름 받음
@@ -141,7 +142,7 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 			} else {
 				result = true;
 			}
-		} // if
+		} // while
 		return diaryDao.diaryModify(diaryBoard);
 	}
 

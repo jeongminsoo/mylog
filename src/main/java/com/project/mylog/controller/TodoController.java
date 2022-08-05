@@ -41,13 +41,15 @@ public class TodoController {
 	
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
 	public String todoDelete(int tdno) {
+		Date ddate = todoService.getTodo(tdno).getTdrdate();
 		todoService.todoDelete(tdno);
-		return "forward:../diary/myList.do";
+		return "forward:../diary/myList.do?ddate="+ddate;
 	}
 	
-	@RequestMapping(value = "check", method = RequestMethod.GET)
+	@RequestMapping(value = "check", method = {RequestMethod.GET, RequestMethod.POST})
 	public String todoChange(int tdno, int tdcheck) {
+		Date ddate = todoService.getTodo(tdno).getTdrdate();
 		todoService.todoChange(tdno, tdcheck);
-		return "forward:../diary/myList.do";
+		return "forward:../diary/myList.do?ddate="+ddate;
 	}
 }
