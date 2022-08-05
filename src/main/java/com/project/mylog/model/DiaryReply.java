@@ -9,9 +9,10 @@ public class DiaryReply {
 	private int drnum;
 	private int dnum;
 	private String mid;
+	private String mname;
+	private String drmention;
 	private String drcontent;
 	private int drgroup;
-	private int drstep;
 	private int drindent;
 	private Timestamp drrdate;
 	private String drip;

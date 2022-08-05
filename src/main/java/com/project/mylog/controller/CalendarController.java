@@ -57,11 +57,8 @@ public class CalendarController {
 		int monthInt = Integer.parseInt(month);
 		int dayInt = Integer.parseInt(day);
 
-		Date tdrdate = new Date(yearInt-1900, monthInt - 1, dayInt);
 		Date ddate = new Date(yearInt-1900, monthInt - 1, dayInt);
-		model.addAttribute("todos", todoService.todoList(session, tdrdate));
-		model.addAttribute("diarys", dbService.myDiaryList(session, ddate, pageNum));
 		model.addAttribute("ddate", ddate);
-		return "forward:../diary/myList.do";
+		return "forward:../diary/myList.do?ddate="+ddate;
 	}
 }
