@@ -13,12 +13,14 @@
 			<result property="tstart" column="tstart"/>
 			<result property="tend" column="tend"/>
 			<result property="tdo" column="tdo"/>
+			<result property="tpause" column="tpause"/>
+			<result property="tduring" column="tduring"/>
     	</resultMap>
     	
     	<!-- 추가 -->
     	<insert id="timerMake" parameterType="Timer">
-    		INSERT INTO TIMER(TNO, MID, TTODAY, TNAME, TDO, TSTART, TEND) 
-    		VALUES(TSEQ.NEXTVAL,#{mid}, SYSDATE, #{tname} ,#{tdo} ,0,0 )
+    		INSERT INTO TIMER(TNO, MID, TTODAY, TNAME, TDO, TPAUSE, TDURING, TSTART, TEND) 
+    		VALUES(TSEQ.NEXTVAL,#{mid}, SYSDATE, #{tname} ,#{tdo},0 , 0, 0, 0 )
     	</insert>
     		
     	<!-- 시작시간 수정 -->
@@ -30,11 +32,35 @@
 		<update id="timerEnd" parameterType="Timer">
     		UPDATE TIMER SET TEND = #{tend} WHERE TNO = #{tno}
     	</update>
+    	
+		<!--pause 수정 -->
+		<update id="timerPause" parameterType="Timer">
+    		UPDATE TIMER SET TPAUSE = #{tpause} WHERE TNO = #{tno}
+    	</update>
+    	
+    	<!-- 중간 시간 저장 -->
+    	<update id="timerSave" parameterType="Timer">
+    		UPDATE TIMER SET TDURING = #{tduring} WHERE TNO = #{tno};
+    	</update>
 		<!-- 시작끝 같이 -->
 		<update id="startEnd" parameterType="Timer">
-    		UPDATE TIMER SET TSTART = #{tstart} AND TEND = #{tend} WHERE TNO = #{tno}
+    		UPDATE TIMER SET TSTART = #{tstart}, TEND = #{tend}, TDURING =TDURING+#{tduring} WHERE TNO = #{tno}
     	</update>
            
+           
+           <!-- 타이머 불러오기 -->
+        <select id="timerTno" parameterType="int" resultMap="TimerResult">
+        	SELECT * FROM TIMER WHERE TNO = #{tno}
+        </select>
+        
+        <!-- TNO가져오기 -->
+        <select id="getTno" resultType="int">
+        	SELECT MAX(TNO)TNO FROM TIMER
+        </select>
     
+        <!-- 시간 잰 것 중에 가장 큰 TNO가져오기 -->
+        <select id="endTno" resultType="int">
+        	SELECT MAX(TNO)TNO FROM TIMER WHERE TEND>0
+        </select>
     </mapper>
     

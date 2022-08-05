@@ -18,30 +18,51 @@
 </script>
 </head>
 <body>
-	
+${ttablewrite }
 	<div id="timetable">
+	<h1>기록한 시간</h1>
+	<div class="col-sm-6">
+		
 		<table class="table table-bordered">
 			<thead>
 				<tr>
-					<th scope="col">#</th>
-					<th scope="col">First</th>
-					<th scope="col">Last</th>
-					<th scope="col">Handle</th>
+					<th scope="col">시간</th>
+					<th scope="col">10</th>
+					<th scope="col">20</th>
+					<th scope="col">30</th>
+					<th scope="col">40</th>
+					<th scope="col">50</th>
+					<th scope="col">60</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="i" begin="1" end="24">
-					<tr>
-						<td scope="row"></td>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
+				<c:forEach var="i" begin="5" end="24">
+					<tr class="${i}">
+						<th>${i }</th>
+						<td class="${i}10"></td>
+						<td class="${i}20"></td>
+						<td class="${i}30"></td>
+						<td class="${i}40"></td>
+						<td class="${i}50"></td>
+						<td class="${i}60"></td>
+					</tr>
+
+				</c:forEach>
+				<c:forEach var="i" begin="1" end="4">
+					<tr class="${i}">
+						<th>${i }</th>
+						<td class="${i}10"></td>
+						<td class="${i}20"></td>
+						<td class="${i}30"></td>
+						<td class="${i}40"></td>
+						<td class="${i}50"></td>
+						<td class="${i}60"></td>
 					</tr>
 
 				</c:forEach>
 			</tbody>
 		</table>
-
+    </div>
 
 	</div>
 </body>
