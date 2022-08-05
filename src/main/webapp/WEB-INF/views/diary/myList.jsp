@@ -63,24 +63,22 @@
 			<button onclick="location.href='${conPath }/diary/myList.do?ddate=${after }'">이후</button>
 		</div>
 		<div id="diaryList">
-			<c:if test="${not empty diaryList }">
-				<c:forEach var="diary" items="${diaryList }">
-					<div class="list" onclick="location.href='${conPath }/diary/content.do?dnum=${diary.dnum }'">
-						<span>${diary.dtitle }</span>
-						<c:if test="${diary.dstatus eq 0 }">
-							<span class="status">비밀 일기</span>
-						</c:if>
-						<c:if test="${diary.dstatus eq 1 }">
-							<span class="status">친구 공개</span>
-						</c:if>
-						<c:if test="${diary.dstatus eq 2 }">
-							<span class="status">전체 공개</span>
-							<span class="hit">조회수 : ${diary.dhit }</span>
-						</c:if>
-						<span class="drdate">작성일 : ${diary.drdate }</span>
-					</div>
-				</c:forEach>
-			</c:if>
+			<c:forEach var="diary" items="${diaryList }">
+				<div class="list" onclick="location.href='${conPath }/diary/content.do?dnum=${diary.dnum }'">
+					<span>${diary.dtitle }</span>
+					<c:if test="${diary.dstatus eq 0 }">
+						<span class="status">비밀 일기</span>
+					</c:if>
+					<c:if test="${diary.dstatus eq 1 }">
+						<span class="status">친구 공개</span>
+					</c:if>
+					<c:if test="${diary.dstatus eq 2 }">
+						<span class="status">전체 공개</span>
+						<span class="hit">조회수 : ${diary.dhit }</span>
+					</c:if>
+					<span class="drdate">작성일 : ${diary.drdate }</span>
+				</div>
+			</c:forEach>
 			<div id="diary_write">
 				<span>+</span>
 				<span>새로운 일기 쓰기</span>
@@ -106,12 +104,13 @@
 			<c:forEach var="todo" items="${todoList }">
 				<div id="todo${todo.tdno }">
 					<span>
-						<img alt="체크이미지 넣을거임" src="${conPath }/img/checkImg${todo.tdcontent }" class="check${todo.tdno }">
+						<img alt="체크이미지${todo.tdcheck }" src="${conPath }/img/checkImg${todo.tdcheck }" class="check${todo.tdno }">
 					</span>
 					<span class="tdcontent${todo.tdno }">${todo.tdcontent }</span>
 					<span class="toggle_button" id="${todo.tdno }">...</span>
 					<div class="toggle toggle${todo.tdno}">
 						<button class="todoModify" name="${todo.tdno}">수정</button>
+						<button class="todoDelay" onclick="location.href='${conPath}/todo/check.do?tdno=${todo.tdno }&tdcheck=1'">내일로 미루기</button>
 						<button onclick="location.href='${conPath}/todo/delete.do?tdno=${todo.tdno }'">삭제</button>
 					</div>
 				</div>

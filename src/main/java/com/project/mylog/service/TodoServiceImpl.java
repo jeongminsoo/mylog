@@ -50,13 +50,11 @@ public class TodoServiceImpl implements TodoService {
 
 	@Override
 	public int todoChange(int tdno, int tdcheck) {
-		Todo todo = new Todo();
-		todo.setTdno(tdno);
+		Todo todo = todoDao.getTodo(tdno);
 		todo.setTdcheck(tdcheck);
 		int result = todoDao.todoChange(todo);
 		if(tdcheck == 1) {
-			Todo todo2 = getTodo(tdno);
-			result = todoDao.todoDelayMake(todo2);
+			result = todoDao.todoDelayMake(todo);
 		}
 		return result;
 	}

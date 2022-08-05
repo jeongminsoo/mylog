@@ -18,4 +18,7 @@ public class NoticeBoard {
 	private Date nrdate;
 	private int nhit;
 	private String nip;
+	
+	private int startRow;
+	private int endRow;
 }

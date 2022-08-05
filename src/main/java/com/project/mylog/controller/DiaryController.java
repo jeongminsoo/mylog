@@ -41,6 +41,13 @@ public class DiaryController {
 		return "diary/myList";
 	}
 	
+	@RequestMapping( value = "list", method = {RequestMethod.GET, RequestMethod.POST})
+	public String diaryList(HttpSession session, String pageNum, Model model) {
+		model.addAttribute("diaryList", dbService.diaryList(session, pageNum));
+		model.addAttribute("paging", new Paging(dbService.diaryCnt(session), pageNum, 8, 5));
+		return "diary/diaryList";
+	}
+	
 	
 	@RequestMapping( value = "content", method = {RequestMethod.GET, RequestMethod.POST})
 	public String content(int dnum, HttpSession session, Model model) {
@@ -49,7 +56,7 @@ public class DiaryController {
 			model.addAttribute("todoList", todoService.todoList(session, diaryboard.getDdate()));
 		}
 		model.addAttribute("diary", diaryboard);
-		return "diary/content";
+		return "forward:../diaryReply/replyList.do";
 	}
 	
 	@RequestMapping(value = "write", method = RequestMethod.GET)
@@ -72,7 +79,7 @@ public class DiaryController {
 	@RequestMapping(value = "modify", method = RequestMethod.POST)
 	public String modify(DiaryBoard diaryBoard, MultipartHttpServletRequest mRequest, Model model) {
 		dbService.diaryModify(mRequest, diaryBoard);
-		return "forward:myList.do";
+		return "forward:content.do?dnum="+diaryBoard.getDnum();
 	}
 	
 	@RequestMapping(value = "delete", method = {RequestMethod.GET, RequestMethod.POST})
