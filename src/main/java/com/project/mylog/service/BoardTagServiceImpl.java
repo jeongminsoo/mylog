@@ -22,6 +22,7 @@ public class BoardTagServiceImpl implements BoardTagService {
 	@Override
 	public void BoardTagConnect(BoardTag boardtag) {
 		boardtag.setRnum(rboarddao.getRnum());
+		boardtag.setHno(hashtagdao.getMaxHno());
 	
 		boardtagdao.BoardTagConnect(boardtag);
 	}

@@ -62,7 +62,7 @@
 		</select>
 		
 		<!-- 최근 글 번호 -->
-		<select id="getRnum">
+		<select id="getRnum" resultType="int">
 			SELECT MAX(RNUM) FROM RBOARD
 		</select>
 

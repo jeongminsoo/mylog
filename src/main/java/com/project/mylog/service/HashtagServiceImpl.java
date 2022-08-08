@@ -34,4 +34,10 @@ public class HashtagServiceImpl implements HashtagService {
 		return hashtagDao.getHno(hname);
 	}
 
+	@Override
+	public int getMaxHno() {
+		// TODO Auto-generated method stub
+		return hashtagDao.getMaxHno();
+	}
+
 }

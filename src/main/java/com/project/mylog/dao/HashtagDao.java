@@ -10,6 +10,7 @@ public interface HashtagDao {
 	public int hashtagModify(Hashtag hashtag);
 	public int hashtagDelete(int hno);
 	public int getHno(String hname);
+	public int getMaxHno();
 	
 	
 

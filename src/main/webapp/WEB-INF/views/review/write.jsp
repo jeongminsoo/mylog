@@ -65,6 +65,7 @@
 		<div>
 			<input type="submit" value="제출">
 		</div>
+	</form>
 		<div id="hname">
 			<input type="text" name="hname" id="hname">
 		</div>
@@ -72,7 +73,6 @@
 
 			<!-- <input type="hidden" name="space"> -->
 		</div>
-	</form>
 
 		
 		<button id="submit">태그추가</button>
