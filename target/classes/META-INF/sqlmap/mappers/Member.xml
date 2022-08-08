@@ -16,14 +16,14 @@
 		SELECT * FROM 
 	        (SELECT ROWNUM RN, A.* FROM 
 		        (SELECT M.* FROM MEMBER M
-		                    ORDER BY mSTATUS DESC,mID) A)
+		                    ORDER BY MSTATUS DESC, MID) A)
 		        WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>
 	<select id="getMember" parameterType="String" resultType="Member">
 			SELECT * FROM MEMBER WHERE MID = #{mid}
 	</select>
-	<select id="getMemberForMname" parameterType="String" resultType="Member">
-			SELECT * FROM MEMBER WHERE MNAME = #{mname}
+	<select id="getMemberForEmail" parameterType="String" resultType="Member">
+			SELECT * FROM MEMBER WHERE MEMAIL = #{memail}
 	</select>
 	<select id="searchIdPw" parameterType="String" resultType="Member">
 		SELECT * FROM MEMBER WHERE MNAME= #{mname} AND MEMAIL = #{memail}
@@ -40,8 +40,9 @@
 	<select id="emailCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM MEMBER WHERE MEMAIL = #{memail}
 	</select>
-	<select id="findFriend" parameterType="String" resultMap="MemberResult">
-		SELECT * FROM MEMBER WHERE MNAME LIKE '%'||#{mname}||'%'
+	<select id="findFriend" parameterType="Member" resultMap="MemberResult">
+		SELECT MID, MNAME, (SELECT COUNT(*) FROM FRIEND WHERE MID=#{mid} AND FID = MEMBER.MID) EXISTENT
+			FROM MEMBER WHERE MNAME LIKE '%'||#{mname}||'%' AND NOT MID = #{mid}
 	</select>
 	<insert id="joinMember" parameterType="Member">
 		<if test="mbirth != null and mmotto != ''">
@@ -61,6 +62,9 @@
 				VALUES (#{mid}, #{mpw}, #{mname}, #{memail})
 		</if>
 	</insert>
+	<update id="modifyMember" parameterType="Member">
+		UPDATE MEMBER SET MPW = #{mpw}, MNAME = #{mname}, MBIRTH = #{mbirth}, MMOTTO = #{mmotto} WHERE MID = #{mid}
+	</update>
 	<update id="deleteMember" parameterType="String">
 		UPDATE MEMBER SET MSTATUS = 0
         	WHERE MID=#{mid}

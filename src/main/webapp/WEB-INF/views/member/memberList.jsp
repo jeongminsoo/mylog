@@ -15,7 +15,7 @@
 				var id = $(this).attr('id');
 				var answer = confirm('해당 아이디를 복구하시겠습니까?');
 				if (answer == true) {
-					location.href='${conPath}/member/recoverMember.do?pageNum=${param.pageNum}&mid=' + id;
+					location.href='${conPath}/member/recoverMember.do?mid=' + id;
 				} else {
 					return false;
 				}
@@ -25,7 +25,7 @@
 				var id = $(this).attr('id');
 				var answer = confirm('정말 해당 아이디를 사용중단하시겠습니까?');
 				if (answer == true) {
-					location.href='${conPath}/member/deleteMember.do?pageNum=${param.pageNum}&mid=' + id;
+					location.href='${conPath}/member/deleteMember.do?mid=' + id;
 				} else {
 					return false;
 				}
