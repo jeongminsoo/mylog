@@ -226,9 +226,13 @@ select * from team_member;
         FROM TEAM_TODO TT, TEAM_MEMBER TM, TEAM T, MEMBER M
         WHERE TT.tmNO=TM.tmNO AND TM.mID=M.mID AND T.TNO= TT.TNO AND TT.tNO=2 AND tt.ttrdate LIKE TO_DATE('2022-08-08', 'YYYY-MM-DD')
         ORDER BY ttcheck, ttORDER;
+    -- 팀투두 가져오기
+    SELECT TT.*, TM.mID, M.mNAME FROM TEAM_TODO TT, TEAM_MEMBER TM, MEMBER M WHERE TT.tmNO=TM.tmNO AND TM.mID=M.mID AND TTNO=5;
+    
     -- (2) 팀 투두 항목 생성
     SELECT * FROM TEAM;
     SELECT * FROM TEAM_MEMBER;
+    
     INSERT INTO TEAM_TODO (ttNO, tNO, ttCONTENT, ttCHECK, tmNO, ttORDER, ttRDATE)
         VALUES (TEAM_TODO_SEQ.NEXTVAL, 2, 'ppt만들기', 0, 5, TEAM_TODO_SEQ.CURRVAL, SYSDATE);
     INSERT INTO TEAM_TODO (ttNO, tNO, ttCONTENT, ttCHECK, tmNO, ttORDER, ttRDATE)
@@ -236,6 +240,10 @@ select * from team_member;
     COMMIT;
     -- (3) 팀 투두 항목 삭제
     DELETE FROM TEAM_TODO WHERE ttNO=3;
+    -- 팀 투두 항목 수정
+    UPDATE TEAM_TODO SET ttCONTENT = 'ddd',
+                         tmNO=2
+                    WHERE ttNO =2 AND tNO=2;
     -- (4) 팀 투두 항목 순서 바꾸기
     UPDATE TEAM_TODO SET ttORDER = 2
                     WHERE ttNO=1;

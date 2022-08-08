@@ -26,6 +26,55 @@
 			location.href = '${conPath}/team/myTeamModifyView.do?tno='+tno;
 		}
 	
+		$(document).ready(function(){
+			// 토글
+			$('.toggle').hide();
+			$('.toggle_button').click(function(){
+				var ttno = $(this).attr('id');
+				$('.toggle'+ttno).toggle();
+				$('.toggle:not(.toggle'+ttno+')').hide();
+			})
+			
+			// 투두 만들기
+			$('#teamTodo_make').click(function(){
+				var tno = $(this).attr('name');
+				var ttrdate =  '${ttrdate }';
+				$.ajax({
+					url : '${conPath}/teamtodo/makeView.do',
+					data : 'tno='+tno+'&ttrdate='+ttrdate,
+					type : 'get',
+					success : function(data){
+						$('#teamTodo_make_form').html(data);
+					}
+				})
+			});
+			
+			// 투두 수정
+			$('.team_todoModify').click(function(){
+				var tno = '${tno }'
+				var ttno = $(this).attr('name');
+				var ttcontent = $('.ttcontent'+ttno).text();
+				var ttrdate =  '${ttrdate }';
+				
+				$.ajax({
+					url : '${conPath}/teamtodo/modifyView.do',
+					data : 'tno='+tno+'ttno='+ttno+'&ttcontent='+ttcontent+'&ttrdate='+ttrdate,
+					type : 'get',
+					success : function(data){
+						$('.ttcontent'+ttno).html(data);
+					}
+				})
+				
+				
+			}); 
+		
+			// 다이어리 쓰기로 이동
+			$('#diary_write').click(function(){
+				location.href="${conPath}/diary/write.do?ddate=${nowDate }";
+			})
+			
+		});
+		
 	</script>
 </head>
 <body>
@@ -103,7 +152,7 @@
 					</c:if>
 					<c:if test="${not empty calPrint.calDate[i][j] }">
 						<td
-							onclick="location.href='${conPath}/team/myTeamDetailView.do?year=${year }&month=${month }&day=${calPrint.calDate[i][j] }'">
+							onclick="location.href='${conPath}/teamtodo/todoList.do?year=${year }&month=${month }&day=${calPrint.calDate[i][j] }&tno=${teamDetail.tno }'">
 							<h3>${calPrint.calDate[i][j] }</h3>
 						</td>
 					</c:if>
@@ -113,5 +162,35 @@
 	</table>
 
 	<!-- teamTodoList -->
+	<div id="teamTodo_list" style="border:1px solid black;">
+		<h3>${teamDetail.tname } TODO LIST</h3>
+		<c:if test="${empty teamTodoList }">
+			<p>생성된 할 일이 없습니다.</p>
+		</c:if>
+		<c:if test="${not empty teamTodoList }">
+			<c:forEach var="todo" items="${teamTodoList }">
+				<div id="todo${todo.ttno }">
+					<span>
+						<img alt="체크이미지${todo.ttcheck }" src="${conPath }/img/checkImg${todo.ttcheck }" class="check${todo.ttno }">
+					</span>
+					<span class="ttcontent${todo.ttno }">${todo.ttcontent }</span>
+					<span>${todo.mname }</span>
+					<c:if test="${todo.mid eq member.mid }">
+						<span class="toggle_button" id="${todo.ttno }">...</span>
+					</c:if>
+					<div class="toggle toggle${todo.ttno}">
+						<button class="team_todoModify" name="${todo.ttno }">수정</button>
+						<button class="team_todoDelay" onclick="location.href='${conPath}/teamtodo/check.do?ttno=${todo.ttno }&ttcheck=1'">내일로 미루기</button>
+						<button onclick="location.href='${conPath}/teamtodo/delete.do?ttno=${todo.ttno }&ttrdate=${ttrdate }&tno=${teamDetail.tno }'">삭제</button>
+					</div>
+				</div>
+			</c:forEach>
+		</c:if>
+		<div id="teamTodo_make_form"></div>
+		<div id="teamTodo_make" name=${teamDetail.tno }>
+			<span>+</span>
+			<span>새로운 투두 만들기</span>
+		</div>
+	</div>
 </body>
 </html>

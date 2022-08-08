@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.mylog.model.Team;
 import com.project.mylog.model.TeamMember;
+import com.project.mylog.model.TeamTodo;
 import com.project.mylog.service.TeamMemberService;
 import com.project.mylog.service.TeamService;
 import com.project.mylog.service.TeamTodoService;
@@ -68,14 +69,16 @@ public class TeamController {
 	
 	//teamCalendar
 	@RequestMapping(value="myTeamDetailView", method = {RequestMethod.GET, RequestMethod.POST})
-	public String calendar(int tno, String year, String month, Model model) {
+	public String calendar(int tno, TeamTodo teamtodo, String year, String month, Date ttrdate, Model model) {
+		System.out.println(tno);
 		//teamDetail
 		model.addAttribute("teamDetail", teamService.getTeamDetail(tno));
 		model.addAttribute("teamMemberTotCnt", teamMservice.teamMemberTotCnt(tno));
 		//calendar
 		int yearInt;
 		int monthInt;
-		if(year==null && month==null) {
+		if(year==null && month==null && ttrdate==null) {
+			System.out.println("11111");
 			Calendar cal = Calendar.getInstance();
 			yearInt = cal.get(Calendar.YEAR);
 			monthInt = cal.get(Calendar.MONTH)+1;
@@ -84,15 +87,21 @@ public class TeamController {
 			month = monthInt < 10 ? "0" + month : String.valueOf(monthInt);
 			
 			//teamTodoList
-			Date ttrdate = new Date(yearInt - 1900, monthInt - 1, dayInt);
-			System.out.println(ttrdate);
-			System.out.println(tno);
-			model.addAttribute("teamTodoList", teamTodoService.teamTodoList(tno, ttrdate));
-			//System.out.println(teamTodoService.teamTodoList(tno, ttrdate));
+			teamtodo.setTno(tno);
+			ttrdate = new Date(yearInt - 1900, monthInt - 1, dayInt);
+			teamtodo.setTtrdate(ttrdate);
+			model.addAttribute("teamTodoList", teamTodoService.teamTodoList(teamtodo));
+			model.addAttribute("ttrdate", ttrdate);
 		} else {
+			System.out.println("2222");
 			yearInt = Integer.parseInt(year);
 			monthInt = Integer.parseInt(month);
 			month = monthInt < 10 ? "0" + month : String.valueOf(monthInt);
+			System.out.println("디테일뷰에서의 팀투두 : "+teamtodo);
+			//teamTodoList
+			model.addAttribute("teamTodoList", teamTodoService.teamTodoList(teamtodo));
+			model.addAttribute("ttrdate", ttrdate);
+			
 		}
 		CalendarPrinter calPrint = new CalendarPrinter(yearInt, monthInt);
 		

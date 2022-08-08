@@ -17,15 +17,17 @@
 	</script>
 </head>
 <body>
-	<form action="${conPath }/teamtodo/write.do" method="post">
+	<form action="${conPath }/teamtodo/make.do" method="post">
+		<input type="hidden" name="tno" value=${param.tno }>
+		<input type="hidden" name="ttrdate" value=${param.ttrdate }>
 		<table>
-			<caption>todolist 작성</caption>
+			<caption>todo 작성</caption>
 			<tr>
 				<td><input type="text" name="ttcontent" required="required" autofocus="autofocus"></td>
 				<td>
-					<select name="mid">
+					<select name="tmno">
 						<c:forEach var="list" items="${teamMemberList }">
-							<option value="${list.mid }" 
+							<option value="${list.tmno }" 
 								<c:if test ="${teamDetail.mid eq list.mid }">selected="selected"</c:if>>${list.mname }(${list.mid })
 							</option>
 						</c:forEach>
