@@ -11,7 +11,6 @@ import com.project.mylog.model.AccountBook;
 public interface AccountBookDao {
 	public int dailyAccountCnt(AccountBook accountBook);
 	public List<AccountBook> dailyAccount(AccountBook accountBook);
-	
 	public int monthlyAccountCnt(AccountBook accountBook);
 	public List<AccountBook> monthlyAccount(AccountBook accountBook);
 	

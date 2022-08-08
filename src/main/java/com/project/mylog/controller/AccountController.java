@@ -24,11 +24,14 @@ public class AccountController {
 	
 	@RequestMapping(value = "list", method = {RequestMethod.GET, RequestMethod.POST})
 	public String monthlyList(Date adate, String pageNum, HttpSession session, Model model) {
+		if(adate == null) {
+			adate = new Date(System.currentTimeMillis());
+		}
+		
 		model.addAttribute("monthlyList", abService.monthlyAccount(adate, pageNum, session));
 		model.addAttribute("monthTotal", abService.mothlyTotal(adate, session));
 		model.addAttribute("mothlyCategoryTotal", abService.monthlyCategoryTotal(adate, session));
 		
-		adate = new Date(abService.mothlyTotal(adate, session).getAdate().getTime());
 		Date before;
 		Date after;
 		if(adate.getMonth() == 0) {
@@ -41,7 +44,6 @@ public class AccountController {
 		}else {
 			after = new Date(adate.getYear(), adate.getMonth()+1, adate.getDate());
 		}
-		
 		model.addAttribute("before", before);
 		model.addAttribute("after", after);
 		return "account/monthly";

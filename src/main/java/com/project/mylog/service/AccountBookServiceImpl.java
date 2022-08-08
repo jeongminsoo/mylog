@@ -25,9 +25,6 @@ public class AccountBookServiceImpl implements AccountBookService {
 		if(pageNum == null) {
 			pageNum = "1";
 		}
-		if(adate == null) {
-			adate = new Date(System.currentTimeMillis());
-		}
 		AccountBook accountBook = new AccountBook();
 		accountBook.setMid(((Member) session.getAttribute("member")).getMid());
 		accountBook.setAdate(Timestamp.valueOf(adate+ " 00:00:00"));
@@ -42,9 +39,6 @@ public class AccountBookServiceImpl implements AccountBookService {
 		if(pageNum == null) {
 			pageNum = "1";
 		}
-		if(adate == null) {
-			adate = new Date(System.currentTimeMillis());
-		}
 		AccountBook accountBook = new AccountBook();
 		accountBook.setMid(((Member) session.getAttribute("member")).getMid());
 		accountBook.setAdate(Timestamp.valueOf(adate+ " 00:00:00"));
@@ -56,9 +50,6 @@ public class AccountBookServiceImpl implements AccountBookService {
 
 	@Override
 	public int dailyAccountCnt(Date adate, HttpSession session) {
-		if(adate == null) {
-			adate = new Date(System.currentTimeMillis());
-		}
 		AccountBook accountBook = new AccountBook();
 		accountBook.setMid(((Member) session.getAttribute("member")).getMid());
 		accountBook.setAdate(Timestamp.valueOf(adate+ " 00:00:00"));
@@ -67,9 +58,6 @@ public class AccountBookServiceImpl implements AccountBookService {
 
 	@Override
 	public int monthlyAccountCnt(Date adate, HttpSession session) {
-		if(adate == null) {
-			adate = new Date(System.currentTimeMillis());
-		}
 		AccountBook accountBook = new AccountBook();
 		accountBook.setMid(((Member) session.getAttribute("member")).getMid());
 		accountBook.setAdate(Timestamp.valueOf(adate+ " 00:00:00"));
@@ -78,9 +66,6 @@ public class AccountBookServiceImpl implements AccountBookService {
 
 	@Override
 	public AccountBook dailyTotal(Date adate, HttpSession session) {
-		if(adate == null) {
-			adate = new Date(System.currentTimeMillis());
-		}
 		AccountBook accountBook = new AccountBook();
 		accountBook.setMid(((Member) session.getAttribute("member")).getMid());
 		accountBook.setAdate(Timestamp.valueOf(adate+ " 00:00:00"));
@@ -89,9 +74,6 @@ public class AccountBookServiceImpl implements AccountBookService {
 
 	@Override
 	public List<AccountBook> dailyCategoryTotal(Date adate, HttpSession session) {
-		if(adate == null) {
-			adate = new Date(System.currentTimeMillis());
-		}
 		AccountBook accountBook = new AccountBook();
 		accountBook.setMid(((Member) session.getAttribute("member")).getMid());
 		accountBook.setAdate(Timestamp.valueOf(adate+ " 00:00:00"));
@@ -100,9 +82,6 @@ public class AccountBookServiceImpl implements AccountBookService {
 
 	@Override
 	public AccountBook mothlyTotal(Date adate, HttpSession session) {
-		if(adate == null) {
-			adate = new Date(System.currentTimeMillis());
-		}
 		AccountBook accountBook = new AccountBook();
 		accountBook.setMid(((Member) session.getAttribute("member")).getMid());
 		accountBook.setAdate(Timestamp.valueOf(adate+ " 00:00:00"));
@@ -111,9 +90,6 @@ public class AccountBookServiceImpl implements AccountBookService {
 
 	@Override
 	public List<AccountBook> monthlyCategoryTotal(Date adate, HttpSession session) {
-		if(adate == null) {
-			adate = new Date(System.currentTimeMillis());
-		}
 		AccountBook accountBook = new AccountBook();
 		accountBook.setMid(((Member) session.getAttribute("member")).getMid());
 		accountBook.setAdate(Timestamp.valueOf(adate+ " 00:00:00"));

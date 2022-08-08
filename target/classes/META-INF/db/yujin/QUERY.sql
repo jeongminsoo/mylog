@@ -225,15 +225,37 @@ DELETE FROM ACCOUNTBOOK WHERE ANO = 1;
 
 -- 월 가계부 보기
 SELECT D.*
-    FROM (SELECT ROWNUM RN, A.*
-                FROM (SELECT B.*, ATITLE FROM ACCOUNTBOOK B, ACCOUNTCATEGORY C
-                            WHERE B.ACNO = C.ACNO
-                                AND MID = 'aaa'
-                                AND ADATE BETWEEN (SELECT ADD_MONTHS(LAST_DAY('2022-07-03')+1,-1) FROM DUAL) 
-                                AND (SELECT LAST_DAY('2022-07-01') FROM DUAL)
-                                ORDER BY ADATE DESC) A ) D
-    WHERE RN BETWEEN 1 AND 10;
+		    FROM (SELECT ROWNUM RN, A.*
+		                FROM (SELECT B.*, (SELECT ATITLE FROM ACCOUNTCATEGORY WHERE ACNO=B.ACNO)  FROM ACCOUNTBOOK B
+                                      WHERE MID ='aaa'
+                                        AND ADATE BETWEEN ADD_MONTHS(LAST_DAY('2022-08-08')+1,-1)
+                                        AND LAST_DAY('2022-08-08')
+                                    ORDER BY ADATE DESC) A ) D
+		    WHERE RN BETWEEN 1 AND 10;
 
+SELECT D.*
+		    FROM (SELECT ROWNUM RN, A.*
+		                FROM (SELECT B.*, ATITLE FROM ACCOUNTBOOK B, ACCOUNTCATEGORY C
+                                      WHERE B.ACNO=C.ACNO
+                                        AND MID ='aaa'
+                                        AND ADATE BETWEEN ADD_MONTHS(LAST_DAY('2022-08-08')+1,-1)
+                                        AND LAST_DAY('2022-08-08')
+                                    ORDER BY ADATE DESC) A ) D
+		    WHERE RN BETWEEN 1 AND 10;
+
+SELECT B.*, ATITLE FROM ACCOUNTBOOK B, ACCOUNTCATEGORY C
+		                            WHERE B.ACNO = C.ACNO
+		                                AND MID = 'aaa'
+		                                AND ADATE >= ADD_MONTHS(LAST_DAY('2022-07-03')+1,-1)
+		                                AND  ADATE <= LAST_DAY('2022-07-03')
+		                                ORDER BY ADATE DESC;
+
+SELECT B.*, (SELECT ATITLE FROM ACCOUNTCATEGORY WHERE ACNO=B.ACNO)  FROM ACCOUNTBOOK B
+		      WHERE MID ='aaa'
+                AND ADATE BETWEEN ADD_MONTHS(LAST_DAY('2022-08-08')+1,-1)
+                AND LAST_DAY('2022-08-08')
+            ORDER BY ADATE DESC;
+            
 -- 월 총액 보기
 SELECT INCOMETOTAL-EXPENSETOTAL TOTAL, INCOMETOTAL, EXPENSETOTAL
     FROM (SELECT SUM(APRICE) INCOMETOTAL FROM ACCOUNTBOOK WHERE ASTATUS = 1 AND MID = 'aaa' 
@@ -246,7 +268,8 @@ SELECT ATITLE, SUM(APRICE) TOTAL
     FROM ACCOUNTBOOK B, ACCOUNTCATEGORY C
     WHERE B.ACNO = C.ACNO
         AND MID = 'aaa'
-        AND ADATE BETWEEN (SELECT ADD_MONTHS(LAST_DAY('2022-07-03')+1,-1) FROM DUAL) AND (SELECT LAST_DAY('2022-07-03') FROM DUAL)
+        AND ADATE BETWEEN ADD_MONTHS(LAST_DAY('2022-08-03')+1, -1)
+        AND LAST_DAY('2022-08-03')
         AND ASTATUS = 0
     GROUP BY ATITLE
     ORDER BY TOTAL DESC;
@@ -254,5 +277,5 @@ SELECT ATITLE, SUM(APRICE) TOTAL
 -- 월 가계부 갯수
 SELECT COUNT(*) FROM ACCOUNTBOOK 
     WHERE MID = 'aaa'
-                AND ADATE BETWEEN (SELECT ADD_MONTHS(LAST_DAY('2022-07-03')+1,-1) FROM DUAL) 
-                AND (SELECT LAST_DAY('2022-07-03') FROM DUAL);
+                AND ADATE BETWEEN (SELECT ADD_MONTHS(LAST_DAY('2022-08-03')+1,-1) FROM DUAL) 
+                AND (SELECT LAST_DAY('2022-08-03') FROM DUAL);
