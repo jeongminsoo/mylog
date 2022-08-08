@@ -22,7 +22,14 @@
 				<tr>
 					<td>${oNum }</td>
 					<td>${f.mname }(${f.mid })</td>
-					<td><button id="${f.mid }" class="follow">follow</button></td>
+					<td>
+						<c:if test="${f.existent eq 0 }">
+							<button id="${f.mid }" class="follow">follow</button>
+						</c:if>
+						<c:if test="${f.existent eq 1 }">
+							<button id="${f.mid }" class="unfollow">unfollow</button>
+						</c:if>
+					</td>
 				</tr>
 				<c:set var="oNum" value="${oNum + 1 }"/>
 			</c:forEach>

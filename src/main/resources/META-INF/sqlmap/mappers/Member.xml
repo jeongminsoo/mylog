@@ -22,8 +22,8 @@
 	<select id="getMember" parameterType="String" resultType="Member">
 			SELECT * FROM MEMBER WHERE MID = #{mid}
 	</select>
-	<select id="getMemberForMname" parameterType="String" resultType="Member">
-			SELECT * FROM MEMBER WHERE MNAME = #{mname}
+	<select id="getMemberForEmail" parameterType="String" resultType="Member">
+			SELECT * FROM MEMBER WHERE MEMAIL = #{memail}
 	</select>
 	<select id="searchIdPw" parameterType="String" resultType="Member">
 		SELECT * FROM MEMBER WHERE MNAME= #{mname} AND MEMAIL = #{memail}
@@ -40,8 +40,9 @@
 	<select id="emailCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM MEMBER WHERE MEMAIL = #{memail}
 	</select>
-	<select id="findFriend" parameterType="String" resultMap="MemberResult">
-		SELECT * FROM MEMBER WHERE MNAME LIKE '%'||#{mname}||'%'
+	<select id="findFriend" parameterType="Member" resultMap="MemberResult">
+		SELECT MID, MNAME, (SELECT COUNT(*) FROM FRIEND WHERE MID=#{mid} AND FID = MEMBER.MID) EXISTENT
+			FROM MEMBER WHERE MNAME LIKE '%'||#{mname}||'%'
 	</select>
 	<insert id="joinMember" parameterType="Member">
 		<if test="mbirth != null and mmotto != ''">

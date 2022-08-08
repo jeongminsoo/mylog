@@ -12,26 +12,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			var mid = '${member.mid}';
-			$.ajax({
-				url : '${conPath}/friend/list.do',
-				data : 'mid=' + mid,
-				type : 'get',
-				dataType : 'html',
-				success : function(data){
-					$('#listResult').html(data);
-				}
-			});
 			
-			$.ajax({
-				url : '${conPath}/friend/myFollow.do',
-				data : 'mid=' + mid,
-				type : 'get',
-				dataType : 'html',
-				success : function(data){
-					$('#myFollow').html(data);
-				}
-			});
+			var mid = '${member.mid}';
 			
 			$('input[name="mname"]').keyup(function(){
 				var mname = $('input[name="mname"]').val();
@@ -44,6 +26,27 @@
 						$('#listResult').html(data);
 					}
 				});
+			});
+			
+			
+			$('.unfollow').click(function() {
+				var id = $(this).attr('id');
+				var answer = confirm('정말 해당 친구를 언팔로우하시겠습니까?');
+				if (answer == true) {
+					location.href='${conPath}/friend/unfollow.do?fid=' + id + '&mid=' + mid;
+				} else {
+					return false;
+				}
+			});
+			
+			$('.follow').click(function() {
+				var id = $(this).attr('id');
+				var answer = confirm('정말 해당 친구를 팔로우하시겠습니까?');
+				if (answer == true) {
+					location.href='${conPath}/friend/follow.do?fid=' + id + '&mid=' + mid;
+				} else {
+					return false;
+				}
 			});
 		});
 	</script>
@@ -72,10 +75,59 @@
 	<div>
 		<a href="${conPath }/friend/findView.do">친구찾기</a>
 		<form>
-			<p>친구검색 <input type="text" name="mname" id="searchNname" placeholder="닉네임을 입력하세요"></p>
+			<p>친구검색 <input type="text" name="mname" placeholder="닉네임을 입력하세요"></p>
 		</form>
-		<div id="listResult"></div>
-		<div id="myFollow"></div>
+		<div id="listResult">
+			<c:set var="oNum1" value="${paging1.orderNum }"/>
+			<table>
+				<caption>MY FOLLOW LIST</caption>
+				<c:if test="${empty friends }">
+					<tr>
+						<td>등록된 친구가 없습니다</td>
+					</tr>
+				</c:if>
+				<c:if test="${not empty friends }">
+					<c:forEach items="${friends }" var="friend">
+						<tr>
+							<td>${oNum1 }</td>
+							<td>${friend.mname }(${friend.fid })</td>
+							<td>
+								<button id="${friend.fid }" class="unfollow">unfollow</button>
+							</td>
+						</tr>
+						<c:set var="oNum1" value="${oNum1 + 1 }"/>
+					</c:forEach>
+				</c:if>
+			</table>
+		</div>
+		<div id="myFollow">
+			<c:set var="oNum2" value="${paging2.orderNum }"/>
+			<table>
+				<caption>나를 FOLLOW한 친구</caption>
+				<c:if test="${empty follows }">
+					<tr>
+						<td>검색결과가 없습니다</td>
+					</tr>
+				</c:if>
+				<c:if test="${not empty follows }">
+					<c:forEach items="${follows }" var="follow">
+						<tr>
+							<td>${oNum2 }</td>
+							<td>${follow.mname }(${follow.mid })</td>
+							<td>
+								<c:if test="${follow.existent eq 1 }">
+									<button id="${follow.fid }" class="unfollow">unfollow</button>
+								</c:if>
+								<c:if test="${follow.existent eq 0 }">
+									<button id="${follow.fid }" class="follow">follow</button>
+								</c:if>
+							</td>
+						</tr>
+						<c:set var="oNum2" value="${oNum2 + 1 }"/>
+					</c:forEach>
+				</c:if>
+			</table>
+		</div>
 	</div>
 </body>
 </html>

@@ -13,11 +13,12 @@
 	<script>
 		$(document).ready(function(){
 			var mid = '${member.mid}';
+			alert(mid);
 			$('input[name="mname"]').keyup(function(){
 				var mname = $('input[name="mname"]').val();
 				$.ajax({
 					url : '${conPath}/member/find.do',
-					data : 'mname=' + mname,
+					data : 'mid=' + mid + '&mname=' + mname,
 					type : 'get',
 					dataType : 'html',
 					success : function(data){
@@ -25,24 +26,13 @@
 					}
 				});
 			});
-			
-			$('.follow').click(function() {
-				var id = $(this).attr('id');
-				alert(id);
-				var answer = confirm('정말 해당 친구를 팔로우하시겠습니까?');
-				if (answer == true) {
-					location.href='${conPath}/friend/follow.do?fid=' + id + '&mid=' + mid;
-				} else {
-					return false;
-				}
-			});
 		});
 	</script>
 </head>
 <body>
 	<div>
 		<form>
-			<p>친구검색 <input type="text" name="mname" id="searchNname" placeholder="닉네임을 입력하세요"></p>
+			<p>친구검색 <input type="text" name="mname" placeholder="닉네임을 입력하세요"></p>
 		</form>
 		<div id="findResult"></div>
 	</div>

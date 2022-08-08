@@ -108,11 +108,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String searchIdPw(final String mname, final String memail) {
 		String result = "검색 성공";
-		final Member member = memberDao.getMemberForMname(mname);
+		final Member member = memberDao.getMemberForEmail(memail);
 		if (member == null) {
-			result = "입력한 닉네임에 해당하는 아이디가 없습니다";
-		} else if (!memail.equals(member.getMemail())) {
 			result = "입력한 이메일에 해당하는 아이디가 없습니다";
+		} else if (!mname.equals(member.getMname())) {
+			result = "입력한 닉네임에 해당하는 아이디가 없습니다";
 		} else if (member.getMstatus() == 0) {
 			result = "사용이 중단된 아이디입니다";
 		} else {
@@ -137,8 +137,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member getMemberForMname(String mname) {
-		return memberDao.getMemberForMname(mname);
+	public Member getMemberForEmail(String memail) {
+		return memberDao.getMemberForEmail(memail);
 	}
 
 	@Override
@@ -147,8 +147,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Member> findFriend(String mname) {
-		return memberDao.findFriend(mname);
+	public List<Member> findFriend(String mid, String mname) {
+		Member member = new Member();
+		member.setMid(mid);
+		member.setMname(mname);
+		return memberDao.findFriend(member);
 	}
 
 }

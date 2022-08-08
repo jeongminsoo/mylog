@@ -21,4 +21,6 @@ public class Member {
 	
 	private int startRow;
 	private int endRow;
+	
+	private int existent;
 }

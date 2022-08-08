@@ -21,12 +21,6 @@ import com.project.mylog.util.Paging;
 @RequestMapping("calendar")
 public class CalendarController {
 	
-	@Autowired
-	private TodoService todoService;
-	
-	@Autowired
-	private DiaryBoardService dbService;
-	
 	@RequestMapping(value="calendar", method = {RequestMethod.GET, RequestMethod.POST})
 	public String calendar(String year, String month, Model model) {
 		int yearInt;

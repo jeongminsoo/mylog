@@ -92,7 +92,7 @@ public class MemberController {
 	public String searchIdPw(String mname, String memail, Model model) {
 		String result = memberService.searchIdPw(mname, memail);
 		if (result.equals("검색 성공")) {
-			Member member = memberService.getMemberForMname(mname);
+			Member member = memberService.getMemberForEmail(memail);
 			model.addAttribute("mid", member.getMid());
 			return "forward:searchResult.do";
 		} else {
@@ -121,10 +121,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="find", method = {RequestMethod.GET, RequestMethod.POST})
-	public String findFriend(String mname, Model model) {
+	public String findFriend(String mid, String mname, Model model) {
 		Paging paging = new Paging(memberService.countMember(), "1");
 		model.addAttribute("paging", paging);
-		model.addAttribute("members", memberService.findFriend(mname));
+		model.addAttribute("members", memberService.findFriend(mid, mname));
 		return "forward:../friend/findResult.do";
 	}
 }

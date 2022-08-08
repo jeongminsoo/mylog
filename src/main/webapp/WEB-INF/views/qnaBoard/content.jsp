@@ -17,6 +17,16 @@
 	</script>
 </head>
 <body>
+	<c:if test="${updateResult eq 0 }">
+		<script>
+			alert('수정 실패');
+		</script>
+	</c:if>
+	<c:if test="${updateResult eq 1 }">
+		<script>
+			alert('질문이 수정되었습니다');
+		</script>
+	</c:if>
 	<div class="content">
 			<table>
 				<col style="width : 200px;">
@@ -38,6 +48,10 @@
 			</table>
 			<div class="btn_wrap">
 				<c:if test="${member != null && member.mid eq qna.mid }">
+					<button onclick="location.href='${conPath}/qna/updateView.do?qNo=${qna.qno }&pageNum=${param.pageNum}'">수정</button>
+					<button onclick="location.href='${conPath}/qna/delete.do?qNo=${qna.qno }&pageNum=${param.pageNum}'">삭제</button>
+				</c:if>
+				<c:if test="${admin != null && member.mid eq qna.aid }">
 					<button onclick="location.href='${conPath}/qna/updateView.do?qNo=${qna.qno }&pageNum=${param.pageNum}'">수정</button>
 					<button onclick="location.href='${conPath}/qna/delete.do?qNo=${qna.qno }&pageNum=${param.pageNum}'">삭제</button>
 				</c:if>

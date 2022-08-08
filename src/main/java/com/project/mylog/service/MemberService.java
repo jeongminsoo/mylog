@@ -28,9 +28,9 @@ public interface MemberService {
 	
 	public String searchIdPw(String mname, String memail);
 	
-	public Member getMemberForMname(String mname);
+	public Member getMemberForEmail(String memail);
 	
 	public int emailCheck(String memail);
 	
-	public List<Member> findFriend(String mname);
+	public List<Member> findFriend(String mid, String mname);
 }
