@@ -14,7 +14,7 @@
     	SELECT * FROM ACCOUNTCATEGORY
     </select>
 
-<!-- 만들지 말지 고민중 -->
+<!-- 만들지 말지 고민 -->
 <!-- 	중복된 카테고리 존재 여부 -->
 <!-- 	<select id="atitleCheck" parameterType="String"> -->
 <!-- 		SELECT * FROM ACCOUNTCATEGORY WHERE ATITLE = #{atitle} -->

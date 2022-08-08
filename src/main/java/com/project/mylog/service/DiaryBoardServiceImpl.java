@@ -46,7 +46,7 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 	public List<DiaryBoard> diaryList(HttpSession session, String pageNum) {
 		DiaryBoard diaryBoard = new DiaryBoard();
 		diaryBoard.setMid(((Member) session.getAttribute("member")).getMid());
-		Paging paging = new Paging(diaryDao.myDiaryCnt(diaryBoard), pageNum, 5, 1);
+		Paging paging = new Paging(diaryDao.diaryCnt(diaryBoard), pageNum, 5, 1);
 		diaryBoard.setStartRow(paging.getStartRow());
 		diaryBoard.setEndRow(paging.getEndRow());
 		return diaryDao.diaryList(diaryBoard);

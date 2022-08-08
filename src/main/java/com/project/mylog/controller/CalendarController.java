@@ -5,17 +5,12 @@ import java.util.Calendar;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.project.mylog.model.Member;
-import com.project.mylog.service.DiaryBoardService;
-import com.project.mylog.service.TodoService;
 import com.project.mylog.util.CalendarPrinter;
-import com.project.mylog.util.Paging;
 
 @Controller
 @RequestMapping("calendar")

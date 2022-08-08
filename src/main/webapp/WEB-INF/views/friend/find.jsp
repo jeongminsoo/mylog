@@ -13,7 +13,6 @@
 	<script>
 		$(document).ready(function(){
 			var mid = '${member.mid}';
-			alert(mid);
 			$('input[name="mname"]').keyup(function(){
 				var mname = $('input[name="mname"]').val();
 				$.ajax({

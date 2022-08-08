@@ -18,13 +18,14 @@ public class TimerServiceImpl implements TimerService {
 	@Override
 	public int timerMake(HttpSession session, Timer timer) {
 		
-		int tno = timerDao.getTno();
+		
 		timer.setMid(((Member)session.getAttribute("member")).getMid());
 		return timerDao.timerMake(timer);
 	}
 
 	@Override
 	public int timerStart(Timer timer) {
+		timer.setTno(timerDao.getTno());
 		return timerDao.timerStart(timer);
 	}
 
@@ -35,7 +36,7 @@ public class TimerServiceImpl implements TimerService {
 
 	@Override
 	public int startEnd(HttpSession session, Timer timer) {
-		
+		timer.setTno(timerDao.getTno());
 		timer.setMid(((Member)session.getAttribute("member")).getMid());
 		return timerDao.startEnd(timer);
 	}
@@ -55,7 +56,7 @@ public class TimerServiceImpl implements TimerService {
 	@Override
 	public int endTno() {
 		// TODO Auto-generated method stub
-		return timerDao.getTno();
+		return timerDao.endTno();
 	}
 
 	@Override

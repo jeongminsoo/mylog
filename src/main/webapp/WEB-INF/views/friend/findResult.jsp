@@ -15,7 +15,7 @@
 			var id = $(this).attr('id');
 			var answer = confirm('정말 해당 친구를 팔로우하시겠습니까?');
 			if (answer == true) {
-				location.href='${conPath}/friend/follow.do?fid=' + id + '&mid=' + mid;
+				location.href='${conPath}/friend/follow.do?mid=' + mid + '&fid=' + id;
 			} else {
 				return false;
 			}
@@ -24,7 +24,7 @@
 			var id = $(this).attr('id');
 			var answer = confirm('정말 해당 친구를 언팔로우하시겠습니까?');
 			if (answer == true) {
-				location.href='${conPath}/friend/unfollow.do?fid=' + id + '&mid=' + mid;
+				location.href='${conPath}/friend/unfollow.do?mid=' + mid + '&fid=' + id;
 			} else {
 				return false;
 			}
