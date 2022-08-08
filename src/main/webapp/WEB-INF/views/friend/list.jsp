@@ -13,13 +13,11 @@
 	<script>
 		$(document).ready(function(){
 			
-			var mid = '${member.mid}';
-			
 			$('input[name="mname"]').keyup(function(){
 				var mname = $('input[name="mname"]').val();
 				$.ajax({
 					url : '${conPath}/friend/search.do',
-					data : 'mname=' + mname + '&mid=' + mid,
+					data : 'mname=' + mname,
 					type : 'get',
 					dataType : 'html',
 					success : function(data){
@@ -33,7 +31,7 @@
 				var id = $(this).attr('id');
 				var answer = confirm('정말 해당 친구를 언팔로우하시겠습니까?');
 				if (answer == true) {
-					location.href='${conPath}/friend/unfollow.do?fid=' + id + '&mid=' + mid;
+					location.href='${conPath}/friend/unfollow.do?fid=' + id;
 				} else {
 					return false;
 				}
@@ -43,7 +41,7 @@
 				var id = $(this).attr('id');
 				var answer = confirm('정말 해당 친구를 팔로우하시겠습니까?');
 				if (answer == true) {
-					location.href='${conPath}/friend/follow.do?fid=' + id + '&mid=' + mid;
+					location.href='${conPath}/friend/follow.do?fid=' + id;
 				} else {
 					return false;
 				}

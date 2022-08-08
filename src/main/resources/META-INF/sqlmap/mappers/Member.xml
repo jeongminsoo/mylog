@@ -62,6 +62,9 @@
 				VALUES (#{mid}, #{mpw}, #{mname}, #{memail})
 		</if>
 	</insert>
+	<update id="modifyMember" parameterType="Member">
+		UPDATE MEMBER SET MPW = #{mpw}, MNAME = #{mname}, MBIRTH = #{mbirth}, MMOTTO = #{mmotto} WHERE MID = #{mid}
+	</update>
 	<update id="deleteMember" parameterType="String">
 		UPDATE MEMBER SET MSTATUS = 0
         	WHERE MID=#{mid}

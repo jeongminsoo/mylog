@@ -12,12 +12,11 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			var mid = '${member.mid}';
 			$('input[name="mname"]').keyup(function(){
 				var mname = $('input[name="mname"]').val();
 				$.ajax({
 					url : '${conPath}/member/find.do',
-					data : 'mid=' + mid + '&mname=' + mname,
+					data : 'mname=' + mname,
 					type : 'get',
 					dataType : 'html',
 					success : function(data){

@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.project.mylog.model.Member;
 import com.project.mylog.service.FriendService;
 import com.project.mylog.util.Paging;
 
@@ -20,23 +19,21 @@ public class FriendController {
 	private FriendService friendService;
 	
 	@RequestMapping(value="list", method = {RequestMethod.GET, RequestMethod.POST})
-	public String friendListVIew(HttpSession session, Model model) {
-		Member member = (Member) session.getAttribute("member");
-		String mid = member.getMid();
-		model.addAttribute("friends", friendService.myFriendList(mid));
-		Paging paging1 = new Paging(friendService.countMyFriend(mid), "1");
-		Paging paging2 = new Paging(friendService.countFollowMe(mid), "1");
-		model.addAttribute("follows", friendService.followMe(mid));
+	public String friendList(HttpSession session, Model model) {
+		Paging paging1 = new Paging(friendService.countMyFriend(session), "1");
+		Paging paging2 = new Paging(friendService.countFollowMe(session), "1");
+		model.addAttribute("friends", friendService.myFriendList(session));
+		model.addAttribute("follows", friendService.followMe(session));
 		model.addAttribute("paging1", paging1);
 		model.addAttribute("paging2", paging2);
 		return "friend/list";
 	}
 	
 	@RequestMapping(value="search", method = {RequestMethod.GET, RequestMethod.POST})
-	public String searchMyFriend(String mid, String mname, Model model) {
-		Paging paging = new Paging(friendService.countMyFriend(mid), "1");
+	public String searchMyFriend(HttpSession session, String mname, Model model) {
+		Paging paging = new Paging(friendService.countMyFriend(session), "1");
 		model.addAttribute("paging", paging);
-		model.addAttribute("friends", friendService.searchMyFriend(mid, mname));
+		model.addAttribute("friends", friendService.searchMyFriend(session, mname));
 		return "friend/listResult";
 	}
 	
@@ -50,23 +47,15 @@ public class FriendController {
 		return "friend/findResult";
 	}
 	
-	@RequestMapping(value="myFollow", method = {RequestMethod.GET, RequestMethod.POST})
-	public String myFollow(String mid, Model model) {
-		Paging paging = new Paging(friendService.countFollowMe(mid), "1");
-		model.addAttribute("paging", paging);
-		model.addAttribute("follows", friendService.followMe(mid));
-		return "friend/myFollow";
-	}
-	
 	@RequestMapping(value="follow", method = {RequestMethod.GET, RequestMethod.POST})
-	public String follow(String mid, String fid, Model model) {
-		model.addAttribute("followResult", friendService.followFriend(mid, fid));
+	public String follow(HttpSession session, String fid, Model model) {
+		model.addAttribute("followResult", friendService.followFriend(session, fid));
 		return "forward:list.do";
 	}
 	
 	@RequestMapping(value="unfollow", method = {RequestMethod.GET, RequestMethod.POST})
-	public String unfollow(String mid, String fid, Model model) {
-		model.addAttribute("unfollowResult", friendService.unfollowFriend(mid, fid));
+	public String unfollow(HttpSession session, String fid, Model model) {
+		model.addAttribute("unfollowResult", friendService.unfollowFriend(session, fid));
 		return "forward:list.do";
 	}
 }

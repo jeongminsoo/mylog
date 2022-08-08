@@ -17,6 +17,16 @@
 	</script>
 </head>
 <body>
+	<c:if test="${writeResult eq 0 }">
+		<script>
+			alert('질문 등록 실패');
+		</script>
+	</c:if>
+	<c:if test="${writeResult eq 1 }">
+		<script>
+			alert('질문이 등록되었습니다');
+		</script>
+	</c:if>
 	<c:if test="${deleteResult eq 0 }">
 		<script>
 			alert('삭제 실패');

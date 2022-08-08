@@ -51,7 +51,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int modifyMember(Member member) {
+	public int modifyMember(Member member, String tempmbirth) {
+		if ("".equals(tempmbirth)) {
+			member.setMbirth(null);
+		} else {
+			member.setMbirth(Date.valueOf(tempmbirth));
+		}
 		return memberDao.modifyMember(member);
 	}
 
@@ -61,12 +66,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int deleteMember(String pageNum, String mid) {
+	public int deleteMember(String mid) {
 		return memberDao.deleteMember(mid);
 	}
 
 	@Override
-	public int recoverMember(String pageNum, String mid) {	
+	public int recoverMember(String mid) {	
 		return memberDao.recoverMember(mid);
 	}
 
@@ -85,8 +90,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member getMember(String mid) {
-		return memberDao.getMember(mid);
+	public Member getMember(HttpSession session) {
+		Member member = (Member) session.getAttribute("member");
+		return memberDao.getMember(member.getMid());
 	}
 
 	@Override
@@ -147,9 +153,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Member> findFriend(String mid, String mname) {
+	public List<Member> findFriend(HttpSession session, String mname) {
+		Member myInfo = (Member) session.getAttribute("member");
 		Member member = new Member();
-		member.setMid(mid);
+		member.setMid(myInfo.getMid());
 		member.setMname(mname);
 		return memberDao.findFriend(member);
 	}
