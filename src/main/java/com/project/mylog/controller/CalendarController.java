@@ -32,7 +32,7 @@ public class CalendarController {
 		int yearInt;
 		int monthInt;
 		if(year==null && month==null) {
-			Calendar cal = Calendar.getInstance();
+			Calendar cal = Calendar.getInstance();	//현재날짜
 			yearInt = cal.get(Calendar.YEAR);
 			monthInt = cal.get(Calendar.MONTH)+1;
 			year = String.valueOf(year);

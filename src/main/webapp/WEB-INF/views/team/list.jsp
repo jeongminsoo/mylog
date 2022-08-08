@@ -23,14 +23,19 @@
 			<li><a href="${conPath }/team/list.do">그룹원 모집</a></li>
 		</ul>
 	</div>
+	<form action="${conPath }/team/list.do" method="post">
+		<select name="schItem">
+			<option value="" <c:if test="${param.schItem == ''}">selected="selected"</c:if> >검색조건</option>
+			<option value="all" <c:if test="${param.schItem == 'all'}">selected="selected"</c:if> >그룹명+팀장</option>
+			<option value="tname" <c:if test="${param.schItem == 'tname'}">selected="selected"</c:if> >그룹명</option>
+			<option value="mname" <c:if test="${param.schItem == 'mname'}">selected="selected"</c:if> >팀장</option>
+		</select>
+		<input type="text" name="schWord" value="${param.schWord }">
+		<input type="submit" value="검색">
+	</form>
+		
 	<table>
-		<tr>
-			<td>검색</td>
-			<td><input type="text" name="search"> </td>
-		</tr>
-	</table>
-	<table>
-		<c:if test="${teamBoardTotCnt eq 0 }">
+		<c:if test="${empty teamList }">
 			<tr>
 				<td>등록된 그룹이 없습니다</td>
 			</tr>

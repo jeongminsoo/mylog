@@ -129,6 +129,7 @@
     );
 
 --DAO QUERY
+select * from team_member;
     -- Member
     INSERT INTO MEMBER (mID, mPW, mNAME, mBIRTH, mEMAIL, mMOTTO, mSTATUS) 
         VALUES ('aaa', '111', '박박박', TO_DATE('2000-01-01', 'YYYY-MM-DD'), 'park@park.com', NULL, 1);
@@ -206,7 +207,8 @@
     UPDATE TEAM_MEMBER SET tmCHECK = 1
                     WHERE tmNO='' AND tNO='';
     INSERT INTO TEAM_MEMBER (tmNO, mID, tNO, tmCHECK)
-        VALUES (TEAM_MEMBER_SEQ.NEXTVAL, 'aaa', 1, 1);
+        VALUES (TEAM_MEMBER_SEQ.NEXTVAL, 'ddd', 2, 1);
+    commit;
     -- 팀 가입신청자 리스트(팀장만 가입허가 가능)
     SELECT * FROM TEAM_MEMBER WHERE tmCHECK = 0 AND tNO = 1; 
     SELECT * FROM TEAM_MEMBER;
@@ -220,15 +222,18 @@
 
     --TEAM_TODO(★ 수정가능성이 많습니다.)
     -- (1) 팀 투두 리스트     (★되는지 봐야함)
-    SELECT TT.*, TM.mID 
-        FROM TEAM_TODO TT, TEAM_MEMBER TM, TEAM T
-        WHERE TT.tmNO=TM.tmNO AND T.TNO= TT.TNO AND TT.tNO=1
-        ORDER BY ttORDER;
+    SELECT TT.*, TM.mID , M.mNAME
+        FROM TEAM_TODO TT, TEAM_MEMBER TM, TEAM T, MEMBER M
+        WHERE TT.tmNO=TM.tmNO AND TM.mID=M.mID AND T.TNO= TT.TNO AND TT.tNO=2
+        ORDER BY ttcheck, ttORDER;
     -- (2) 팀 투두 항목 생성
+    SELECT * FROM TEAM;
+    SELECT * FROM TEAM_MEMBER;
     INSERT INTO TEAM_TODO (ttNO, tNO, ttCONTENT, ttCHECK, tmNO, ttORDER, ttRDATE)
-        VALUES (TEAM_TODO_SEQ.NEXTVAL, 1, 'ppt만들기', 0, 2, TEAM_TODO_SEQ.CURRVAL, SYSDATE);
+        VALUES (TEAM_TODO_SEQ.NEXTVAL, 2, 'ppt만들기', 0, 5, TEAM_TODO_SEQ.CURRVAL, SYSDATE);
     INSERT INTO TEAM_TODO (ttNO, tNO, ttCONTENT, ttCHECK, tmNO, ttORDER, ttRDATE)
-        VALUES (TEAM_TODO_SEQ.NEXTVAL, 1, 'service단 만들기', 0, 2, TEAM_TODO_SEQ.CURRVAL, SYSDATE);
+        VALUES (TEAM_TODO_SEQ.NEXTVAL, 2, 'service단 만들기', 0, 5, TEAM_TODO_SEQ.CURRVAL, SYSDATE);
+    COMMIT;
     -- (3) 팀 투두 항목 삭제
     DELETE FROM TEAM_TODO WHERE ttNO=3;
     -- (4) 팀 투두 항목 순서 바꾸기

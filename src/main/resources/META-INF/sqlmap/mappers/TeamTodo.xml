@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mylog.dao.Team_TodoDao">
+<mapper namespace="com.project.mylog.dao.TeamTodoDao">
 	<resultMap type="TeamTodo" id="TeamTodoResult">
 		<result column="ttno" property="ttno"/>
 		<result column="tno" property="tno"/>
@@ -12,19 +12,20 @@
 		<result column="ttorder" property="ttorder"/>
 		<result column="ttrdate" property="ttrdate"/>
 		<result column="mid" property="mid"/>
+		<result column="mname" property="mname"/>
 	</resultMap>
 	
 	<!-- teamTodoList -->
 	<select id="teamTodoList" parameterType="int" resultType="TeamTodo">
-		SELECT TT.*, TM.mID 
-	        FROM TEAM_TODO TT, TEAM_MEMBER TM, TEAM T
-	        WHERE TT.tmNO=TM.tmNO AND T.TNO= TT.TNO AND TT.tNO=#{tno}
-	        ORDER BY ttORDER
+		SELECT TT.*, TM.mID, M.mNAME 
+	        FROM TEAM_TODO TT, TEAM_MEMBER TM, TEAM T, MEMBER M
+	        WHERE TT.tmNO=TM.tmNO AND TM.mID=M.mID AND T.TNO= TT.TNO AND TT.tNO=#{tno} AND TT.ttRDATE=#{ttrdate}
+	        ORDER BY ttCHECK, ttORDER
 	</select>
 	<!-- writeTeamTodo -->
 	<insert id="writeTeamTodo" parameterType="TeamTodo">
 		INSERT INTO TEAM_TODO (ttNO, tNO, ttCONTENT, ttCHECK, tmNO, ttORDER, ttRDATE)
-        	VALUES (TEAM_TODO_SEQ.NEXTVAL, #{tno}, #{ttcontent}, 0, #{tmno}, TEAM_TODO_SEQ.CURRVAL, SYSDATE);
+        	VALUES (TEAM_TODO_SEQ.NEXTVAL, #{tno}, #{ttcontent}, 0, #{tmno}, TEAM_TODO_SEQ.CURRVAL, #{ttrdate});
 	</insert>
 	<!-- deleteTeamTodo -->
 	<delete id="deleteTeamTodo" parameterType="int">
@@ -37,7 +38,7 @@
 	</update>
 	<!-- checkTeamTodo -->
 	<update id="checkTeamTodo" parameterType="TeamTodo">
-		UPDATE TEAM_TODO SET ttCHECK = #{ttcheck}
+		UPDATE TEAM_TODO SET ttCHECK = 1
 	                     WHERE ttNO=#{ttno} AND tmNO=#{tmno}
 	</update>
 	<!-- deleteTeamTodoList -->

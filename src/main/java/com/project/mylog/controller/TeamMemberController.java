@@ -48,8 +48,18 @@ public class TeamMemberController {
 		model.addAttribute("deleteApplyTeamResult", teamMservice.deleteApplyTeam(teammember));
 		return "forward:myteamList.do";
 	}
+	@RequestMapping(value = "deleteApplyTeam_TL", method = RequestMethod.GET)
+	public String deleteApplyTeam_TL(@ModelAttribute("teammember") TeamMember teammember, Model model) {
+		model.addAttribute("deleteApplyTeamResult", teamMservice.deleteApplyTeam(teammember));
+		return "forward:teamApplyList.do";
+	}
 	
 	//permitApplyTeam
+	@RequestMapping(value = "permitApplyTeam", method = RequestMethod.GET)
+	public String permitApplyTeam(@ModelAttribute("teammember") TeamMember teammember, Model model) {
+		model.addAttribute("permitApplyTeamResult", teamMservice.permitApplyTeam(teammember));
+		return "forward:teamApplyList.do";
+	}
 	
 	//join
 	@RequestMapping(value = "firstJoin", method = {RequestMethod.GET, RequestMethod.POST})
@@ -61,13 +71,24 @@ public class TeamMemberController {
 	@RequestMapping(value = "join", method = RequestMethod.GET)
 	public String joinTeamMember(int tno, HttpSession session, Model model) {
 		model.addAttribute("jointeam", teamMservice.joinTeamMember(session, tno));
-		System.out.println(teamMservice.myTeamList(session));
 		return "teammember/myteamList";
 	}
 	
 	//teamApplyList(조장만 확인가능)
+	@RequestMapping(value = "teamApplyList", method = RequestMethod.GET)
+	public String teamApplyList(int tno, Model model) {
+		model.addAttribute("teamDetail", teamService.getTeamDetail(tno));
+		model.addAttribute("teamApplyList", teamMservice.teamApplyList(tno));
+		return "teammember/teamApplyList";
+	}
 	
 	//drawalTeamMember(팀 탈퇴)
+	@RequestMapping(value = "drawalTeamMember", method = {RequestMethod.GET, RequestMethod.POST})
+	public String drawalTeamMember(@ModelAttribute("teammember") TeamMember teammember, Model model) {
+		int result = teamMservice.drawalTeamMember(teammember);
+		model.addAttribute("drawalTeamMemberResult", result);
+		return "forward:../team/myTeamDetailView.do";
+	}
 	
 	//teamMemberList
 	

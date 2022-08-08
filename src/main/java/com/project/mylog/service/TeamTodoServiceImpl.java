@@ -1,5 +1,6 @@
 package com.project.mylog.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class TeamTodoServiceImpl implements TeamTodoService {
 	private TeamTodoDao teamTodoDao;
 	
 	@Override
-	public List<TeamTodo> teamTodoList(int tno) {
-		return teamTodoDao.teamTodoList(tno);
+	public List<TeamTodo> teamTodoList(int tno, Date ttrdate) {
+		return teamTodoDao.teamTodoList(tno, ttrdate);
 	}
 
 	@Override

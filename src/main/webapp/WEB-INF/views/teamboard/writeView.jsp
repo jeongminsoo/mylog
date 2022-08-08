@@ -11,7 +11,7 @@
 	<link href="${conPath }/css/style.css" rel="stylesheet">
 </head>
 <body>
-	<form action="${conPath }/teamboard/write.do" method="post" enctype="multipart/form-data">
+	<form action="${conPath }/teamboard/write.do" method="post">
 		<input type="hidden" name="mid" value="${member.mid }">
 		<table>
 			<caption>팀모집 게시판 글쓰기</caption>

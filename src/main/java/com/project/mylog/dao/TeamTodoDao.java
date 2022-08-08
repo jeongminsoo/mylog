@@ -1,5 +1,6 @@
 package com.project.mylog.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -8,7 +9,7 @@ import com.project.mylog.model.TeamTodo;
 
 @Mapper
 public interface TeamTodoDao {
-	public List<TeamTodo> teamTodoList(int tno);
+	public List<TeamTodo> teamTodoList(int tno, Date ttrdate);
 	public int writeTeamTodo(TeamTodo teamtodo);
 	public int deleteTeamTodo(int ttno);
 	public int orderingTeamTodo(TeamTodo teamtodo);

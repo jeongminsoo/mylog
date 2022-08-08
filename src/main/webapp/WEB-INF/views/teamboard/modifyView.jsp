@@ -17,7 +17,7 @@
 	</script>
 </head>
 <body>
-	<form action="${conPath }/teamboard/modify.do" method="post" enctype="multipart/form-data">
+	<form action="${conPath }/teamboard/modify.do" method="post">
 		<input type="hidden" name="pageNum" value="${param.pageNum }">
 		<input type="hidden" name="tnum" value="${teamboard.tnum }">
 		<table>

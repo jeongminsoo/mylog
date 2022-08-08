@@ -47,7 +47,7 @@
 	
 	<!-- teamApplyList -->
 	<select id="teamApplyList" parameterType="int" resultType="TeamMember">
-		SELECT * FROM TEAM_MEMBER WHERE tmCHECK = 0 AND tNO = #{tno}
+		SELECT TM.*, M.mNAME FROM TEAM_MEMBER TM, MEMBER M WHERE TM.mID=M.mID AND tmCHECK = 0 AND tNO = #{tno}
 	</select>
 	
 	<!-- drawalTeamMember -->
@@ -57,7 +57,7 @@
 	
 	<!-- teamMemberList -->
 	<select id="teamMemberList" parameterType="int" resultType="TeamMember">
-		SELECT * FROM TEAM_MEMBER WHERE tmCHECK=1 AND tNO=#{tno}
+		SELECT TM.*, M.mNAME FROM TEAM_MEMBER TM, MEMBER M WHERE TM.mID=M.mID AND tmCHECK=1 AND tNO=#{tno}
 	</select>
 	
 	<!-- teamMemberTotCnt -->

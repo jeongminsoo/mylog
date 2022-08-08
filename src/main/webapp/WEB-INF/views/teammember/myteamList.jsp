@@ -15,7 +15,7 @@
 			location.href = '${conPath}/team/teamDetailView.do?tno='+tno+'&mid=${member.mid}';
 		}
 		function myteamDetail(tno){
-			location.href = '${conPath}/team/teamDetailView.do?tno='+tno+'&mid=${member.mid}';
+			location.href = '${conPath}/team/myTeamDetailView.do?tno='+tno+'&mid=${member.mid}';
 		}
 	</script>
 </head>

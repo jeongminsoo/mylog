@@ -42,10 +42,9 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public List<Team> teamList(String pageNum) {
+	public List<Team> teamList(String pageNum, Team team) {
 		int teamTotCnt = teamDao.teamTotCnt();
 		Paging paging = new Paging(teamTotCnt, pageNum, 12, 5);
-		Team team = new Team();
 		team.setStartRow(paging.getStartRow());
 		team.setEndRow(paging.getEndRow());
 		return teamDao.teamList(team);

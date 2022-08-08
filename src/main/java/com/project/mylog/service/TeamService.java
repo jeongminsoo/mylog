@@ -10,6 +10,6 @@ public interface TeamService {
 	public int deleteTeam(int tno);
 	public int modifyTeam(Team team);
 	public Team getTeamDetail(int tno);
-	public List<Team> teamList(String pageNum);
+	public List<Team> teamList(String pageNum, Team team);
 	public int teamTotCnt();
 }
