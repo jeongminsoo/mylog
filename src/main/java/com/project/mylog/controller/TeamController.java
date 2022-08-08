@@ -69,7 +69,6 @@ public class TeamController {
 	//teamCalendar
 	@RequestMapping(value="myTeamDetailView", method = {RequestMethod.GET, RequestMethod.POST})
 	public String calendar(int tno, String year, String month, Model model) {
-		System.out.println("tno : "+tno);
 		//teamDetail
 		model.addAttribute("teamDetail", teamService.getTeamDetail(tno));
 		model.addAttribute("teamMemberTotCnt", teamMservice.teamMemberTotCnt(tno));
@@ -80,7 +79,7 @@ public class TeamController {
 			Calendar cal = Calendar.getInstance();
 			yearInt = cal.get(Calendar.YEAR);
 			monthInt = cal.get(Calendar.MONTH)+1;
-			int dayInt = cal.get(Calendar.DAY_OF_WEEK);
+			int dayInt = cal.get(Calendar.DAY_OF_WEEK_IN_MONTH)+6;
 			year = String.valueOf(year);
 			month = monthInt < 10 ? "0" + month : String.valueOf(monthInt);
 			
@@ -89,6 +88,7 @@ public class TeamController {
 			System.out.println(ttrdate);
 			System.out.println(tno);
 			model.addAttribute("teamTodoList", teamTodoService.teamTodoList(tno, ttrdate));
+			//System.out.println(teamTodoService.teamTodoList(tno, ttrdate));
 		} else {
 			yearInt = Integer.parseInt(year);
 			monthInt = Integer.parseInt(month);

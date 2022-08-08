@@ -25,50 +25,7 @@
 		function myTeamModify(tno){
 			location.href = '${conPath}/team/myTeamModifyView.do?tno='+tno;
 		}
-		
-		/* $(document).ready(function(){
-			// 토글
-			$('.toggle').hide();
-			$('.toggle_button').click(function(){
-				var tdno = $(this).attr('id');
-				$('.toggle'+ttno).toggle();
-				$('.toggle:not(.toggle'+ttno+')').hide();
-			})
-			
-			// 투두 만들기
-			$('#todo_make').click(function(){
-				var nowDate =  '${nowDate }';
-				$.ajax({
-					url : '${conPath}/teamtodo/make.do',
-					data : 'ttrdate='+nowDate,
-					type : 'get',
-					success : function(data){
-						$('#todo_make_form').html(data);
-					}
-				})
-			});
-			
-			// 투두 수정
-			$('.todoModify').click(function(){
-				var tdno = $(this).attr('name');
-				var tdcontent = $('.tdcontent'+tdno).text();
-				var nowDate =  '${nowDate }';
-				$.ajax({
-					url : '${conPath}/todo/modify.do',
-					data : 'tdno='+tdno+'&tdcontent='+tdcontent+'&ddate='+nowDate,
-					type : 'get',
-					success : function(data){
-						$('.tdcontent'+tdno).html(data);
-					}
-				})
-			});
-						
-			// 다이어리 쓰기로 이동
-			$('#diary_write').click(function(){
-				location.href="${conPath}/diary/write.do?ddate=${nowDate }";
-			}) */
-			
-		});
+	
 	</script>
 </head>
 <body>
@@ -156,46 +113,5 @@
 	</table>
 
 	<!-- teamTodoList -->
-	<table style="width: 250px; border: 1px solid black;">
-		<tr>
-			<td><h2>${teamDetail.tname }</h2></td>
-		</tr>
-	</table>
-	<table style="width: 250px; border: 1px solid black;">
-		<c:if test="${empty teamTodoList }">
-			<tr>
-				<td>등록된 할일이 없습니다</td>
-			</tr>
-		</c:if>
-		<c:if test="${not empty teamTodoList }">
-			<c:forEach items="${teamTodoList }" var="ttDto">
-				<div>
-					<span> 
-						<img alt="체크이미지${ttDto.ttcheck }" src="${conPath }/img/checkImg${ttDto.ttcheck }" class="check${ttDto.ttno }">
-					</span> 
-					<span>${ttDto.ttcontent }</span> 
-					<span class="toggle_button" id="${ttDto.ttno }">...</span>
-					
-					<div class="toggle toggle${ttDto.ttno}">
-						<button class="todoModify" name="${ttDto.ttno}">
-							수정
-						</button>
-						<button class="todoDelay" onclick="location.href='${conPath}/teamtodo/check.do?ttno=${ttDto.ttno }&ttcheck=1'">
-							내일로 미루기
-						</button>
-						<button onclick="location.href='${conPath}/teamtodo/delete.do?ttno=${ttDto.ttno }'">
-							삭제
-						</button>
-					</div>
-				</div>
-			</c:forEach>
-		</c:if>
-	</table>
-		<div id="todo_make_form"></div>
-		<div id="todo_make">
-			<span>+</span> <span>새로운 투두 만들기</span>
-		</div>
-
-
 </body>
 </html>

@@ -16,10 +16,10 @@
 	</resultMap>
 	
 	<!-- teamTodoList -->
-	<select id="teamTodoList" parameterType="int" resultType="TeamTodo">
+	<select id="teamTodoList" parameterType="TeamTodo" resultType="TeamTodo">
 		SELECT TT.*, TM.mID, M.mNAME 
 	        FROM TEAM_TODO TT, TEAM_MEMBER TM, TEAM T, MEMBER M
-	        WHERE TT.tmNO=TM.tmNO AND TM.mID=M.mID AND T.TNO= TT.TNO AND TT.tNO=#{tno} AND TT.ttRDATE=#{ttrdate}
+	        WHERE TT.tmNO=TM.tmNO AND TM.mID=M.mID AND T.TNO= TT.TNO AND TT.tNO=#{tno} AND TT.ttRDATE LIKE TO_DATE(#{ttrdate}, 'YYYY-MM-DD')
 	        ORDER BY ttCHECK, ttORDER
 	</select>
 	<!-- writeTeamTodo -->

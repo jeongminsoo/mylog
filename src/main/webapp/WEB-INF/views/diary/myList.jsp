@@ -59,7 +59,7 @@
 	<div id="main_wrap">
 		<div id="date">
 			<button onclick="location.href='${conPath }/diary/myList.do?ddate=${before }'">이전</button>
-			<div class="nowDate">${nowDate }</div>
+			<div class="nowDate"><fmt:formatDate value="${nowDate }" pattern="yyyy년 MM월 dd일"/></div>
 			<button onclick="location.href='${conPath }/diary/myList.do?ddate=${after }'">이후</button>
 		</div>
 		<div id="diaryList">

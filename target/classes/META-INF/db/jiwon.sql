@@ -224,7 +224,7 @@ select * from team_member;
     -- (1) 팀 투두 리스트     (★되는지 봐야함)
     SELECT TT.*, TM.mID , M.mNAME
         FROM TEAM_TODO TT, TEAM_MEMBER TM, TEAM T, MEMBER M
-        WHERE TT.tmNO=TM.tmNO AND TM.mID=M.mID AND T.TNO= TT.TNO AND TT.tNO=2
+        WHERE TT.tmNO=TM.tmNO AND TM.mID=M.mID AND T.TNO= TT.TNO AND TT.tNO=2 AND tt.ttrdate LIKE TO_DATE('2022-08-08', 'YYYY-MM-DD')
         ORDER BY ttcheck, ttORDER;
     -- (2) 팀 투두 항목 생성
     SELECT * FROM TEAM;

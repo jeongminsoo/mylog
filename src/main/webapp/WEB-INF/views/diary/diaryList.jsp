@@ -36,18 +36,18 @@
 			</c:forEach>
 			<div class="paging">
 				<c:if test="${paging.startPage > paging.blockSize }">
-					<a href="${conPath }/diary/myList.do?ddate=${nowDate }&pageNum=${paging.startPage-1 }">[ 이전 ]</a>
+					<a href="${conPath }/diary/diaryList.do?pageNum=${paging.startPage-1 }">[ 이전 ]</a>
 				</c:if>
 				<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
 					<c:if test="${i eq paging.currentPage }">
 						[ <b>${i }</b> ]
 					</c:if>
 					<c:if test="${i != paging.currentPage }">
-						<a href="${conPath }/diary/myList.do?ddate=${nowDate }&pageNum=${i}">[ ${i } ]</a>
+						<a href="${conPath }/diary/diaryList.do?pageNum=${i}">[ ${i } ]</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${ paging.endPage < paging.pageCnt }">
-					<a href="${conPath }/diary/myList.do?ddate=${nowDate }&pageNum=${paging.endPage + 1 }">[ 다음 ]</a>
+					<a href="${conPath }/diary/diaryList.do?pageNum=${paging.endPage + 1 }">[ 다음 ]</a>
 				</c:if>
 			</div>
 		</div>
