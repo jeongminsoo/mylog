@@ -25,6 +25,8 @@
 		<typeAlias type="com.project.mylog.model.Timer" alias="Timer" />
 		<typeAlias type="com.project.mylog.model.Friend" alias="Friend" />
 		<typeAlias type="com.project.mylog.model.AccountCategory" alias="AccountCategory" />
+		<typeAlias type="com.project.mylog.model.Timetable" alias="Timetable" />
+		<typeAlias type="com.project.mylog.model.AccountBook" alias="AccountBook" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/Member.xml"/>
@@ -48,5 +50,7 @@
 		<mapper resource="META-INF/sqlmap/mappers/Timer.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/Friend.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/AccountCategory.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Timetable.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/AccountBook.xml"/>
 	</mappers>
 </configuration>
