@@ -25,10 +25,10 @@ public class HashtagController {
 	}
 	
 	@RequestMapping(value="testplus", method= RequestMethod.GET)
-	public String testplus(@RequestParam("tname") String tname, Model model) {
-		model.addAttribute("tname", tname);
-		model.addAttribute("tag",hashtagservice.hashtagWrite(tname));
-		
+	public String testplus(@RequestParam("hname") String hname, Model model) {
+		model.addAttribute("hname", hname);
+		model.addAttribute("tag",hashtagservice.hashtagWrite(hname));
+		model.addAttribute("hno", hashtagservice.getHno(hname));
 		return "hashtag/testplus";
 		
 	}

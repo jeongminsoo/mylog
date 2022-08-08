@@ -27,5 +27,10 @@
 			DELETE HASHTAG WHERE HNO =#{hno}
 		</delete>
             
+            
+        <!-- 태그 번호 가져오기 -->
+        <select id="getHno" parameterType="String" resultType="int">
+        	SELECT MAX(HNO) FROM HASHTAG WHERE HNAME=#{hname}
+        </select>
 	
 </mapper>
