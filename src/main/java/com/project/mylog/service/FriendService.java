@@ -2,21 +2,25 @@ package com.project.mylog.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.project.mylog.model.Friend;
 
 public interface FriendService {
 
-	public List<Friend> myFriendList(String mid);
+	public List<Friend> myFriendList(HttpSession session);
 	
-	public List<Friend> searchMyFriend(String mid, String mname);
+	public List<Friend> searchMyFriend(HttpSession session, String mname);
 	
-	public List<Friend> followMe(String mid);
+	public List<Friend> followMe(HttpSession session);
 	
-	public int followFriend(String mid, String fid);
+	public int followFriend(HttpSession session, String fid);
 	
-	public int unfollowFriend(String mid, String fid);
+	public int unfollowFriend(HttpSession session, String fid);
 	
-	public int countMyFriend(String mid);
+	public int countMyFriend(HttpSession session);
 	
-	public int countFollowMe(String mid);
+	public int countFollowMe(HttpSession session);
+	
+	public int followCheck(HttpSession session, String fid);
 }

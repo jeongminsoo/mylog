@@ -76,7 +76,7 @@
 					<td><input type="password" name="mpw" id="mpw"></td>
 				</tr>
 				<tr>
-					<th><label for="mpwChk">비밀번호</label></th>
+					<th><label for="mpwChk">비밀번호확인</label></th>
 					<td><input type="password" name="mpwChk" id="mpwChk">
 					</td>
 				</tr>

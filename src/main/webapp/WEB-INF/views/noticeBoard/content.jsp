@@ -17,6 +17,16 @@
 	</script>
 </head>
 <body>
+	<c:if test="${updateResult eq 0 }">
+		<script>
+			alert('수정실패');
+		</script>
+	</c:if>
+	<c:if test="${updateResult eq 1 }">
+		<script>
+			alert('공지사항이 수정되었습니다');
+		</script>
+	</c:if>
 	<div class="content">
 			<table>
 				<col style="width : 200px;">

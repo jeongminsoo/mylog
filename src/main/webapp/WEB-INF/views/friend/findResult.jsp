@@ -7,6 +7,29 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		$('.follow').click(function() {
+			var id = $(this).attr('id');
+			var answer = confirm('정말 해당 친구를 팔로우하시겠습니까?');
+			if (answer == true) {
+				location.href='${conPath}/friend/follow.do?fid=' + id;
+			} else {
+				return false;
+			}
+		});
+		$('.unfollow').click(function() {
+			var id = $(this).attr('id');
+			var answer = confirm('정말 해당 친구를 언팔로우하시겠습니까?');
+			if (answer == true) {
+				location.href='${conPath}/friend/unfollow.do?fid=' + id;
+			} else {
+				return false;
+			}
+		});
+	});
+	</script>
 </head>
 <body>
 	<c:set var="oNum" value="${paging.orderNum }"/>
@@ -22,7 +45,14 @@
 				<tr>
 					<td>${oNum }</td>
 					<td>${m.mname }(${m.mid })</td>
-					<td><button id="${m.mid }" class="follow">follow</button></td>
+					<td>
+						<c:if test="${m.existent eq 0 }">
+							<button id="${m.mid }" class="follow">follow</button>
+						</c:if>
+						<c:if test="${m.existent eq 1 }">
+							<button id="${m.mid }" class="unfollow">unfollow</button>
+						</c:if>
+					</td>
 				</tr>
 				<c:set var="oNum" value="${oNum + 1 }"/>
 			</c:forEach>

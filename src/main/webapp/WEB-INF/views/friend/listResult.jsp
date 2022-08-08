@@ -7,6 +7,19 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<script>
+		$(document).ready(function(){
+			$('.unfollow').click(function() {
+				var id = $(this).attr('id');
+				var answer = confirm('정말 해당 친구를 언팔로우하시겠습니까?');
+				if (answer == true) {
+					location.href='${conPath}/friend/unfollow.do?fid=' + id;
+				} else {
+					return false;
+				}
+			});
+		});
+	</script>
 </head>
 <body>
 	<c:set var="oNum" value="${paging.orderNum }"/>
