@@ -41,7 +41,7 @@ public class DiaryController {
 		return "diary/myList";
 	}
 	
-	@RequestMapping( value = "list", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping( value = "diaryList", method = {RequestMethod.GET, RequestMethod.POST})
 	public String diaryList(HttpSession session, String pageNum, Model model) {
 		model.addAttribute("diaryList", dbService.diaryList(session, pageNum));
 		model.addAttribute("paging", new Paging(dbService.diaryCnt(session), pageNum, 8, 5));
@@ -87,4 +87,4 @@ public class DiaryController {
 		dbService.diaryDelete(dnum);
 		return "forward:myList.do";
 	}
-	}
+}
