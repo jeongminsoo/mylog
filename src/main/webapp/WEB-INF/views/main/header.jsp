@@ -20,9 +20,10 @@
    	<a href="${conPath }/timer/setting.do">타이머</a>
    	<a href="${conPath }/notice/list.do">공지사항</a>
     <a href="${conPath }/qna/list.do">QNA</a>
-    <a href="${conPath }/timer/tableview.do">일 캘린더</a>
-    <a href="${conPath }/friend/listView.do">친구</a>
+    <a href="${conPath }/timetable/view.do">일 캘린더</a>
+    <a href="${conPath }/friend/list.do">친구</a>
     <a href="${conPath }/diary/diaryList.do">일기목록</a>
+    <a href="${conPath }/account/list.do">가계부</a>
 
 </body>
 </html>

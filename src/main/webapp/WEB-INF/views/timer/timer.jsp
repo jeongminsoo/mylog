@@ -11,7 +11,6 @@
 <!-- 부트스트랩 3.3.2css -->
 <link rel="stylesheet" href="${conPath }/css/bootstrap.min.css">
 <style>
-
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
@@ -37,9 +36,8 @@
 
 	}
 
-	
-	
-	$(document).ready(function() {
+	$(document).ready(
+			function() {
 				$('#pause').hide();
 				//기록될 시간
 				var start;
@@ -47,11 +45,18 @@
 				var during;
 				var end;
 				var enow;
-				
+
+				//기록될 날짜
+				var shour;
+				var smin;
+				var ehour;
+				var emin;
+
 				//타이머
 				var tdo = $('input[name=tdo]').val();
 				var tname = $('input[name=tname]').val();
 				var tno = $('input[name=tno]').val();
+				var tbno = $('input[name=tbno]').val();
 				//var time = tdo * 3600;
 				var time = tdo * 6
 				var hour = 0;
@@ -63,7 +68,7 @@
 					tdo = '0' + tdo;
 				}
 				//document.getElementById('timer').innerHTML = tdo + ":00:00";
-				document.getElementById('timer').innerHTML =  "00:00:"+tdo;
+				document.getElementById('timer').innerHTML = "00:00:" + tdo;
 
 				//▶누른 경우
 				$('#play').click(
@@ -71,7 +76,7 @@
 							$('#play').hide();
 							$('#pause').show();
 
-							 timer = setInterval(function() {
+							timer = setInterval(function() {
 								time--;
 
 								min = Math.floor(time / 60);
@@ -94,52 +99,72 @@
 								}
 								document.getElementById('timer').innerHTML = ph
 										+ ":" + pm + ":" + ps;
-								 
+
 								//타이머 시간이 다 된 경우
 								/* if(time < 0){
-				                   
-				                    
-				                    clearInterval(timer);
-				                    var enow = end.toLocaleTimeString('ko-kr');
-				                    document.getElementById('timer').innerHTML = tdo
+								   
+								    
+								    clearInterval(timer);
+								    var enow = end.toLocaleTimeString('ko-kr');
+								    document.getElementById('timer').innerHTML = tdo
 									+ ":00:00";
-				                    $.ajax({
-				        				type : 'get', // 타입 (get, post, put 등등)
-				        				url : 'timewrite.do', // 요청할 서버url
-				        				dataType : 'html', // 데이터 타입 (html, xml, json, text 등등)
-				        				data : {'start':start, 'end':end },
-				        				success : function(data) { // 결과 성공 콜백함수
-				        					//
-				        					console.log(data);
+								    $.ajax({
+										type : 'get', // 타입 (get, post, put 등등)
+										url : 'timewrite.do', // 요청할 서버url
+										dataType : 'html', // 데이터 타입 (html, xml, json, text 등등)
+										data : {'start':start, 'end':end },
+										success : function(data) { // 결과 성공 콜백함수
+											//
+											console.log(data);
 
-				        				},
+										},
 
-				        			})
-				                    
+									})
+								    
 								} */
-								
+
 							}, 1000);
-							
+
 							//시작 시간 보내기
-						var	snow = new Date();
+							var snow = new Date();
 							start = snow.getTime();
 							stime = snow.toLocaleTimeString('ko-kr');
-				            ssecond=Math.floor((start/1000)%60);
-					         
-					        
-					         $.ajax({
-			        				type : 'get', // 타입 (get, post, put 등등)
-			        				url : 'timestart.do', // 요청할 서버url
-			        				dataType : 'text', // 데이터 타입 (html, xml, json, text 등등)
-			        				data : {'tstart':ssecond, 'tdo':tdo, 'tname':tname,'tno':tno },
-			        				success : function(data) { // 결과 성공 콜백함수
-			        					alert(data);
-		
-			        				},
+							ssecond = Math.floor((start / 1000) % 60);
+							shour = snow.getHours();
+							smin = snow.getMinutes();
 
-			        			})
+							$.ajax({
+								type : 'get', // 타입 (get, post, put 등등)
+								url : 'timestart.do', // 요청할 서버url
+								dataType : 'text', // 데이터 타입 (html, xml, json, text 등등)
+								data : {
+									'tstart' : ssecond,
+									'tdo' : tdo,
+									'tname' : tname,
+									'tno' : tno,
+									'tbshour' : shour,
+									'tbsmin' : smin,
+									'tbno' : tbno
+								},
+								success : function(data) { // 결과 성공 콜백함수
+
+								},
+
+							})
+
+							/* $.ajax({
+								type : 'get', // 타입 (get, post, put 등등)
+								url : '${conPath}/timetable/', // 요청할 서버url
+								dataType : 'text', // 데이터 타입 (html, xml, json, text 등등)
+								data : {'tstart':ssecond, 'tdo':tdo, 'tname':tname,'tno':tno },
+								success : function(data) { // 결과 성공 콜백함수
+									alert(data);
 							
-							
+								},
+
+							})
+							 */
+
 						});
 
 				// ||누른 경우
@@ -148,25 +173,28 @@
 					$('#play').show();
 
 					clearInterval(timer);
-					
+
 					dnow = new Date();
 					dtime = dnow.getTime();
-					during = Math.floor(((dtime-start)/1000)%60);
+					during = Math.floor(((dtime - start) / 1000) % 60);
 					console.log(dtime);
-				
-					 $.ajax({
-	        				type : 'get', // 타입 (get, post, put 등등)
-	        				url : 'timesave.do', // 요청할 서버url
-	        				dataType : 'text', // 데이터 타입 (html, xml, json, text 등등)
-	        				data : {'tduring':during, 'tname':tname, 'tno':tno },
-	        				success : function(data) { // 결과 성공 콜백함수
-	        					//
-	        					
 
-	        				},
+					$.ajax({
+						type : 'get', // 타입 (get, post, put 등등)
+						url : 'timesave.do', // 요청할 서버url
+						dataType : 'text', // 데이터 타입 (html, xml, json, text 등등)
+						data : {
+							'tduring' : during,
+							'tname' : tname,
+							'tno' : tno
+						},
+						success : function(data) { // 결과 성공 콜백함수
+							//
 
-	        			})  
-					
+						},
+
+					})
+
 				});
 
 				//■ 누른 경우
@@ -178,32 +206,36 @@
 							time = tdo * 6;
 							document.getElementById('timer').innerHTML = tdo
 									+ ":00:00";
-							
-							
+
 							var enow = new Date();
-				            end = enow.getTime();
-				            etime = enow.toLocaleTimeString('ko-kr');
-				            tduring = Math.floor(((end-start)/1000)%60);
-				            esecond=Math.floor((end/1000)%60);
+							end = enow.getTime();
+							etime = enow.toLocaleTimeString('ko-kr');
+							tduring = Math.floor(((end - start) / 1000) % 60);
+							esecond = Math.floor((end / 1000) % 60);
+							ehour = enow.getHours();
+							emin = enow.getMinutes();
+		
+							$.ajax({
+								type : 'get', // 타입 (get, post, put 등등)
+								url : 'timewrite.do', // 요청할 서버url
+								dataType : 'text', // 데이터 타입 (html, xml, json, text 등등)
+								data : {
+									'tstart' : ssecond,
+									'tend' : esecond,
+									'tname' : tname,
+									'tno' : tno,
+									'tduring' : tduring,
+									'tbehour' : ehour,
+									'tbemin' : emin,
+									'tbno' : tbno
+								},
+								success : function(data) { // 결과 성공 콜백함수
+									//
 
-				             
-				               $.ajax({
-			        				type : 'get', // 타입 (get, post, put 등등)
-			        				url : 'timewrite.do', // 요청할 서버url
-			        				dataType : 'text', // 데이터 타입 (html, xml, json, text 등등)
-			        				data : {'tstart':ssecond, 'tend':esecond, 'tname':tname, 'tno':tno, 'tduring':tduring },
-			        				success : function(data) { // 결과 성공 콜백함수
-			        					//
-			        					
+								},
 
-			        				},
-
-			        			})  
+							})
 						});
-				
-				
-				
-				
 
 			});
 </script>
@@ -214,6 +246,7 @@
 	<input type="hidden" name="tname" value="${param.tname }">
 	<input type="hidden" name="tdo" value="${param.tdo }">
 	<input type=hidden name="tno" value="${tno }">
+	<input type=hidden name="tbno" value="${tbno }">
 	<div id="timer"></div>
 	<div id="tbtn">
 		<button id="play">▶</button>
@@ -221,7 +254,8 @@
 		<button id="stop">■</button>
 	</div>
 	
-	
-	<button onclick="location.href='${conPath}/timer/tableview.do'">이동</button>
+	<button onclick="location.href='${conPath}/main.do'"></button>
+
+
 </body>
 </html>
