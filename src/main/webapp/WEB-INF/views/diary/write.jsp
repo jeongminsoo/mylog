@@ -8,17 +8,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>MyLog : 일기 적기</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-	<script src="/ckeditor/ckeditor.js"></script>
-	<script src="/ckeditor/ko.js"></script>
+	<script src="/resources/ckeditor/ckeditor.js"></script>
+	<script src="/resources/ckeditor/ko.js"></script>
 	<script>
-		$(document).ready(function(){
-			function MyCustomUploadAdapterPlugin(editor) {
-			    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-			        return new UploadAdapter(loader)
-			    }
-			}
-		});
+		function MyCustomUploadAdapterPlugin(editor) {
+		    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+		        return new UploadAdapter(loader)
+		    }
+		}
 	</script>
 </head>
 <body>

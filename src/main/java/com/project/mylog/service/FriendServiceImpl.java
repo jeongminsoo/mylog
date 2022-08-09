@@ -68,13 +68,4 @@ public class FriendServiceImpl implements FriendService {
 		return friendDao.countFollowMe(member.getMid());
 	}
 
-	@Override
-	public int followCheck(HttpSession session, String fid) {
-		Member member = (Member) session.getAttribute("member");
-		Friend friend = new Friend();
-		friend.setMid(member.getMid());
-		friend.setFid(fid);
-		return friendDao.followCheck(friend);
-	}
-
 }
