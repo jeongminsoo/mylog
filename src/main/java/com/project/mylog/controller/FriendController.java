@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.mylog.service.AlertService;
 import com.project.mylog.service.FriendService;
 import com.project.mylog.util.Paging;
 
@@ -17,6 +18,9 @@ public class FriendController {
 
 	@Autowired
 	private FriendService friendService;
+	
+	@Autowired
+	private AlertService alertService;
 	
 	@RequestMapping(value="list", method = {RequestMethod.GET, RequestMethod.POST})
 	public String friendList(HttpSession session, Model model) {
@@ -48,13 +52,15 @@ public class FriendController {
 	}
 	
 	@RequestMapping(value="follow", method = {RequestMethod.GET, RequestMethod.POST})
-	public String follow(HttpSession session, String fid, Model model) {
+	public String follow(HttpSession session, String fid, int alcode, Model model) {
+		alertService.makeAlert(session, fid, alcode);
 		model.addAttribute("followResult", friendService.followFriend(session, fid));
 		return "forward:list.do";
 	}
 	
 	@RequestMapping(value="unfollow", method = {RequestMethod.GET, RequestMethod.POST})
-	public String unfollow(HttpSession session, String fid, Model model) {
+	public String unfollow(HttpSession session, String fid, int alcode, Model model) {
+		alertService.makeAlert(session, fid, alcode);
 		model.addAttribute("unfollowResult", friendService.unfollowFriend(session, fid));
 		return "forward:list.do";
 	}
