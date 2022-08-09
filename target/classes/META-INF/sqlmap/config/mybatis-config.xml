@@ -11,8 +11,6 @@
 		<typeAlias type="com.project.mylog.model.Team" alias="Team"/>
 		<typeAlias type="com.project.mylog.model.TeamBoard" alias="TeamBoard"/>
 		<typeAlias type="com.project.mylog.model.TeamCommentBoard" alias="TeamCommentBoard"/>
-		<typeAlias type="com.project.mylog.model.TeaminBoard" alias="TeaminBoard"/>
-		<typeAlias type="com.project.mylog.model.TeaminCommentBoard" alias="TeaminCommentBoard"/>
 		<typeAlias type="com.project.mylog.model.Todo" alias="Todo"/>
 		<typeAlias type="com.project.mylog.model.ReviewBoard" alias="ReviewBoard" />
 		<typeAlias type="com.project.mylog.model.ReviewReplyBoard" alias="ReviewReplyBoard" />
@@ -27,6 +25,7 @@
 		<typeAlias type="com.project.mylog.model.AccountCategory" alias="AccountCategory" />
 		<typeAlias type="com.project.mylog.model.Timetable" alias="Timetable" />
 		<typeAlias type="com.project.mylog.model.AccountBook" alias="AccountBook" />
+		<typeAlias type="com.project.mylog.model.Alert" alias="Alert" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/Member.xml"/>
@@ -36,8 +35,6 @@
 		<mapper resource="META-INF/sqlmap/mappers/Team.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/TeamBoard.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/TeamCommentBoard.xml"/>
-		<mapper resource="META-INF/sqlmap/mappers/TeaminBoard.xml"/>
-		<mapper resource="META-INF/sqlmap/mappers/TeaminCommentBoard.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/Todo.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/ReviewBoard.xml" />
 		<mapper resource="META-INF/sqlmap/mappers/ReviewReplyBoard.xml" />
@@ -52,5 +49,6 @@
 		<mapper resource="META-INF/sqlmap/mappers/AccountCategory.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/Timetable.xml"/>
 		<mapper resource="META-INF/sqlmap/mappers/AccountBook.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Alert.xml"/>
 	</mappers>
 </configuration>

@@ -22,5 +22,4 @@ public interface FriendService {
 	
 	public int countFollowMe(HttpSession session);
 	
-	public int followCheck(HttpSession session, String fid);
 }
