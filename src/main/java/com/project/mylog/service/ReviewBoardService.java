@@ -21,5 +21,7 @@ public interface ReviewBoardService {
 	public void reviewHitUp();
 
 	public int reviewCount();
+	
+	public int getRnum();
 
 }
