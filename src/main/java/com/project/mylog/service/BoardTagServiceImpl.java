@@ -20,9 +20,12 @@ public class BoardTagServiceImpl implements BoardTagService {
 	private ReviewBoardDao rboarddao;
 
 	@Override
-	public void BoardTagConnect(BoardTag boardtag) {
+	public void BoardTagConnect(BoardTag boardtag, String hname) {
 		boardtag.setRnum(rboarddao.getRnum());
-		boardtag.setHno(hashtagdao.getMaxHno());
+		while(hname == "") {
+			boardtag.setHno(hashtagdao.getHno(hname));
+		}
+		
 	
 		boardtagdao.BoardTagConnect(boardtag);
 	}

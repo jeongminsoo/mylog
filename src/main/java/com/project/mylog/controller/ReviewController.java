@@ -1,13 +1,17 @@
 package com.project.mylog.controller;
 
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.project.mylog.dao.HashtagDao;
 import com.project.mylog.model.BoardTag;
 import com.project.mylog.model.ReviewBoard;
 import com.project.mylog.model.ReviewReplyBoard;
@@ -28,6 +32,8 @@ public class ReviewController {
 	private ReveiwReplyBoardService replyservice;
 	@Autowired
 	private BoardTagService btagservice;
+	@Autowired
+	private HashtagDao hashtag;
 	
 	
 	@RequestMapping(value="list", method= {RequestMethod.GET, RequestMethod.POST})
@@ -60,13 +66,17 @@ public class ReviewController {
 		return "review/write";
 		
 	}
+	
 	@RequestMapping(value="write", method= RequestMethod.POST)
 	public String reviewWrite(MultipartHttpServletRequest mRequest, BoardTag boardtag, ReviewBoard reviewBoard, Model model) {
 		model.addAttribute("reviewWrite", rboardservice.reviewWrite(mRequest, reviewBoard));
-		btagservice.BoardTagConnect(boardtag);
+		
+		//btagservice.BoardTagConnect(boardtag, hname);
 		return "forward:list.do";
 		
 	}
+	
+	
 	
 	@RequestMapping(value="modify", method= RequestMethod.GET)
 	public String reviewModify(int rnum, Model model, String pageNum) {

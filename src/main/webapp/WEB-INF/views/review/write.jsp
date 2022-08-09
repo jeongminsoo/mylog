@@ -17,12 +17,13 @@
 		/* let tname = document.getElementById('tname').value();
 		document.getElementById('space') = tname;
 		let tcount; */
-
-
 	
+		
+		//배열
+		//var hnames=[];
 	//태그등록
 	$('#submit').click(function() {
-		var hname = $('input[name=hname]').val().trim();
+		var hname = $('input[name=hname]').val();
 
 		$.ajax({
 			type : 'get', // 타입 (get, post, put 등등)
@@ -30,17 +31,29 @@
 			dataType : 'html', // 데이터 타입 (html, xml, json, text 등등)
 			data : 'hname=' + hname,
 			success : function(data) { // 결과 성공 콜백함수
-				$('#space').append(data);
-
+				/* 	$('#space').append(data);
+					var temp = data.trim();
+					var idx = temp.indexOf('#');
+					var lastIdx = temp.indexOf('</span>');
+					var hn = temp.substring(idx+1, lastIdx);
+					hnames.push(hn); */
+				
 			},
 
 		})
 
-	});	});
+	});	
+	
+	
+	
+
+	});
 </script>
 </head>
 <body>
-	<form action="write.do" enctype="multipart/form-data" method="post">
+
+	<form action="write.do" enctype="multipart/form-data" method="post" id="write">
+		<input type="text" name="hnames" value="${hnames }">
 		<div>
 			<input type="text" name="mid">
 		</div>
@@ -63,18 +76,18 @@
 		</div>
 		
 		<div>
-			<input type="submit" value="제출">
+			<input type="submit" value="제출" id="formsubmit">
 		</div>
+	
 	</form>
+
 		<div id="hname">
 			<input type="text" name="hname" id="hname">
 		</div>
 		<div id="space">
-
 			<!-- <input type="hidden" name="space"> -->
 		</div>
-
-		
+				
 		<button id="submit">태그추가</button>
 
 
