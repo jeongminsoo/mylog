@@ -31,8 +31,8 @@
 			dataType : 'html', // 데이터 타입 (html, xml, json, text 등등)
 			data : 'hname=' + hname,
 			success : function(data) { // 결과 성공 콜백함수
-				/* 	$('#space').append(data);
-					var temp = data.trim();
+					$('#space').append(data);
+					/* var temp = data.trim();
 					var idx = temp.indexOf('#');
 					var lastIdx = temp.indexOf('</span>');
 					var hn = temp.substring(idx+1, lastIdx);
@@ -52,8 +52,7 @@
 </head>
 <body>
 
-	<form action="write.do" enctype="multipart/form-data" method="post" id="write">
-		<input type="text" name="hnames" value="${hnames }">
+	<form action="write.do" enctype="multipart/form-data" method="post">
 		<div>
 			<input type="text" name="mid">
 		</div>
@@ -78,12 +77,12 @@
 		<div>
 			<input type="submit" value="제출" id="formsubmit">
 		</div>
-	
-	</form>
-
 		<div id="hname">
 			<input type="text" name="hname" id="hname">
 		</div>
+	
+	</form>
+
 		<div id="space">
 			<!-- <input type="hidden" name="space"> -->
 		</div>
