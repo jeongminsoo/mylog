@@ -208,32 +208,54 @@ SELECT ATITLE, SUM(APRICE) TOTAL
 
 -- 가계부 작성하기
 INSERT INTO ACCOUNTBOOK (ANO, MID, ACNO, ACONTENT, APRICE, ADATE, ASTATUS)
-    VALUES(ACCOUNTBOOK_SEQ.NEXTVAL, 'aaa', 1, '월급', 2000000, '2022-08-01', 1);
+    VALUES(ACCOUNTBOOK_SEQ.NEXTVAL, 'aaa', 14, '탑건봄', 18000, '2022-08-06', 0);
 
 -- 가계부 수정하기
 UPDATE ACCOUNTBOOK
-    SET ACNO = 1,
-         ACONTENT = '7월 월급',
-         APRICE = 2500000, 
-         ADATE = '2022-07-15',
-         ASTATUS = 1
-    WHERE ANO = 1;
-
+    SET ACNO = 5,
+         ACONTENT = '아침에 탄 택시비',
+         APRICE = 11200, 
+         ADATE = TO_DATE('2022-08-15 08:13:00', 'YYYY-MM-DD HH24:MI:SS'),
+         ASTATUS = 0
+    WHERE ANO = 9;
+select to_char(sysdate, 'yyyy-mm-dd hh24:mi:ss.') from dual;
 -- 가계부 삭제
 DELETE FROM ACCOUNTBOOK WHERE ANO = 1;
 
 
 -- 월 가계부 보기
 SELECT D.*
-    FROM (SELECT ROWNUM RN, A.*
-                FROM (SELECT B.*, ATITLE FROM ACCOUNTBOOK B, ACCOUNTCATEGORY C
-                            WHERE B.ACNO = C.ACNO
-                                AND MID = 'aaa'
-                                AND ADATE BETWEEN (SELECT ADD_MONTHS(LAST_DAY('2022-07-03')+1,-1) FROM DUAL) 
-                                AND (SELECT LAST_DAY('2022-07-01') FROM DUAL)
-                                ORDER BY ADATE DESC) A ) D
-    WHERE RN BETWEEN 1 AND 10;
+		    FROM (SELECT ROWNUM RN, A.*
+		                FROM (SELECT B.*, (SELECT ATITLE FROM ACCOUNTCATEGORY WHERE ACNO=B.ACNO)  FROM ACCOUNTBOOK B
+                                      WHERE MID ='aaa'
+                                        AND ADATE BETWEEN ADD_MONTHS(LAST_DAY('2022-08-08')+1,-1)
+                                        AND LAST_DAY('2022-08-08')
+                                    ORDER BY ADATE DESC) A ) D
+		    WHERE RN BETWEEN 1 AND 10;
 
+SELECT D.*
+		    FROM (SELECT ROWNUM RN, A.*
+		                FROM (SELECT B.*, ATITLE FROM ACCOUNTBOOK B, ACCOUNTCATEGORY C
+                                      WHERE B.ACNO=C.ACNO
+                                        AND MID ='aaa'
+                                        AND ADATE BETWEEN ADD_MONTHS(LAST_DAY('2022-08-08')+1,-1)
+                                        AND LAST_DAY('2022-08-08')
+                                    ORDER BY ADATE DESC) A ) D
+		    WHERE RN BETWEEN 1 AND 10;
+
+SELECT B.*, ATITLE FROM ACCOUNTBOOK B, ACCOUNTCATEGORY C
+		                            WHERE B.ACNO = C.ACNO
+		                                AND MID = 'aaa'
+		                                AND ADATE >= ADD_MONTHS(LAST_DAY('2022-07-03')+1,-1)
+		                                AND  ADATE <= LAST_DAY('2022-07-03')
+		                                ORDER BY ADATE DESC;
+
+SELECT B.*, (SELECT ATITLE FROM ACCOUNTCATEGORY WHERE ACNO=B.ACNO)  FROM ACCOUNTBOOK B
+		      WHERE MID ='aaa'
+                AND ADATE BETWEEN ADD_MONTHS(LAST_DAY('2022-08-08')+1,-1)
+                AND LAST_DAY('2022-08-08')
+            ORDER BY ADATE DESC;
+            
 -- 월 총액 보기
 SELECT INCOMETOTAL-EXPENSETOTAL TOTAL, INCOMETOTAL, EXPENSETOTAL
     FROM (SELECT SUM(APRICE) INCOMETOTAL FROM ACCOUNTBOOK WHERE ASTATUS = 1 AND MID = 'aaa' 
@@ -246,7 +268,8 @@ SELECT ATITLE, SUM(APRICE) TOTAL
     FROM ACCOUNTBOOK B, ACCOUNTCATEGORY C
     WHERE B.ACNO = C.ACNO
         AND MID = 'aaa'
-        AND ADATE BETWEEN (SELECT ADD_MONTHS(LAST_DAY('2022-07-03')+1,-1) FROM DUAL) AND (SELECT LAST_DAY('2022-07-03') FROM DUAL)
+        AND ADATE BETWEEN ADD_MONTHS(LAST_DAY('2022-07-03')+1, -1)
+        AND LAST_DAY('2022-07-03')
         AND ASTATUS = 0
     GROUP BY ATITLE
     ORDER BY TOTAL DESC;
@@ -254,5 +277,10 @@ SELECT ATITLE, SUM(APRICE) TOTAL
 -- 월 가계부 갯수
 SELECT COUNT(*) FROM ACCOUNTBOOK 
     WHERE MID = 'aaa'
-                AND ADATE BETWEEN (SELECT ADD_MONTHS(LAST_DAY('2022-07-03')+1,-1) FROM DUAL) 
-                AND (SELECT LAST_DAY('2022-07-03') FROM DUAL);
+                AND ADATE BETWEEN (SELECT ADD_MONTHS(LAST_DAY('2022-08-03')+1,-1) FROM DUAL) 
+                AND (SELECT LAST_DAY('2022-08-03') FROM DUAL);
+                
+-- 시퀀스로 가계부 가져오기
+SELECT B.*, ATITLE
+    FROM ACCOUNTBOOK B, ACCOUNTCATEGORY C
+    WHERE B.ACNO = C.ACNO AND ANO = 1;

@@ -9,7 +9,7 @@ public class AccountBook {
 	private int ano;
 	private String mid;
 	private int acno;
-	private int atitle;
+	private String atitle;
 	private String acontent;
 	private int aprice;
 	private Timestamp adate;
