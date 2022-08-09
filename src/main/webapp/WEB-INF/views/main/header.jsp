@@ -15,6 +15,7 @@
     	<a href="${conPath }/member/logout.do">로그아웃</a>
     	<a href="${conPath }/qna/list.do">QNA</a>
     	<a href="${conPath }/friend/list.do">친구</a>
+    	<a href="${conPath }/alert/list.do">알림(${alertCount })</a>
     </c:if>
     <c:if test="${empty member }">
     	<a href="${conPath }/member/joinView.do">회원가입</a>

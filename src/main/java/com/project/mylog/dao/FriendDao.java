@@ -22,6 +22,4 @@ public interface FriendDao {
 	public int countMyFriend(String mid);
 	
 	public int countFollowMe(String mid);
-	
-	public int followCheck(Friend friend);
 }
