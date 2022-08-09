@@ -20,6 +20,7 @@ public interface AccountBookDao {
 	public List<AccountBook> monthlyCategoryTotal(AccountBook accountBook);
 	
 	public int accountWrite(AccountBook accountBook);
+	public AccountBook getAccount(int ano);
 	public int accountModify(AccountBook accountBook);
 	public int accountDelete(int ano);
 }

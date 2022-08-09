@@ -9,9 +9,15 @@
 	<meta charset="UTF-8">
 	<title>MyLog : 일기 적기</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="/ckeditor/ckeditor.js"></script>
+	<script src="/ckeditor/ko.js"></script>
 	<script>
 		$(document).ready(function(){
-
+			function MyCustomUploadAdapterPlugin(editor) {
+			    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+			        return new UploadAdapter(loader)
+			    }
+			}
 		});
 	</script>
 </head>
@@ -44,8 +50,16 @@
 				<tr>
 					<th>내용</th>
 					<td>
-						<textarea name="dcontent"style="width: 100%; height:500px;"></textarea>
-						
+						<textarea id="classic" name="dcontent"></textarea>
+						<script>
+					        ClassicEditor
+					            .create( document.querySelector( '#classic' ), {
+					                language: 'ko' //언어설정
+					            })
+					            .catch( error => {
+					                console.error( error );
+					            } );
+					    </script>
 					</td>
 				</tr>
 				<tr>

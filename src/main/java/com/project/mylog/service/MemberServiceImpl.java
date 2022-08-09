@@ -51,7 +51,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int modifyMember(Member member) {
+	public int modifyMember(Member member, String tempmbirth) {
+		if ("".equals(tempmbirth)) {
+			member.setMbirth(null);
+		} else {
+			member.setMbirth(Date.valueOf(tempmbirth));
+		}
 		return memberDao.modifyMember(member);
 	}
 
@@ -61,12 +66,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int deleteMember(String pageNum, String mid) {
+	public int deleteMember(String mid) {
 		return memberDao.deleteMember(mid);
 	}
 
 	@Override
-	public int recoverMember(String pageNum, String mid) {	
+	public int recoverMember(String mid) {	
 		return memberDao.recoverMember(mid);
 	}
 
@@ -85,8 +90,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member getMember(String mid) {
-		return memberDao.getMember(mid);
+	public Member getMember(HttpSession session) {
+		Member member = (Member) session.getAttribute("member");
+		return memberDao.getMember(member.getMid());
 	}
 
 	@Override
@@ -108,11 +114,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String searchIdPw(final String mname, final String memail) {
 		String result = "검색 성공";
-		final Member member = memberDao.getMemberForMname(mname);
+		final Member member = memberDao.getMemberForEmail(memail);
 		if (member == null) {
-			result = "입력한 닉네임에 해당하는 아이디가 없습니다";
-		} else if (!memail.equals(member.getMemail())) {
 			result = "입력한 이메일에 해당하는 아이디가 없습니다";
+		} else if (!mname.equals(member.getMname())) {
+			result = "입력한 닉네임에 해당하는 아이디가 없습니다";
 		} else if (member.getMstatus() == 0) {
 			result = "사용이 중단된 아이디입니다";
 		} else {
@@ -137,8 +143,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member getMemberForMname(String mname) {
-		return memberDao.getMemberForMname(mname);
+	public Member getMemberForEmail(String memail) {
+		return memberDao.getMemberForEmail(memail);
 	}
 
 	@Override
@@ -147,8 +153,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Member> findFriend(String mname) {
-		return memberDao.findFriend(mname);
+	public List<Member> findFriend(HttpSession session, String mname) {
+		Member myInfo = (Member) session.getAttribute("member");
+		Member member = new Member();
+		member.setMid(myInfo.getMid());
+		member.setMname(mname);
+		return memberDao.findFriend(member);
 	}
 
 }

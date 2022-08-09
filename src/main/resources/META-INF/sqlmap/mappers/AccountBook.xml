@@ -56,7 +56,7 @@
 	
 <!-- 	일 토탈 -->
 	<select id="dailyTotal" parameterType="AccountBook" resultType="AccountBook">
-		SELECT INCOMETOTAL+EXPENSETOTAL TOTAL, INCOMETOTAL, EXPENSETOTAL
+		SELECT INCOMETOTAL-EXPENSETOTAL TOTAL, INCOMETOTAL, EXPENSETOTAL
    		 FROM (SELECT SUM(APRICE) INCOMETOTAL FROM ACCOUNTBOOK WHERE ASTATUS = 1 AND MID = #{mid} AND ADATE = #{adate}),
             (SELECT SUM(APRICE) EXPENSETOTAL FROM ACCOUNTBOOK WHERE ASTATUS = 0 AND MID = #{mid} AND ADATE = #{adate})
 	</select>
@@ -74,7 +74,7 @@
 	
 <!-- 	월 토탈 -->
 	<select id="mothlyTotal" parameterType="AccountBook" resultType="AccountBook">
-		SELECT INCOMETOTAL+EXPENSETOTAL TOTAL, INCOMETOTAL, EXPENSETOTAL
+		SELECT INCOMETOTAL-EXPENSETOTAL TOTAL, INCOMETOTAL, EXPENSETOTAL
     		FROM (SELECT SUM(APRICE) INCOMETOTAL FROM ACCOUNTBOOK 
     				WHERE ASTATUS = 1 AND MID = #{mid} 
                 		AND ADATE BETWEEN ADD_MONTHS(LAST_DAY(#{adate})+1,-1)
@@ -98,10 +98,17 @@
 		    ORDER BY TOTAL DESC
 	</select>
 	
+	<!-- 시퀀스로 가계부 가져오기 -->
+	<select id="getAccount" parameterType="int" resultType="AccountBook">
+		SELECT B.*, ATITLE
+		    FROM ACCOUNTBOOK B, ACCOUNTCATEGORY C
+		    WHERE B.ACNO = C.ACNO AND ANO = #{ano}
+	</select>
+	
 <!-- 	작성 -->
 	<insert id="accountWrite" parameterType="AccountBook">
-		INSERT INTO ACCOUNTBOOK (ANO, MID, ACNO, ACONTENT, APRICE, ADATE, ASTATUS)
-    		VALUES(ACCOUNTBOOK_SEQ.NEXTVAL, #{mid}, #{acno}, #{acontent}, #{aprice}, #{adate}, {astatus})		
+		INSERT INTO ACCOUNTBOOK
+    		VALUES(ACCOUNTBOOK_SEQ.NEXTVAL, #{mid}, #{acno}, #{acontent}, #{aprice}, #{adate}, #{astatus})		
 	</insert>
 	
 <!-- 	수정 -->
@@ -110,7 +117,7 @@
 		    SET ACNO = #{acno},
 		         ACONTENT = #{acontent},
 		         APRICE = #{aprice}, 
-		         ADATE = #{adate},
+		         ADATE =#{adate},
 		         ASTATUS = #{astatus}
 		    WHERE ANO = #{ano}
 	</update>

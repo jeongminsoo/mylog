@@ -1,6 +1,7 @@
 package com.project.mylog.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,5 +67,19 @@ public class QnaController {
 	public String qnawrite(QnaBoard qnaBoard, String pageNum, HttpServletRequest request, Model model) {
 		model.addAttribute("writeResult", qnaboardService.qnaWrite(request, qnaBoard));
 		return "forward:list.do";
+	}
+	
+	@RequestMapping(value="delete", method = {RequestMethod.GET, RequestMethod.POST})
+	public String qnaDelete(int qno, String pageNum, Model model) {
+		model.addAttribute("deleteResult", qnaboardService.qnaDelete(qno));
+		return "forward:list.do";
+	}
+	
+	@RequestMapping(value="myList", method = {RequestMethod.GET, RequestMethod.POST})
+	public String myList(HttpSession session, String pageNum, Model model) {
+		Paging paging = new Paging(qnaboardService.countMyQna(session), pageNum);
+		model.addAttribute("paging", paging);
+		model.addAttribute("qnas", qnaboardService.myQnaList(session, pageNum));
+		return "qnaBoard/myQnaList";
 	}
 }

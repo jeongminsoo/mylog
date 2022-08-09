@@ -99,6 +99,7 @@ public class AccountBookServiceImpl implements AccountBookService {
 	@Override
 	public int accountWrite(AccountBook accountBook, HttpSession session) {
 		accountBook.setMid(((Member) session.getAttribute("member")).getMid());
+		System.out.println(accountBook);
 		return abDao.accountWrite(accountBook);
 	}
 
@@ -110,6 +111,11 @@ public class AccountBookServiceImpl implements AccountBookService {
 	@Override
 	public int accountDelete(int ano) {
 		return abDao.accountDelete(ano);
+	}
+
+	@Override
+	public AccountBook getAccount(int ano) {
+		return abDao.getAccount(ano);
 	}
 
 

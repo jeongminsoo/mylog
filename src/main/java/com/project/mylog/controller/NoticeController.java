@@ -56,4 +56,10 @@ public class NoticeController {
 		model.addAttribute("writeResult", noticeboardService.noticeWrite(request, noticeBoard));
 		return "forward:list.do";
 	}
+	
+	@RequestMapping(value="delete", method = {RequestMethod.GET, RequestMethod.POST})
+	public String noticeDelete(int nno, Model model) {
+		model.addAttribute("deleteResult", noticeboardService.noticeDelete(nno));
+		return "forward:list.do";
+	}
 }

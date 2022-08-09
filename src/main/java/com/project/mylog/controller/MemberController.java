@@ -54,14 +54,14 @@ public class MemberController {
 	 
 	
 	@RequestMapping(value="deleteMember", method = RequestMethod.GET)
-	public String deleteMember(String mid, String pageNum, Model model) {
-		model.addAttribute("deleteResult", memberService.deleteMember(pageNum, mid));
+	public String deleteMember(String mid, Model model) {
+		model.addAttribute("deleteResult", memberService.deleteMember(mid));
 		return "forward:memberList.do";
 	}
 	
 	@RequestMapping(value="recoverMember", method = RequestMethod.GET)
-	public String recoverMember(String mid, String pageNum, Model model) {
-		model.addAttribute("recoverResult", memberService.recoverMember(pageNum, mid));
+	public String recoverMember(String mid, Model model) {
+		model.addAttribute("recoverResult", memberService.recoverMember(mid));
 		return "forward:memberList.do";
 	}
 	
@@ -92,7 +92,7 @@ public class MemberController {
 	public String searchIdPw(String mname, String memail, Model model) {
 		String result = memberService.searchIdPw(mname, memail);
 		if (result.equals("검색 성공")) {
-			Member member = memberService.getMemberForMname(mname);
+			Member member = memberService.getMemberForEmail(memail);
 			model.addAttribute("mid", member.getMid());
 			return "forward:searchResult.do";
 		} else {
@@ -121,10 +121,40 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="find", method = {RequestMethod.GET, RequestMethod.POST})
-	public String findFriend(String mname, Model model) {
+	public String findFriend(HttpSession session, String mname, Model model) {
 		Paging paging = new Paging(memberService.countMember(), "1");
 		model.addAttribute("paging", paging);
-		model.addAttribute("members", memberService.findFriend(mname));
+		model.addAttribute("members", memberService.findFriend(session, mname));
 		return "forward:../friend/findResult.do";
+	}
+	
+	@RequestMapping(value="modifyView", method = {RequestMethod.GET, RequestMethod.POST})
+	public String modifyView(HttpSession session, Model model) {
+		model.addAttribute("myInfo", memberService.getMember(session));
+		return "member/modify";
+	}
+	
+	@RequestMapping(value="modify", method = {RequestMethod.GET, RequestMethod.POST})
+	public String modify(Member member, String tempmbirth, HttpSession session, Model model) {
+		int modifyResult = memberService.modifyMember(member, tempmbirth);
+		if (modifyResult == 1) {
+			session.removeAttribute("member");
+			session.setAttribute("member", member);
+		}
+		model.addAttribute("modifyResult", modifyResult);
+		return "forward:../main.do";
+	}
+	
+	@RequestMapping(value="logout", method = {RequestMethod.GET, RequestMethod.POST})
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "forward:../main.do";
+	}
+	
+	@RequestMapping(value="outMember", method = {RequestMethod.GET, RequestMethod.POST})
+	public String outMember(HttpSession session, String mid, Model model) {
+		session.invalidate();
+		model.addAttribute("outResult", memberService.deleteMember(mid));
+		return "forward:../main.do";
 	}
 }

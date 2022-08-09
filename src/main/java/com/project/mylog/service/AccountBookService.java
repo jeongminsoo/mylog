@@ -19,4 +19,5 @@ public interface AccountBookService {
 	public int accountWrite(AccountBook accountBook, HttpSession session);
 	public int accountModify(AccountBook accountBook);
 	public int accountDelete(int ano);
+	public AccountBook getAccount(int ano);
 }

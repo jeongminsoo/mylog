@@ -17,6 +17,26 @@
 	</script>
 </head>
 <body>
+	<c:if test="${writeResult eq 0 }">
+		<script>
+			alert('공지사항 등록 실패');
+		</script>
+	</c:if>
+	<c:if test="${writeResult eq 1 }">
+		<script>
+			alert('공지사항이 등록되었습니다');
+		</script>
+	</c:if>
+	<c:if test="${deleteResult eq 0 }">
+		<script>
+			alert('공지사항 삭제 실패');
+		</script>
+	</c:if>
+	<c:if test="${deleteResult eq 1 }">
+		<script>
+			alert('공지사항이 삭제되었습니다');
+		</script>
+	</c:if>
 	<div class="content">
 		<div>
 			<c:if test="${admin != null }">

@@ -2,11 +2,14 @@ package com.project.mylog.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.mylog.dao.FriendDao;
 import com.project.mylog.model.Friend;
+import com.project.mylog.model.Member;
 
 @Service
 public class FriendServiceImpl implements FriendService {
@@ -15,47 +18,63 @@ public class FriendServiceImpl implements FriendService {
 	private FriendDao friendDao;
 	
 	@Override
-	public List<Friend> myFriendList(String mid) {
-		return friendDao.myFriendList(mid);
+	public List<Friend> myFriendList(HttpSession session) {
+		Member member = (Member) session.getAttribute("member");
+		return friendDao.myFriendList(member.getMid());
 	}
 
 	@Override
-	public List<Friend> searchMyFriend(String mid, String mname) {
+	public List<Friend> searchMyFriend(HttpSession session, String mname) {
+		Member member = (Member) session.getAttribute("member");
 		Friend friend = new Friend();
-		friend.setMid(mid);
+		friend.setMid(member.getMid());
 		friend.setMname(mname);
 		return friendDao.searchMyFriend(friend);
 	}
 
 	@Override
-	public List<Friend> followMe(String mid) {
-		return friendDao.followMe(mid);
+	public List<Friend> followMe(HttpSession session) {
+		Member member = (Member) session.getAttribute("member");
+		return friendDao.followMe(member.getMid());
 	}
 
 	@Override
-	public int followFriend(String mid, String fid) {
+	public int followFriend(HttpSession session, String fid) {
+		Member member = (Member) session.getAttribute("member");
 		Friend friend = new Friend();
-		friend.setMid(mid);
+		friend.setMid(member.getMid());
 		friend.setFid(fid);
 		return friendDao.followFriend(friend);
 	}
 
 	@Override
-	public int unfollowFriend(String mid, String fid) {
+	public int unfollowFriend(HttpSession session, String fid) {
+		Member member = (Member) session.getAttribute("member");
 		Friend friend = new Friend();
-		friend.setMid(mid);
+		friend.setMid(member.getMid());
 		friend.setFid(fid);
 		return friendDao.unfollowFriend(friend);
 	}
 
 	@Override
-	public int countMyFriend(String mid) {
-		return friendDao.countMyFriend(mid);
+	public int countMyFriend(HttpSession session) {
+		Member member = (Member) session.getAttribute("member");
+		return friendDao.countMyFriend(member.getMid());
 	}
 
 	@Override
-	public int countFollowMe(String mid) {
-		return friendDao.countFollowMe(mid);
+	public int countFollowMe(HttpSession session) {
+		Member member = (Member) session.getAttribute("member");
+		return friendDao.countFollowMe(member.getMid());
+	}
+
+	@Override
+	public int followCheck(HttpSession session, String fid) {
+		Member member = (Member) session.getAttribute("member");
+		Friend friend = new Friend();
+		friend.setMid(member.getMid());
+		friend.setFid(fid);
+		return friendDao.followCheck(friend);
 	}
 
 }
