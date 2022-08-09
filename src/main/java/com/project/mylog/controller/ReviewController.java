@@ -68,7 +68,7 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="write", method= RequestMethod.POST)
-	public String reviewWrite(MultipartHttpServletRequest mRequest, BoardTag boardtag, ReviewBoard reviewBoard, Model model) {
+	public String reviewWrite(MultipartHttpServletRequest mRequest, BoardTag boardtag, ReviewBoard reviewBoard, Model model, String tname) {
 		model.addAttribute("reviewWrite", rboardservice.reviewWrite(mRequest, reviewBoard));
 		
 		//btagservice.BoardTagConnect(boardtag, hname);

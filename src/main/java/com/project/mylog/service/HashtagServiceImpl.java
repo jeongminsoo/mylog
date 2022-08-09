@@ -18,12 +18,7 @@ public class HashtagServiceImpl implements HashtagService {
 	@Override
 	public int hashtagWrite(String hname) {
 		
-		 StringTokenizer st = new StringTokenizer(hname, "#");
-		 while(st.hasMoreTokens()) {
-			 int result = hashtagDao.hashtagWrite(hname);
-			 
-		 }
-		
+		 
 		 return hashtagDao.hashtagWrite(hname);
 		
 	}
