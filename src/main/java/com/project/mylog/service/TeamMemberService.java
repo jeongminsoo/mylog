@@ -22,4 +22,6 @@ public interface TeamMemberService {
 	
 	public TeamMember getTeamMemberDetail(TeamMember teammember);
 	
+	public int deleteTeamMember(int tno);
+	
 }

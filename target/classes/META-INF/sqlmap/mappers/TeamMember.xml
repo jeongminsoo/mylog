@@ -70,4 +70,9 @@
 		SELECT * FROM TEAM_MEMBER WHERE tNO=#{tno} AND MID=#{mid}
 	</select>
 	
+	<!-- deleteTeamMember -->
+	<delete id="deleteTeamMember" parameterType="int">
+		DELETE FROM TEAM_MEMBER WHERE tNO=#{tno}
+	</delete>
+	
 </mapper>

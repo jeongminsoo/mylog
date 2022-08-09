@@ -15,4 +15,5 @@ public interface TeamDao {
 	public Team getTeamDetail(int tno);
 	public List<Team> teamList(Team team);
 	public int teamTotCnt();
+	
 }

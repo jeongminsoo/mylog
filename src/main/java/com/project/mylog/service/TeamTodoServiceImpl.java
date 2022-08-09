@@ -46,6 +46,11 @@ public class TeamTodoServiceImpl implements TeamTodoService {
 
 	@Override
 	public int checkTeamTodo(TeamTodo teamtodo) {
+		if(teamtodo.getTtcheck()==1) {
+			teamtodo.setTtcheck(0);
+		}else if(teamtodo.getTtcheck()==0) {
+			teamtodo.setTtcheck(1);
+		}
 		return teamTodoDao.checkTeamTodo(teamtodo);
 	}
 

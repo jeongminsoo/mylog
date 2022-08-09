@@ -86,5 +86,9 @@ public class TeamMemberServiceImpl implements TeamMemberService {
 		return teamMemberDao.getTeamMemberDetail(teammember);
 	}
 
+	@Override
+	public int deleteTeamMember(int tno) {
+		return teamMemberDao.deleteTeamMember(tno);
+	}
 
 }

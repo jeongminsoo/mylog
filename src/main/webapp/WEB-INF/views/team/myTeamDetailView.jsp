@@ -51,27 +51,19 @@
 			
 			// 투두 수정
 			$('.team_todoModify').click(function(){
-				var tno = '${tno }'
+				var tno = '${teamDetail.tno }';
 				var ttno = $(this).attr('name');
-				var ttcontent = $('.ttcontent'+ttno).text();
 				var ttrdate =  '${ttrdate }';
-				
 				$.ajax({
 					url : '${conPath}/teamtodo/modifyView.do',
-					data : 'tno='+tno+'ttno='+ttno+'&ttcontent='+ttcontent+'&ttrdate='+ttrdate,
+					data : 'tno='+tno+'&ttno='+ttno+'&ttrdate='+ttrdate,
 					type : 'get',
-					success : function(data){
-						$('.ttcontent'+ttno).html(data);
+					success : function(data, status) {
+						$('#teamTodo_modify_form').html(data);
 					}
 				})
 				
-				
 			}); 
-		
-			// 다이어리 쓰기로 이동
-			$('#diary_write').click(function(){
-				location.href="${conPath}/diary/write.do?ddate=${nowDate }";
-			})
 			
 		});
 		
@@ -117,6 +109,7 @@
 	<h2>${year }년${month }월</h2>
 	<b>
 		<form action="${conPath }/team/myTeamDetailView.do">
+			<input type="hidden" name="tno" value="${teamDetail.tno }">
 			<select name="year">
 				<c:forEach var="i" begin="${year-10 }" end="${year+10 }">
 					<c:if test="${i eq year }">
@@ -163,30 +156,34 @@
 
 	<!-- teamTodoList -->
 	<div id="teamTodo_list" style="border:1px solid black;">
-		<h3>${teamDetail.tname } TODO LIST</h3>
+		<h3>${teamDetail.tname } TODO LIST(${ttrdate })</h3>
 		<c:if test="${empty teamTodoList }">
 			<p>생성된 할 일이 없습니다.</p>
 		</c:if>
 		<c:if test="${not empty teamTodoList }">
 			<c:forEach var="todo" items="${teamTodoList }">
-				<div id="todo${todo.ttno }">
-					<span>
-						<img alt="체크이미지${todo.ttcheck }" src="${conPath }/img/checkImg${todo.ttcheck }" class="check${todo.ttno }">
+				<div id="team_todo${todo.ttno }">
+					<span 
+						<c:if test="${todo.mid eq member.mid }">
+							onclick="location.href='${conPath}/teamtodo/teamTodoCheck.do?ttno=${todo.ttno }&ttrdate=${ttrdate }&tno=${teamDetail.tno }&ttcheck=${todo.ttcheck }'"
+						</c:if>>
+						<img alt="체크이미지${todo.ttcheck }" src="${conPath }/img/checkImg${todo.ttcheck }.png">
 					</span>
 					<span class="ttcontent${todo.ttno }">${todo.ttcontent }</span>
 					<span>${todo.mname }</span>
+					
 					<c:if test="${todo.mid eq member.mid }">
 						<span class="toggle_button" id="${todo.ttno }">...</span>
 					</c:if>
 					<div class="toggle toggle${todo.ttno}">
 						<button class="team_todoModify" name="${todo.ttno }">수정</button>
-						<button class="team_todoDelay" onclick="location.href='${conPath}/teamtodo/check.do?ttno=${todo.ttno }&ttcheck=1'">내일로 미루기</button>
 						<button onclick="location.href='${conPath}/teamtodo/delete.do?ttno=${todo.ttno }&ttrdate=${ttrdate }&tno=${teamDetail.tno }'">삭제</button>
 					</div>
 				</div>
 			</c:forEach>
 		</c:if>
 		<div id="teamTodo_make_form"></div>
+		<div id="teamTodo_modify_form"></div>
 		<div id="teamTodo_make" name=${teamDetail.tno }>
 			<span>+</span>
 			<span>새로운 투두 만들기</span>

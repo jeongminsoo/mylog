@@ -59,7 +59,7 @@
 			<tr>
 				<td>
 					<input type="submit" value="그룹수정">
-					<input type="button" value="그룹삭제" onclick="location.href='${conPath}/team/delete.do'">
+					<input type="button" value="그룹삭제" onclick="location.href='${conPath}/team/teamDelete.do?tno=${teamDetail.tno }'">
 				</td>
 			</tr>
 		</table>

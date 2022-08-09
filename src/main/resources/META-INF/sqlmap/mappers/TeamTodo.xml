@@ -49,7 +49,7 @@
 	<!-- checkTeamTodo -->
 	<update id="checkTeamTodo" parameterType="TeamTodo">
 		UPDATE TEAM_TODO SET ttCHECK = #{ttcheck}
-	                     WHERE ttNO=#{ttno} AND tmNO=#{tmno}
+	                     WHERE ttNO=#{ttno}
 	</update>
 	<!-- deleteTeamTodoList -->
 	<delete id="deleteTeamTodoList" parameterType="int">

@@ -14,12 +14,12 @@
 		<input type="hidden" name="ttno" value="${param.ttno }">
 		<input type="hidden" name="ttrdate" value="${param.ttrdate }">
 		
-		<input type="text" id="ttcontent" name="ttcontent" value="${param.ttcontent }" autofocus="autofocus">
+		<input type="text" name="ttcontent" value="${teamTodoDetail.ttcontent }" autofocus="autofocus">
 		<label for="${teamTodoDetail.mid }">담당자</label>
-		<select name="mid">
+		<select name="tmno">
 			<c:forEach var="list" items="${teamMemberList }">
-				<option value="${list.mid }" 
-					<c:if test ="${teamTodoDetail.mid eq list.mid }">selected="selected"</c:if>>${list.mname }(${list.mid })
+				<option value="${list.tmno }" 
+					<c:if test ="${teamTodoDetail.mid eq list.mid }">selected="selected"</c:if>>${list.mname }(${list.mid }|${list.tmno })
 				</option>
 			</c:forEach>
 		</select>

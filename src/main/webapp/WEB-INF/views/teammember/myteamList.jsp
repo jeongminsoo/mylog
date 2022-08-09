@@ -42,6 +42,17 @@
 			history.back();
 		</script>
 	</c:if>
+	<c:if test="${teamDeleteResult  eq 1}">
+		<script>
+			alert('그룹삭제 완료');
+		</script>
+	</c:if>
+	<c:if test="${teamDeleteResult  eq 0}">
+		<script>
+			alert('그룹삭제 실패');
+			history.back();
+		</script>
+	</c:if>
 	<table>
 		<tr>
 			<td><a href="${conPath}/team/makeTeamView.do">그룹만들기</a></td>
