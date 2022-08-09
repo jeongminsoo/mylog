@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>MyLog : 일기 적기</title>
+	<title>MyLog : write</title>
 	<script src="/resources/ckeditor/ckeditor.js"></script>
 	<script src="/resources/ckeditor/ko.js"></script>
 	<script>
