@@ -61,13 +61,9 @@ public class TeamTodoController {
 	}
 	@RequestMapping(value = "make", method = RequestMethod.POST) 
 	public String makeTeamTodo(TeamTodo teamtodo, Model model) {
-		System.out.println(teamtodo);
 		model.addAttribute("makeTeamTodoResult", teamTodoService.makeTeamTodo(teamtodo));
 		Date ttrdate = teamtodo.getTtrdate();
 		int tno = teamtodo.getTno();
-		System.out.println(ttrdate);
-		System.out.println(tno);
-		System.out.println(teamtodo);
 		return "forward:../team/myTeamDetailView.do?ttrdate="+ttrdate+"&tno="+tno;
 	}
 	

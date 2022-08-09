@@ -28,6 +28,16 @@
 			alert('회원가입 성공');
 		</script>
 	</c:if>
+	<c:if test="${modifyResult eq 0 }">
+		<script>
+			alert('회원정보수정 실패');
+		</script>
+	</c:if>
+	<c:if test="${modifyResult eq 1 }">
+		<script>
+			alert('회원정보수정 성공');
+		</script>
+	</c:if>
 	<c:if test="${loginResult eq '관리자 로그인 실패' or loginResult eq '유효하지 않은 아이디입니다' or loginResult eq '비밀번호가 맞지 않습니다'}">
 		<script>
 			alert('${loginResult}');

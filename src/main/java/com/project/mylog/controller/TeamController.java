@@ -69,7 +69,7 @@ public class TeamController {
 	
 	//teamCalendar
 	@RequestMapping(value="myTeamDetailView", method = {RequestMethod.GET, RequestMethod.POST})
-	public String calendar(int tno, TeamTodo teamtodo, String year, String month, Date ttrdate, Model model) {
+	public String calendar(int tno, TeamTodo teamtodo, String year, String month, String day, Date ttrdate, Model model) {
 		System.out.println(tno);
 		//teamDetail
 		model.addAttribute("teamDetail", teamService.getTeamDetail(tno));
@@ -77,12 +77,12 @@ public class TeamController {
 		//calendar
 		int yearInt;
 		int monthInt;
-		if(year==null && month==null && ttrdate==null) {
-			System.out.println("11111");
+		int dayInt;
+		if(year==null && month==null) {
 			Calendar cal = Calendar.getInstance();
 			yearInt = cal.get(Calendar.YEAR);
 			monthInt = cal.get(Calendar.MONTH)+1;
-			int dayInt = cal.get(Calendar.DAY_OF_WEEK_IN_MONTH)+6;
+			dayInt = cal.get(Calendar.DAY_OF_WEEK_IN_MONTH)+6;
 			year = String.valueOf(year);
 			month = monthInt < 10 ? "0" + month : String.valueOf(monthInt);
 			
@@ -93,11 +93,10 @@ public class TeamController {
 			model.addAttribute("teamTodoList", teamTodoService.teamTodoList(teamtodo));
 			model.addAttribute("ttrdate", ttrdate);
 		} else {
-			System.out.println("2222");
 			yearInt = Integer.parseInt(year);
 			monthInt = Integer.parseInt(month);
 			month = monthInt < 10 ? "0" + month : String.valueOf(monthInt);
-			System.out.println("디테일뷰에서의 팀투두 : "+teamtodo);
+			
 			//teamTodoList
 			model.addAttribute("teamTodoList", teamTodoService.teamTodoList(teamtodo));
 			model.addAttribute("ttrdate", ttrdate);
