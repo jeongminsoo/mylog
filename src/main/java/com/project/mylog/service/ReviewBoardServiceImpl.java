@@ -146,4 +146,10 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 		return rboardDao.reviewCount();
 	}
 
+	@Override
+	public int getRnum() {
+		// TODO Auto-generated method stub
+		return rboardDao.getRnum();
+	}
+
 }

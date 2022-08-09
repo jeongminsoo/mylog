@@ -60,6 +60,11 @@
 		<select id="reviewCount" resultType="int">
 			SELECT COUNT(*) CNT FROM RBOARD
 		</select>
+		
+		<!-- 최근 글 번호 -->
+		<select id="getRnum" resultType="int">
+			SELECT MAX(RNUM) FROM RBOARD
+		</select>
 
     
     </mapper>
