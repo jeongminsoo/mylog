@@ -1,15 +1,21 @@
 package com.project.mylog.controller;
 
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.project.mylog.dao.HashtagDao;
+import com.project.mylog.model.BoardTag;
 import com.project.mylog.model.ReviewBoard;
 import com.project.mylog.model.ReviewReplyBoard;
+import com.project.mylog.service.BoardTagService;
 import com.project.mylog.service.ReveiwReplyBoardService;
 import com.project.mylog.service.ReviewBoardService;
 import com.project.mylog.util.Paging;
@@ -24,7 +30,11 @@ public class ReviewController {
 	private ReviewBoardService rboardservice;
 	@Autowired
 	private ReveiwReplyBoardService replyservice;
-
+	@Autowired
+	private BoardTagService btagservice;
+	@Autowired
+	private HashtagDao hashtag;
+	
 	
 	@RequestMapping(value="list", method= {RequestMethod.GET, RequestMethod.POST})
 	public String reviewList(String pageNum, Model model) {
@@ -56,12 +66,18 @@ public class ReviewController {
 		return "review/write";
 		
 	}
+	
 	@RequestMapping(value="write", method= RequestMethod.POST)
-	public String reviewWrite(MultipartHttpServletRequest mRequest, ReviewBoard reviewBoard, Model model) {
+	public String reviewWrite(MultipartHttpServletRequest mRequest, BoardTag boardtag, ReviewBoard reviewBoard, Model model, String tname) {
 		model.addAttribute("reviewWrite", rboardservice.reviewWrite(mRequest, reviewBoard));
+		model.addAttribute("tags", rboardservice.reviewWrite(mRequest, reviewBoard));
+		
+		//btagservice.BoardTagConnect(boardtag, hname);
 		return "forward:list.do";
 		
 	}
+	
+	
 	
 	@RequestMapping(value="modify", method= RequestMethod.GET)
 	public String reviewModify(int rnum, Model model, String pageNum) {
@@ -138,5 +154,7 @@ public class ReviewController {
 		return "review/replycomment";
 	}
 
+	
+	
 
 }

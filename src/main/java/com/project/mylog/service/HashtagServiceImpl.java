@@ -1,5 +1,7 @@
 package com.project.mylog.service;
 
+import java.util.StringTokenizer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +16,11 @@ public class HashtagServiceImpl implements HashtagService {
 
 	
 	@Override
-	public int hashtagWrite(String tname) {
-		return  hashtagDao.hashtagWrite(tname);
+	public int hashtagWrite(String hname) {
+		
+		 
+		 return hashtagDao.hashtagWrite(hname);
+		
 	}
 
 	@Override
@@ -24,9 +29,20 @@ public class HashtagServiceImpl implements HashtagService {
 	}
 
 	@Override
-	public int hashtagDelete(int tno) {
+	public int hashtagDelete(int hno) {
 		
-		return hashtagDao.hashtagDelete(tno);
+		return hashtagDao.hashtagDelete(hno);
+	}
+
+	@Override
+	public int getHno(String hname) {
+		return hashtagDao.getHno(hname);
+	}
+
+	@Override
+	public int getMaxHno() {
+		// TODO Auto-generated method stub
+		return hashtagDao.getMaxHno();
 	}
 
 }

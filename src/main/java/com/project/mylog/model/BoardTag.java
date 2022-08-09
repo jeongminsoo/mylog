@@ -7,4 +7,5 @@ public class BoardTag {
 
 	private int hno;
 	private int rnum;
+	private int hname;
 }

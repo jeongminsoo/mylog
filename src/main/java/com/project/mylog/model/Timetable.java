@@ -17,9 +17,10 @@ public class Timetable {
 	private int tbemin;
 	@Override
 	public String toString() {
-		return "{'tbno':" + tbno + ", 'tno':" + tno + ", 'mid':" + mid + ", 'mname':" + mname + ", 'tname':" + tname
-				+ ",'tduring':" + tduring + ", 'tbshour':" + tbshour + ", 'tbsmin':" + tbsmin + ", 'tbehour':" + tbehour
-				+ ", 'tbemin':" + tbemin + "}";
+		return "{'tbno': '" + tbno + "','tno': '" + tno + "','mid':'" + mid + "','mname':'" + mname + "','tname':'" + tname
+				+ "','tduring':'" + tduring + "','tbshour':'" + tbshour + "','tbsmin':'" 
+				+ tbsmin + "','tbehour':'" + tbehour
+				+ "','tbemin':'" + tbemin + "'}";
 	}
 	
 	
