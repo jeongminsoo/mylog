@@ -53,7 +53,6 @@
 <body>
 
 	<form action="write.do" enctype="multipart/form-data" method="post" id="write">
-		<input type="text" name="hnames" value="${hnames }">
 		<div>
 			<input type="text" name="mid">
 		</div>
@@ -78,12 +77,12 @@
 		<div>
 			<input type="submit" value="제출" id="formsubmit">
 		</div>
-	
-	</form>
-
 		<div id="hname">
 			<input type="text" name="hname" id="hname">
 		</div>
+	
+	</form>
+
 		<div id="space">
 			<!-- <input type="hidden" name="space"> -->
 		</div>

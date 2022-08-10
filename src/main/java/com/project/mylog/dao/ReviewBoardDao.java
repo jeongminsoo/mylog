@@ -24,5 +24,7 @@ public interface ReviewBoardDao {
 	
 	public int getRnum();
 	
+
+	
 	
 }

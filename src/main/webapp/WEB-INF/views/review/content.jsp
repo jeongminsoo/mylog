@@ -19,18 +19,12 @@
 <script>
 	$(document).ready(function() {
 	
+		//댓글 쓰기
+		$('#write').click(function() {
 		
-		$('#submit').click(function() {
-			/* var rnum = $('input[name=rnum]').val();
-			var mid = $('input[name=mid]').val();
-			var rpcontent = $('#rpcontent').val();
-			var rpip = $('input[name=rpip]').val(); */
-
-			/* 	var all = rnum+mid+rpcontent+rpip;
-				console.log(all); */
 			$.ajax({
 				type : 'post', // 타입 (get, post, put 등등)
-				url : 'replywrite.do', // 요청할 서버url
+				url : '${conPath}/reply/write.do', // 요청할 서버url
 				dataType : 'html', // 데이터 타입 (html, xml, json, text 등등)
 				data :$("#wform").serialize(),
 				success : function(data) { // 결과 성공 콜백함수
@@ -42,6 +36,7 @@
 
 		});
 		
+		//댓글 수정
 		
 		 $('.modifyview').click(function () {
 			var rpnum = $(this).attr('id');
@@ -51,7 +46,7 @@
 		
 			 	$.ajax({
 				type: 'get',
-				url: 'replymodify.do',
+				url: '${conPath}/reply/modify.do',
 				dataType: 'html',
 				data: { 'rpnum': rpnum, 'rpcontent': rpcontent, 'rnum':rnum },
 				success: function (data) { 
@@ -64,17 +59,18 @@
 		}); 
 		 
 		 
-			
+		//대댓글
 		 $('.recomment').click(function () {
 			var rpnum = $(this).attr('id');
 			var rnum = $('#rnum'+rpnum).text();
+			
 		
 		
 			 	$.ajax({
 				type: 'get',
-				url: 'replycomment.do',
+				url: '${conPath}/reply/comment.do',
 				dataType: 'html',
-				data: { 'rpnum': rpnum },
+				data: { 'rpnum': rpnum,'rnum':rnum },
 				success: function (data) { 
 					$('#appendwrite'+rpnum).append(data);
 					
@@ -100,7 +96,12 @@
 	<div id="nav">${reviewContent.rrdate }/ ${reviewContent.mname }</div>
 
 	<div id="content">${reviewContent.rcontent }${relist.rpdate }</div>
-
+	
+	<div id="tag">
+		<c:forEach var="t" items="${tags }">
+			<span>#${t.hname }</span>
+		</c:forEach>
+	</div>
 	<button
 		onclick="location.href='${conPath}/review/modify.do?rnum=${reviewContent.rnum}'">수정</button>
 	<button
@@ -111,11 +112,11 @@
 	<div id="cmtwrite">
 		<%-- 	<form action="${conPath }/review/replywrite.do" method="post"> --%>
 		<form name="wform" id="wform" method="post">
-			<input type="hidden" name="rnum" value="${reviewContent.rnum }">
+			<input type="text" name="rnum" value="${reviewContent.rnum }">
 			<input type="text" name="mid" value="AAA">
 			<textarea rows="5" cols="10" id="rpcontent" name="rpcontent"></textarea>
 			<input type="text" name="rpip" value="120.12.10">
-			<button id="submit">작성</button>
+			<button id="write">작성</button>
 		</form>
 		<!-- 	</form> -->
 	</div>
@@ -130,9 +131,16 @@
 		</c:if>
 		<c:if test="${not empty replylist }">
 			<c:forEach items="${replylist }" var="relist">
+			<c:if test="${relist.rpindent eq 1 }">
+			 └─ &nbsp; &nbsp;
+			</c:if>
+			<c:if test="${relist.rpmention != null}">
+				<div>@ ${relist.rpmention }</div>
+			</c:if>
 				<div class="reply">
-					<div id="${relist.rpnum }">${relist.rpnum }</div>
-					<div id="rnum${relist.rpnum }">${relist.rnum }</div>
+		
+					<div id="${relist.rnum }" style="display:none;">${relist.rnum }</div>
+					<div id="rnum${relist.rpnum }" style="display:none;">${relist.rnum }</div> 
 					<div id="">작성자 : ${relist.mname }</div>
 					<div id="append${relist.rpnum }"></div>
 					<div id="rpcontent${relist.rpnum }">
@@ -153,10 +161,12 @@
 						onclick="location.href='${conPath}/review/replymodify.do?rpnum=${relist.rpnum}'"
 						onclick="location.href='${conPath}/review/replycomment.do?rpnum=${relist.rpnum}'" -->
 					<button
-						onclick="location.href='${conPath}/review/replydelete.do?rpnum=${relist.rpnum}&rnum=${relist.rnum }'">삭제</button>
+						onclick="location.href='${conPath}/reply/delete.do?rpnum=${relist.rpnum}&rnum=${relist.rnum }'">삭제</button>
 					<button id="${relist.rpnum }" class="recomment">답변</button>
 					<div id="appendwrite${relist.rpnum }"></div>
 				</div>
+				
+		
 			</c:forEach>
 			
 			<div id="paging">

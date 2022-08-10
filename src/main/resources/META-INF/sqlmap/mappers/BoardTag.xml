@@ -13,6 +13,11 @@
 	
 	<!-- 추가 -->
     	<insert id="BoardTagConnect" parameterType="BoardTag">
-    		INSERT INTO BOARD_TAG(BTNO, RNUM, HNO) VALUES(BTSEQ.NEXTVAL,(SELECT MAX(RNUM) FROM RBOARD), (SELECT HNO FROM HASHTAG WHERE HNAME=#{hname}))
+    		INSERT INTO BOARD_TAG(BTNO, RNUM, HNO) VALUES(BTSEQ.NEXTVAL,#{rnum}, #{hno})
     	</insert>
+    	
+    	<!-- 태그 이름 출력 -->
+    	<select id="tagNameGet" parameterType="int" resultType="BoardTag">
+    		SELECT HNAME FROM HASHTAG H, BOARD_TAG B WHERE H.HNO = B.HNO AND RNUM =#{rnum}
+    	</select>
 </mapper>

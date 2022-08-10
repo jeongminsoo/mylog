@@ -5,6 +5,7 @@ import java.util.StringTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.mylog.dao.BoardTagDao;
 import com.project.mylog.dao.HashtagDao;
 import com.project.mylog.model.Hashtag;
 
@@ -13,13 +14,14 @@ public class HashtagServiceImpl implements HashtagService {
 
 	@Autowired
 	private HashtagDao hashtagDao;
+	
+	private BoardTagDao boardtagDao;
 
 	
 	@Override
 	public int hashtagWrite(String hname) {
 		
-		 
-		 return hashtagDao.hashtagWrite(hname);
+		return hashtagDao.hashtagWrite(hname);
 		
 	}
 
