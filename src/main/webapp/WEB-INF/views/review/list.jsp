@@ -34,7 +34,7 @@
 			<td><a href="${conPath }/review/content.do?rnum=${review.rnum}&pageNum=${reviewPaging.currentPage}&repageNum=1">${review.rtitle }</a></td>
 			<td>${review.mname }</td>
 			<td>${review.rrdate }</td>
-			<td>1</td>
+			<td>${review.cnt }</td>
 		</tr>
 		</c:forEach>
 	</table>

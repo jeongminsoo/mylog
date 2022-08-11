@@ -8,44 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${conPath }/css/style.css" rel="stylesheet">
-<style>
-#main {
-	width: 1200px;
-	height: 700px;
-	margin: 0 auto;
-	border : 1px solid black;
-	border-radius : 20px 20px 20px 20px;
-}
-
-#wrap {
-	width : 1000px;
-	height : 650px;
-	margin: 29px auto;
-	border : 1px solid black;
-	border-radius : 20px 20px 20px 20px;
-	text-align : center;
-}
-
-#wrap table {
-	width : 850px;
-	margin : 10px auto;
-}
-
-#wrap table th {
-	border-bottom : 2px solid black;
-}
-
-#wrap table td {
-	width: 120px;
-	height: 80px;
-	background-color : #fbfbfb;
-	text-align : center;
-	line-height : 0;
-	pedding : 0;
-	line-height : 0;
-}
-</style>
+<link href="${conPath }/css/calendar.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function() {

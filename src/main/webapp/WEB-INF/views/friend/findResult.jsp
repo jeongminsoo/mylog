@@ -32,7 +32,6 @@
 	</script>
 </head>
 <body>
-	<c:set var="oNum" value="${paging.orderNum }"/>
 	<table>
 		<caption>친구 찾기</caption>
 		<c:if test="${empty members }">
@@ -43,7 +42,6 @@
 		<c:if test="${not empty members }">
 			<c:forEach items="${members }" var="m">
 				<tr>
-					<td>${oNum }</td>
 					<td>${m.mname }(${m.mid })</td>
 					<td>
 						<c:if test="${m.existent eq 0 }">
@@ -54,7 +52,6 @@
 						</c:if>
 					</td>
 				</tr>
-				<c:set var="oNum" value="${oNum + 1 }"/>
 			</c:forEach>
 		</c:if>
 	</table>

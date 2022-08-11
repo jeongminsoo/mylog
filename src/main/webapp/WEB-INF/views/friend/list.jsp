@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${conPath }/css/style.css" rel="stylesheet">
+	<link href="${conPath }/css/friendList.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -48,14 +48,6 @@
 			});
 		});
 	</script>
-	<style>
-		#main {
-			width : 1600px;
-			height : 850px;
-			margin : 60px 35px;
-		}
-	</style>
-	
 </head>
 <body>
 	<c:if test="${followResult eq 1 }">
@@ -79,14 +71,20 @@
 		</script>
 	</c:if>
 	<div id="main">
-		<div id="wrap"></div>
-		<a href="${conPath }/friend/findView.do">친구찾기</a>
+		<div id="wrap">
+		<div id="search_wrap">
+			<a href="${conPath }/friend/findView.do">친구찾기</a>
+		</div>
+		<div id="sub_title">
+			<div id="following">팔로잉</div>
+			<div id="follower">팔로워</div>
+		</div>
+		<div id="myList">
 		<form>
 			<p>친구검색 <input type="text" name="mname" placeholder="닉네임을 입력하세요"></p>
 		</form>
 		<div id="listResult">
 			<table>
-				<caption>MY FOLLOW LIST</caption>
 				<c:if test="${empty friends }">
 					<tr>
 						<td>등록된 친구가 없습니다</td>
@@ -104,10 +102,9 @@
 				</c:if>
 			</table>
 		</div>
-		<div id="myFollow">
-			<c:set var="oNum2" value="${paging2.orderNum }"/>
+		</div>
+		<div id="followMe">
 			<table>
-				<caption>나를 FOLLOW한 친구</caption>
 				<c:if test="${empty follows }">
 					<tr>
 						<td>검색결과가 없습니다</td>
@@ -116,7 +113,6 @@
 				<c:if test="${not empty follows }">
 					<c:forEach items="${follows }" var="follow">
 						<tr>
-							<td>${oNum2 }</td>
 							<td>${follow.mname }(${follow.mid })</td>
 							<td>
 								<c:if test="${follow.existent eq 1 }">
@@ -127,10 +123,10 @@
 								</c:if>
 							</td>
 						</tr>
-						<c:set var="oNum2" value="${oNum2 + 1 }"/>
 					</c:forEach>
 				</c:if>
 			</table>
+		</div>
 		</div>
 	</div>
 </body>

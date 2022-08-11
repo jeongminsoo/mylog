@@ -23,7 +23,6 @@
 </head>
 <body>
 	<table>
-		<caption>MY FOLLOW LIST</caption>
 		<c:if test="${empty friends }">
 			<tr>
 				<td>등록된 친구가 없습니다</td>

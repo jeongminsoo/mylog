@@ -26,13 +26,44 @@
 			});
 		});
 	</script>
+	<style>
+		#main {
+	width: 1600px;
+	height: 850px;
+	margin: 60px 35px;
+	background-image: url(../img/main_wraper.png);
+	position: absolute;
+}
+
+#wrap {
+	width: 1200px;
+	height: 700px;
+	margin: 50px auto;
+	border: 1px solid black;
+	border-radius: 15px;
+	text-align: center;
+	position: relative;
+}
+#wrap input {
+	width : 300px;
+	height : 50px;
+	font-size : 1.2em;
+}
+#wrap table {
+	width : 600px;
+	margin : 0 auto;
+	font-size: 1.2em;
+}
+	</style>
 </head>
 <body>
-	<div>
+	<div id="main">
+		<div id="wrap">
 		<form>
-			<p>친구검색 <input type="text" name="mname" placeholder="닉네임을 입력하세요"></p>
+			<input type="text" name="mname" placeholder="닉네임 또는 아이디를 입력하세요">
 		</form>
 		<div id="findResult"></div>
+		</div>
 	</div>
 </body>
 </html>

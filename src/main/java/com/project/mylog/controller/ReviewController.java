@@ -16,6 +16,7 @@ import com.project.mylog.model.BoardTag;
 import com.project.mylog.model.ReviewBoard;
 import com.project.mylog.model.ReviewReplyBoard;
 import com.project.mylog.service.BoardTagService;
+import com.project.mylog.service.HashtagService;
 import com.project.mylog.service.ReveiwReplyBoardService;
 import com.project.mylog.service.ReviewBoardService;
 import com.project.mylog.util.Paging;
@@ -33,11 +34,12 @@ public class ReviewController {
 	@Autowired
 	private BoardTagService btagservice;
 	@Autowired
-	private HashtagDao hashtag;
+	private HashtagService hashtagservice;
 	
 	
 	@RequestMapping(value="list", method= {RequestMethod.GET, RequestMethod.POST})
 	public String reviewList(String pageNum, Model model) {
+		
 		model.addAttribute("reviewList", rboardservice.reviewList(pageNum));
 		model.addAttribute("reviewPaging",new ReviewPaging(rboardservice.reviewCount(), pageNum));
 		
@@ -48,7 +50,7 @@ public class ReviewController {
 	@RequestMapping(value="content", method={RequestMethod.GET, RequestMethod.POST})
 	public String reviewContent(int rnum, Model model, String pageNum, String repageNum) {
 		//model.addAttribute("replylist", replyservice.reviewReplyContent(rnum)); 
-		
+		model.addAttribute("tags", btagservice.tagNameGet(rnum));
 		model.addAttribute("replylist", replyservice.reviewReplyList(rnum, repageNum));
 		model.addAttribute("repaging", new ReplyPaging(replyservice.reviewReplyCount(rnum), repageNum));
 		model.addAttribute("rnum", rnum);
@@ -68,11 +70,9 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="write", method= RequestMethod.POST)
-	public String reviewWrite(MultipartHttpServletRequest mRequest, BoardTag boardtag, ReviewBoard reviewBoard, Model model, String tname) {
+	public String reviewWrite(MultipartHttpServletRequest mRequest, BoardTag boardtag, ReviewBoard reviewBoard, Model model, String hname) {
 		model.addAttribute("reviewWrite", rboardservice.reviewWrite(mRequest, reviewBoard));
-		model.addAttribute("tags", rboardservice.reviewWrite(mRequest, reviewBoard));
-		
-		//btagservice.BoardTagConnect(boardtag, hname);
+		btagservice.BoardTagConnect(boardtag, hname);
 		return "forward:list.do";
 		
 	}
@@ -112,48 +112,9 @@ public class ReviewController {
 //		return "forward:content.do";
 //	}
 //	
-	//댓글
+	//�뙎湲�
 	
-	@RequestMapping(value="replywrite", method= RequestMethod.POST)
-	public String replyWrite(int rnum, Model model, ReviewReplyBoard replyBoard) {
-		model.addAttribute("rnum", rnum);
-		model.addAttribute("replywrite", replyservice.reviewReplyWrite(replyBoard));
-		return "forward:content.do";
-	}
-
-	@RequestMapping(value="replydelete", method= RequestMethod.GET)
-	public String replyDelete(int rpnum, Model model, int rnum) {
-		model.addAttribute("rpnum", rpnum);
-		model.addAttribute("rnum", rnum);
-		model.addAttribute("replyDelete", replyservice.reviewReplyDelete(rpnum));
-		return "forward:content.do";
-	}
 	
-
-	@RequestMapping(value="replymodify", method= RequestMethod.GET)
-	public String replyModifyView(int rpnum, Model model, ReviewReplyBoard replyBoard) {
-		model.addAttribute("rpnum", rpnum);
-		model.addAttribute("replymview", replyservice.reviewReplyContent(rpnum));
-		
-		return "review/replymodify";
-	}
-	
-	@RequestMapping(value="replymodify", method= RequestMethod.POST)
-	public String replyModify(Model model, ReviewReplyBoard replyBoard) {
-		//model.addAttribute("rpnum", rpnum);
-		System.out.println("수정할 데이터 : " + replyBoard);
-		model.addAttribute("replyModify", replyservice.reviewReplyModify(replyBoard));
-		return "forward:content.do";
-	}
-
-	
-	@RequestMapping(value="replycomment", method= RequestMethod.GET)
-	public String replyComment(Model model, int rpnum) {
-		//model.addAttribute("rpnum", rpnum);
-		model.addAttribute("rpnum", rpnum);
-		return "review/replycomment";
-	}
-
 	
 	
 

@@ -1,5 +1,9 @@
 package com.project.mylog.service;
 
+import java.util.List;
+
+import java.util.StringTokenizer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +17,7 @@ public class BoardTagServiceImpl implements BoardTagService {
 
 	@Autowired
 	private BoardTagDao boardtagdao;
-	
+
 	@Autowired
 	private HashtagDao hashtagdao;
 	@Autowired
@@ -22,14 +26,27 @@ public class BoardTagServiceImpl implements BoardTagService {
 	@Override
 	public void BoardTagConnect(BoardTag boardtag, String hname) {
 		boardtag.setRnum(rboarddao.getRnum());
-		while(hname == "") {
+		StringTokenizer st = new StringTokenizer(hname);
+
+		while(st.hasMoreTokens()) {
+			hname = st.nextToken();
+			hashtagdao.hashtagWrite(hname);
 			boardtag.setHno(hashtagdao.getHno(hname));
+			boardtagdao.BoardTagConnect(boardtag);
 		}
 		
-	
-		boardtagdao.BoardTagConnect(boardtag);
-	}
-	
 
+	
+	
+	}
+
+
+
+
+	@Override
+	public List<BoardTag> tagNameGet(int rnum) {
+		
+		return boardtagdao.tagNameGet(rnum);
+	}
 
 }

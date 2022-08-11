@@ -23,13 +23,9 @@ public class FriendController {
 	private AlertService alertService;
 	
 	@RequestMapping(value="list", method = {RequestMethod.GET, RequestMethod.POST})
-	public String friendList(HttpSession session, Model model) {
-		Paging paging1 = new Paging(friendService.countMyFriend(session), "1");
-		Paging paging2 = new Paging(friendService.countFollowMe(session), "1");
+	public String friendList(HttpSession session, String pageNum,Model model) {
 		model.addAttribute("friends", friendService.myFriendList(session));
 		model.addAttribute("follows", friendService.followMe(session));
-		model.addAttribute("paging1", paging1);
-		model.addAttribute("paging2", paging2);
 		return "friend/list";
 	}
 	
