@@ -21,7 +21,7 @@
 		//	console.log(rpnum + ',' + rnum +", " +rpcontent );
 			$.ajax({
 				type : 'post',
-				url : 'replymodify.do',
+				url : '${conPath}/reply/modify.do',
 				dataType : 'html',
 				data :$("#mform").serialize(),
 				success : function(data) {

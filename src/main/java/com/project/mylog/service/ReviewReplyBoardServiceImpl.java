@@ -15,11 +15,10 @@ public class ReviewReplyBoardServiceImpl implements ReveiwReplyBoardService {
 
 	@Autowired
 	private ReviewReplyBoardDao replyboardDao;
-	
-	
+
 	@Override
 	public int reviewReplyWrite(ReviewReplyBoard replyBoard) {
-		// TODO Auto-generated method stub
+		System.out.println(1);
 		return replyboardDao.reviewReplyWrite(replyBoard);
 	}
 
@@ -58,15 +57,19 @@ public class ReviewReplyBoardServiceImpl implements ReveiwReplyBoardService {
 	}
 
 	@Override
-	public void reviewReplyStepA(ReviewReplyBoard replyBoard) {
-		replyboardDao.reviewReplyStepA(replyBoard);
-
+	public int reviewReplyComment(ReviewReplyBoard replyBoard) {
+		int rpnum = replyBoard.getRpnum();
+		ReviewReplyBoard ogreply = replyboardDao.reviewReplyContent(rpnum);
+		replyBoard.setRpgroup(ogreply.getRpgroup());
+		if (ogreply.getRpindent() == 1) {
+			replyBoard.setRpmention(ogreply.getMname());
+		}
+		return replyboardDao.reviewReplyComment(replyBoard);
 	}
 
 	@Override
-	public int reviewReplyComment(ReviewReplyBoard replyBoard) {
-		// TODO Auto-generated method stub
-		return replyboardDao.reviewReplyComment(replyBoard);
+	public String replyMname(int rpnum) {
+		return replyboardDao.replyMname(rpnum);
 	}
 
 }

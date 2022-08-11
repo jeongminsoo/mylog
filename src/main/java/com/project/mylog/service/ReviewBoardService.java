@@ -23,5 +23,7 @@ public interface ReviewBoardService {
 	public int reviewCount();
 	
 	public int getRnum();
+	
+	
 
 }
