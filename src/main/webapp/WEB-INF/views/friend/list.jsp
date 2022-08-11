@@ -48,6 +48,14 @@
 			});
 		});
 	</script>
+	<style>
+		#main {
+			width : 1600px;
+			height : 850px;
+			margin : 60px 35px;
+		}
+	</style>
+	
 </head>
 <body>
 	<c:if test="${followResult eq 1 }">
@@ -70,13 +78,13 @@
 			alert('언팔로우 실패');
 		</script>
 	</c:if>
-	<div>
+	<div id="main">
+		<div id="wrap"></div>
 		<a href="${conPath }/friend/findView.do">친구찾기</a>
 		<form>
 			<p>친구검색 <input type="text" name="mname" placeholder="닉네임을 입력하세요"></p>
 		</form>
 		<div id="listResult">
-			<c:set var="oNum1" value="${paging1.orderNum }"/>
 			<table>
 				<caption>MY FOLLOW LIST</caption>
 				<c:if test="${empty friends }">
@@ -87,13 +95,11 @@
 				<c:if test="${not empty friends }">
 					<c:forEach items="${friends }" var="friend">
 						<tr>
-							<td>${oNum1 }</td>
 							<td>${friend.mname }(${friend.fid })</td>
 							<td>
 								<button id="${friend.fid }" class="unfollow">unfollow</button>
 							</td>
 						</tr>
-						<c:set var="oNum1" value="${oNum1 + 1 }"/>
 					</c:forEach>
 				</c:if>
 			</table>

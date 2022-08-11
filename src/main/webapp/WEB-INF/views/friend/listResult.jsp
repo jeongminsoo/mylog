@@ -22,7 +22,6 @@
 	</script>
 </head>
 <body>
-	<c:set var="oNum" value="${paging.orderNum }"/>
 	<table>
 		<caption>MY FOLLOW LIST</caption>
 		<c:if test="${empty friends }">
@@ -33,11 +32,9 @@
 		<c:if test="${not empty friends }">
 			<c:forEach items="${friends }" var="f">
 				<tr>
-					<td>${oNum }</td>
 					<td>${f.mname }(${f.fid })</td>
 					<td><button id="${f.fid }" class="unfollow">unfollow</button></td>
 				</tr>
-				<c:set var="oNum" value="${oNum + 1 }"/>
 			</c:forEach>
 		</c:if>
 	</table>

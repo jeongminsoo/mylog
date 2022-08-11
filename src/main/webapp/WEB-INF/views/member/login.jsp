@@ -12,7 +12,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			$('#search').click(function() {
+			$('.search').click(function() {
 				var searchIdPw = open('${conPath}/member/searchIdPwView.do', '',
 									'width=800, height=500, left=800, top=300');
 				if (!searchIdPw) {
@@ -21,6 +21,56 @@
 			});
 		});
 	</script>
+	<style>
+		#main {
+			width : 1600px;
+			height : 850px;
+			margin : 0 auto;
+			border : 1px solid black;
+		}
+		
+		#wrap {
+			width : 1000px;
+			height : 600px;
+			margin : 100px auto;
+			border : 1px solid black;
+			text-align : center;
+		}
+		#wrap table {
+			width : 600px;
+			margin : 0 auto;
+			margin-top : 300px;
+			text-align : center;
+		}
+		
+		#wrap table td {
+			height : 50px;
+		}
+		
+		.search {
+			cursor : pointer;
+		}
+		input:not(.btn) {
+			width : 100%;
+			height : 90%;
+			border : none;
+			border-bottom : 1px solid lightgray;
+			border-radius : 10px;
+			font-size : 1.2em;
+		}
+		
+		.btn {
+			width : 300px;
+			height : 30px;
+			font-size : 1.2em;
+			border : none;
+			border-radius : 10px;
+			font-weight : bold;
+			background-color : #03045E;
+			color : white;
+			cursor : pointer;
+		}
+	</style>
 </head>
 <body>
 	<c:if test="${joinResult eq 0 }">
@@ -39,25 +89,25 @@
 			alert('${loginResult}');
 		</script>
 	</c:if>
-	<div>
+	<div id="main">
+	<div id="wrap">
 		<form action="${conPath }/member/login.do" method="post">
 			<table>
 				<tr>
-					<th>아이디</th>
-					<td><input type="text" name="mid" value="${mid}"></td>
+					<td><input type="text" name="mid" value="${mid}" placeholder="ID"></td>
 				</tr>
 				<tr>
-					<th>비밀번호</th>
-					<td><input type="password" name="mpw" value="${mpw}"></td>
+					<td><input type="password" name="mpw" value="${mpw}" placeholder="PASSWORD"></td>
+				</tr>
+				<tr>
+					<td>
+						<p><input type="submit" value="Login" class="btn"></p>
+						<span class="search">아이디/비밀번호 찾기</span>
+					</td>
 				</tr>
 			</table>
-			<p>
-				<input type="submit" value="로그인" class="btn">
-			</p>
-			<p>
-				<span id="search">아이디/비밀번호 찾기</span>
-			</p>
 		</form>
+	</div>
 	</div>
 </body>
 </html>

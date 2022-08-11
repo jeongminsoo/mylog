@@ -56,56 +56,104 @@
 		});
 	}
 </script>
-
+<style>
+	#main {
+		width : 1600px;
+		height : 850px;
+		margin : 0 auto;
+		border : 1px solid black;
+	}
+	#wrap {
+		width : 1000px;
+		height : 700px;
+		margin : 50px auto;
+		border : 1px solid black;
+	}
+	
+	#wrap table {
+		width : 600px;
+		margin : 50px auto;
+		text-align : center;
+	}
+	
+	#wrap table td {
+		height : 50px;
+		text-align : left;
+	}
+	
+	input:not(.btn) {
+		width : 70%;
+		height : 90%;
+		border : none;
+		border-bottom : 1px solid lightgray;
+		border-radius : 10px;
+		font-size : 1.2em;
+	}
+	
+	.mmotto {
+		width : 70%;
+		font-size : 1.5em;
+		resize : none;
+	}
+	.btn {
+		width : 15%;
+		border : none;
+		height : 70%;
+		border-radius : 10px;
+		background-color : #03045E;
+		color : white;
+		margin-left : 5px;
+	}
+	#wrap table .last {
+		text-align : center;
+	}
+</style>
 </head>
 <body>
-	<div>
+	<div id="main">
+		<div id="wrap">
 		<form action="${conPath }/member/join.do" method="post">
 			<table>
 				<caption>회원가입</caption>
 				<tr>
-					<th><label for="mid">아이디</label></th>
 					<td>
-						<input type="text" name="mid" id="mid"> 
+						<input type="text" name="mid" id="mid" placeholder="ID"> 
 						<input type="button" value="중복확인" class="btn" onclick="idCheck(mid)">
-						<div id="idCheckResult"></div>
 					</td>
 				</tr>
 				<tr>
-					<th><label for="mpw">비밀번호</label></th>
-					<td><input type="password" name="mpw" id="mpw"></td>
+					<td><div id="idCheckResult"></div></td>
 				</tr>
 				<tr>
-					<th><label for="mpwChk">비밀번호확인</label></th>
-					<td><input type="password" name="mpwChk" id="mpwChk">
+					<td><input type="password" name="mpw" id="mpw" placeholder="PASSWORD"></td>
+				</tr>
+				<tr>
+					<td><input type="password" name="mpwChk" id="mpwChk" placeholder="PASSWORD CHECK">
 					</td>
 				</tr>
 				<tr>
-					<th><label for="mname">닉네임</label></th>
-					<td><input type="text" name="mname" id="mname"></td>
+					<td><input type="text" name="mname" id="mname" placeholder="NICKNAME"></td>
 				</tr>
 				<tr>
-					<th>생년월일</th>
 					<td><input type="date" name="tempmbirth"
 						class="datepicker" id="tempmbirth"></td>
 				</tr>
 				<tr>
-					<th><label for="memail">이메일</label></th>
 					<td>
-						<input type="email" name="memail" id="memail">
+						<input type="email" name="memail" id="memail" placeholder="EMAIL">
 						<input type="button" value="중복확인" class="btn" onclick="emailCheck(memail)">
-						<div id="emailCheckResult"></div>
 					</td>
 				</tr>
+				<tr><td><div id="emailCheckResult"></div></td></tr>
 				<tr>
-					<th>좌우명</th>
-					<td><textarea rows="5" cols="10" name="mmotto" id="mmotto"></textarea></td>
+					<td><textarea rows="2" cols="20" name="mmotto" class="mmotto" placeholder="MOTTO"></textarea></td>
+				</tr>
+				<tr>
+					<td class="last"><input type="submit" value="가입하기" class="btn"></td>
 				</tr>
 			</table>
-			<div>
-				<input type="submit" value="가입하기" class="btn">
-			</div>
 		</form>
+		</div>
 	</div>
 </body>
 <link rel="stylesheet"
