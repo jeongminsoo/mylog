@@ -20,6 +20,7 @@
 	$(document).ready(function() {
 	
 		//댓글 쓰기
+<<<<<<< HEAD
 		$('#cwrite').click(function() {
 			/* var rnum = $('input[name=rnum]').val();
 			var mid = $('input[name=mid]').val();
@@ -28,6 +29,10 @@
 
 			/* 	var all = rnum+mid+rpcontent+rpip;
 				console.log(all); */
+=======
+		$('#write').click(function() {
+		
+>>>>>>> 3503eb58da1550e89b304c885f9f4477b5dc6600
 			$.ajax({
 				type : 'post', // 타입 (get, post, put 등등)
 				url : '${conPath}/reply/write.do', // 요청할 서버url
@@ -121,7 +126,11 @@
 			<input type="text" name="mid" value="AAA">
 			<textarea rows="5" cols="10" id="rpcontent" name="rpcontent"></textarea>
 			<input type="text" name="rpip" value="120.12.10">
+<<<<<<< HEAD
 			<button id="cwrite">작성</button>
+=======
+			<button id="write">작성</button>
+>>>>>>> 3503eb58da1550e89b304c885f9f4477b5dc6600
 		</form>
 		<!-- 	</form> -->
 	</div>
