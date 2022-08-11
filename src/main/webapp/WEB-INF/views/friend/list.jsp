@@ -70,10 +70,11 @@
 			alert('언팔로우 실패');
 		</script>
 	</c:if>
-	<div id="main">
+	<div id="main_wrap">
 		<div id="wrap">
 		<div id="search_wrap">
 			<a href="${conPath }/friend/findView.do">친구찾기</a>
+			<div id="alert_icon"><span class="alert_num">${alertNum }</span></div>
 		</div>
 		<div id="sub_title">
 			<div id="following">팔로잉</div>

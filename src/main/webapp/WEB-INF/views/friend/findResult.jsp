@@ -33,7 +33,6 @@
 </head>
 <body>
 	<table>
-		<caption>친구 찾기</caption>
 		<c:if test="${empty members }">
 			<tr>
 				<td>검색결과가 없습니다</td>

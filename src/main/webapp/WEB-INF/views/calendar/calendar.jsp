@@ -19,7 +19,7 @@
 </script>
 </head>
 <body>
-	<div id="main">
+	<div id="main_wrap">
 		<div id="wrap">
 			<h2>${year }년${month }월</h2>
 			<form action="${conPath }/calendar.do">

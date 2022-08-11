@@ -26,6 +26,7 @@ public class FriendController {
 	public String friendList(HttpSession session, String pageNum,Model model) {
 		model.addAttribute("friends", friendService.myFriendList(session));
 		model.addAttribute("follows", friendService.followMe(session));
+		model.addAttribute("alertNum", alertService.countNotRead(session));
 		return "friend/list";
 	}
 	

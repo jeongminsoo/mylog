@@ -15,6 +15,36 @@
 			
 		});
 	</script>
+	<style>
+		#main_wrap {
+	width: 1600px;
+	height: 850px;
+	margin: 60px 35px;
+	background-image : url(../img/main_wraper.png);
+	position : absolute;
+}
+
+#wrap {
+	width: 1000px;
+	height: 600px;
+	margin: 200px auto;
+	border: 1px solid white;
+	text-align: center;
+	position : relative;
+}
+#wrap table {
+	border-collapse: collapse;
+}
+#wrap table tr {
+	border-bottom : 1px solid lightgray;
+	border-top : 1px solid lightgray;
+}
+
+#wrap table th {
+	background-color : lightgray;
+}
+
+	</style>
 </head>
 <body>
 	<c:if test="${updateResult eq 0 }">
@@ -27,7 +57,8 @@
 			alert('질문이 수정되었습니다');
 		</script>
 	</c:if>
-	<div class="content">
+	<div id="main_wrap">
+		<div id="wrap">
 			<table>
 				<col style="width : 200px;">
 				<col style="width : 600px;">
@@ -59,6 +90,7 @@
 					<button onclick="location.href='${conPath}/qna/replyView.do?qno=${qna.qno }&pageNum=${param.pageNum}'">답글작성</button>
 				</c:if>
 				<button onclick="location.href='${conPath}/qna/list.do?pageNum=${param.pageNum}'">목록</button>
+			</div>
 			</div>
 		</div>
 </body>

@@ -15,6 +15,42 @@
 			
 		});
 	</script>
+	<style>
+		#main_wrap {
+	width: 1600px;
+	height: 850px;
+	margin: 60px 35px;
+	background-image : url(../img/main_wraper.png);
+	position : absolute;
+}
+
+#wrap {
+	width: 1000px;
+	height: 600px;
+	margin: 200px auto;
+	border: 1px solid white;
+	text-align: center;
+	position : relative;
+}
+
+#noticeList table {
+	border-collapse: collapse;
+	border-top : 1px solid black;
+	border-bottom : 1px solid black;
+}
+
+#noticeList table tr:first-child {
+	border-bottom : 1px solid black;
+}
+
+#noticeList {
+	height : 400px;
+}
+.paging {
+	width : 500px;
+	margin : 0 auto;
+}
+	</style>
 </head>
 <body>
 	<c:if test="${writeResult eq 0 }">
@@ -37,11 +73,12 @@
 			alert('공지사항이 삭제되었습니다');
 		</script>
 	</c:if>
-	<div class="content">
-		<div>
+	<div id="main_wrap">
+		<div id="wrap">
 			<c:if test="${admin != null }">
 				<a href="${conPath }/notice/writeView.do">공지작성</a>
 			</c:if>
+			<div id="noticeList">
 			<table>
 				<col style="width: 135px;">
 				<col style="width: 395px;">
@@ -71,8 +108,8 @@
 					</c:forEach>
 				</c:if>
 			</table>
-		</div>
-		<div class="paging">
+			</div>
+			<div class="paging">
 			<a
 				href="${conPath }/notice/list.do?pageNum=${paging.startPage - 1 eq 0 ? 1 : paging.startPage-1}">이전</a>
 			<c:forEach var="j" begin="${paging.startPage }" end="${paging.endPage }">
@@ -85,6 +122,7 @@
 			</c:forEach>
 			<a
 				href="${conPath }/notice/list.do?pageNum=${paging.endPage == paging.pageCnt ? paging.endPage : paging.endPage + 1 }">다음</a>
+		</div>
 		</div>
 	</div>
 </body>

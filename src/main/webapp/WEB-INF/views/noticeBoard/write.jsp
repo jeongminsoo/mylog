@@ -17,7 +17,7 @@
 	</script>
 </head>
 <body>
-	<div>
+	<div id="main_wrap">
 		<form action="${conPath }/notice/write.do" method="post">
 			<input type="hidden" name="aid" value="${admin.aid }">
 			<div class="write">

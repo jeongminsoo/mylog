@@ -15,6 +15,43 @@
 			
 		});
 	</script>
+	<style>
+		#main_wrap {
+	width: 1600px;
+	height: 850px;
+	margin: 60px 35px;
+	background-image : url(../img/main_wraper.png);
+	position : absolute;
+}
+
+#wrap {
+	width: 1000px;
+	height: 600px;
+	margin: 200px auto;
+	border: 1px solid white;
+	text-align: center;
+	position : relative;
+}
+
+#qnaList table {
+	border-collapse: collapse;
+	border-collapse: collapse;
+	border-top : 1px solid black;
+	border-bottom : 1px solid black;
+}
+
+#qnaList table tr:first-child {
+	border-bottom : 1px solid black;
+}
+
+#qnaList {
+	height : 400px;
+}
+.paging {
+	width : 500px;
+	margin : 0 auto;
+}
+	</style>
 </head>
 <body>
 	<c:if test="${writeResult eq 0 }">
@@ -38,11 +75,11 @@
 		</script>
 	</c:if>
 	<c:set var="iNum" value="${paging.inverseNum }"/>
-	<div>
+	<div id="main_wrap">
+		<div id="wrap">
 		<a href="${conPath }/qna/writeView.do">qna작성</a>
    		<a href="${conPath }/qna/myList.do">myList</a>
-		<div class="content">
-			<h1>ALL LIST</h1>
+   		<div id="qnaList">
 			<table>
 					<col style="width : 100px;">
 					<col style="width : 470px;">
@@ -87,8 +124,8 @@
 					</c:forEach>
 				</c:if>
 			</table>
-		</div>
-		<div class="paging">
+			</div>
+			<div class="paging">
 				<a href="${conPath }/qna/list.do?pageNum=${paging.startPage - 1 eq 0 ? 1 : paging.startPage-1}">이전</a>
 				<c:forEach var="j" begin="${paging.startPage }" end="${paging.endPage }">
 					<c:if test="${j eq paging.currentPage }">
@@ -99,6 +136,7 @@
 					</c:if>
 				</c:forEach>
 				<a href="${conPath }/qna/list.do?pageNum=${paging.endPage == paging.pageCnt ? paging.endPage : paging.endPage + 1 }">다음</a>
+			</div>
 		</div>
 	</div>
 </body>

@@ -27,7 +27,7 @@
 			alert('공지사항이 수정되었습니다');
 		</script>
 	</c:if>
-	<div class="content">
+	<div id="main_wrap">
 			<table>
 				<col style="width : 200px;">
 				<col style="width : 600px;">

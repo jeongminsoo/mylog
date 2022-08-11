@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${conPath }/css/style.css" rel="stylesheet">
+	<link href="${conPath }/css/login.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -21,56 +21,6 @@
 			});
 		});
 	</script>
-	<style>
-		#main {
-			width : 1600px;
-			height : 850px;
-			margin : 0 auto;
-			border : 1px solid black;
-		}
-		
-		#wrap {
-			width : 1000px;
-			height : 600px;
-			margin : 100px auto;
-			border : 1px solid black;
-			text-align : center;
-		}
-		#wrap table {
-			width : 600px;
-			margin : 0 auto;
-			margin-top : 300px;
-			text-align : center;
-		}
-		
-		#wrap table td {
-			height : 50px;
-		}
-		
-		.search {
-			cursor : pointer;
-		}
-		input:not(.btn) {
-			width : 100%;
-			height : 90%;
-			border : none;
-			border-bottom : 1px solid lightgray;
-			border-radius : 10px;
-			font-size : 1.2em;
-		}
-		
-		.btn {
-			width : 300px;
-			height : 30px;
-			font-size : 1.2em;
-			border : none;
-			border-radius : 10px;
-			font-weight : bold;
-			background-color : #03045E;
-			color : white;
-			cursor : pointer;
-		}
-	</style>
 </head>
 <body>
 	<c:if test="${joinResult eq 0 }">
@@ -89,7 +39,7 @@
 			alert('${loginResult}');
 		</script>
 	</c:if>
-	<div id="main">
+	<div id="main_wrap">
 	<div id="wrap">
 		<form action="${conPath }/member/login.do" method="post">
 			<table>

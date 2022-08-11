@@ -15,9 +15,28 @@
 			
 		});
 	</script>
+	<style>
+		#main_wrap {
+	width: 1600px;
+	height: 850px;
+	margin: 60px 35px;
+	background-image : url(../img/main_wraper.png);
+	position : absolute;
+}
+
+#wrap {
+	width: 1000px;
+	height: 600px;
+	margin: 200px auto;
+	border: 1px solid white;
+	text-align: center;
+	position : relative;
+}
+	</style>
 </head>
 <body>
-	<div>
+	<div id="main_wrap">
+		<div id="wrap">
 		<form action="${conPath }/qna/write.do" method="post">
 			<input type="hidden" name="mid" value="${member.mid }">
 			<div class="write">
@@ -45,6 +64,7 @@
 				<input type="button" value="목록" class="btn" onclick="location.href='${conPath}/qna/list.do?pageNum=1'">
 			</div>
 		</form>
+		</div>
 	</div>
 </body>
 </html>

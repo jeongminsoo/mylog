@@ -41,12 +41,12 @@
 	</script>
 </head>
 <body>
-	<div>
+	<div id="main_wrap">
 		<form action="${conPath }/member/modify.do" method="post">
 			<input type="hidden" name="mid" value="${myInfo.mid }">
 			<input type="hidden" name="memail" value="${myInfo.memail }">
 			<table>
-				<caption>회원가입</caption>
+				<caption>정보수정</caption>
 				<tr>
 					<th><label for="mid">아이디</label></th>
 					<td>${myInfo.mid }</td>

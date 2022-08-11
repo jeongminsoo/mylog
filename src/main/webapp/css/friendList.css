@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#main {
+#main_wrap {
 	width: 1600px;
 	height: 850px;
 	margin: 60px 35px;
@@ -20,12 +20,12 @@
 
 #search_wrap {
 	width: 1200px;
-	height: 50px;
+	height: 70px;
 	border: 1px solid black;
 	box-sizing: border-box;
 	border-radius: 15px 15px 0 0;
-	position: relative;
-	line-height: 50px;
+	line-height: 70px;
+	overflow : hidden;
 }
 
 #search_wrap a {
@@ -58,7 +58,7 @@
 
 #wrap #myList, #wrap #followMe {
 	width: 600px;
-	height: 600px;
+	height: 580px;
 	border: 1px solid black;
 	box-sizing: border-box;
 	position: relative;
@@ -102,4 +102,30 @@ button {
 	width : 50%;
 	height : 90%;
 	font-weight : bold;
+}
+
+#alert_icon {
+	width : 50px;
+	height : 50px;
+	background-image: url(../img/alert.png);
+	position: relative;
+	float : right;
+	margin : 5px 5px;
+}
+
+#alert_icon .alert_num {
+	position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    height: 25px;
+    width: 25px;
+    line-height: 25px;
+    text-align: center;
+    background-color: red;
+    border-radius: 15px;
+    display: inline-block;
+    color : white;
+    font-weight : bold;
+    font-size : 1em;
 }

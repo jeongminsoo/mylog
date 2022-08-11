@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${conPath }/css/style.css" rel="stylesheet">
+<link href="${conPath }/css/join.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function() {
@@ -56,65 +56,13 @@
 		});
 	}
 </script>
-<style>
-	#main {
-		width : 1600px;
-		height : 850px;
-		margin : 0 auto;
-		border : 1px solid black;
-	}
-	#wrap {
-		width : 1000px;
-		height : 700px;
-		margin : 50px auto;
-		border : 1px solid black;
-	}
-	
-	#wrap table {
-		width : 600px;
-		margin : 50px auto;
-		text-align : center;
-	}
-	
-	#wrap table td {
-		height : 50px;
-		text-align : left;
-	}
-	
-	input:not(.btn) {
-		width : 70%;
-		height : 90%;
-		border : none;
-		border-bottom : 1px solid lightgray;
-		border-radius : 10px;
-		font-size : 1.2em;
-	}
-	
-	.mmotto {
-		width : 70%;
-		font-size : 1.5em;
-		resize : none;
-	}
-	.btn {
-		width : 15%;
-		border : none;
-		height : 70%;
-		border-radius : 10px;
-		background-color : #03045E;
-		color : white;
-		margin-left : 5px;
-	}
-	#wrap table .last {
-		text-align : center;
-	}
-</style>
 </head>
 <body>
-	<div id="main">
+	<div id="main_wrap">
 		<div id="wrap">
 		<form action="${conPath }/member/join.do" method="post">
 			<table>
-				<caption>회원가입</caption>
+				<caption><h2>회원가입</h2></caption>
 				<tr>
 					<td>
 						<input type="text" name="mid" id="mid" placeholder="ID"> 
@@ -135,8 +83,8 @@
 					<td><input type="text" name="mname" id="mname" placeholder="NICKNAME"></td>
 				</tr>
 				<tr>
-					<td><input type="date" name="tempmbirth"
-						class="datepicker" id="tempmbirth"></td>
+					<td><input type="text" name="tempmbirth"
+						class="datepicker" id="tempmbirth" placeholder="BIRTHDAY"></td>
 				</tr>
 				<tr>
 					<td>
