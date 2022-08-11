@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${conPath }/css/style.css" rel="stylesheet">
+	<link href="${conPath }/css/team/teamApplyList.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -34,24 +34,42 @@
 			history.back();
 		</script>
 	</c:if>
-	<table>
-		<caption>${teamDetail.tname } 그룹 신청자 list</caption>
-		<c:if test="${empty teamApplyList }">
+	<div class="wrap">
+		<table class="teamApplyList_wrap">
 			<tr>
-				<td>등록된 신청자가 없습니다.</td>
+				<td class="teamApplyList_header">${teamDetail.tname } 신청자</td>
 			</tr>
-		</c:if>
-		<c:if test="${not empty teamApplyList }">
-			<c:forEach items="${teamApplyList }" var="list">
+			<c:if test="${empty teamApplyList }">
 				<tr>
-	  				<td>${list.mname }(${list.mid })</td>
-	  				<td>
-	  					<button onclick="location.href='${conPath}/teammember/permitApplyTeam.do?tmno=${list.tmno }&tno=${list.tno }'">수락</button>
-	  					<button onclick="location.href='${conPath}/teammember/deleteApplyTeam_TL.do?mid=${list.mid }&tno=${list.tno }'">거절</button>
-	  				</td>
+					<td>
+						<div class="teamApplyList_main_wrap"><div class="teamApplyList_main">
+							등록된 신청자가 없습니다.
+						</div></div>
+					</td>
 				</tr>
-			</c:forEach>
-		</c:if>
-	</table>
+			</c:if>
+			<c:if test="${not empty teamApplyList }">
+				<tr><td>
+				<div class="teamApplyList_main_wrap">
+					<c:forEach items="${teamApplyList }" var="list">
+						<div class="teamApplyList_main">
+				  			<table>
+				  				<tr>
+					  				<td>${list.mname }(${list.mid })</td>
+					  				<td style="width: 200px; text-align: right;">
+						  				<button class="btn" 
+						  					onclick="location.href='${conPath}/teammember/permitApplyTeam.do?tmno=${list.tmno }&tno=${list.tno }'">[수락]</button>
+						  				<button class="btn" 
+						  					onclick="location.href='${conPath}/teammember/deleteApplyTeam_TL.do?mid=${list.mid }&tno=${list.tno }'">[거절]</button>
+					  				</td>
+				  				</tr>
+				  			</table>
+						</div>
+					</c:forEach>
+				</div>
+				</td></tr>
+			</c:if>
+		</table>
+	</div>
 </body>
 </html>

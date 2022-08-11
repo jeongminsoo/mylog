@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${conPath}/css/style.css" rel="stylesheet">
+<link href="${conPath}/css/team/teamDetails.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 		function (){
@@ -17,40 +17,47 @@
 	</script>
 </head>
 <body>
-	<div id="content">
-		<table>
-			<caption>${teamDetail.tname }그룹상세보기</caption>
+<div class="wrap">
+	<div class="myTeamDetail">
+		<table class="myTeamDetail">
 			<tr>
-				<th>그룹명(인원)</th>
-				<td>${teamDetail.tname }(${teamMemberTotCnt }명)</td>
-			</tr>
-			<tr>
-				<th>그룹 팀장</th>
-				<td>${teamDetail.mid }</td>
-			</tr>
-			<tr>
-				<th>그룹원</th>
-				<td>
-					<table>
-						<c:forEach items="${teamMemberList }" var="tmList">
-							<tr>
-								<td>${tmList.mid }</td>
-							</tr>
-						</c:forEach>
-					</table>
+				<td colspan="2">
+					<h4>[${teamDetail.tname }] GROUP DETAIL</h4>
 				</td>
 			</tr>
 			<tr>
+				<th>GroupName(tot)</th>
+				<td>${teamDetail.tname }(${teamMemberTotCnt }명)</td>
+			</tr>
+			<tr>
+				<th>GroupCap.</th>
+				<td>${teamDetail.mid }</td>
+			</tr>
+			<tr>
+				<th>GroupMem.</th>
+				<td>
+					<c:forEach items="${teamMemberList }" var="tmList">
+						${tmList.mid }
+					</c:forEach>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"> ... </td>
+			</tr>
+			<tr class="btn">
 				<td colspan="2">
 					<c:if test="${empty tMemberDetail }">
-						<button onclick="location.href='${conPath }/teammember/applyTeamMember.do?mid=${member.mid }&tno=${teamDetail.tno }'">그룹가입 신청</button>
+						<button class="btn" 
+							onclick="location.href='${conPath }/teammember/applyTeamMember.do?mid=${member.mid }&tno=${teamDetail.tno }'">그룹가입 신청</button>
 					</c:if>
 					<c:if test="${tMemberDetail.tmcheck eq 0 }">
-						<button onclick="location.href='${conPath }/teammember/deleteApplyTeam.do?mid=${member.mid }&tno=${teamDetail.tno }'">그룹가입 신청 철회</button>
+						<button class="btn" 
+							onclick="location.href='${conPath }/teammember/deleteApplyTeam.do?mid=${member.mid }&tno=${teamDetail.tno }'">그룹가입 신청 철회</button>
 					</c:if>
 				</td>
 			</tr>
 		</table>
 	</div>
+</div>
 </body>
 </html>
