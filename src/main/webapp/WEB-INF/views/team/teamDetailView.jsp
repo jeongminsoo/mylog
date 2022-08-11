@@ -37,22 +37,25 @@
 				<th>GroupMem.</th>
 				<td>
 					<c:forEach items="${teamMemberList }" var="tmList">
-						${tmList.mid }
+						<p>${tmList.mid }</p>
 					</c:forEach>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2"> ... </td>
 			</tr>
-			<tr class="btn">
+			<tr>
 				<td colspan="2">
 					<c:if test="${empty tMemberDetail }">
 						<button class="btn" 
-							onclick="location.href='${conPath }/teammember/applyTeamMember.do?mid=${member.mid }&tno=${teamDetail.tno }'">그룹가입 신청</button>
+							onclick="location.href='${conPath }/teammember/applyTeamMember.do?mid=${member.mid }&tno=${teamDetail.tno }'">[그룹가입 신청]</button>
 					</c:if>
 					<c:if test="${tMemberDetail.tmcheck eq 0 }">
 						<button class="btn" 
-							onclick="location.href='${conPath }/teammember/deleteApplyTeam.do?mid=${member.mid }&tno=${teamDetail.tno }'">그룹가입 신청 철회</button>
+							onclick="location.href='${conPath }/teammember/deleteApplyTeam.do?mid=${member.mid }&tno=${teamDetail.tno }'">[그룹가입 신청 철회]</button>
+					</c:if>
+					<c:if test="${not empty tMemberDetail and tMemberDetail.tmcheck eq 1 }">
+						[가입 완료]
 					</c:if>
 				</td>
 			</tr>

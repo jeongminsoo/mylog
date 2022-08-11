@@ -38,3 +38,11 @@ div.myTeamDetail table.myTeamDetail tr:first-child td{
 	padding: 10px;
 	background-color: #EEEEEE;
 }
+
+button.btn{
+	border: none;
+	background-color: white;
+}
+button.btn:hover {
+	border-bottom: 1px solid black;
+}
