@@ -4,15 +4,15 @@
 	padding:0;
 }
 div.wrap{
-	border:1px solid black;
-	margin: 0 auto;
-	width:1100px;
-	height: 600px;
+	background-image: url("../img/main_wraper.png");
+	width : 1600px;
+	height : 850px;
+	margin : 60px 35px;
 }
 table.teamApplyList_wrap{
 	width:300px;
 	height: 550px;
-	margin: 0 auto;
+	margin: 110px auto;
 }
 table.teamApplyList_wrap tr td.teamApplyList_header {
 	width:300px;

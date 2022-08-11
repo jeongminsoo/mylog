@@ -34,7 +34,7 @@
 			history.back();
 		</script>
 	</c:if>
-	<div class="wrap">
+	<div class="wrap" style="background-image: url('../img/main_wraper.png'); border: 1px solid white;">
 		<table class="teamApplyList_wrap">
 			<tr>
 				<td class="teamApplyList_header">${teamDetail.tname } 신청자</td>

@@ -18,8 +18,8 @@ public interface ReveiwReplyBoardService {
 
 	public int reviewReplyCount(int rnum);
 
-	public void reviewReplyStepA(ReviewReplyBoard replyBoard);
-
 	public int reviewReplyComment(ReviewReplyBoard replyBoard);
+	
+	public String replyMname(int rpnum);
 
 }

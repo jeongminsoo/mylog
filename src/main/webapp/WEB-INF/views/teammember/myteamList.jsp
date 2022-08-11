@@ -54,7 +54,8 @@
 		</script>
 	</c:if>
 	
-<div class="wrap">
+<div class="wrap" style="background-image: url('../img/main_wraper.png'); border:1px solid white;">
+	<div class="myTeamList_wrap">
 	<div class="myTeamListHeader">
 		<div><h2>MY GROUP LIST</h2></div>
 		<div><a href="${conPath}/team/makeTeamView.do">[그룹만들기]</a></div>
@@ -104,6 +105,7 @@
 			</c:if>
 		</table>
 		</div>
+	</div>
 	</div>
 </div>
 </body>

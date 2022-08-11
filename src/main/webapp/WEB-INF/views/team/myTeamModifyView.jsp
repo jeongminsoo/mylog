@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${conPath }/css/team/teamDetail.css" rel="stylesheet">
+	<link href="${conPath }/css/team/myTeamModify.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		function drawalTeamMember(tno, tmno){
@@ -17,7 +17,7 @@
 	</script>
 </head>
 <body>
-	<div class="wrap">
+<div class="wrap" style="background-image: url('../img/main_wraper.png');">
 	<form action="${conPath }/team/myTeamModify.do" method="post">
 		<input type="hidden" name="tno" value="${teamDetail.tno }">
 		<table class="myTeamModify">
@@ -83,6 +83,6 @@
 			</tr>
 		</table>
 	</form>
-	</div>
+</div>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${conPath}/css/team/teamDetails.css" rel="stylesheet">
+<link href="${conPath}/css/team/teamDetail.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 		function (){
@@ -17,7 +17,7 @@
 	</script>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" style="background-image: url('../img/main_wraper.png'); border: 1px solid white">
 	<div class="myTeamDetail">
 		<table class="myTeamDetail">
 			<tr>
@@ -42,7 +42,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"> ... </td>
+				<th>&nbsp;</th>
+				<td>&nbsp;</td>
 			</tr>
 			<tr>
 				<td colspan="2">

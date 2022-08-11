@@ -4,9 +4,16 @@
 	padding:0;
 }
 div.wrap{
-	border:1px solid black;
-	width:1100px;
-	height: 600px;
+	border:1px solid white;
+	background-image: url("../img/main_wraper.png");
+	width : 1600px;
+	height : 850px;
+	margin : 60px 35px;
+}
+div.myTeamList_wrap{
+	width : 1100px;
+	height : 600px;
+	margin:110px auto;
 }
 div.myTeamListHeader{
 	overflow: hidden;

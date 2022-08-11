@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+*{
+	margin:0;
+	padding:0;
+}
+
+#wrap{
+	width:500px;
+	height:300px;
+	
+}
+
+#wrap #content #timer{
+	margin:0 auto;
+	width:400px;
+
+	
+}
+
+#wrap #content #tbtn{
+	display: inline-block;
+}
+
+#wrap #content #tbtn img{
+	width:50px;
+	height:50px;
+	
+}
