@@ -54,7 +54,8 @@
 					});
 				
 				
-					
+				
+					//색 변경
 
 				$('button').click(function(){
 					
@@ -94,10 +95,7 @@
 					});
 					
 				});
-				//색변경
-				var color = [ '#f4cccc', '#fbe4cd', '#fdf2cc', '#d9ead3',
-						'#d0e0e3', '#cfe2f2', '#d9d2e9', '#ead1dc' ];
-				
+			
 
 			});
 </script>
@@ -113,15 +111,15 @@
 	기록된 시간이 없습니다
 </c:if>
 
-				<div>
-				<button id="#f4cccc">o</button>
-				<button id="#fbe4cd">o</button>
-				<button id="#fdf2cc">o</button>
-				<button id="#d9ead3">o</button>
-				<button id="#d0e0e3">o</button>
-				<button id="#cfe2f2">o</button>
-				<button id="#d9d2e9">o</button>
-				<button id="#ead1dc">o</button>
+				<div id="colors">
+				<button id="#f4cccc"><img src="${conPath }/img/f4cccc.PNG"></button>
+				<button id="#fbe4cd"><img src="${conPath }/img/fbe4cd.PNG"></button>
+				<button id="#fdf2cc"><img src="${conPath }/img/fdf2cc.PNG"></button>
+				<button id="#d9ead3"><img src="${conPath }/img/d9ead3.PNG"></button>
+				<button id="#d0e0e3"><img src="${conPath }/img/d0e0e3.PNG"></button>
+				<button id="#cfe2f2"><img src="${conPath }/img/cfe2f2.PNG"></button>
+				<button id="#d9d2e9"><img src="${conPath }/img/d9d2e9.PNG"></button>
+				<button id="#ead1dc"><img src="${conPath }/img/ead1dc.PNG"></button>
 				
 				</div>
 				<table class="table table-bordered" >

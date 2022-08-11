@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.project.mylog.dao.BoardTagDao;
+import com.project.mylog.dao.HashtagDao;
 import com.project.mylog.dao.ReviewBoardDao;
 import com.project.mylog.dao.ReviewReplyBoardDao;
 import com.project.mylog.model.ReviewBoard;
@@ -26,6 +28,12 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	private ReviewBoardDao rboardDao;
 	@Autowired
 	private ReviewReplyBoardDao replyDao;
+	@Autowired
+	private BoardTagDao boardtagDao;
+	@Autowired
+	private HashtagDao hashtagDao;
+	
+	
 	String backupPath = "D:\\LDSwebPro\\source\\0809\\mylog\\src\\main\\webapp\\ReviewImgUpload/";
 
 	@Override
@@ -150,6 +158,24 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	public int getRnum() {
 		// TODO Auto-generated method stub
 		return rboardDao.getRnum();
+	}
+
+	@Override
+	public List<ReviewBoard> rSearchList(String pageNum, String hname) {
+		System.out.println(1);
+		ReviewPaging rp = new ReviewPaging(reviewCount(), pageNum);
+		ReviewBoard reviewBoard = new ReviewBoard();
+		reviewBoard.setStartRow(rp.getStartRow());
+		System.out.println(rp.getStartRow());
+		System.out.println(2);
+		System.out.println(rp.getEndRow());
+		
+		reviewBoard.setEndRow(rp.getEndRow());
+		reviewBoard.setHno(hashtagDao.searchHno(hname));
+		System.out.println(hashtagDao.searchHno(hname));
+		
+		
+		return rboardDao.rSearchList(reviewBoard);
 	}
 
 	

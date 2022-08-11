@@ -37,12 +37,28 @@ public class ReviewController {
 	private HashtagService hashtagservice;
 	
 	
-	@RequestMapping(value="list", method= {RequestMethod.GET, RequestMethod.POST})
-	public String reviewList(String pageNum, Model model) {
-		
-		model.addAttribute("reviewList", rboardservice.reviewList(pageNum));
-		model.addAttribute("reviewPaging",new ReviewPaging(rboardservice.reviewCount(), pageNum));
-		
+//	@RequestMapping(value="list", method= {RequestMethod.GET, RequestMethod.POST})
+//	public String reviewList(String pageNum, Model model) {
+//		
+//		model.addAttribute("reviewList", rboardservice.reviewList(pageNum));
+//		model.addAttribute("reviewPaging",new ReviewPaging(rboardservice.reviewCount(), pageNum));
+//		
+//		return "review/list";
+//		
+//	}
+	
+	
+	@RequestMapping(value="list", method={RequestMethod.GET, RequestMethod.POST})
+	public String reviewDelete(String hname, String pageNum, Model model) {
+		if(hname!=null) {
+			model.addAttribute("reviewList", rboardservice.rSearchList(pageNum, hname));
+			System.out.println(7);
+			model.addAttribute("reviewPaging",new ReviewPaging(rboardservice.reviewCount(), pageNum));
+			System.out.println(8);
+		} else if(hname ==null) {
+			model.addAttribute("reviewList", rboardservice.reviewList(pageNum));
+			model.addAttribute("reviewPaging",new ReviewPaging(rboardservice.reviewCount(), pageNum));
+		}
 		return "review/list";
 		
 	}
@@ -102,6 +118,8 @@ public class ReviewController {
 		return "forward:list.do";
 		
 	}
+	
+
 	
 //	@RequestMapping(value="replylist", method= {RequestMethod.GET,RequestMethod.POST})
 //	public String reviewReplyList(String pageNum, Model model, int rnum) {

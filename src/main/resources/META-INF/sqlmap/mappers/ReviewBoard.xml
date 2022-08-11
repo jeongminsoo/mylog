@@ -16,6 +16,7 @@
 			<result property="rstatus" column="rstatus"/>
 			<result property="rip" column="rip"/>
 			<result property="cnt" column="cnt"/>
+			<result property="hno" column="hno"/>
     	</resultMap>
     	
     	<!-- 추가 -->
@@ -68,6 +69,13 @@
 			SELECT MAX(RNUM) FROM RBOARD
 		</select>
 		
+		<!-- 글 찾기 리스트 -->
+		<select id="rSearchList" parameterType="ReviewBoard" resultMap="ReviewBoardResult">
+			SELECT * FROM (SELECT ROWNUM RN, A.*
+    			FROM(SELECT RBOARD.* FROM BOARD_TAG JOIN RBOARD ON RBOARD.RNUM=BOARD_TAG.RNUM
+						WHERE BOARD_TAG.HNO LIKE '%'||'#{hno}'||'%')A)
+    			WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</select>
 		
     
     </mapper>

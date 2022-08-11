@@ -18,9 +18,25 @@
 
 #wrap #timetable h1{
 	position: relative;
-	left: 2%;
+	left: 3.5%;
 }
 
+#wrap #timetable #colors{
+	position: relative;
+	left : 5%;
+}
+#wrap #timetable #colors button{
+	outline: none;
+	border: none;
+	background:none;
+
+}
+#wrap #timetable #colors img{
+	width:30px;
+	height:30px;
+	margin-bottom:10px;
+
+}
 #wrap #timetable #do{
 	float:left;
 	width:20%;

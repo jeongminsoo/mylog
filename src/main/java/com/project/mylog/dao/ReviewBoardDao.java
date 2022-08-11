@@ -23,6 +23,8 @@ public interface ReviewBoardDao {
 	public int reviewCount();
 	
 	public int getRnum();
+
+	public List<ReviewBoard> rSearchList(ReviewBoard reviewBoard);
 	
 
 	

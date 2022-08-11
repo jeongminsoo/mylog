@@ -24,6 +24,8 @@ public interface ReviewBoardService {
 	
 	public int getRnum();
 	
+	public List<ReviewBoard> rSearchList(String pageNum, String hname);
+	
 	
 
 }
