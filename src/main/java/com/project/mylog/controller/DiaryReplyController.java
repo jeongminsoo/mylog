@@ -21,10 +21,13 @@ public class DiaryReplyController {
 	DiaryReplyService drService;
 	
 	@RequestMapping( value = "replyList", method = {RequestMethod.GET, RequestMethod.POST})
-	public String replyList(int dnum, String rPageNum, Model model) {
+	public String replyList(int dnum, String returnInt, String rPageNum, Model model) {
 		model.addAttribute("diaryReplyList", drService.replyList(dnum, rPageNum));
 		model.addAttribute("rPaging", new Paging(drService.replyCnt(dnum), rPageNum, 15, 5));
-		return "diary/content";
+		if("1".equals(returnInt)) {
+			return "diary/listContent";
+		}
+		return "diary/myListContent";
 	}
 	
 	@RequestMapping( value = "write", method = RequestMethod.POST)
@@ -40,9 +43,9 @@ public class DiaryReplyController {
 	}
 	
 	@RequestMapping( value = "modify", method = RequestMethod.POST)
-	public String modify(DiaryReply diaryReply, HttpServletRequest request) {
+	public String modify(DiaryReply diaryReply, String returnInt, HttpServletRequest request) {
 		drService.replyModify(diaryReply, request);
-		return "forward:../diary/content.do";
+		return "forward:../diary/content.do?returnInt="+returnInt;
 	}
 	
 	@RequestMapping( value = "reply", method = RequestMethod.GET)
@@ -57,9 +60,9 @@ public class DiaryReplyController {
 	}
 	
 	@RequestMapping( value = "delete", method = RequestMethod.GET)
-	public String delete(int drnum, int dnum) {
+	public String delete(int drnum, int dnum, String returnInt) {
 		drService.replyDelete(drnum);
-		return "forward:../diary/content.do?dnum="+dnum;
+		return "forward:../diary/content.do?dnum="+dnum+"&returnInt="+returnInt;
 	}
 	
 }

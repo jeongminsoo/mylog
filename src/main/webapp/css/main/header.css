@@ -1,0 +1,32 @@
+@charset "UTF-8";
+#header{
+	/* 위치 */
+	top : 90px;
+	left : 1581.4px;
+	position: absolute;
+}
+
+#header a{
+	/* 위치 */
+	margin : 10px 0;
+	
+	/* 크기 */
+	width : 145px;
+	height : 40px;
+
+	/* 속성 */
+	display: block;
+	
+	/* 글씨 */
+	font-size : 17px;
+	font-weight : bold;
+	
+	
+	/* 디자인 */
+	color : black;
+	text-align: center;
+	line-height : 40px;
+	text-decoration : none;
+	background-color: #DFF6FF;
+	box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+}
