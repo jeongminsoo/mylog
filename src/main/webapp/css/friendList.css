@@ -6,16 +6,17 @@
 	margin: 60px 35px;
 	background-image: url(../img/main_wraper.png);
 	position: absolute;
+	overflow : hidden;
 }
 
 #wrap {
 	width: 1200px;
 	height: 700px;
-	margin: 50px auto;
+	margin: 50px 100px;
 	border: 1px solid black;
 	border-radius: 15px;
 	text-align: center;
-	position: relative;
+	float : left;
 }
 
 #search_wrap {
@@ -61,13 +62,14 @@
 	height: 580px;
 	border: 1px solid black;
 	box-sizing: border-box;
-	position: relative;
 	float: left;
 }
 
 #wrap #myList {
+	height : 580px;
 	border-radius: 0 0 0 15px;
 	font-size: 1.2em;
+	overflow : auto;
 }
 
 #wrap #myList input {
@@ -75,8 +77,10 @@
 }
 
 #wrap #followMe {
+	height : 580px;
 	border-radius: 0 0 15px 0;
 	font-size: 1.2em;
+	overflow : auto;
 }
 
 #listResult table {
@@ -108,9 +112,10 @@ button {
 	width : 40px;
 	height : 40px;
 	background-image: url(../img/alert.png);
+	background-size : cover;
 	position: relative;
-	float : right;
-	margin : 5px 5px;
+	float : left;
+	margin : 100px 0;
 }
 
 #alert_icon .alert_num {
@@ -128,4 +133,20 @@ button {
     color : white;
     font-weight : bold;
     font-size : 1em;
+}
+
+#alert_icon #checkbox {
+	display : none;
+}
+.alert_list {
+	width : 400px;
+	display : none;
+	background-color : white;
+	border : 1px solid black;
+	position: absolute;
+	top : 50px;
+	left : -250px;
+}
+input#checkbox:checked + .alert_list {
+	display: block;
 }

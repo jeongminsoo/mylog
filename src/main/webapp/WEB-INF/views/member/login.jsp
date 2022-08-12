@@ -14,7 +14,7 @@
 		$(document).ready(function(){
 			$('.search').click(function() {
 				var searchIdPw = open('${conPath}/member/searchIdPwView.do', '',
-									'width=800, height=500, left=800, top=300');
+									'width=800, height=500, left=500, top=300');
 				if (!searchIdPw) {
 					alert('팝업차단 설정이 되어있습니다. 차단 해제 이후 다시 시도하세요.');
 				}

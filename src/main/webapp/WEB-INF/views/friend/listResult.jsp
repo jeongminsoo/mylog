@@ -13,7 +13,7 @@
 				var id = $(this).attr('id');
 				var answer = confirm('정말 해당 친구를 언팔로우하시겠습니까?');
 				if (answer == true) {
-					location.href='${conPath}/friend/unfollow.do?alcode=0&fid=' + id;
+					location.href='${conPath}/friend/unfollow.do?alcode=2&fid=' + id;
 				} else {
 					return false;
 				}

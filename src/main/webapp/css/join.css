@@ -11,7 +11,6 @@
 	width: 1000px;
 	height: 700px;
 	margin: 50px auto;
-	border: 1px solid black;
 	position : relative;
 }
 
@@ -19,6 +18,11 @@
 	width: 600px;
 	margin: 50px auto;
 	text-align: center;
+	border-top : 2px solid lightgray;
+}
+
+#wrap table caption {
+	font-size : 1.3em;
 }
 
 #wrap table td {
@@ -49,8 +53,11 @@ input:not(.btn) {
 	background-color: #03045E;
 	color: white;
 	margin-left: 5px;
+	font-weight : bold;
+	font-size : 1em;
 }
 
 #wrap table .last {
 	text-align: center;
+	padding-top : 20px;
 }

@@ -2,7 +2,6 @@ package com.project.mylog.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +36,10 @@ public class AlertServiceImpl implements AlertService {
 	}
 
 	@Override
-	public int readAlert(HttpServletRequest request) {
+	public int readAlert(String[] alno) {
 		int result = 0;
-		String[] alnos = request.getParameterValues("alno");
-		for (int i = 0; i < alnos.length; i++) {
-			alertDao.readAlert(Integer.parseInt(alnos[i]));
+		for (int i = 0; i < alno.length; i++) {
+			alertDao.readAlert(Integer.parseInt(alno[i]));
 		}
 		return result;
 	}

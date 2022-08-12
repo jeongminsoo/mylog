@@ -39,56 +39,113 @@
 			});
 		});
 	</script>
+	<style>
+		#main_wrap {
+	width: 1600px;
+	height: 850px;
+	margin: 60px 35px;
+	background-image : url(../img/main_wraper.png);
+	position : absolute;
+}
+
+#wrap {
+	width: 1000px;
+	height: 700px;
+	margin: 50px auto;
+	position : relative;
+}
+#wrap table {
+	width: 600px;
+	margin: 50px auto;
+	text-align: center;
+}
+#wrap table td {
+	height: 50px;
+	text-align: left;
+}
+input:not(.btn) {
+	width: 70%;
+	height: 90%;
+	border: none;
+	border-bottom: 1px solid lightgray;
+	border-radius: 10px;
+	font-size: 1.2em;
+}
+.mmotto {
+	width: 70%;
+	font-size: 1.5em;
+	resize: none;
+}
+
+.btn, .outMember {
+	width: 100px;
+	border: none;
+	height: 30px;;
+	border-radius: 10px;
+	background-color: #03045E;
+	color: white;
+	margin-left: 5px;
+	font-size : 1.1em;
+	font-weight : bold;
+}
+
+.btn_wrap {
+	width : 500px;
+	margin : 0 auto;
+}
+	</style>
 </head>
 <body>
 	<div id="main_wrap">
+		<div id="wrap">
 		<form action="${conPath }/member/modify.do" method="post">
 			<input type="hidden" name="mid" value="${myInfo.mid }">
 			<input type="hidden" name="memail" value="${myInfo.memail }">
 			<table>
-				<caption>정보수정</caption>
+				<caption><h2>Modify My Info</h2></caption>
 				<tr>
-					<th><label for="mid">아이디</label></th>
+					<th><label for="mid">ID</label></th>
 					<td>${myInfo.mid }</td>
 				</tr>
 				<tr>
-					<th><label for="oldpw">현재비밀번호</label></th>
+					<th><label for="oldpw">Old Password</label></th>
 					<td><input type="password" name="oldpw" id="oldpw"></td>
 				</tr>
 				<tr>
-					<th><label for="mpw">새비밀번호</label></th>
+					<th><label for="mpw">New Password</label></th>
 					<td><input type="password" name="mpw" id="mpw">
 					</td>
 				</tr>
 				<tr>
-					<th><label for="mpwChk">새비밀번호</label></th>
+					<th><label for="mpwChk">Password Check</label></th>
 					<td><input type="password" name="mpwChk" id="mpwChk">
 					</td>
 				</tr>
 				<tr>
-					<th><label for="mname">닉네임</label></th>
+					<th><label for="mname">Nickname</label></th>
 					<td><input type="text" name="mname" id="mname" value="${myInfo.mname }"></td>
 				</tr>
 				<tr>
-					<th>생년월일</th>
+					<th>Birthday</th>
 					<td><input type="date" name="tempmbirth"
 						class="datepicker" id="tempmbirth" value="${myInfo.mbirth }"></td>
 				</tr>
 				<tr>
-					<th><label for="memail">이메일</label></th>
+					<th><label for="memail">Email</label></th>
 					<td>${myInfo.memail }</td>
 				</tr>
 				<tr>
-					<th>좌우명</th>
-					<td><textarea rows="5" cols="10" name="mmotto" id="mmotto">${myInfo.mmotto }</textarea></td>
+					<th>Motto</th>
+					<td><textarea rows="5" cols="10" name="mmotto" class="mmotto">${myInfo.mmotto }</textarea></td>
 				</tr>
 			</table>
-			<div>
+			<div class="btn_wrap">
 				<input type="submit" value="정보수정" class="btn">
 				<input type="button" value="취소" class="btn" onclick="location.href='../main.do'">
+				<button id="${myInfo.mid }" class="outMember">회원탈퇴</button>
 			</div>
 		</form>
-		<button id="${myInfo.mid }" class="outMember">회원탈퇴</button>
+		</div>
 	</div>
 </body>
 <link rel="stylesheet"

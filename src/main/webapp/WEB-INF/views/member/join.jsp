@@ -62,7 +62,7 @@
 		<div id="wrap">
 		<form action="${conPath }/member/join.do" method="post">
 			<table>
-				<caption><h2>회원가입</h2></caption>
+				<caption><h2>Join Member</h2></caption>
 				<tr>
 					<td>
 						<input type="text" name="mid" id="mid" placeholder="ID"> 

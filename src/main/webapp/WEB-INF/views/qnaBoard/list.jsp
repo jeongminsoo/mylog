@@ -16,6 +16,16 @@
 		});
 	</script>
 	<style>
+	a {
+		text-decoration : none;
+		color : black;
+	}
+	li {
+		list-style: none;
+		font-size : 1.2em;
+		font-weight : bold;
+		margin : 20px 0;
+	}
 		#main_wrap {
 	width: 1600px;
 	height: 850px;
@@ -27,7 +37,7 @@
 #wrap {
 	width: 1000px;
 	height: 600px;
-	margin: 200px auto;
+	margin : 50px 0 0 150px;
 	border: 1px solid white;
 	text-align: center;
 	position : relative;
@@ -35,21 +45,39 @@
 
 #qnaList table {
 	border-collapse: collapse;
-	border-collapse: collapse;
-	border-top : 1px solid black;
-	border-bottom : 1px solid black;
+	font-size : 1.2em;
+}
+#qnaList table caption {
+	text-align : left;
+}
+#qnaList table th {
+	background-color : #DFF6FF;
 }
 
-#qnaList table tr:first-child {
-	border-bottom : 1px solid black;
+#qnaList table .title {
+	padding-left : 10px;
+	text-align : left;
 }
 
-#qnaList {
-	height : 400px;
+
+
+#qnaList table tr {
+	height : 50px;
+}
+
+#qnaList table .bottom {
+	background-color : #DFF6FF;
+	height : 20px;
 }
 .paging {
-	width : 500px;
-	margin : 0 auto;
+	margin : 30px 0 0 30px; 
+	font-size : 1.2em;
+}
+
+#sub_nav {
+	position : absolute;
+	top : 100px;
+	right : 300px;
 }
 	</style>
 </head>
@@ -77,10 +105,9 @@
 	<c:set var="iNum" value="${paging.inverseNum }"/>
 	<div id="main_wrap">
 		<div id="wrap">
-		<a href="${conPath }/qna/writeView.do">qna작성</a>
-   		<a href="${conPath }/qna/myList.do">myList</a>
    		<div id="qnaList">
 			<table>
+				<caption><h2>Q&A</h2></caption>
 					<col style="width : 100px;">
 					<col style="width : 470px;">
 					<col style="width : 210px;">
@@ -123,20 +150,30 @@
 						<c:set var="iNum" value="${iNum - 1 }"/>
 					</c:forEach>
 				</c:if>
+				<tr>
+					<td colspan="5" class="bottom"></td>
+				</tr>
 			</table>
 			</div>
 			<div class="paging">
-				<a href="${conPath }/qna/list.do?pageNum=${paging.startPage - 1 eq 0 ? 1 : paging.startPage-1}">이전</a>
+				<a href="${conPath }/qna/list.do?pageNum=${paging.startPage - 1 eq 0 ? 1 : paging.startPage-1}"><img src="${conPath }/img/btn01.gif" height="25"></a>
 				<c:forEach var="j" begin="${paging.startPage }" end="${paging.endPage }">
 					<c:if test="${j eq paging.currentPage }">
-						<b> ${j } </b>
+						<b>&ensp; ${j } &ensp;</b>
 					</c:if>
 					<c:if test="${j != paging.currentPage }">
-						<a href="${conPath }/qna/list.do?pageNum=${j}"> ${j } </a>
+						<a href="${conPath }/qna/list.do?pageNum=${j}">&ensp; ${j } &ensp;</a>
 					</c:if>
 				</c:forEach>
-				<a href="${conPath }/qna/list.do?pageNum=${paging.endPage == paging.pageCnt ? paging.endPage : paging.endPage + 1 }">다음</a>
+				<a href="${conPath }/qna/list.do?pageNum=${paging.endPage == paging.pageCnt ? paging.endPage : paging.endPage + 1 }"><img src="${conPath }/img/btn0010.gif" height="25"></a>
 			</div>
+		</div>
+		<div id="sub_nav">
+			<ul>
+				<li><a href="${conPath }/qna/list.do?pageNum=1">Q&A목록</a></li>
+				<li><a href="${conPath }/qna/writeView.do">Q&A작성</a></li>
+				<li><a href="${conPath }/qna/myList.do">My Q&A List</a></li>
+			</ul>
 		</div>
 	</div>
 </body>

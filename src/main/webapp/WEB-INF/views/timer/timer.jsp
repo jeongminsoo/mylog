@@ -7,13 +7,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${member.mmotto }</title>
 <!-- 부트스트랩 3.3.2css -->
 <link rel="stylesheet" href="${conPath }/css/bootstrap.min.css">
-<link href="${conPath }/css/timersetting.css" rel="stylesheet">
 <style>
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link href="${conPath }/css/timer.css" rel="stylesheet">
 <script>
 	function playtoggle() {
 
@@ -78,77 +78,85 @@
 						document.getElementById('timer').style.marginLeft = "20px";
 
 						//▶누른 경우
-						$('#play')
-								.click(
-										function() {
-											$('#play').hide();
-											$('#pause').show();
+						$('#play').click(function() {
+							$('#play').hide();
+							$('#pause').show();
 
-											timer = setInterval(
-													function() {
-														time--;
+							timer = setInterval(function() {
+									time--;
 
-														min = Math
-																.floor(time / 60);
-														hour = Math
-																.floor(time / 3600);
-														sec = time % 60;
-														min = min % 60;
+									min = Math.floor(time / 60);
+									hour = Math.floor(time / 3600);
+									sec = time % 60;
+									min = min % 60;
 
-														var ph = hour;
-														var pm = min;
-														var ps = sec;
-														if (ph < 10) {
-															ph = '0' + ph;
-														}
-														if (pm < 10) {
-															pm = '0' + pm;
-														}
-														if (ps < 10) {
-															ps = '0' + ps;
+									var ph = hour;
+									var pm = min;
+									var ps = sec;
+									if (ph < 10) {
+										ph = '0' + ph;
+									}
+									if (pm < 10) {
+										pm = '0' + pm;
+									}
+									if (ps < 10) {
+										ps = '0' + ps;
 
-														}
-														document
-																.getElementById('timer').innerHTML = "<h1>"
-																+ ph
-																+ ":"
-																+ pm
-																+ ":"
-																+ ps
-																+ "</h1>";
+									}
+									document.getElementById('timer').innerHTML = "<span>"+ ph+ ":"+ pm+ ":"+ ps+ "</span>";
+									document.getElementById('timer').style.width = "300px";
+									document.getElementById('timer').style.fontSize = "100px";
+									document.getElementById('timer').style.marginLeft = "20px";
+										//타이머 시간이 다 된 경우
+										if(time <= 0){
+											clearInterval(timer);   
+											$('#play').show();
+											$('#pause').hide();
+											clearInterval(timer);
+											time = tdo * 6;
+											document.getElementById('timer').innerHTML ="00:00:00";
+											document.getElementById('timer').style.width = "300px";
+											document.getElementById('timer').style.fontSize = "100px";
+											document.getElementById('timer').style.marginLeft = "20px";
 
-														//타이머 시간이 다 된 경우
-														/* if(time < 0){
-														   
+											var enow = new Date();
+											end = enow.getTime();
+											etime = enowtoLocaleTimeString('ko-kr');
+											tduring = Math.floor(((end - start) / 1000) % 60);
+											esecond = Math.floor((end / 1000) % 60);
+											ehour = enow.getHours();
+											emin = enow.getMinutes();
+
+											$.ajax({
+												type : 'get', // 타입 (get, post, put 등등)
+												url : 'timewrite.do', // 요청할 서버url
+												dataType : 'text', // 데이터 타입 (html, xml, json, text 등등)
+												data : {
+													'tstart' : ssecond,
+													'tend' : esecond,
+													'tname' : tname,
+													'tno' : tno,
+													'tduring' : tduring,
+													'tbehour' : ehour,
+													'tbemin' : emin,
+													'tbno' : tbno
+												},
+												success : function(data) { // 결과 성공 콜백함수
+													//
+
+												},
+
+											})
 														    
-														    clearInterval(timer);
-														    var enow = end.toLocaleTimeString('ko-kr');
-														    document.getElementById('timer').innerHTML = tdo
-															+ ":00:00";
-														    $.ajax({
-																type : 'get', // 타입 (get, post, put 등등)
-																url : 'timewrite.do', // 요청할 서버url
-																dataType : 'html', // 데이터 타입 (html, xml, json, text 등등)
-																data : {'start':start, 'end':end },
-																success : function(data) { // 결과 성공 콜백함수
-																	//
-																	console.log(data);
+										} 
 
-																},
-
-															})
-														    
-														} */
-
-													}, 1000);
+									}, 1000);
 
 											//시작 시간 보내기
 											var snow = new Date();
 											start = snow.getTime();
-											stime = snow
-													.toLocaleTimeString('ko-kr');
-											ssecond = Math
-													.floor((start / 1000) % 60);
+											stime = snow.toLocaleTimeString('ko-kr');
+											ssecond = Math.floor((start / 1000) % 60);
 											shour = snow.getHours();
 											smin = snow.getMinutes();
 
@@ -171,18 +179,6 @@
 
 											})
 
-											/* $.ajax({
-												type : 'get', // 타입 (get, post, put 등등)
-												url : '${conPath}/timetable/', // 요청할 서버url
-												dataType : 'text', // 데이터 타입 (html, xml, json, text 등등)
-												data : {'tstart':ssecond, 'tdo':tdo, 'tname':tname,'tno':tno },
-												success : function(data) { // 결과 성공 콜백함수
-													alert(data);
-											
-												},
-
-											})
-											 */
 
 										});
 
@@ -226,6 +222,9 @@
 											time = tdo * 6;
 											document.getElementById('timer').innerHTML = tdo
 													+ ":00:00";
+											document.getElementById('timer').style.width = "300px";
+											document.getElementById('timer').style.fontSize = "100px";
+											document.getElementById('timer').style.marginLeft = "20px";
 
 											var enow = new Date();
 											end = enow.getTime();
@@ -271,20 +270,26 @@
 
 	<div id="wrap">
 		<div id="content">
-			${member.mname }님의 타이머 할 일 : ${param.tname }
-			<div id="time">시간 ${param.tdo }</div>
-			<div>
-				<div id="timer"></div>
-				<div id="tbtn">
-					<button id="play" class="tbtn" style="background-color:white;"><img src="${conPath }/img/play.png" style="width:80px; height:80px;"></button>
-					<button id="pause" class="tbtn" style="background-color:white;"><img src="${conPath }/img/pause.png" style="width:90px; height:90px;"></button>
-					<button id="stop" class="tbtn" style="background-color:white;"><img src="${conPath }/img/stop.png" style="width:90px; height:90px;"></button>
+			<div class="hourglass">
+		
+			<img alt="모래시계" src="${conPath }/img/hourglass.png">
 				</div>
-
+			<div class="mcontent">
+			<div class="do">${member.mname }님은 ${param.tname } 중</div>
+				<div class="do">목표 : ${param.tdo }시간</div>
+				<div class="do">${member.mmotto }</div>
+			</div>
+			<div class="tcontent">
+				<span id="timer">
+				</span>
+				
+				<button id="play" class="tbtn" ><img src="${conPath }/img/play.png" style="width:80x; height:80px;"></button>
+				<button id="pause" class="tbtn" ><img src="${conPath }/img/pause.png" style="width:80px; height:80px;"></button>
+				<button id="stop" class="tbtn" ><img src="${conPath }/img/stop.png" style="width:90px; height:90px;"></button>
+			
 			</div>
 		</div>
 	</div>
-	<button onclick="location.href='${conPath}/main.do'"></button>
 
 
 </body>

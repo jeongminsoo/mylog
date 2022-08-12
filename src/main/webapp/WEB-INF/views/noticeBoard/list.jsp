@@ -16,6 +16,16 @@
 		});
 	</script>
 	<style>
+		a {
+		text-decoration : none;
+		color : black;
+	}
+	li {
+		list-style: none;
+		font-size : 1.2em;
+		font-weight : bold;
+		margin : 20px 0;
+	}
 		#main_wrap {
 	width: 1600px;
 	height: 850px;
@@ -27,7 +37,7 @@
 #wrap {
 	width: 1000px;
 	height: 600px;
-	margin: 200px auto;
+	margin : 50px 0 0 150px;
 	border: 1px solid white;
 	text-align: center;
 	position : relative;
@@ -35,20 +45,42 @@
 
 #noticeList table {
 	border-collapse: collapse;
-	border-top : 1px solid black;
-	border-bottom : 1px solid black;
+	font-size : 1.2em;
 }
 
-#noticeList table tr:first-child {
-	border-bottom : 1px solid black;
+#noticeList table caption {
+	text-align : left;
 }
 
-#noticeList {
-	height : 400px;
+#noticeList table .title {
+	padding-left : 10px;
+	text-align : left;
 }
+
+
+
+#noticeList table th {
+	background-color : #DFF6FF;
+}
+
+#noticeList table tr {
+	height : 50px;
+}
+
+#noticeList table .bottom {
+	background-color : #DFF6FF;
+	height : 20px;
+}
+
 .paging {
-	width : 500px;
-	margin : 0 auto;
+	margin : 30px 0 0 30px; 
+	font-size : 1.2em;
+}
+
+#sub_nav {
+	position : absolute;
+	top : 100px;
+	right : 300px;
 }
 	</style>
 </head>
@@ -75,11 +107,10 @@
 	</c:if>
 	<div id="main_wrap">
 		<div id="wrap">
-			<c:if test="${admin != null }">
-				<a href="${conPath }/notice/writeView.do">공지작성</a>
-			</c:if>
+			
 			<div id="noticeList">
 			<table>
+				<caption><h2>Notice</h2></caption>
 				<col style="width: 135px;">
 				<col style="width: 395px;">
 				<col style="width: 235px;">
@@ -107,23 +138,32 @@
 						</tr>
 					</c:forEach>
 				</c:if>
+				<tr>
+					<td colspan="5" class="bottom"></td>
+				</tr>
 			</table>
 			</div>
 			<div class="paging">
 			<a
-				href="${conPath }/notice/list.do?pageNum=${paging.startPage - 1 eq 0 ? 1 : paging.startPage-1}">이전</a>
+				href="${conPath }/notice/list.do?pageNum=${paging.startPage - 1 eq 0 ? 1 : paging.startPage-1}"><img src="${conPath }/img/btn01.gif" height="25"></a>
 			<c:forEach var="j" begin="${paging.startPage }" end="${paging.endPage }">
 				<c:if test="${j eq paging.currentPage }">
-					<b> ${j } </b>
+					<b>&nbsp; ${j } &nbsp;</b>
 				</c:if>
 				<c:if test="${j != paging.currentPage }">
-					<a href="${conPath }/notice/list.do?pageNum=${j}"> ${j } </a>
+					<a href="${conPath }/notice/list.do?pageNum=${j}">&nbsp; ${j } &nbsp;</a>
 				</c:if>
 			</c:forEach>
 			<a
-				href="${conPath }/notice/list.do?pageNum=${paging.endPage == paging.pageCnt ? paging.endPage : paging.endPage + 1 }">다음</a>
+				href="${conPath }/notice/list.do?pageNum=${paging.endPage == paging.pageCnt ? paging.endPage : paging.endPage + 1 }"><img src="${conPath }/img/btn0010.gif" height="25"></a>
 		</div>
+		
 		</div>
+		<div id="sub_nav">
+			<c:if test="${admin != null }">
+				<a href="${conPath }/notice/writeView.do">공지작성</a>
+			</c:if>
+			</div>
 	</div>
 </body>
 </html>

@@ -15,6 +15,67 @@
 			
 		});
 	</script>
+	<style>
+	a {
+		text-decoration : none;
+		color : black;
+	}
+	li {
+		list-style: none;
+		font-size : 1.2em;
+		font-weight : bold;
+		margin : 20px 0;
+	}
+		#main_wrap {
+	width: 1600px;
+	height: 850px;
+	margin: 60px 35px;
+	background-image : url(../img/main_wraper.png);
+	position : absolute;
+}
+
+#wrap {
+	width: 1000px;
+	height: 600px;
+	margin : 50px 0 0 150px;
+	border: 1px solid white;
+	text-align: center;
+	position : relative;
+}
+#wrap table {
+	font-size : 1.2em;
+}
+#wrap table caption {
+	text-align : left;
+}
+
+#wrap table th {
+	background-color : #DFF6FF ;
+}
+#sub_nav {
+	position : absolute;
+	top : 100px;
+	right : 300px;
+}
+.btn_wrap {
+	text-align : left;
+	width : 500px;
+	margin : 20px 0 0 0;
+}
+
+.btn_wrap button {
+	width: 80px;
+	border: none;
+	height: 30px;
+	border-radius: 10px;
+	background-color: #03045E;
+	color: white;
+	margin-left: 5px;
+	font-weight : bold;
+	font-size : 1em;
+}
+
+	</style>
 </head>
 <body>
 	<c:if test="${updateResult eq 0 }">
@@ -28,7 +89,9 @@
 		</script>
 	</c:if>
 	<div id="main_wrap">
+		<div id="wrap">
 			<table>
+				<caption><h2>Notice</h2></caption>
 				<col style="width : 200px;">
 				<col style="width : 600px;">
 				<tr>
@@ -50,6 +113,7 @@
 					<button onclick="location.href='${conPath}/notice/delete.do?nno=${notice.nno }&pageNum=${param.pageNum}'">삭제</button>
 				</c:if>
 				<button onclick="location.href='${conPath}/notice/list.do?pageNum=${param.pageNum}'">목록</button>
+			</div>
 			</div>
 		</div>
 </body>
