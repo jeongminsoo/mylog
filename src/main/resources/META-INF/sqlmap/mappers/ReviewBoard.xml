@@ -43,9 +43,9 @@
 		
 		<select id="reviewList" parameterType="ReviewBoard" resultMap="ReviewBoardResult">
 		
-		SELECT *
+		 SELECT *
     		FROM(SELECT ROWNUM RN, A.*
-        		FROM(SELECT R.*, MNAME,(SELECT COUNT(*)FROM RPBOARD B WHERE B.RNUM= R.RNUM) AS cnt FROM RBOARD R, MEMBER M WHERE M.MID = R.MID ORDER BY RRDATE DESC)A)
+       			 FROM(SELECT R.*, MNAME,(SELECT COUNT(*)FROM RPBOARD B WHERE B.RNUM= R.RNUM)AS cnt FROM RBOARD R, MEMBER M WHERE M.MID = R.MID AND RTITLE LIKE '%'||'#{rtitle}'||'%' ORDER BY RRDATE DESC)A)
     		WHERE RN BETWEEN #{startRow} AND #{endRow}
 		</select>
 

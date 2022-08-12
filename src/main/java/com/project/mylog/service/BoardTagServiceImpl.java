@@ -27,7 +27,6 @@ public class BoardTagServiceImpl implements BoardTagService {
 	public void BoardTagConnect(BoardTag boardtag, String hname) {
 		boardtag.setRnum(rboarddao.getRnum());
 		StringTokenizer st = new StringTokenizer(hname);
-
 		while (st.hasMoreTokens()) {
 			hname = st.nextToken();
 			String yestag = hashtagdao.getHname(hname);

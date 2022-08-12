@@ -14,7 +14,7 @@ public interface ReviewBoardService {
 
 	public int reviewDelete(int rnum);
 
-	public List<ReviewBoard> reviewList(String pageNum);
+	public List<ReviewBoard> reviewList(String pageNum, String rtitle);
 
 	public ReviewBoard reviewContent(int rnum);
 
@@ -24,7 +24,7 @@ public interface ReviewBoardService {
 	
 	public int getRnum();
 	
-	public List<ReviewBoard> rSearchList(String pageNum, String hname);
+	public List<ReviewBoard> rSearchList(String pageNum, String rtitle);
 	
 	
 

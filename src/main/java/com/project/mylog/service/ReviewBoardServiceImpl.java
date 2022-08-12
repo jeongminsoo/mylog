@@ -129,12 +129,13 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	}
 
 	@Override
-	public List<ReviewBoard> reviewList(String pageNum) {
+	public List<ReviewBoard> reviewList(String pageNum, String rtitle) {
 		ReviewPaging rp = new ReviewPaging(reviewCount(), pageNum);
-		ReviewBoard reveiwBoard = new ReviewBoard();
-		reveiwBoard.setStartRow(rp.getStartRow());
-		reveiwBoard.setEndRow(rp.getEndRow());
-		return rboardDao.reviewList(reveiwBoard);
+		ReviewBoard reviewBoard = new ReviewBoard();
+		reviewBoard.setStartRow(rp.getStartRow());
+		reviewBoard.setEndRow(rp.getEndRow());
+		
+		return rboardDao.reviewList(reviewBoard);
 	}
 
 	@Override
@@ -161,18 +162,12 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	}
 
 	@Override
-	public List<ReviewBoard> rSearchList(String pageNum, String hname) {
-		System.out.println(1);
+	public List<ReviewBoard> rSearchList(String pageNum, String rtitle) {
 		ReviewPaging rp = new ReviewPaging(reviewCount(), pageNum);
 		ReviewBoard reviewBoard = new ReviewBoard();
 		reviewBoard.setStartRow(rp.getStartRow());
-		System.out.println(rp.getStartRow());
-		System.out.println(2);
-		System.out.println(rp.getEndRow());
-		
 		reviewBoard.setEndRow(rp.getEndRow());
-		reviewBoard.setHno(hashtagDao.searchHno(hname));
-		System.out.println(hashtagDao.searchHno(hname));
+		
 		
 		
 		return rboardDao.rSearchList(reviewBoard);
