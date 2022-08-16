@@ -39,11 +39,12 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	@Autowired
 	private HashtagDao hashtagDao;
 
-	String backupPath = "D:\\LDSwebPro\\source\\09_2nd Project\\mylog\\src\\main\\webapp\\ReviewImgUpload/";
+	String backupPath = "D:\\LDSwebPro\\source\\0809\\mylog\\src\\main\\webapp\\ReviewImgUpload/";
 
 	@Override
 	public int reviewWrite(HttpSession session, HttpServletRequest request, MultipartHttpServletRequest mRequest,
 			ReviewBoard reviewBoard) {
+		
 		String uploadPath = mRequest.getRealPath("ReviewImgUpload/");
 		String rfilename = "";
 		Iterator<String> params = mRequest.getFileNames();
@@ -58,8 +59,10 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 
 				try {
 					mFile.transferTo(new File(uploadPath + rfilename));
+					boolean result = fileCopy(uploadPath+ rfilename,  backupPath + rfilename);
 					System.out.println("업로드 : " + uploadPath + rfilename);
 					System.out.println("백업 : " + backupPath + rfilename);
+					System.out.println(result ? "백업성공" :"백업실패");
 
 				} catch (IOException e) {
 					System.out.println(e.getMessage());
@@ -70,6 +73,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 			// filename = "";
 		}
 		reviewBoard.setRfilename(rfilename);
+		
 		reviewBoard.setMid(((Member) (session.getAttribute("member"))).getMid());
 		reviewBoard.setRip(request.getRemoteAddr());
 		return rboardDao.reviewWrite(reviewBoard);
@@ -77,7 +81,6 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 
 	@Override
 	public int reviewModify(MultipartHttpServletRequest mRequest, ReviewBoard reviewBoard, HttpServletRequest request) {
-		System.out.println("서비스에 넘어온 reviewBoard : " + reviewBoard);
 		String uploadPath = mRequest.getRealPath("ReviewImgUpload/");
 		String rfilename = "";
 		Iterator<String> params = mRequest.getFileNames();
@@ -92,8 +95,10 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 
 				try {
 					mFile.transferTo(new File(uploadPath + rfilename));
+					boolean result = fileCopy(uploadPath+ rfilename,  backupPath + rfilename);
 					System.out.println("업로드 : " + uploadPath + rfilename);
 					System.out.println("백업 : " + backupPath + rfilename);
+					System.out.println(result ? "백업성공" :"백업실패");
 
 				} catch (IOException e) {
 					System.out.println(e.getMessage());
@@ -104,43 +109,41 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 			// filename = "";
 		}
 		reviewBoard.setRfilename(rfilename);
+		
+		
 		return rboardDao.reviewModify(reviewBoard);
 	}
 
-	private int filecopy(String serverFile, String backupFile) {
-		int isCopy = 0;
-		FileInputStream is = null;
-		FileOutputStream os = null;
+	
+	private boolean fileCopy(String serverFile, String backupFile) {
+		boolean isCopy = false;
+		InputStream is = null; 
+		OutputStream os = null;
 		try {
-			is = new FileInputStream(serverFile);
+			File file = new File(serverFile);
+			is = new FileInputStream(file);
 			os = new FileOutputStream(backupFile);
-			File sFile = new File(serverFile);
-			byte[] buff = new byte[(int) sFile.length()];
-			while (true) {
-				int nRead = is.read(buff);
-				if (nRead == -1) {
-					break;
-				}
-				os.write(buff, 0, nRead);
+			byte[] buff = new byte[(int) file.length()];
+			while(true) {
+				int nReadByte = is.read(buff);
+				if(nReadByte == -1) break;
+				os.write(buff, 0, nReadByte);
 			}
-			isCopy = 1;
-		} catch (FileNotFoundException e) {
-			System.out.println("복사 예외0 : " + e.getMessage());
-		} catch (IOException e) {
-			System.out.println("복사 예외1 : " + e.getMessage());
+			isCopy = true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		} finally {
 			try {
-				if (os != null) {
-					os.close();
-				}
-				if (is != null) {
-					is.close();
-				}
-			} catch (Exception e) {
+				if(os!=null) os.close();
+				if(is!=null) is.close();
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
 			}
 		}
 		return isCopy;
 	}
+	
+
 
 	@Override
 	public int reviewDelete(int rnum) {
@@ -203,34 +206,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 		return null;
 	}
 
-	@Override
-	public FileUp fileUp(FileUp fileUp, HttpServletRequest request) {
-		String rootPath = request.getRealPath("/");
-		String attachPath = "resources/ReviewImgUpload/";
-		System.out.println("서버로 여기로 보낸다 : " + rootPath + attachPath);
-		MultipartFile upload = fileUp.getUpload();
-		String filename = "";
 
-		if (upload != null) {
-			filename = System.currentTimeMillis() + upload.getOriginalFilename();
-			fileUp.setFilename(filename);
-			try {
-				File file = new File(rootPath + attachPath + filename);
-				upload.transferTo(file);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			fileUp.setAttachPath(attachPath);
-			fileUp.setFilename(filename);
-		}
-
-		int result = filecopy(rootPath + attachPath + filename, backupPath + filename);
-		if (result == 1) {
-			System.out.println(filename + " 파일 백업 성공");
-		}
-		return fileUp;
-	}
 
 	@Override
 	public List<ReviewBoard> myReview(HttpSession session, ReviewBoard reviewBoard, String pageNum) {
