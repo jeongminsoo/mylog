@@ -4,18 +4,24 @@
 	height: 850px;
 	margin: 60px 35px;
 	background-image: url(../img/main_wraper.png);
-	position: absolute;
 }
 
 #wrap {
-	width: 1200px;
+	width: 1300px;
 	height: 700px;
-	margin: 50px auto;
-	border: 1px solid black;
-	border-radius: 15px;
 	text-align: center;
-	position: relative;
+	margin : 0 auto;
+	position : relative;
+	padding-top : 80px;
 }
+
+#wrap #findList {
+	width : 1300px;
+	height : 700px;
+	border : 1px solid #03045E;
+	border-radius : 15px;
+}
+
 #wrap input {
 	width : 300px;
 	height : 50px;

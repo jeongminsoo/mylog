@@ -4,27 +4,29 @@
 	width: 1600px;
 	height: 850px;
 	margin: 60px 35px;
-	background-image : url(../img/index1_notbutton.png);
-	position : absolute;
+	background-image : url("../../img/index1_notbutton.png");
 }
 
 #wrap {
-	width: 1000px;
-	height: 600px;
-	margin: 200px auto;
-	border: 1px solid white;
-	text-align: center;
-	position : relative;
+	width: 1300px;
+	height: 700px;
+	margin : 0 0 0 130px;
 }
 
-#wrap table {
+#login_wrap {
+	position : relative;
+	width : 1300px;
+	top : 550px;
+	left : 40px;
+}
+
+#login_wrap table {
 	width: 600px;
 	margin: 0 auto;
-	margin-top: 400px;
 	text-align: center;
 }
 
-#wrap table td {
+#login_wrap table td {
 	height: 50px;
 }
 

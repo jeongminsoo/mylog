@@ -8,81 +8,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${conPath }/css/style.css" rel="stylesheet">
+	<link href="${conPath }/css/noticeboard/list.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			
+			$('#notice').addClass('nowIndex');
 		});
 	</script>
-	<style>
-		a {
-		text-decoration : none;
-		color : black;
-	}
-	li {
-		list-style: none;
-		font-size : 1.2em;
-		font-weight : bold;
-		margin : 20px 0;
-	}
-		#main_wrap {
-	width: 1600px;
-	height: 850px;
-	margin: 60px 35px;
-	background-image : url(../img/main_wraper.png);
-	position : absolute;
-}
-
-#wrap {
-	width: 1000px;
-	height: 600px;
-	margin : 50px 0 0 150px;
-	border: 1px solid white;
-	text-align: center;
-	position : relative;
-}
-
-#noticeList table {
-	border-collapse: collapse;
-	font-size : 1.2em;
-}
-
-#noticeList table caption {
-	text-align : left;
-}
-
-#noticeList table .title {
-	padding-left : 10px;
-	text-align : left;
-}
-
-
-
-#noticeList table th {
-	background-color : #DFF6FF;
-}
-
-#noticeList table tr {
-	height : 50px;
-}
-
-#noticeList table .bottom {
-	background-color : #DFF6FF;
-	height : 20px;
-}
-
-.paging {
-	margin : 30px 0 0 30px; 
-	font-size : 1.2em;
-}
-
-#sub_nav {
-	position : absolute;
-	top : 100px;
-	right : 300px;
-}
-	</style>
 </head>
 <body>
 	<c:if test="${writeResult eq 0 }">
@@ -107,7 +39,6 @@
 	</c:if>
 	<div id="main_wrap">
 		<div id="wrap">
-			
 			<div id="noticeList">
 			<table>
 				<caption><h2>Notice</h2></caption>
@@ -164,6 +95,7 @@
 				<a href="${conPath }/notice/writeView.do">공지작성</a>
 			</c:if>
 			</div>
+			<jsp:include page="../main/header.jsp"/>
 	</div>
 </body>
 </html>

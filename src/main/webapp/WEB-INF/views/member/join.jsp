@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${conPath }/css/join.css" rel="stylesheet">
+<link href="${conPath }/css/member/info.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function() {
@@ -28,6 +28,8 @@
 				return false;
 			} 
 		});
+		
+		$('#join').addClass('nowIndex');
 	});
 
 	function idCheck(mid) {
@@ -60,6 +62,7 @@
 <body>
 	<div id="main_wrap">
 		<div id="wrap">
+		<div id="info">
 		<form action="${conPath }/member/join.do" method="post">
 			<table>
 				<caption><h2>Join Member</h2></caption>
@@ -97,11 +100,13 @@
 					<td><textarea rows="2" cols="20" name="mmotto" class="mmotto" placeholder="MOTTO"></textarea></td>
 				</tr>
 				<tr>
-					<td class="last"><input type="submit" value="가입하기" class="btn"></td>
+					<th style="height : 50px; padding-top : 20px;"><input type="submit" value="가입하기" class="btn"></th>
 				</tr>
 			</table>
 		</form>
 		</div>
+		</div>
+		<jsp:include page="../main/header.jsp"/>
 	</div>
 </body>
 <link rel="stylesheet"

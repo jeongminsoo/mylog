@@ -8,106 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${conPath }/css/style.css" rel="stylesheet">
+<link href="${conPath }/css/noticeboard/form.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function() {
-
+		$('#notice').addClass('nowIndex');
 	});
 </script>
-<style>
-		a {
-		text-decoration : none;
-		color : black;
-	}
-	li {
-		list-style: none;
-		font-size : 1.2em;
-		font-weight : bold;
-		margin : 20px 0;
-	}
-		#main_wrap {
-	width: 1600px;
-	height: 850px;
-	margin: 60px 35px;
-	background-image : url(../img/main_wraper.png);
-	position : absolute;
-}
-
-#wrap {
-	width: 1000px;
-	height: 600px;
-	margin : 50px 0 0 150px;
-	border: 1px solid white;
-	text-align: center;
-	position : relative;
-}
-
-.write table {
-	border-collapse: collapse;
-	font-size : 1.2em;
-}
-
-.write table caption {
-	text-align : left;
-}
-
-.write table .title {
-	padding-left : 10px;
-	text-align : left;
-}
-
-
-
-.write table th {
-	background-color : #DFF6FF;
-}
-
-.write table tr {
-	height : 50px;
-}
-
-.write table .bottom {
-	background-color : #DFF6FF;
-	height : 20px;
-}
-
-.paging {
-	margin : 30px 0 0 30px; 
-	font-size : 1.2em;
-}
-
-#sub_nav {
-	position : absolute;
-	top : 100px;
-	right : 300px;
-}
-
-input:not(.btn) {
-	width : 90%;
-	height : 90%;
-}
-.ncontent {
-	width : 95%;
-	resize: none;
-}
-.btn {
-	width: 80px;
-	border: none;
-	height: 30px;
-	border-radius: 10px;
-	background-color: #03045E;
-	color: white;
-	margin-left: 5px;
-	font-weight : bold;
-	font-size : 1em;
-}
-.btn_wrap {
-	text-align : left;
-	width : 500px;
-	margin : 20px 0 0 0;
-}
-</style>
 </head>
 <body>
 	<div id="main_wrap">
@@ -122,13 +29,13 @@ input:not(.btn) {
 					<col style="width: 600px;">
 					<tr>
 						<th>Title</th>
-						<td>
+						<td  class="sc">
 							<input type="text" name="ntitle" class="ntitle" value="${notice.ntitle }">
 						</td>
 					</tr>
 					<tr>
 						<th>Content</th>
-						<td style="height: 200px; padding: 10px;">
+						<td style="height: 200px; padding: 10px;" class="sc">
 							<textarea name="ncontent" class="ncontent" rows="15" cols="10">${notice.ncontent }</textarea>
 						</td>
 					</tr>
@@ -141,6 +48,7 @@ input:not(.btn) {
 			</div>
 		</form>
 		</div>
+		<jsp:include page="../main/header.jsp"/>
 	</div>
 </body>
 </html>

@@ -20,13 +20,15 @@ public interface ReviewBoardDao {
 
 	public void reviewHitUp();
 
-	public int reviewCount();
+	public int reviewCount(ReviewBoard reviewBoard);
 	
 	public int getRnum();
 
 	public List<ReviewBoard> rSearchList(ReviewBoard reviewBoard);
 	
-
+	public List<ReviewBoard> myReview(ReviewBoard reviewBoard);
+	
+	public int myReviewCnt(ReviewBoard reviewBoard);
 	
 	
 }

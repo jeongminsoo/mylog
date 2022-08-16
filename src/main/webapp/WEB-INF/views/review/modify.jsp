@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${conPath }/css/style.css" rel="stylesheet">
+<link href="${conPath }/css/review/rwrite.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -20,7 +20,8 @@
 <body>
 	<form action="modify.do" enctype="multipart/form-data" method="post">
 		<div>
-			<input type="text" name="mid" value="${modifyView.mid }">
+			<input type="hidden" name="mid" value="${modifyView.mid }">
+			<input type="hidden" name="rnum" value="${modifyView.rnum }">
 		</div>
 		<div>
 			<input type="text" name="rtitle" value="${modifyView.rtitle }">

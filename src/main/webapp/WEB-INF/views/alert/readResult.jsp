@@ -9,13 +9,13 @@
 	<meta charset="UTF-8">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		var pageCnt = Number('${append.pageCnt}');
 		var totCnt = Number('${append.totCnt}');
 		if(totCnt<=5){
 			$('.appendAlert').css('display','none');
 		}
-		$('.appendAlert').click(function(){
+		$('.appendAlert').click(function() {
 			pageNum = Number($('.pageNum').last().val());
 			if(isNaN(pageNum)){
 				pageNum=1;
@@ -25,7 +25,7 @@
 				type : 'get',
 				dataType : 'html',
 				data : {"pageNum":(pageNum+1)},
-				success : function(data){
+				success : function(data) {
 					$('#appendDiv').append(data);
 					pageNum = Number($('.pageNum').last().val());
 					if(pageCnt <= pageNum){
@@ -34,13 +34,13 @@
 				}
 			});
 		});
-		$('form[name="frm2"]').submit(function(){
+		$('form[name="frm2"]').submit(function() {
 			$.ajax({
-				url : '${conPath}/alert/read.do?pageNum=' + pageNum,
+				url : '${conPath}/alert/read.do',
 				type : 'get',
 				dataType : 'html',
 				data : $('form[name="frm2"]').serialize(),
-				success : function(data){
+				success : function(data) {
 					$('.alert_list').html(data);
 					$('.alert_num').text('0');
 				}

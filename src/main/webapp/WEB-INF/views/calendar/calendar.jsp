@@ -15,12 +15,15 @@
 		$('select[name="year"], select[name="month"]').change(function() {
 			$('form').submit();
 		});
+		
+		$('#calendar').addClass('nowIndex');
 	});
 </script>
 </head>
 <body>
 	<div id="main_wrap">
 		<div id="wrap">
+			<div id="calendar_wrap">
 			<h2>${year }년${month }월</h2>
 			<form action="${conPath }/calendar.do">
 				<select name="year">
@@ -65,7 +68,9 @@
 					</tr>
 				</c:forEach>
 			</table>
+			</div>
 		</div>
+		<jsp:include page="../main/header.jsp"/>
 	</div>
 </body>
 </html>

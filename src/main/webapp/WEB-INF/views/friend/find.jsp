@@ -24,17 +24,21 @@
 					}
 				});
 			});
+			$('#friend').addClass('nowIndex');
 		});
 	</script>
 </head>
 <body>
 	<div id="main_wrap">
 		<div id="wrap">
-		<form>
-			<input type="text" name="mname" placeholder="닉네임 또는 아이디를 입력하세요">
-		</form>
-		<div id="findResult"></div>
+			<div id="findList">
+				<form>
+					<input type="text" name="mname" placeholder="닉네임 또는 아이디를 입력하세요">
+				</form>
+			<div id="findResult"></div>
+			</div>
 		</div>
+		<jsp:include page="../main/header.jsp"/>
 	</div>
 </body>
 </html>

@@ -24,7 +24,7 @@ public class FriendController {
 	private AlertService alertService;
 	
 	@RequestMapping(value="list", method = {RequestMethod.GET, RequestMethod.POST})
-	public String friendList(HttpSession session, String pageNum,Model model) {
+	public String friendList(HttpSession session, String pageNum, Model model) {
 		Append append = new Append(alertService.countMyAlert(session), pageNum);
 		model.addAttribute("append", append);
 		model.addAttribute("alerts", alertService.myAlertList(pageNum, session));
