@@ -7,15 +7,16 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>My Log : Content</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
 		$(document).ready(function(){
 			$('.reply_modify_button').click(function(){
 				var drnum = $(this).attr('name');
+				var returnInt = '${param.returnInt }';
 				$.ajax({
 					url : '${conPath}/diaryReply/modify.do',
-					data : 'drnum='+drnum,
+					data : 'drnum='+drnum+'&returnInt='+returnInt,
 					type : 'get',
 					success : function(data){
 						$('#'+drnum).html(data);
@@ -70,9 +71,9 @@
 					<td>${diary.ddate }</td>
 				</tr>
 			</table>
-			<button onclick="location.href='${conPath}/diary/myList.do?ddate=${diary.ddate }'">목록</button>
-			<button onclick="location.href='${conPath}/diary/modify.do?dnum=${diary.dnum}&ddate=${diary.ddate }'">수정</button>
-			<button onclick="location.href='${conPath}/diary/delete.do?dnum=${diary.dnum}&ddate=${diary.ddate }'">삭제</button>
+			<button onclick="location.href='${conPath}/diary/diaryList.do?pageNum=${param.pageNum }'">목록</button>
+			<button onclick="location.href='${conPath}/diary/modify.do?dnum=${diary.dnum}&returnInt=1'">수정</button>
+			<button onclick="location.href='${conPath}/diary/delete.do?dnum=${diary.dnum}&returnInt=1'">삭제</button>
 		</div>
 		<div id="reply_wrap">
 			<div id="reply_write">
@@ -95,7 +96,7 @@
 					<span>${reply.drrdate }</span>
 					<c:if test="${reply.mid eq member.mid }">
 						<button class="reply_modify_button" name="${reply.drnum }">수정</button>
-						<button onclick="location.href='${conPath}/diaryReply/delete.do?drnum=${reply.drnum }&dnum=${diary.dnum }&returnInt=${param.returnInt }'">삭제</button>
+						<button onclick="location.href='${conPath}/diaryReply/delete.do?drnum=${reply.drnum }&dnum=${diary.dnum }&returnInt=1'">삭제</button>
 					</c:if>
 					<button class="reply_form_button" name="${reply.drnum }">답글</button>
 					<div class="reply_form${reply.drnum }"></div>
