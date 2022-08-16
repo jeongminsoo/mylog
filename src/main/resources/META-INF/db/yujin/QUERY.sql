@@ -25,7 +25,7 @@ SELECT *
 
 -- 오늘 날짜의 투투 갯수
 SELECT COUNT(*) FROM TODO
-    WHERE MID = 'aaa' AND TDRDATE = '2022-07-28'
+    WHERE MID = 'aaa' AND TDRDATE = '2022-07-28';
 
 -- 투두 만들기(todoMake)
 INSERT INTO TODO VALUES(TODO_SEQ.NEXTVAL, 'aaa', '국어 노트 정리하기', '0', '2022-07-28');

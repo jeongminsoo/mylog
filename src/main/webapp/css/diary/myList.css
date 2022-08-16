@@ -240,7 +240,7 @@
 	height : 580px;
 	
 	/* 디자인 */
-	border : 2px solid #bad4e1;
+	background-image: url("../../img/todoList.png");
 }
 #main_wrap #wrap #list_wrap #todo_wrap #todo_list{
 	/* 위치 */
@@ -261,7 +261,7 @@
 	/* 디자인 */
 	overflow: hidden;
 	box-sizing: border-box;
-	border : 2px solid #bad4e1;
+	border-bottom : 2px solid #03045E;
 }
 #main_wrap #wrap #list_wrap #todo_wrap #todo_list .todo_one .todo_content{
 	/* 크기 */

@@ -30,3 +30,21 @@
 	background-color: #DFF6FF;
 	box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
+
+#header a:hover {
+	/* 디자인 */
+	color : white;
+	background-color: #03045E;
+}
+#header .nowIndex{
+	/* 위치 */
+	margin : 10px 0 10px -23px;
+	
+	/* 크기 */
+	width : 170px;
+	height : 40px;
+	
+	/* 디자인 */
+	color : white;
+	background-color: #03045E;
+}

@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>My Log</title>
-	<link href="${conPath }/css/index.css" rel="stylesheet">
+	<link href="${conPath }/css/main/index.css" rel="stylesheet">
 </head>
 <body>
 	<c:if test="${joinResult eq 0 }">

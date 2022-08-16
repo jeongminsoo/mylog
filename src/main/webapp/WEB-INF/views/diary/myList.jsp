@@ -74,6 +74,9 @@
 			if(day == "Sat" || day == "Sun"){
 				$('.ifred').addClass('weekend');
 			}
+			
+			//인덱스
+			$('#myList').addClass('nowIndex');
 		});
 	</script>
 </head>
@@ -144,7 +147,7 @@
 						<c:forEach var="todo" items="${todoList }">
 							<div id="todo${todo.tdno }" class="todo_one">
 								<div class="todo_content">
-									<img alt="체크이미지${todo.tdcheck }" src="https://via.placeholder.com/35" class="check${todo.tdno } check" name="${todo.tdno }">
+									<img alt="체크이미지${todo.tdcheck }" src="${conPath }/img/check${todo.tdcheck }.png" class="check${todo.tdno } check" name="${todo.tdno }">
 									<span class="tdcontent${todo.tdno } content">${todo.tdcontent }</span>
 									<span class="toggle_button" id="${todo.tdno }">···</span>
 								</div>
