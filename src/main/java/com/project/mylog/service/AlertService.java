@@ -12,7 +12,7 @@ public interface AlertService {
 	
 	public int countMyAlert(HttpSession session);
 	
-	public int readAlert(String[] alno);
+	public void readAlert(String[] alno);
 	
 	public int makeAlert(HttpSession session, String fid, int alcode);
 	

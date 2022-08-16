@@ -72,7 +72,7 @@
 		
 		$('form[name="frm2"]').submit(function(){
 			$.ajax({
-				url : '${conPath}/alert/read.do',
+				url : '${conPath}/alert/read.do?pageNum=' + pageNum,
 				type : 'get',
 				dataType : 'html',
 				data : $('form[name="frm2"]').serialize(),
@@ -165,7 +165,7 @@
 			</div>
 		</div>
 		<div id="alert_icon">
-			<label for="checkbox"> <span class="alert_num">${alertNum }</span>
+			<label for="checkbox"><span class="alert_num">${alertNum }</span>
 			</label> <input type="checkbox" id="checkbox">
 			<div class="alert_list">
 				<form name="frm2">
@@ -183,12 +183,12 @@
 								<tr>
 									<td
 										<c:if test="${alert.alcheck eq 0 }">
-								style="font-weight : bold;"
-							</c:if>>
+											style="font-weight : bold;"
+										</c:if>
+									>
 										<input type="hidden" name="alno" value="${alert.alno }">
-										${alert.midname }(${alert.mid })님이 ${alert.fidname }(${alert.fid })님을
-										${alert.codename }하였습니다<br><fmt:formatDate
-												value="${alert.aldate }" pattern="MM월 dd일" />
+										${alert.midname }(${alert.mid })님이 ${alert.fidname }(${alert.fid })님을 ${alert.codename }하였습니다<br>
+										<fmt:formatDate value="${alert.aldate }" pattern="MM월 dd일" />
 									</td>
 								</tr>
 							</c:forEach>

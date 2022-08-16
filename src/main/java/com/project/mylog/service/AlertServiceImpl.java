@@ -36,12 +36,12 @@ public class AlertServiceImpl implements AlertService {
 	}
 
 	@Override
-	public int readAlert(String[] alno) {
-		int result = 0;
-		for (int i = 0; i < alno.length; i++) {
-			alertDao.readAlert(Integer.parseInt(alno[i]));
+	public void readAlert(String[] alno) {
+		if (alno.length != 0) {
+			for (int i = 0; i < alno.length; i++) {
+				alertDao.readAlert(Integer.parseInt(alno[i]));
+			}
 		}
-		return result;
 	}
 
 	@Override

@@ -21,7 +21,7 @@
 				pageNum=1;
 			}
 			$.ajax({
-				url : '${conPath}/alert/append.do',
+				url : '${conPath}/alert/append.do?',
 				type : 'get',
 				dataType : 'html',
 				data : {"pageNum":(pageNum+1)},
@@ -34,7 +34,20 @@
 				}
 			});
 		});
-
+		$('form[name="frm2"]').submit(function(){
+			$.ajax({
+				url : '${conPath}/alert/read.do?pageNum=' + pageNum,
+				type : 'get',
+				dataType : 'html',
+				data : $('form[name="frm2"]').serialize(),
+				success : function(data){
+					$('.alert_list').html(data);
+					$('.alert_num').text('0');
+				}
+			});
+			return false;
+		});
+	});
 	</script>
 </head>
 <body>
