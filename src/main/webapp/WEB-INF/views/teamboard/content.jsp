@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${conPath}/css/style.css" rel="stylesheet">
+	<link href="${conPath}/css/teamboard/content.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
 		function replyComment(tcnum, pageNum, tnum, tcpageNum) {
@@ -33,7 +33,17 @@
 				}
 			});
 		}
+		$(document).ready(function(){
+			// 토글
+			$('.toggle').hide();
+			$('.toggle_button').click(function(){
+				var tcnum = $(this).attr('id');
+				$('.toggle'+tcnum).toggle();
+				$('.toggle:not(.toggle'+tcnum+')').hide();
+			})
+		});
 	</script>
+	
 </head>
 <body>
 	<c:if test="${teamboarddeleteResult eq 1 }">
@@ -46,12 +56,13 @@
 			alert('댓글삭제 실패');
 		</script>
 	</c:if>
-	<div id="content">
-		<table>
+	<div class="wrap" style="background-image: url('../img/main_wraper.png');">
+	<div class="teamBcontent_wrap">
+		<table class="teamBcontent">
 			<tr>
-				<td>${content.ttitle }(${content.thit })</td>
+				<td><h3>${content.ttitle }(${content.thit })</h3></td>
 			</tr>
-			<tr class="left">
+			<tr>
 				<td>${content.mname }</td>
 			</tr>
 			<tr>
@@ -61,18 +72,15 @@
 				<td>작성일 : ${content.trdate }</td>
 			</tr>
 			<tr>
-				<td>ip : ${content.tip }</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="button" value="목록"
+				<td colspan="2" style="padding-bottom: 5px;">
+					<input type="button" value="[list]"
 						onclick="location.href='${conPath}/teamboard/list.do?pageNum=${pageNum }'"
 						class="btn"> 
 					<c:if test="${member.mid eq content.mid }">
-						<input type="button" value="수정"
+						<input type="button" value="[modify]"
 							onclick="location.href='${conPath}/teamboard/modifyView.do?tnum=${content.tnum}&pageNum=${pageNum }'"
 							class="btn"> 
-						<input type="button" value="삭제"
+						<input type="button" value="[delete]"
 							onclick="location.href='${conPath}/teamboard/delete.do?tnum=${content.tnum}&pageNum=${pageNum }'"
 							class="btn">
 					</c:if>
@@ -85,45 +93,44 @@
 			<input type="hidden" name="pageNum" value="${param.pageNum }">
 			<table>
 				<tr>
-					<td><input type="text" name="mname" value="${member.mname }" readonly="readonly"></td>
+					<td>${member.mname }</td>
 					<td><input type="text" name="tccontent" required="required"></td>
-					<td><input type="submit" value="댓글쓰기" class="btn"></td>
+					<td><input type="submit" value="[write]" class="btn"></td>
 				</tr>
 			</table>
 		</form>
-		<table>
-			<caption>댓글</caption>
+		<div class="teamBCcontent">
+			<div class="teamBCcontent_header">&lt; comment &gt; </div>
 			<c:if test="${teamCommentTotCnt eq 0 }">
-				<tr>
-					<td>등록된 댓글이 없습니다</td>
-				</tr>
+				<p style="margin: 10px auto; text-align: center;">등록된 댓글이 없습니다</p>
 			</c:if>
 			<c:if test="${teamCommentTotCnt ne 0 or teamCommentTotCnt ne null}">
 				<c:forEach items="${teamcommentList }" var="tcDto">
-					
-					<tr>
+					<div class="teamBCcontent_list">
 						<c:if test="${tcDto.tcindent eq 1 }">
-				  			&nbsp; &nbsp;
-				  			<td style="color:red;">@${tcDto.tcmention }</td>
+				  			<div style="font-size: 0.9em; color: #5D8BF4;">
+				  				&nbsp; @${tcDto.tcmention }
+				  			</div>
 				  		</c:if>
-						<td>${tcDto.mname }</td>
-				  		<td>${tcDto.tccontent }</td>
-						<td>
-							<button
-								onclick="replyComment('${tcDto.tcnum}', '${param.pageNum}', '${content.tnum }', '${tcpaging.currentPage }')">답댓글</button>
-							<c:if test="${member.mid eq tcDto.mid }">
-								<button 
-									onclick="modifyComment('${tcDto.tcnum}', '${param.pageNum}', '${content.tnum }', '${tcpaging.currentPage }')">수정</button>
-								<button 
-									onclick="location.href='${conPath}/teamcomment/delete.do?tnum=${content.tnum}&pageNum=${pageNum }&tcnum=${tcDto.tcnum }'">삭제</button>
-							</c:if>
-						</td>
-					</tr>
+						<div class="Ccomment_mname">${tcDto.mname }</div>
+				  		<div class="toggle_button" id="${tcDto.tcnum }">${tcDto.tccontent }</div>
+							<div class="toggle toggle${tcDto.tcnum}" id="todoList_btn"
+								style="float: right;">
+								<button style="border:none; background-color: white; padding: 0 3px;"
+									onclick="replyComment('${tcDto.tcnum}', '${param.pageNum}', '${content.tnum }', '${tcpaging.currentPage }')">[reply]</button>
+								<c:if test="${member.mid eq tcDto.mid }">
+									<button style="border:none; background-color: white; padding: 0 3px;"
+										onclick="modifyComment('${tcDto.tcnum}', '${param.pageNum}', '${content.tnum }', '${tcpaging.currentPage }')">[modify]</button>
+									<button style="border:none; background-color: white; padding: 0 3px;"
+										onclick="location.href='${conPath}/teamcomment/delete.do?tnum=${content.tnum}&pageNum=${pageNum }&tcnum=${tcDto.tcnum }'">[delete]</button>
+								</c:if>
+							</div>
+						</div>	
 				</c:forEach>
 				<div id="modifyDiv"></div>
 				<div id="replyDiv"></div>
 			</c:if>
-		</table>
+		</div>
 		<div id="paging">
 			<c:if test="${tcpaging.startPage > tcpaging.blockSize }">
 	  			[ <a href="${conPath }/teamboard/content.do?tnum=${content.tnum}&pageNum=${param.pageNum }&tcpageNum=${tcpaging.startPage-1 }"> 이 전 </a>]
@@ -140,6 +147,7 @@
 		  		[ <a href="${conPath }/teamboard/content.do?tnum=${content.tnum}&pageNum=${param.pageNum }&tcpageNum=${tcpaging.endPage+1 }"> 다 음 </a>]
 		  	</c:if>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

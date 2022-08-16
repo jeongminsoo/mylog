@@ -7,7 +7,20 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link href="${conPath}/css/style.css" rel="stylesheet">
+	<style>
+		td.mname {
+			width:60px;
+			padding:3px;
+			text-align: center;
+		}
+		input.tccontent{
+			width: 100px;
+			height: 25px;
+			border: none;
+			margin-left: 10px;
+			border-bottom: 1px solid black;
+		}
+	</style>
 </head>
 <body>
 	<form id="commentReplyForm" action="${conPath }/teamcomment/reply.do" method="post">
@@ -19,10 +32,19 @@
 		<input type="hidden" name="tcgroup" value="${teamcomment.tcgroup }">
 		<table>
 			<tr>
-				<td><input type="text" name="mname" value="${member.mname }" readonly="readonly"></td>
-				<td><input type="text" name="tccontent" required="required"></td>
-				<td><input type="submit" value="답댓글쓰기" class="btn"></td>
-				<td><input type="reset" value="취소" class="btn" onclick="history.back()"></td>
+				<td style="width:60px; padding:3px; text-align: center;">${member.mname }</td>
+				<td>
+					<input style="border-bottom:1px solid black; width:150px; padding:3px; text-align: center;" 
+						type="text" name="tccontent" required="required">
+				</td>
+				<td>
+					<input style="width:52px;"
+						type="submit" value="[답댓글]" class="btn">
+				</td>
+				<td>
+					<input style="width:37px;"
+						type="reset" value="[취소]" class="btn" onclick="history.back()">
+				</td>
 			</tr>
 		</table>
 	</form>

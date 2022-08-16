@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.project.mylog.dao.BoardTagDao;
+import com.project.mylog.dao.HashtagDao;
 import com.project.mylog.dao.ReviewBoardDao;
 import com.project.mylog.dao.ReviewReplyBoardDao;
 import com.project.mylog.model.ReviewBoard;
@@ -26,6 +28,12 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	private ReviewBoardDao rboardDao;
 	@Autowired
 	private ReviewReplyBoardDao replyDao;
+	@Autowired
+	private BoardTagDao boardtagDao;
+	@Autowired
+	private HashtagDao hashtagDao;
+	
+	
 	String backupPath = "D:\\LDSwebPro\\source\\0809\\mylog\\src\\main\\webapp\\ReviewImgUpload/";
 
 	@Override
@@ -121,12 +129,13 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	}
 
 	@Override
-	public List<ReviewBoard> reviewList(String pageNum) {
+	public List<ReviewBoard> reviewList(String pageNum, String rtitle) {
 		ReviewPaging rp = new ReviewPaging(reviewCount(), pageNum);
-		ReviewBoard reveiwBoard = new ReviewBoard();
-		reveiwBoard.setStartRow(rp.getStartRow());
-		reveiwBoard.setEndRow(rp.getEndRow());
-		return rboardDao.reviewList(reveiwBoard);
+		ReviewBoard reviewBoard = new ReviewBoard();
+		reviewBoard.setStartRow(rp.getStartRow());
+		reviewBoard.setEndRow(rp.getEndRow());
+		
+		return rboardDao.reviewList(reviewBoard);
 	}
 
 	@Override
@@ -150,6 +159,18 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	public int getRnum() {
 		// TODO Auto-generated method stub
 		return rboardDao.getRnum();
+	}
+
+	@Override
+	public List<ReviewBoard> rSearchList(String pageNum, String rtitle) {
+		ReviewPaging rp = new ReviewPaging(reviewCount(), pageNum);
+		ReviewBoard reviewBoard = new ReviewBoard();
+		reviewBoard.setStartRow(rp.getStartRow());
+		reviewBoard.setEndRow(rp.getEndRow());
+		
+		
+		
+		return rboardDao.rSearchList(reviewBoard);
 	}
 
 	

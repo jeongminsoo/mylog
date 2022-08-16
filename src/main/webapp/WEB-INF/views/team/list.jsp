@@ -21,6 +21,7 @@
 	}
 	div.list div table.thing:hover{
 		border: 2px solid black;
+		transform: scale(1.1);
 	}
 	</style>
 </head>
@@ -35,14 +36,16 @@
 	</div>
 	<div class="search">
 		<form action="${conPath }/team/list.do" method="post">
-			<select name="schItem">
-				<option value="" <c:if test="${param.schItem == ''}">selected="selected"</c:if> >검색조건</option>
-				<option value="all" <c:if test="${param.schItem == 'all'}">selected="selected"</c:if> >그룹명+팀장</option>
-				<option value="tname" <c:if test="${param.schItem == 'tname'}">selected="selected"</c:if> >그룹명</option>
-				<option value="mname" <c:if test="${param.schItem == 'mname'}">selected="selected"</c:if> >팀장</option>
-			</select>
+			<div class="selectBox">
+				<select name="schItem" class="select">
+					<option value="" <c:if test="${param.schItem == ''}">selected="selected"</c:if> >검색조건</option>
+					<option value="all" <c:if test="${param.schItem == 'all'}">selected="selected"</c:if> >그룹명+팀장</option>
+					<option value="tname" <c:if test="${param.schItem == 'tname'}">selected="selected"</c:if> >그룹명</option>
+					<option value="mname" <c:if test="${param.schItem == 'mname'}">selected="selected"</c:if> >팀장</option>
+				</select>
+			</div>
 			<input type="text" name="schWord" value="${param.schWord }">
-			<input type="submit" value="검색">
+			<input type="submit" value="[검색]" class="btn">
 		</form>
 		<a href="${conPath}/team/makeTeamView.do">[그룹만들기]</a>
 	</div>
@@ -55,10 +58,10 @@
 				<div onclick="divClicked(${tDto.tno})">
 					<table class="thing" style="border: 1px solid black;">
 						<tr>
-							<td>${tDto.tname }</td>
+							<td><h3>${tDto.tname }</h3></td>
 						</tr>
 						<tr>
-							<td>${tDto.tgoal }</td>
+							<td>MOTTO : ${tDto.tgoal }</td>
 						</tr>
 						<tr>
 							<td>${tDto.mname }</td>

@@ -38,11 +38,20 @@ public class ReviewController {
 	
 	
 	@RequestMapping(value="list", method= {RequestMethod.GET, RequestMethod.POST})
-	public String reviewList(String pageNum, Model model) {
+	public String reviewList(String pageNum, Model model, String rtitle) {
 		
-		model.addAttribute("reviewList", rboardservice.reviewList(pageNum));
+		model.addAttribute("reviewList", rboardservice.reviewList(pageNum, rtitle));
 		model.addAttribute("reviewPaging",new ReviewPaging(rboardservice.reviewCount(), pageNum));
 		
+		return "review/list";
+		
+	}
+	
+	
+	@RequestMapping(value="search", method={RequestMethod.GET, RequestMethod.POST})
+	public String reviewDelete(String hname, String pageNum, Model model) {
+			model.addAttribute("reviewList", rboardservice.rSearchList(pageNum, hname));
+			model.addAttribute("reviewPaging",new ReviewPaging(rboardservice.reviewCount(), pageNum));
 		return "review/list";
 		
 	}
@@ -102,6 +111,8 @@ public class ReviewController {
 		return "forward:list.do";
 		
 	}
+	
+
 	
 //	@RequestMapping(value="replylist", method= {RequestMethod.GET,RequestMethod.POST})
 //	public String reviewReplyList(String pageNum, Model model, int rnum) {

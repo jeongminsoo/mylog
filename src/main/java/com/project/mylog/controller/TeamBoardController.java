@@ -1,5 +1,7 @@
 package com.project.mylog.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,9 +42,9 @@ public class TeamBoardController {
 	}
 
 	@RequestMapping(value = "write", method = RequestMethod.POST)
-	public String teamboardWrite(@ModelAttribute("teamboard") TeamBoard teamboard, MultipartHttpServletRequest mRequest,
+	public String teamboardWrite(@ModelAttribute("teamboard") TeamBoard teamboard, HttpServletRequest request,
 			Model model) { // ip저장위해
-		model.addAttribute("teamboardwriteResult", tbService.teamBoardWrite(mRequest, teamboard));
+		model.addAttribute("teamboardwriteResult", tbService.teamBoardWrite(request, teamboard));
 		return "forward:list.do";
 	}
 
@@ -71,8 +73,8 @@ public class TeamBoardController {
 
 	@RequestMapping(value = "modify", method = RequestMethod.POST)
 	public String teamboardModify(@ModelAttribute("teamboard") TeamBoard teamboard,
-			MultipartHttpServletRequest mRequest, Model model) {
-		model.addAttribute("teamboardmodifyResult", tbService.teamBoardModify(mRequest, teamboard));
+			HttpServletRequest request, Model model) {
+		model.addAttribute("teamboardmodifyResult", tbService.teamBoardModify(request, teamboard));
 		return "forward:list.do";
 	}
 

@@ -8,7 +8,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${conPath}/css/style.css" rel="stylesheet">
 </head>
 <body>
 	<form action="${conPath }/teamcomment/modify.do" method="post">
@@ -19,15 +18,18 @@
 		<input type="hidden" name="tcpageNum" value="${param.tcpageNum }">
 		<table>
 			<tr>
+				<td style="width:60px; padding:3px; text-align: center;">${member.mname }</td>
 				<td>
-					<input type="text" name="mname" value="${member.mname }" readonly="readonly">
+					<input style="border-bottom:1px solid black; width:150px; padding:3px; text-align: center;" 
+						type="text" name="tccontent" required="required">
 				</td>
 				<td>
-					<textarea rows="5" cols="5" name="tccontent">${teamcomment.tccontent }</textarea>
+					<input style="width:52px;"
+						type="submit" value="[저장]" class="btn">
 				</td>
-				<td colspan="2">
-					<input type="submit" value="저장" class="btn">
-					<input type="reset" value="취소" class="btn" onclick="history.back()">
+				<td>
+					<input style="width:37px;"
+						type="reset" value="[취소]" class="btn" onclick="history.back()">
 				</td>
 			</tr>
 		</table>

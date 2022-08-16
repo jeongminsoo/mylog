@@ -52,15 +52,9 @@
 </head>
 <body>
 
-<<<<<<< HEAD
+
 	<form action="write.do" enctype="multipart/form-data" method="post" id="write">
-=======
-<<<<<<< HEAD
-	<form action="write.do" enctype="multipart/form-data" method="post" id="write">
-=======
-	<form action="write.do" enctype="multipart/form-data" method="post">
->>>>>>> d8790adbf713d9f47bdaa6bcea65de5da2926095
->>>>>>> 3503eb58da1550e89b304c885f9f4477b5dc6600
+
 		<div>
 			<input type="text" name="mid">
 		</div>

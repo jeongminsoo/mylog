@@ -13,99 +13,161 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link href="${conPath }/css/timetable.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-	$(document).ready(function() {
-
-				//타임테이블 출력
-					var array =[];
+	$(document).ready(
+			function() {
+				document.getElementById('dolist').innerHTML = "<h4>What to do ?</h4>";
+				
+			
+					//타임테이블 출력
+					var array = [];
 					var tableList = ${tableIdList};
 					$(tableList).each(function(idx, list) {
 						array.push(list);
-						
+
 					});
-					
-					$(array).each(function(idx, item){
+
+					$(array).each(function(idx, item) {
+						var tname= item.tname;
 						var tbshour = item.tbshour;
 						var tbsmin = item.tbsmin;
 						var tbehour = item.tbehour;
 						var tbemin = item.tbemin;
 						var tduring = item.tduring;
-						var stime = Number(tbshour+tbsmin);
-						var etime = Number(tbehour+tbemin);
-						for(var idx=stime; idx<etime; idx++){
-							   $('.'+idx).css('background-color', 'lightgray');
-						 } 
+						var stime = Number(tbshour + tbsmin);
+						var etime = Number(tbehour + tbemin);
 						
+					/* 	for(var i in tname){
+							document.getElementById('do').innerHTML += "<h4>"+tname+"</h4>";
+							
+							
+						} */
+						for (var idx = stime; idx < etime; idx++) {
+							$('.' + idx).css('background-color', 'lightgray');
+						
+						}
+						
+						
+
+					});
+				
+				
+				
+					//색 변경
+
+				$('button').click(function(){
+					
+					var color= $(this).attr('id');
+					console.log(color);
+					
+					
+					var array = [];
+					var tableList = ${tableIdList};
+					$(tableList).each(function(idx, list) {
+						array.push(list);
+
+					});
+
+					$(array).each(function(idx, item) {
+						var tname= item.tname;
+						var tbshour = item.tbshour;
+						var tbsmin = item.tbsmin;
+						var tbehour = item.tbehour;
+						var tbemin = item.tbemin;
+						var tduring = item.tduring;
+						var stime = Number(tbshour + tbsmin);
+						var etime = Number(tbehour + tbemin);
+						
+					/* 	for(var i in tname){
+							document.getElementById('do').innerHTML += "<h4>"+tname+"</h4>";
+							
+							
+						} */
+						for (var idx = stime; idx < etime; idx++) {
+							$('.' + idx).css('background-color', color);
+						
+						}
+						
+						
+
 					});
 					
-					
-				
-				
-					//색변경
-					var color =['#f4cccc','#fbe4cd','#fdf2cc','#d9ead3','#d0e0e3','#cfe2f2','#d9d2e9','#ead1dc'];
-					
-					
-	});
-	
-	
-					
+				});
+			
+
+			});
 </script>
 </head>
 <body>
+	<div id="wrap">
+		<div id="timetable">
+			<h1>DAY CALENDAR</h1>
+			
+			<div class="col-sm-6">
 
-	<div id="timetable">
-		<h1>기록한 시간</h1>
-		<div class="col-sm-6">
-
-<c:if test="${empty tableIdList }">
+				<c:if test="${empty tableIdList }">
 	기록된 시간이 없습니다
-</c:if> 
-	
+</c:if>
 
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th scope="col">시간</th>
-						<th scope="col">10</th>
-						<th scope="col">20</th>
-						<th scope="col">30</th>
-						<th scope="col">40</th>
-						<th scope="col">50</th>
-						<th scope="col">60</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="i" begin="5" end="24">
-						<tr class="${i}">
-							<th>${i }</th>
-							<td class="${i}10"></td>
-							<td class="${i}20"></td>
-							<td class="${i}30"></td>
-							<td class="${i}40"></td>
-							<td class="${i}50"></td>
-							<td class="${i}60"></td>
+				<div id="colors">
+				<button id="#f4cccc"><img src="${conPath }/img/f4cccc.PNG"></button>
+				<button id="#fbe4cd"><img src="${conPath }/img/fbe4cd.PNG"></button>
+				<button id="#fdf2cc"><img src="${conPath }/img/fdf2cc.PNG"></button>
+				<button id="#d9ead3"><img src="${conPath }/img/d9ead3.PNG"></button>
+				<button id="#d0e0e3"><img src="${conPath }/img/d0e0e3.PNG"></button>
+				<button id="#cfe2f2"><img src="${conPath }/img/cfe2f2.PNG"></button>
+				<button id="#d9d2e9"><img src="${conPath }/img/d9d2e9.PNG"></button>
+				<button id="#ead1dc"><img src="${conPath }/img/ead1dc.PNG"></button>
+				
+				</div>
+				<table class="table table-bordered" >
+					<thead>
+						<tr>
+							<th scope="col">시간</th>
+							<th scope="col">10</th>
+							<th scope="col">20</th>
+							<th scope="col">30</th>
+							<th scope="col">40</th>
+							<th scope="col">50</th>
+							<th scope="col">60</th>
 						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="i" begin="5" end="24">
+							<tr class="${i}">
+								<th>${i }</th>
+								<td class="${i}10"></td>
+								<td class="${i}20"></td>
+								<td class="${i}30"></td>
+								<td class="${i}40"></td>
+								<td class="${i}50"></td>
+								<td class="${i}60"></td>
+							</tr>
 
-					</c:forEach>
-					<c:forEach var="i" begin="1" end="4">
-						<tr class="${i}">
-							<th>${i }</th>
-							<td class="${i}10"></td>
-							<td class="${i}20"></td>
-							<td class="${i}30"></td>
-							<td class="${i}40"></td>
-							<td class="${i}50"></td>
-							<td class="${i}60"></td>
-						</tr>
+						</c:forEach>
+						<c:forEach var="i" begin="1" end="4">
+							<tr class="${i}">
+								<th>${i }</th>
+								<td class="${i}10"></td>
+								<td class="${i}20"></td>
+								<td class="${i}30"></td>
+								<td class="${i}40"></td>
+								<td class="${i}50"></td>
+								<td class="${i}60"></td>
+							</tr>
 
-					</c:forEach>
-				</tbody>
-			</table>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<div id="do" style="height:600px; width:20%;">
+				<span id="dolist"></span>
+				
+			</div>
+			
 		</div>
-		
-		<button onclick="location.href='${conPath}/main.do'">메인으로</button>
-
 	</div>
 </body>
 </html>

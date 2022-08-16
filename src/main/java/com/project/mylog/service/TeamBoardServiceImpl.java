@@ -2,9 +2,10 @@ package com.project.mylog.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.mylog.dao.TeamBoardDao;
 import com.project.mylog.model.TeamBoard;
@@ -33,8 +34,8 @@ public class TeamBoardServiceImpl implements TeamBoardService {
 	}
 
 	@Override
-	public int teamBoardWrite(MultipartHttpServletRequest mRequest, TeamBoard teamboard) {
-		teamboard.setTip(mRequest.getRemoteAddr());
+	public int teamBoardWrite(HttpServletRequest request, TeamBoard teamboard) {
+		teamboard.setTip(request.getRemoteAddr());
 		return teamBoardDao.teamBoardWrite(teamboard);
 	}
 
@@ -54,8 +55,8 @@ public class TeamBoardServiceImpl implements TeamBoardService {
 	}
 
 	@Override
-	public int teamBoardModify(MultipartHttpServletRequest mRequest, TeamBoard teamboard) {
-		teamboard.setTip(mRequest.getRemoteAddr());
+	public int teamBoardModify(HttpServletRequest request, TeamBoard teamboard) {
+		teamboard.setTip(request.getRemoteAddr());
 		return teamBoardDao.teamBoardModify(teamboard);
 	}
 
