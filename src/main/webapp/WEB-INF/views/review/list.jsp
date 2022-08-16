@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${conPath }/css/style.css" rel="stylesheet">
+<link href="${conPath }/css/reviewList.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	$(document).ready(function() {
@@ -18,51 +18,78 @@
 </script>
 </head>
 <body>
-	<button onclick="location.href='${conPath}/review/write.do'">글쓰기</button>
-	<table>
-		<tr>
-			<th>No</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>댓글개수</th>
-		</tr>
+	<div id="main_wrap">
+		<div id="wrap">
+		<h1>REVIEW ABOUT</h1>
+		<hr>
+			<button id="write" onclick="location.href='${conPath}/review/write.do'"><img class ="menu_img" src="${conPath }/img/reviewWrite.png" title="글쓰기"></button>
+			<button id="menu"onclick="location.href='${conPath}/main.do'"><img class ="menu_img" src="${conPath }/img/timetablemenu.png" title="메뉴"></button>
+			<button id="mylist" onclick="location.href='${conPath}/review/myReview.do'"><img class ="menu_img" src="${conPath }/img/reviewuser.png" title="내 글 보기"></button>
 
-		<c:forEach var="review" items="${reviewList }">
-			<tr>
-				<td>${review.rnum }</td>
-				<td><a
-					href="${conPath }/review/content.do?rnum=${review.rnum}&pageNum=${reviewPaging.currentPage}&repageNum=1">${review.rtitle }</a></td>
-				<td>${review.mname }</td>
-				<td>${review.rrdate }</td>
-				<td>${review.cnt }</td>
-			</tr>
-		</c:forEach>
-	</table>
-	<div id="paging">
-		<c:if test="${reviewPaging.startPage > reviewPaging.blockSize }">
-					[<a href="">이전</a>]
+			<div id="allList">
+
+				<c:if test="${empty reviewList }">
+			해당 글이 존재하지 않습니다
+		</c:if>
+				<c:if test="${not empty reviewList }">
+					<c:forEach var="review" items="${reviewList }">
+						<div class="rlist">
+							<c:if test="${empty review.rfilename }">
+
+								<div><img src="${conPath }/img/reviewNoImg.PNG"></div>
+							</c:if>
+							<c:if test="${not empty review.rfilename }">
+								<div><img src="${conPath }/ReviewImgUpload/${review.rfilename }"></div>
+							</c:if>
+							<div class="info">
+							
+								<a href="${conPath }/review/content.do?rnum=${review.rnum}&pageNum=${reviewPaging.currentPage}&repageNum=1">${review.rtitle }</a>(${review.cnt })
+								<br>
+								${review.mname }<br>
+								${review.rrdate }<br>
+							</div>
+							</div>
+					</c:forEach>
 				</c:if>
-		<c:forEach var="i" begin="${reviewPaging.startPage }"
-			end="${reviewPaging.endPage }">
-			<c:if test="${reviewPaging.currentPage == i }">
+
+				<div id="paging">
+					<c:if test="${reviewPaging.startPage > reviewPaging.blockSize }">
+					[<a href="${conPath }/review/list.do?pageNum=${reviewPaging.startPage-1}&rtitle=${param.rtitle}">이전</a>]
+				</c:if>
+					<c:forEach var="i" begin="${reviewPaging.startPage }"
+						end="${reviewPaging.endPage }">
+						<c:if test="${reviewPaging.currentPage == i }">
 						${i }
 					</c:if>
-			<c:if test="${reviewPaging.currentPage != i }">
-				<a href="${conPath }/review/list.do?pageNum=${i}">${i }</a>
-			</c:if>
-		</c:forEach>
-		<c:if test="${reviewPaging.endPage < reviewPaging.pageCnt }">
-					[<a href="">다음</a>]
+						<c:if test="${reviewPaging.currentPage != i }">
+							<a
+								href="${conPath }/review/list.do?pageNum=${i}&rtitle=${param.rtitle}">${i }</a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${reviewPaging.endPage < reviewPaging.pageCnt }">
+					[<a
+							href="${conPath }/review/list.do?pageNum=${reviewPaging.endPage+1}&rtitle=${param.rtitle}">다음</a>]
 				</c:if>
 
-	</div>
+				</div>
 
-	<div id="search">
-		<form action="${conPath }/review/list.do">
-			<input type="text" name="hname"> 
-			<input type="submit" value="검색">
-		</form>
+				<div id="search">
+					<form id="rsearch" action="${conPath }/review/list.do">
+						<select name="shoption">
+							<option value=""
+								<c:if test="${param.shoption == ''}">selected="selected"</c:if>>검색조건</option>
+							<option value="rtitle"
+								<c:if test="${param.rtitle == ''}">selected="selected"</c:if>>제목으로
+								검색</option>
+							<option value="hname"
+								<c:if test="${param.hno == ''}">selected="selected"</c:if>>태그로
+								검색</option>
+						</select> <input type="text" name="shname" value="${param.shname }">
+						<input type="submit" value="검색" class="btn_s">
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

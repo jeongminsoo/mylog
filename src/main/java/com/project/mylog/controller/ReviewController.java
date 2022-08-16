@@ -3,9 +3,13 @@ package com.project.mylog.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,23 +42,35 @@ public class ReviewController {
 	
 	
 	@RequestMapping(value="list", method= {RequestMethod.GET, RequestMethod.POST})
-	public String reviewList(String pageNum, Model model, String rtitle) {
-		
-		model.addAttribute("reviewList", rboardservice.reviewList(pageNum, rtitle));
-		model.addAttribute("reviewPaging",new ReviewPaging(rboardservice.reviewCount(), pageNum));
+	public String reviewList(String pageNum, Model model,ReviewBoard reviewBoard, HttpSession session) {
+		System.out.println(7);
+		System.out.println(8);
+		model.addAttribute("reviewList", rboardservice.reviewList(session, pageNum, reviewBoard));
+		System.out.println(9);
+		model.addAttribute("reviewPaging",new ReviewPaging(rboardservice.reviewCount(session, reviewBoard),pageNum));
 		
 		return "review/list";
 		
 	}
 	
-	
-	@RequestMapping(value="search", method={RequestMethod.GET, RequestMethod.POST})
-	public String reviewDelete(String hname, String pageNum, Model model) {
-			model.addAttribute("reviewList", rboardservice.rSearchList(pageNum, hname));
-			model.addAttribute("reviewPaging",new ReviewPaging(rboardservice.reviewCount(), pageNum));
+	@RequestMapping(value="myReview", method= RequestMethod.GET)
+	public String myReview(String pageNum, Model model,ReviewBoard reviewBoard, HttpSession session) {
+		
+		model.addAttribute("reviewList", rboardservice.myReview(session, reviewBoard, pageNum));
+		model.addAttribute("reviewPaging",new ReviewPaging(rboardservice.myReviewCnt(session, reviewBoard),pageNum));
 		return "review/list";
 		
 	}
+	
+	
+	
+//	@RequestMapping(value="search", method={RequestMethod.GET, RequestMethod.POST})
+//	public String reviewDelete(String rtitle, String pageNum, Model model) {
+//			model.addAttribute("searchList", rboardservice.rSearchList(pageNum, rtitle));
+//			model.addAttribute("reviewPaging",new ReviewPaging(rboardservice.reviewCount(rtitle), pageNum));
+//		return "review/tagsearch";
+//		
+//	}
 	
 	@RequestMapping(value="content", method={RequestMethod.GET, RequestMethod.POST})
 	public String reviewContent(int rnum, Model model, String pageNum, String repageNum) {
@@ -79,8 +95,8 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="write", method= RequestMethod.POST)
-	public String reviewWrite(MultipartHttpServletRequest mRequest, BoardTag boardtag, ReviewBoard reviewBoard, Model model, String hname) {
-		model.addAttribute("reviewWrite", rboardservice.reviewWrite(mRequest, reviewBoard));
+	public String reviewWrite(HttpSession session, HttpServletRequest request,MultipartHttpServletRequest mRequest, BoardTag boardtag, ReviewBoard reviewBoard, Model model, String hname) {
+		model.addAttribute("reviewWrite", rboardservice.reviewWrite(session, request, mRequest, reviewBoard));
 		btagservice.BoardTagConnect(boardtag, hname);
 		return "forward:list.do";
 		
@@ -96,10 +112,11 @@ public class ReviewController {
 		
 	}
 	@RequestMapping(value="modify", method= RequestMethod.POST)
-	public String reviewModify(MultipartHttpServletRequest mRequest, ReviewBoard reviewBoard, Model model) {
+	public String reviewModify(HttpServletRequest request,MultipartHttpServletRequest mRequest,  @ModelAttribute("reviewBoard")ReviewBoard reviewBoard, Model model) {
 		
-		
-		model.addAttribute("reviewModify", rboardservice.reviewModify(mRequest, reviewBoard));
+		System.out.println(1);
+		model.addAttribute("reviewModify", rboardservice.reviewModify(mRequest, reviewBoard, request));
+		System.out.println(2);
 		return "forward:list.do";
 		
 	}
@@ -112,6 +129,7 @@ public class ReviewController {
 		
 	}
 	
+
 
 	
 //	@RequestMapping(value="replylist", method= {RequestMethod.GET,RequestMethod.POST})
