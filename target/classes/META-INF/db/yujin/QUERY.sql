@@ -15,11 +15,17 @@ UPDATE MEMBER SET MSTATUS = 0 WHERE MID = 'aaa';
 
 -- TODO
 -- 오늘 날짜의 투두 리스트 전체 출력하기(todoList)
-SELECT *
-    FROM TODO
-    WHERE MID = 'aaa'
-        AND TDRDATE = '2022-07-28'
-    ORDER BY TDCHECK, TDNO;
+SELECT * 
+    FROM (SELECT ROWNUM RN, A.*
+                    FROM (SELECT * FROM TODO
+                                WHERE MID = 'aaa'
+                                AND TDRDATE = '2022-07-28'
+                                ORDER BY TDCHECK, TDNO) A )
+    WHERE RN BETWEEN 1 AND 10;
+
+-- 오늘 날짜의 투투 갯수
+SELECT COUNT(*) FROM TODO
+    WHERE MID = 'aaa' AND TDRDATE = '2022-07-28';
 
 -- 투두 만들기(todoMake)
 INSERT INTO TODO VALUES(TODO_SEQ.NEXTVAL, 'aaa', '국어 노트 정리하기', '0', '2022-07-28');

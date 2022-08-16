@@ -9,6 +9,7 @@ import com.project.mylog.model.Todo;
 @Mapper
 public interface TodoDao {
 	public List<Todo> todoList(Todo todo);
+	public int todoCnt(Todo todo);
 	public Todo getTodo(int tdno);
 	public int todoMake(Todo todo);
 	public int todoModify(Todo todo);

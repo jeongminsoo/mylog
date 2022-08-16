@@ -19,7 +19,8 @@
 	<div id="main_wrap">
 		<form action="modify.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="dnum" value="${diary.dnum }">
-		<input type="hidden" name="ddate" value="${param.ddate }">
+		<input type="hidden" name="ddate" value="${diary.ddate }">
+		<input type="hidden" name="returnInt" value="${returnInt }">
 			<table>
 				<tr>
 					<th>제목</th>
