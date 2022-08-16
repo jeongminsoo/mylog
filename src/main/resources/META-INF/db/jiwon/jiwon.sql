@@ -1,141 +1,12 @@
--- CREATE TABLE & SEQUENCE
-    -- ADMIN
-    DROP TABLE ADMIN CASCADE CONSTRAINTS;
-    CREATE TABLE ADMIN (
-        aID VARCHAR2(15) PRIMARY KEY,
-        aPW VARCHAR2(15),
-        aGRADE NUMBER(1)
-    );
-    -- MEMBER
-    DROP TABLE MEMBER CASCADE CONSTRAINTS;
-    CREATE TABLE MEMBER(
-        mID VARCHAR2(15) PRIMARY KEY,
-        mPW VARCHAR2(15) NOT NULL,
-        mNAME VARCHAR2(30) NOT NULL,
-        mBIRTH DATE,
-        mEMAIL VARCHAR2(30) UNIQUE NOT NULL,
-        mMOTTO VARCHAR2(100),
-        mSTATUS NUMBER(1) DEFAULT 1 NOT NULL
-    );
-    -- TEAM
-    DROP SEQUENCE TEAM_SEQ;
-    CREATE SEQUENCE TEAM_SEQ
-        NOCACHE
-        NOCYCLE;
-    DROP TABLE TEAM CASCADE CONSTRAINTS;
-    CREATE TABLE TEAM(
-        tNO NUMBER(8) PRIMARY KEY,
-        mID VARCHAR2(15) REFERENCES  MEMBER(mID),
-        tNAME VARCHAR2(100) NOT NULL,
-        tGOAL VARCHAR2(100)
-    );
-    --TEAM_MEMBER
-    DROP SEQUENCE TEAM_MEMBER_SEQ;
-    CREATE SEQUENCE TEAM_MEMBER_SEQ
-        NOCACHE
-        NOCYCLE;
-    DROP TABLE TEAM_MEMBER CASCADE CONSTRAINTS;
-    CREATE TABLE TEAM_MEMBER(
-        tmNO NUMBER(8) PRIMARY KEY,
-        mID VARCHAR2(15) REFERENCES MEMBER(mID) NOT NULL,
-        tNO NUMBER(8) REFERENCES TEAM(tNO) NOT NULL,
-        tmCHECK NUMBER(1) DEFAULT 0 NOT NULL
-    );
-    --TEAM_TODO
-    DROP SEQUENCE TEAM_TODO_SEQ;
-    CREATE SEQUENCE TEAM_TODO_SEQ
-        NOCACHE
-        NOCYCLE;
-    DROP TABLE TEAM_TODO CASCADE CONSTRAINTS;
-    CREATE TABLE TEAM_TODO(
-        ttNO NUMBER(8) PRIMARY KEY,
-        tNO NUMBER(8) REFERENCES TEAM(tNO),
-        ttCONTENT VARCHAR2(4000) NOT NULL,
-        ttCHECK NUMBER(2) DEFAULT 0 NOT NULL,
-        tmNO NUMBER(8) REFERENCES TEAM_MEMBER(tmNO),
-        ttORDER NUMBER(6),
-        ttRDATE DATE DEFAULT SYSDATE
-    );
-    
-    -- TEAMinBOARD
-    DROP SEQUENCE TEAMinBOARD_SEQ;
-    CREATE SEQUENCE TEAMinBOARD_SEQ
-        NOCACHE
-        NOCYCLE;
-    DROP TABLE TEAMinBOARD CASCADE CONSTRAINTS;
-    CREATE TABLE TEAMinBOARD(
-        tiNUM NUMBER(8) PRIMARY KEY,
-        tNO NUMBER(8) REFERENCES TEAM(tNO),
-        tmNO NUMBER(8) REFERENCES TEAM_MEMBER(tmNO),
-        tiTITLE VARCHAR2(100) NOT NULL,
-        tiCONTENT CLOB NOT NULL,
-        tiFILENAME VARCHAR2(100),
-        tiHIT NUMBER(8),
-        tiRDATE DATE DEFAULT SYSDATE,
-        tiGROUP NUMBER(8),
-        tiSTEP NUMBER(4),
-        tiINDENT NUMBER(4),
-        tiIP VARCHAR2(20)
-    );
-    -- TEAMin_COMMENTBOARD
-    DROP SEQUENCE TEAMin_COMMENTBOARD_SEQ;
-    CREATE SEQUENCE TEAMin_COMMENTBOARD_SEQ
-        NOCACHE
-        NOCYCLE;
-    DROP TABLE TEAMin_COMMENTBOARD CASCADE CONSTRAINTS;
-    CREATE TABLE TEAMin_COMMENTBOARD(
-        ticNUM NUMBER(8) PRIMARY KEY,
-        tiNUM NUMBER(8) REFERENCES TEAMinBOARD(tiNUM),
-        tmNO NUMBER(8) REFERENCES TEAM_MEMBER(tmNO),
-        ticCONTENT VARCHAR2(1000) NOT NULL,
-        ticRDATE DATE DEFAULT SYSDATE,
-        ticGROUP NUMBER(8),
-        ticSTEP NUMBER(4),
-        ticINDENT NUMBER(4),
-        ticIP VARCHAR2(20)
-    );
-    
-    -- TEAMBOARD
-    DROP SEQUENCE TEAMBOARD_SEQ;
-    CREATE SEQUENCE TEAMBOARD_SEQ
-        NOCACHE
-        NOCYCLE;
-    DROP TABLE TEAMBOARD CASCADE CONSTRAINTS;
-    CREATE TABLE TEAMBOARD(
-        tNUM NUMBER(8) PRIMARY KEY,
-        mID VARCHAR2(15) REFERENCES MEMBER(mID),
-        tTITLE VARCHAR2(100) NOT NULL,
-        tCONTENT CLOB NOT NULL,
-        tFILENAME VARCHAR2(100),
-        tHIT NUMBER(8) DEFAULT 0,
-        tRDATE DATE DEFAULT SYSDATE,
-        tGROUP NUMBER(8) DEFAULT 0,
-        tSTEP NUMBER(4) DEFAULT 0,
-        tINDENT NUMBER(4) DEFAULT 0,
-        tIP VARCHAR2(20)
-    );
-    -- TEAM_COMMENTBOARD
-    DROP SEQUENCE TEAM_COMMENTBOARD_SEQ;
-    CREATE SEQUENCE TEAM_COMMENTBOARD_SEQ
-        NOCACHE
-        NOCYCLE;
-    DROP TABLE TEAM_COMMENTBOARD CASCADE CONSTRAINTS;
-    CREATE TABLE TEAM_COMMENTBOARD(
-        tcNUM NUMBER(8) PRIMARY KEY,
-        mID VARCHAR2(15) REFERENCES MEMBER(mID),
-        tNUM NUMBER(8) REFERENCES TEAMBOARD(tNUM),
-        tcCONTENT VARCHAR2(1000) NOT NULL,
-        tcRDATE DATE DEFAULT SYSDATE,
-        tcGROUP NUMBER(8) DEFAULT 0,
-        tcSTEP NUMBER(4) DEFAULT 0,
-        tcINDENT NUMBER(4) DEFAULT 0,
-        tcIP VARCHAR2(20)
-    );
-
 --DAO QUERY
+select * from team_member;
     -- Member
     INSERT INTO MEMBER (mID, mPW, mNAME, mBIRTH, mEMAIL, mMOTTO, mSTATUS) 
         VALUES ('aaa', '111', '박박박', TO_DATE('2000-01-01', 'YYYY-MM-DD'), 'park@park.com', NULL, 1);
+    INSERT INTO MEMBER (mID, mPW, mNAME, mBIRTH, mEMAIL, mMOTTO, mSTATUS) 
+        VALUES ('ddd', '111', '디디', TO_DATE('2002-02-02', 'YYYY-MM-DD'), 'DDD@DDD.com', NULL, 1);
+    COMMIT;
+    SELECT * FROM MEMBER;
     -- ADMIN
     select * from admin;
     -- 관리자 등록
@@ -160,6 +31,18 @@
         WHERE RN BETWEEN 1 AND 11;
     commit;
     -- TEAM(make TEAM)
+    -- teamList
+    SELECT * FROM 
+	        (SELECT ROWNUM RN, A.* FROM 
+	            (SELECT T.*, M.mNAME FROM TEAM T, MEMBER M
+	            			WHERE T.MID = M.MID
+	                        ORDER BY TNO DESC) A)
+		        WHERE RN BETWEEN 1 AND 3;
+    SELECT * FROM TEAM ORDER BY TNO DESC;
+    -- teamTotCnt
+    SELECT COUNT(*) FROM TEAM;
+    -- 가입신청 한 팀인지 아닌지
+    SELECT * FROM TEAM_MEMBER WHERE MID='aaa' AND tNO=2;
     -- (1) 팀 만들기
     INSERT INTO TEAM (tNO, mID, tNAME, tGOAL) 
         VALUES (TEAM_SEQ.NEXTVAL, 'aaa', 'myLOG', '팀프빠샤');
@@ -173,7 +56,7 @@
                     tGOAL = '팀프빠샤빠샤!'
                 WHERE tNO = 32;
     -- 팀 디테일
-    SELECT * FROM TEAM WHERE tNO=2;
+    SELECT * FROM TEAM WHERE tNO=1;
     -- TEAM_MEMBER(join team)
     -- 내 팀 리스트
     SELECT T.tNAME, T.MID FROM TEAM_MEMBER TM, TEAM T WHERE TM.tNO = T.tNO AND TM.tmCHECK=1 AND TM.mID='aaa';
@@ -181,17 +64,21 @@
     SELECT T.tNAME, T.MID FROM TEAM_MEMBER TM, TEAM T WHERE TM.tNO = T.tNO AND TM.tmCHECK=0 AND TM.mID='aaa';
     SELECT * FROM TEAM_MEMBER;
     COMMIT;
+    -- detail
+    SELECT * FROM TEAM_MEMBER WHERE TNO=2 AND MID='aaa';
     -- (1) 팀원 가입 신청
     INSERT INTO TEAM_MEMBER (tmNO, mID, tNO, tmCHECK)
         VALUES (TEAM_MEMBER_SEQ.NEXTVAL, 'aaa', 1, 0);
     -- (2) 팀원 가입 신청 취소
     DELETE FROM TEAM_MEMBER WHERE tmNO='' AND tNO=4;
-    DELETE FROM TEAM_MEMBER WHERE mID='aaa' AND tNO=4; 
+    DELETE FROM TEAM_MEMBER WHERE mID='ddd' AND tNO=4;
+    commit;
     -- (2) 팀원 가입(가입허가/팀원 가입)
     UPDATE TEAM_MEMBER SET tmCHECK = 1
                     WHERE tmNO='' AND tNO='';
     INSERT INTO TEAM_MEMBER (tmNO, mID, tNO, tmCHECK)
-        VALUES (TEAM_MEMBER_SEQ.NEXTVAL, 'aaa', 1, 1);
+        VALUES (TEAM_MEMBER_SEQ.NEXTVAL, 'ddd', 2, 1);
+    commit;
     -- 팀 가입신청자 리스트(팀장만 가입허가 가능)
     SELECT * FROM TEAM_MEMBER WHERE tmCHECK = 0 AND tNO = 1; 
     SELECT * FROM TEAM_MEMBER;
@@ -205,17 +92,28 @@
 
     --TEAM_TODO(★ 수정가능성이 많습니다.)
     -- (1) 팀 투두 리스트     (★되는지 봐야함)
-    SELECT TT.*, TM.mID 
-        FROM TEAM_TODO TT, TEAM_MEMBER TM, TEAM T
-        WHERE TT.tmNO=TM.tmNO AND T.TNO= TT.TNO AND TT.tNO=1
-        ORDER BY ttORDER;
+    SELECT TT.*, TM.mID , M.mNAME
+        FROM TEAM_TODO TT, TEAM_MEMBER TM, TEAM T, MEMBER M
+        WHERE TT.tmNO=TM.tmNO AND TM.mID=M.mID AND T.TNO= TT.TNO AND TT.tNO=2 AND tt.ttrdate LIKE TO_DATE('2022-08-08', 'YYYY-MM-DD')
+        ORDER BY ttcheck, ttORDER;
+    -- 팀투두 가져오기
+    SELECT TT.*, TM.mID, M.mNAME FROM TEAM_TODO TT, TEAM_MEMBER TM, MEMBER M WHERE TT.tmNO=TM.tmNO AND TM.mID=M.mID AND TTNO=5;
+    
     -- (2) 팀 투두 항목 생성
+    SELECT * FROM TEAM;
+    SELECT * FROM TEAM_MEMBER;
+    
     INSERT INTO TEAM_TODO (ttNO, tNO, ttCONTENT, ttCHECK, tmNO, ttORDER, ttRDATE)
-        VALUES (TEAM_TODO_SEQ.NEXTVAL, 1, 'ppt만들기', 0, 2, TEAM_TODO_SEQ.CURRVAL, SYSDATE);
+        VALUES (TEAM_TODO_SEQ.NEXTVAL, 2, 'ppt만들기', 0, 5, TEAM_TODO_SEQ.CURRVAL, SYSDATE);
     INSERT INTO TEAM_TODO (ttNO, tNO, ttCONTENT, ttCHECK, tmNO, ttORDER, ttRDATE)
-        VALUES (TEAM_TODO_SEQ.NEXTVAL, 1, 'service단 만들기', 0, 2, TEAM_TODO_SEQ.CURRVAL, SYSDATE);
+        VALUES (TEAM_TODO_SEQ.NEXTVAL, 2, 'service단 만들기', 0, 5, TEAM_TODO_SEQ.CURRVAL, SYSDATE);
+    COMMIT;
     -- (3) 팀 투두 항목 삭제
     DELETE FROM TEAM_TODO WHERE ttNO=3;
+    -- 팀 투두 항목 수정
+    UPDATE TEAM_TODO SET ttCONTENT = 'ddd',
+                         tmNO=2
+                    WHERE ttNO =2 AND tNO=2;
     -- (4) 팀 투두 항목 순서 바꾸기
     UPDATE TEAM_TODO SET ttORDER = 2
                     WHERE ttNO=1;
@@ -302,25 +200,23 @@
     -- (1) 글목록(startRow부터 endRow까지)
     SELECT * FROM 
         (SELECT ROWNUM RN, A.* FROM 
-            (SELECT T.* FROM TEAMBOARD T
-                        ORDER BY tGROUP DESC, tSTEP) A)
+            (SELECT T.*, M.mNAME FROM TEAMBOARD T, MEMBER M
+                                 WHERE T.MID = M.MID
+                        ORDER BY trdate DESC) A)
         WHERE RN BETWEEN 1 AND 11; -- DAO에 들어갈 QUERY
        
     -- (2) 글갯수
     SELECT COUNT(*) FROM TEAMBOARD;
     -- (3) 글쓰기(원글)
-    INSERT INTO TEAMBOARD (tNUM, mID, tTITLE, tCONTENT, tFILENAME,  
-            tGROUP, tSTEP, tINDENT, tIP)
-        VALUES (TEAMBOARD_SEQ.NEXTVAL, 'aaa','title','content', null, 
-            TEAMBOARD_SEQ.CURRVAL, 0, 0, '192.168.10.01');
+    INSERT INTO TEAMBOARD (tNUM, mID, tTITLE, tCONTENT, tIP)
+        VALUES (TEAMBOARD_SEQ.NEXTVAL, 'aaa','title','content', '192.168.10.01');
     -- (4) Hit 하나 올리기(1번글 조회수 하나 올리기)
     UPDATE TEAMBOARD SET tHIT = tHIT +1 WHERE tNUM=1;
     -- (5) NUM으로 글 dto보기
-    SELECT T.* FROM TEAMBOARD T WHERE tNUM=1;
+    SELECT T.*, M.mNAME FROM TEAMBOARD T, MEMBER M WHERE tNUM=1;
     -- (6) 글 수정하기
     UPDATE TEAMBOARD SET tTITLE = '바뀐제목',
                         tCONTENT = '본문',
-                        tFILENAME = NULL,
                         tIP = '192.168.151.10',
                         tRDATE = SYSDATE
                 WHERE tNUM = 1;
@@ -328,53 +224,43 @@
     COMMIT;
     DELETE FROM TEAMBOARD WHERE tNUM=3;
     ROLLBACK;
-    -- (8) 답변글 추가전 STEP a 수행
-    UPDATE TEAMBOARD SET tSTEP = tSTEP+1 
-        WHERE tGROUP = 10 AND tSTEP>0;
-    -- (9) 답변글 쓰기
-    INSERT INTO TEAMBOARD (tNUM, mID, tTITLE, tCONTENT, tFILENAME,
-            tGROUP, tSTEP, tINDENT, tIP)
-        VALUES (TEAMBOARD_SEQ.NEXTVAL, 'aaa','reply','content', null,
-            10, 1, 1, '192.168.10.151');
     
     -- TEAM_COMMENTBOARD
     select tnum from teamboard;
     -- (1) 댓글목록(startRow부터 endRow까지)
         SELECT TR.* FROM TEAM_COMMENTBOARD TR
-                    ORDER BY tcGROUP DESC, tcSTEP;
+                    ORDER BY tcGROUP DESC, tcRDATE;
         -- 그냥 출력 시 사용
         SELECT TR.* FROM TEAM_COMMENTBOARD TR WHERE tNUM=12
-                    ORDER BY tcGROUP DESC, tcSTEP;
+                    ORDER BY tcGROUP DESC, tcRDATE;
     SELECT * FROM 
         (SELECT ROWNUM RN, A.* FROM 
         (SELECT TC.* FROM TEAM_COMMENTBOARD TC WHERE tNUM=12
-                    ORDER BY tcGROUP DESC, tcSTEP) A)
+                    ORDER BY tcGROUP DESC, tcINDENT, tcRDATE) A)
         WHERE RN BETWEEN 1 AND 11; -- DAO에 들어갈 QUERY
     select * from TEAM_COMMENTBOARD where tcnum=1;
     -- (2) 댓글갯수
-    SELECT COUNT(*) FROM TEAM_COMMENTBOARD;
+    SELECT COUNT(*) FROM TEAM_COMMENTBOARD WHERE tNUM=12;
     -- (3) 댓글쓰기(원글)
     INSERT INTO TEAM_COMMENTBOARD (tcNUM, mID, tNUM, tcCONTENT, 
-            tcGROUP, tcSTEP, tcINDENT, tcIP)
+            tcGROUP, tcINDENT, tcIP)
         VALUES (TEAM_COMMENTBOARD_SEQ.NEXTVAL, 'aaa', 1, 'commentContent',
-            TEAM_COMMENTBOARD_SEQ.CURRVAL, 0, 0, '192.168.10.01');
+            TEAM_COMMENTBOARD_SEQ.CURRVAL, 0, '192.168.10.01');
     -- (4) 댓글 수정하기
     UPDATE TEAM_COMMENTBOARD SET tcCONTENT = '바뀐댓글',
-                         tcIP = '192.168.151.10',
-                         tcRDATE = SYSDATE
+                         tcIP = '192.168.151.10'
                 WHERE tcNUM = 1;
     -- (5) 글 삭제하기(NUM으로 삭제하기)
     COMMIT;
     DELETE FROM TEAM_COMMENTBOARD WHERE tcNUM=1;
     ROLLBACK;
-    -- (6) 답댓글 추가전 STEP a 수행
-    UPDATE TEAM_COMMENTBOARD SET tcSTEP = tcSTEP+1 
-        WHERE tcGROUP = 1 AND tcSTEP>0;
+    -- (6) 답댓글 추가전 STEP a 수행(TNUM으로 작성자 ID가져오기)
+    SELECT TC.*, M.mNAME FROM TEAM_COMMENTBOARD TC, MEMBER M WHERE TC.MID=M.MID AND TCNUM=1;
     -- (7) 답댓글 쓰기
-    INSERT INTO TEAM_COMMENTBOARD (tcNUM, mID, tNUM, tcCONTENT,
-            tcGROUP, tcSTEP, tcINDENT, tcIP)
-        VALUES (TEAM_COMMENTBOARD_SEQ.NEXTVAL, 'aaa', 1, 'reply',
-            1, 1, 1, '192.168.10.151');
+    INSERT INTO TEAM_COMMENTBOARD (tcNUM, mID, tcMENTION, tNUM, tcCONTENT, 
+            tcGROUP, tcINDENT, tcIP)
+        VALUES (TEAM_COMMENTBOARD_SEQ.NEXTVAL, 'aaa', 'ddd',1, 'reply',
+           1, 1, '192.168.10.151');
     
     
     
