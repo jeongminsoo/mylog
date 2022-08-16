@@ -10,10 +10,10 @@
 	width: 1600px;
 	height: 850px;
 	/* 이미지 */
-	background-image: url("../img/index1_notbutton.png");
+	background-image: url("../../img/index1_notbutton.png");
 	/* header 붙이기 */
 	overflow: hidden;
-	background-image: url( "../img/main_wraper.png" );
+	background-image: url( "../../img/main_wraper.png" );
 	background-repeat: no-repeat;
 }
 

@@ -13,7 +13,7 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <!-- <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
-<link href="${conPath }/css/timetable.css" rel="stylesheet">
+<link href="${conPath }/css/timer/timetable.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	$(document).ready(function() {

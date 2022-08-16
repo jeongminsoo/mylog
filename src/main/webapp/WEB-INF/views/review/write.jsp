@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${conPath }/css/rwrite.css" rel="stylesheet">
+<link href="${conPath }/css/review/rwrite.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="${conPath }/resources/ckeditor/ckeditor.js"></script>
 

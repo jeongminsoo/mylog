@@ -13,7 +13,7 @@
 <style>
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<link href="${conPath }/css/timer.css" rel="stylesheet">
+<link href="${conPath }/css/timer/timer.css" rel="stylesheet">
 <script>
 	function playtoggle() {
 
