@@ -7,14 +7,43 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>아이디 찾기</title>
 	<link href="${conPath}/css/style.css" rel="stylesheet">
-	<script	 src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-			$(document).ready(function(){
-				
-			});
-	</script>
+	<style>
+		#wrap{
+			width : 700px;
+			margin : 0 auto;
+			text-align : center;
+		}
+		#wrap table {
+			width : 500px;
+			margin : 50px auto;
+		}
+		
+		#wrap table tr {
+			height : 50px;
+		}
+		
+		input:not(.btn) {
+			width : 90%;
+			border : none;
+			border-bottom : 1px solid lightgray;
+			border-radius: 15px;
+			height : 90%;
+			font-size : 1.2em;
+			padding-left : 10px;
+		}
+		
+		.btn {
+			border : none;
+			width : 100px;
+			font-weight : bold;
+			font-size : 1.1em;
+			background-color : #03045E;
+			color : white;
+			
+		}
+	</style>
 </head>
 <body>
 	<c:if test="${searchResult != null }">
@@ -22,19 +51,17 @@
 			alert('${searchResult}')
 		</script>
 	</c:if>
-	<div>
+	<div id="wrap">
 		<form action="${conPath }/member/searchIdPw.do" method="post">
 			<table>
-				<caption>아이디 찾기</caption>
+				<caption><h3>아이디 찾기</h3></caption>
 				<col style="width : 200px;">
 				<tr>
-					<th>닉네임</th>
-					<td><input type="text" name="mname" class="mname" value="${mname }"></td>
+					<td><input type="text" name="mname" class="mname" value="${mname }" placeholder="NICKNAME"></td>
 				</tr>
 				<tr>
-					<th>이메일</th>
 					<td>
-						<input type="email" name="memail" class="memail" id="memail" value="${memail }">
+						<input type="email" name="memail" class="memail" id="memail" value="${memail }" placeholder="EMAIL">
 					</td>
 				</tr>
 			</table>

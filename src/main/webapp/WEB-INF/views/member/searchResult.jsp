@@ -9,11 +9,48 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link href="${conPath}/css/style.css" rel="stylesheet">
+	<style>
+		#wrap{
+			width : 700px;
+			margin : 0 auto;
+			text-align : center;
+			font-size : 1.2em;
+		}
+		#wrap table {
+			width : 500px;
+			margin : 50px; auto;
+		}
+		
+		#wrap table tr {
+			height : 50px;
+		}
+		#wrap table th {
+			background-color : #DFF6FF;
+		}
+		input:not(button) {
+			width : 90%;
+			border : none;
+			border-bottom : 1px solid lightgray;
+			border-radius: 15px;
+			height : 90%;
+			font-size : 1.2em;
+			padding-left : 10px;
+		}
+		
+		button {
+			border : none;
+			width : 100px;
+			font-weight : bold;
+			font-size : 1.1em;
+			background-color : #03045E;
+			color : white;
+			
+		}
+	</style>
 </head>
 <body>
-	<div>
+	<div id="wrap">
 			<table>
-				<caption>검색 결과는 아래와 같습니다.</caption>
 				<col style="width : 200px;">
 				<col style="width : 200px;">
 				<tr>
