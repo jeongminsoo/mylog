@@ -61,6 +61,13 @@
             console.error( error );
         } );
     </script>
+    <script>
+		$(document).ready(function(){
+			//인덱스
+			$('#teamboard').addClass('nowIndex');
+	  	});
+	</script>
+	<jsp:include page="../main/header.jsp"/>
 </div>
 </body>
 </html>
