@@ -17,7 +17,10 @@ public class ReviewBoard {
 	private int rstatus;
 	private String rip;
 	private int cnt;
+	private int rcnt;
 	private int hno;
+	private String shoption;
+	private String shname;
 	private int startRow;
 	private int endRow;
 	

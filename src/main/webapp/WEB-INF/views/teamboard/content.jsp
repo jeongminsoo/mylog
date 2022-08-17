@@ -43,7 +43,10 @@
 			})
 		});
 	</script>
-	
+	<script>
+		//인덱스
+		$('#myList').addClass('nowIndex');
+	</script>
 </head>
 <body>
 	<c:if test="${teamboarddeleteResult eq 1 }">
@@ -147,6 +150,13 @@
 		  		[ <a href="${conPath }/teamboard/content.do?tnum=${content.tnum}&pageNum=${param.pageNum }&tcpageNum=${tcpaging.endPage+1 }"> 다 음 </a>]
 		  	</c:if>
 		</div>
+		<script>
+			$(document).ready(function(){
+				//인덱스
+				$('#teamboard').addClass('nowIndex');
+		  	});
+		</script>
+	<jsp:include page="../main/header.jsp"/>
 	</div>
 	</div>
 </body>

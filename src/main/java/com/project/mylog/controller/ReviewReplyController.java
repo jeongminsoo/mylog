@@ -1,5 +1,8 @@
 package com.project.mylog.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +22,9 @@ public class ReviewReplyController {
 	
 
 	@RequestMapping(value="write", method=RequestMethod.POST)
-	public String replyWrite(int rnum, Model model, ReviewReplyBoard replyBoard) {
+	public String replyWrite(int rnum, Model model, ReviewReplyBoard replyBoard, HttpSession session, HttpServletRequest request) {
 		model.addAttribute("rnum", rnum);
-		model.addAttribute("replywrite", replyservice.reviewReplyWrite(replyBoard));
+		model.addAttribute("replywrite", replyservice.reviewReplyWrite(session, request, replyBoard));
 		return "forward:../review/content.do";
 	}
 	
@@ -68,8 +71,11 @@ public class ReviewReplyController {
 	}
 	
 	@RequestMapping(value="comment", method= RequestMethod.POST)
-	public String replyComment(ReviewReplyBoard replyBoard) {
-		 replyservice.reviewReplyComment(replyBoard);
+	public String replyComment(HttpSession session, HttpServletRequest request, ReviewReplyBoard replyBoard) {
+		System.out.println(6);
+		replyservice.reviewReplyComment(session, request, replyBoard);
+		System.out.println(replyBoard);
+		System.out.println(7);
 		return "forward:content.do";
 	}
 
