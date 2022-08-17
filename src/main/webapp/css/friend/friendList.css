@@ -4,7 +4,7 @@
 	width: 1600px;
 	height: 850px;
 	margin : 60px 36px;
-	background-image: url(../img/main_wraper.png);
+	background-image: url("../../img/main_wraper.png");
 	overflow : hidden;
 }
 
@@ -118,7 +118,7 @@
 #followMe table td {
 	height: 50px;
 }
-button {
+button, .btn {
 	width : 50%;
 	height : 90%;
 	font-weight : bold;
@@ -133,7 +133,7 @@ button {
 	right : -75px;
 	width : 40px;
 	height : 40px;
-	background-image: url(../img/alert.png);
+	background-image: url("../../img/alert.png");
 	background-size : cover;
 	position: relative;
 	float : left;
@@ -170,4 +170,10 @@ button {
 }
 input#checkbox:checked + .alert_list {
 	display: block;
+}
+.alert_list table td {
+	padding : 5px;
+}
+.appendBtn {
+	text-align : center;
 }

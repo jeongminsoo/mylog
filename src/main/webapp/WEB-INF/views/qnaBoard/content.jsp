@@ -54,13 +54,12 @@
 						<button onclick="location.href='${conPath}/qna/updateView.do?qno=${qna.qno }&pageNum=${param.pageNum}'">수정</button>
 						<button onclick="location.href='${conPath}/qna/delete.do?qno=${qna.qno }&pageNum=${param.pageNum}'">삭제</button>
 					</c:if>
-					<c:if test="${admin != null && member.mid eq qna.aid }">
+					<c:if test="${admin != null && admin.aid eq qna.aid }">
 						<button onclick="location.href='${conPath}/qna/updateView.do?qno=${qna.qno }&pageNum=${param.pageNum}'">수정</button>
 						<button onclick="location.href='${conPath}/qna/delete.do?qno=${qna.qno }&pageNum=${param.pageNum}'">삭제</button>
 					</c:if>
 					<c:if test="${admin != null }">
 						<button onclick="location.href='${conPath}/qna/replyView.do?qno=${qna.qno }&pageNum=${param.pageNum}'">답글작성</button>
-						<button onclick="location.href='${conPath}/qna/updateView.do?qno=${qna.qno }&pageNum=${param.pageNum}'">답글수정</button>
 					</c:if>
 					<button onclick="location.href='${conPath}/qna/list.do?pageNum=${param.pageNum}'">목록</button>
 				</div>
