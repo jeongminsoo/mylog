@@ -9,6 +9,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link href="${conPath}/css/team/myteamList.css" rel="stylesheet">
+	
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
 		function teamDetail(tno){
@@ -106,6 +107,13 @@
 		</table>
 		</div>
 	</div>
+	<script>
+		$(document).ready(function(){
+			//인덱스
+			$('#group').addClass('nowIndex');
+	  	});
+	</script>
+	<jsp:include page="../main/header.jsp"/>
 	</div>
 </div>
 </body>

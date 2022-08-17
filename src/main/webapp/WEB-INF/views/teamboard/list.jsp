@@ -15,6 +15,10 @@
 			location.href = '${conPath}/teamboard/content.do?tnum='+tnum+'&pageNum=${paging.currentPage}'+'&tcpageNum=1';
 		}
 	</script>
+	<script>
+		//인덱스
+		$('#myList').addClass('nowIndex');
+	</script>
 </head>
 <body>
 	<c:set var="SUCCESS" value="1"/>
@@ -104,6 +108,13 @@
 	  		[ <a href="${conPath }/teamboard/list.do?pageNum=${paging.endPage+1 }"> 다 음 </a>]
 	  	</c:if>
   	</div>
+  	<script>
+		$(document).ready(function(){
+			//인덱스
+			$('#teamboard').addClass('nowIndex');
+	  	});
+	</script>
+	<jsp:include page="../main/header.jsp"/>
 	</div>
 </div>
 </body>

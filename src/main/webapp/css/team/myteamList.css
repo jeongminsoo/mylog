@@ -11,17 +11,14 @@ div.wrap{
 	margin : 60px 35px;
 }
 div.myTeamList_wrap{
-	border:1px solid red;
 	width : 1100px;
 	height : 600px;
 	margin:110px auto;
 }
 div.myTeamListHeader{
-	border:1px solid orange;
 	overflow: hidden;
 }
 div.myTeamListHeader div{
-	border:1px solid yellow;
 	float: left;
 	width: 440px;
 	height: 70px;
@@ -43,7 +40,6 @@ div.myTeamListHeader div:nth-child(2) a:hover{
 	border-bottom: 1px solid black;
 }
 div.myList {
-	border:1px solid green;
 	clear: both;
 	overflow: hidden;
 }
