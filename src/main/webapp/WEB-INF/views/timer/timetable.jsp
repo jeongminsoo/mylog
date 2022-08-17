@@ -17,7 +17,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	$(document).ready(function() {
-		//document.getElementById('dolist').innerHTML = "<h4>What to do ?</h4>";
+		$('#daily').addClass('nowIndex');
 
 		//타임테이블 출력
 		var array = [];
@@ -34,29 +34,25 @@
 			var tbehour = item.tbehour;
 			var tbemin = item.tbemin;
 			var tduring = item.tduring;
-			if(tbsmin < 10){
-				tbsmin='0'+tbsmin;
+			if (tbsmin < 10) {
+				tbsmin = '0' + tbsmin;
 			}
-			if(tbemin <10 ){
-				tbemin='0'+tbemin;
-				
+			if (tbemin < 10) {
+				tbemin = '0' + tbemin;
+
 			}
 			var stime = Number(tbshour + tbsmin);
 			var etime = Number(tbehour + tbemin);
 
-
-			
 			/* 	for(var i in tname){
 					document.getElementById('do').innerHTML += "<h4>"+tname+"</h4>";
 					
 				} */
-			
+
 			for (var idx = stime; idx < etime; idx++) {
 				$('.' + idx).css('background-color', 'lightgray');
 
 			}
-				
-			
 
 		});
 
@@ -81,24 +77,22 @@
 				var tbehour = item.tbehour;
 				var tbemin = item.tbemin;
 				var tduring = item.tduring;
-				if(tbsmin < 10){
-					tbsmin='0'+tbsmin;
+				if (tbsmin < 10) {
+					tbsmin = '0' + tbsmin;
 				}
-				if(tbemin <10 ){
-					tbemin='0'+tbemin;
-					
+				if (tbemin < 10) {
+					tbemin = '0' + tbemin;
+
 				}
 				var stime = Number(tbshour + tbsmin);
 				var etime = Number(tbehour + tbemin);
-				
+
 				/* 	for(var i in tname){
 						document.getElementById('do').innerHTML += "<h4>"+tname+"</h4>";
 						
 						
 					} */
-					
-				
-					
+
 				for (var idx = stime; idx < etime; idx++) {
 					$('.' + idx).css('background-color', color);
 
@@ -116,7 +110,9 @@
 		<div id="wrap">
 			<div id="timetable">
 				<h1>DAY CALENDAR</h1>
-
+				
+				<button onclick="location.href='${conPath}/timetable/view.do?tdate=${prev}'"> &lt; </button>
+				<button onclick="location.href='${conPath}/timetable/view.do?tdate=${next}'"> &gt; </button>
 				<div class="col-sm-6">
 
 
@@ -189,19 +185,22 @@
 						</table>
 					</div>
 				</div>
-				
+
 			</div>
-			
+
 			<div class="tprint">
 				<h3>What to do?</h3>
-				
-				<c:forEach var="time" items="${tableIdList }">
-					<div>${time.tname }   <span class="during">${time.tduring }분</span></div>
-				</c:forEach>
-				
+				<div class="tdocontent">
+					<c:forEach var="time" items="${tableIdList }">
+						<div>${time.tname }
+							<span class="during">${time.tduring }분</span>
+						</div>
+					</c:forEach>
+				</div>
 			</div>
 			<div id="menu">
-				<button onclick="window.open('${conPath}/timer/setting.do','_blank', 'width=630, height=400');return false">
+				<button
+					onclick="window.open('${conPath}/timer/setting.do','_blank', 'width=630, height=400');return false">
 					<img src="${conPath }/img/stopwatch.png">
 				</button>
 				<button onclick="location.href='${conPath}/main.do'">
@@ -209,6 +208,7 @@
 				</button>
 			</div>
 		</div>
+		<jsp:include page="../main/header.jsp" />
 	</div>
 </body>
 </html>
