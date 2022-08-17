@@ -68,24 +68,27 @@
 	<select id="reviewList" parameterType="ReviewBoard"
 		resultMap="ReviewBoardResult">
 		<if test="shoption=='' or shoption== null">
-			SELECT A.* 
-  			  FROM(SELECT ROWNUM RN, r.*, MNAME, (SELECT COUNT(*)FROM RPBOARD B WHERE B.RNUM= R.RNUM)AS RCNT FROM RBOARD R, MEMBER M, FRIEND F
-               	 WHERE((M.MID = R.MID AND F.MID = R.MID AND MSTATUS =1 AND RSTATUS=0) 
-                		 OR (M.MID=F.FID AND MSTATUS =1 AND RSTATUS = 1 AND F.MID=#{mid})
-                 		 OR (M.MID=R.MID AND F.MID=R.MID AND R.MID=#{mid} AND RSTATUS =2 ))ORDER BY RRDATE DESC, R.RNUM DESC)A
-				WHERE RN BETWEEN #{startRow} AND #{endRow}
+		
+		SELECT B.* FROM(
+    SELECT ROWNUM RN, A.* FROM(SELECT DISTINCT RSTATUS, RNUM,RTITLE, MNAME, RRDATE,RFILENAME,(SELECT COUNT(*)FROM RPBOARD B WHERE B.RNUM= R.RNUM)AS RCNT FROM RBOARD R, MEMBER M, FRIEND F
+                WHERE(R.MID = F.MID AND M.MID = F.MID AND MSTATUS =1 AND RSTATUS=0) 
+                 OR (R.MID=F.FID AND M.MID=F.FID AND MSTATUS =1  AND F.MID=#{mid} AND RSTATUS = 1)
+                  OR (R.MID=M.MID AND M.MID=F.MID AND M.MID=#{mid} AND RSTATUS = 2 )ORDER BY RRDATE DESC )A)B
+			WHERE RN BETWEEN #{startRow} AND #{endRow}
+			
+		
+			
 		</if>
 
 		<if test="shoption == 'rtitle'">
 		
-		
-		SELECT A.* 
-    		FROM(SELECT ROWNUM RN, r.*, MNAME, (SELECT COUNT(*)FROM RPBOARD B WHERE B.RNUM= R.RNUM)AS RCNT FROM RBOARD R, MEMBER M, FRIEND F
-                WHERE((M.MID = R.MID AND F.MID = M.MID AND MSTATUS =1 AND RSTATUS=0 AND RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%') 
-                 OR (M.MID=F.FID AND MSTATUS =1 AND RSTATUS = 1 AND F.MID=#{mid} AND RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%')
-                  OR (M.MID=R.MID AND F.MID=R.MID AND R.MID=#{mid} AND RSTATUS =2 AND RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%')) ORDER BY RRDATE DESC, R.RNUM)A
+		SELECT B.* FROM(
+    		SELECT ROWNUM RN, A.* FROM(SELECT DISTINCT RSTATUS, RNUM,RTITLE, MNAME, RRDATE,RFILENAME,(SELECT COUNT(*)FROM RPBOARD B WHERE B.RNUM= R.RNUM)AS RCNT FROM RBOARD R, MEMBER M, FRIEND F
+                WHERE(R.MID = F.MID AND M.MID = F.MID AND MSTATUS =1 AND RSTATUS=0 AND RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%') 
+                 OR (R.MID=F.FID AND M.MID=F.FID AND MSTATUS =1  AND F.MID=#{mid} AND RSTATUS = 1 AND RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%')
+                  OR (R.MID=M.MID AND M.MID=F.MID AND M.MID=#{mid} AND RSTATUS = 2 AND RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%' ) ORDER BY RRDATE DESC )A)B
 			WHERE RN BETWEEN #{startRow} AND #{endRow}
-
+	
 <!-- 			SELECT * -->
 <!-- 			FROM(SELECT ROWNUM RN, A.* -->
 <!-- 				FROM(SELECT R.*, MNAME,(SELECT COUNT(*)FROM RPBOARD B WHERE B.RNUM= R.RNUM)AS -->
@@ -111,17 +114,25 @@
 		resultType="int">
 
 		<if test="shoption=='' or shoption==null">
-			SELECT COUNT(*)CNT FROM RBOARD R, MEMBER M, FRIEND F WHERE 
-					(M.MID = R.MID AND F.MID = R.MID AND MSTATUS =1 AND RSTATUS=0) 
-                 OR (M.MID=F.FID AND MSTATUS =1 AND RSTATUS = 1 AND F.MID=#{mid})
-                  OR (M.MID=R.MID AND F.MID=R.MID AND R.MID=#{mid} AND RSTATUS =2 )
+		
+		
+		
+		SELECT COUNT(DISTINCT RNUM)CNT FROM RBOARD R, MEMBER M, FRIEND F
+                WHERE(R.MID = F.MID AND M.MID = F.MID AND MSTATUS =1 AND RSTATUS=0) 
+                 OR (R.MID=F.FID AND M.MID=F.FID AND MSTATUS =1  AND F.MID=#{mid} AND RSTATUS = 1)
+                  OR (R.MID=M.MID AND M.MID=F.MID AND M.MID=#{mid} AND RSTATUS = 2 )
+                  
+		
 		</if>
 
 		<if test="shoption=='rtitle'">
-			SELECT COUNT(*)CNT FROM RBOARD R, MEMBER M, FRIEND F 
-  			  WHERE (M.MID = R.MID AND F.MID = R.MID AND MSTATUS =1 AND RSTATUS=0 AND  RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%') 
-     		   OR (M.MID=F.FID AND MSTATUS =1 AND RSTATUS = 1 AND F.MID=#{mid}  AND  RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%') 
-      			  OR (M.MID=R.MID AND F.MID=R.MID AND R.MID=#{mid} AND RSTATUS =2 AND  RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%')
+		
+		SELECT COUNT(DISTINCT RNUM)CNT FROM RBOARD R, MEMBER M, FRIEND F 
+    WHERE (R.MID = F.MID AND M.MID = F.MID AND MSTATUS =1 AND RSTATUS=0 AND  RTITLE LIKE '%'|||#{rtitle, jdbcType=VARCHAR}||'%') 
+        OR (R.MID=F.FID AND M.MID=F.FID AND MSTATUS =1 AND RSTATUS = 1 AND F.MID=#{mid} AND  RTITLE LIKE '%'|||#{rtitle, jdbcType=VARCHAR}||'%') 
+        OR (R.MID=M.MID AND M.MID=F.MID AND R.MID=#{mid} AND RSTATUS =2 AND  RTITLE LIKE '%'|||#{rtitle, jdbcType=VARCHAR}||'%'); 
+			
+		
 		</if>
 
 

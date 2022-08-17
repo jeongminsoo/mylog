@@ -110,9 +110,10 @@
 		<div id="wrap">
 			<div id="timetable">
 				<h1>DAY CALENDAR</h1>
+				<div class="pbtn">
+					<button onclick="location.href='${conPath}/timetable/view.do?tdate=${prev}'"> &lt; </button>
+				</div>
 				
-				<button onclick="location.href='${conPath}/timetable/view.do?tdate=${prev}'"> &lt; </button>
-				<button onclick="location.href='${conPath}/timetable/view.do?tdate=${next}'"> &gt; </button>
 				<div class="col-sm-6">
 
 
@@ -143,6 +144,9 @@
 						</button>
 
 					</div>
+					<div class="nbtn">
+					<button onclick="location.href='${conPath}/timetable/view.do?tdate=${next}'"> &gt; </button>
+				</div>
 					<div id="table">
 						<table class="table table-bordered">
 							<thead>

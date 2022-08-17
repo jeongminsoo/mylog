@@ -54,7 +54,7 @@ public class ReviewController {
 	public String myReview(String pageNum, Model model,ReviewBoard reviewBoard, HttpSession session) {
 		
 		model.addAttribute("reviewList", rboardservice.myReview(session, reviewBoard, pageNum));
-		model.addAttribute("reviewPaging",new ReviewPaging(rboardservice.myReviewCnt(session, reviewBoard),pageNum));
+		model.addAttribute("myPaging",new ReviewPaging(rboardservice.myReviewCnt(session, reviewBoard),pageNum));
 		return "review/list";
 		
 	}
