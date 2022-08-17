@@ -149,6 +149,7 @@
 	/* 디자인 */
 	color : white;
 	background-color: #03045E;
+	
 }
 #main_wrap #wrap #list_wrap #diary_wrap #diaryList .list{
 	/* 위치 */
@@ -177,30 +178,33 @@
 	
 	/* 글씨체 설정 */
 	
+	/* 글씨 */
+	font-size: 16px;
 }
 #main_wrap #wrap #list_wrap #diary_wrap #diaryList .list .title{
 	/* 위치 */
 	margin-left : 15px;
 	
+	/* 크기 */
+	width : 300px;
+	
 	/* 글씨 */
 	font-size: 20px;
 	font-weight : bold;
 	
-}
-#main_wrap #wrap #list_wrap #diary_wrap #diaryList .list .status{
-	
-	/* 글씨 */
-	font-size: 16px;
-}
-#main_wrap #wrap #list_wrap #diary_wrap #diaryList .list .hit{
-	
-	/* 글씨 */
-	font-size: 16px;
+	/* 속성 */
+	display : inline-block;
+	white-space : nowrap;
+	overflow : hidden;
+	text-overflow : ellipsis;
 }
 #main_wrap #wrap #list_wrap #diary_wrap #diaryList .list .drdate{
-	
 	/* 글씨 */
-	font-size: 16px;
+	font-size: 13px;
+}
+#main_wrap #wrap #list_wrap #diary_wrap #diaryList .list .hit{
+	/* 글씨 */
+	font-size: 13px;
 }
 
 /* 글 작성 버튼 */

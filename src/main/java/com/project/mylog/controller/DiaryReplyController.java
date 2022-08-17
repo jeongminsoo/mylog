@@ -24,16 +24,16 @@ public class DiaryReplyController {
 	public String replyList(int dnum, String returnInt, String rPageNum, Model model) {
 		model.addAttribute("diaryReplyList", drService.replyList(dnum, rPageNum));
 		model.addAttribute("rPaging", new Paging(drService.replyCnt(dnum), rPageNum, 15, 5));
-		if("1".equals(returnInt)) {
+		if(returnInt != null) {
 			return "diary/listContent";
 		}
 		return "diary/myListContent";
 	}
 	
 	@RequestMapping( value = "write", method = RequestMethod.POST)
-	public String replyWrite(DiaryReply diaryReply, HttpSession session, HttpServletRequest request) {
+	public String replyWrite(DiaryReply diaryReply, String returnInt, HttpSession session, HttpServletRequest request) {
 		drService.replyWrite(diaryReply, session, request);
-		return "forward:../diary/content.do";
+		return "forward:../diary/content.do?returnInt="+returnInt;
 	}
 	
 	@RequestMapping( value = "modify", method = RequestMethod.GET)
@@ -45,7 +45,7 @@ public class DiaryReplyController {
 	@RequestMapping( value = "modify", method = RequestMethod.POST)
 	public String modify(DiaryReply diaryReply, String returnInt, HttpServletRequest request) {
 		drService.replyModify(diaryReply, request);
-		return "forward:../diary/content.do?returnInt="+returnInt;
+		return "forward:../diary/content.do";
 	}
 	
 	@RequestMapping( value = "reply", method = RequestMethod.GET)
