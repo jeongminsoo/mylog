@@ -53,9 +53,11 @@
 			</form>
 			<div id="sub_nav">
 				<ul>
+					<c:if test="${member != null }">
 					<li><a href="${conPath }/qna/list.do?pageNum=1">Q&A목록</a></li>
 					<li><a href="${conPath }/qna/writeView.do">Q&A작성</a></li>
 					<li><a href="${conPath }/qna/myList.do">My Q&A List</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
