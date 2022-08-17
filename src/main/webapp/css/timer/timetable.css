@@ -49,6 +49,33 @@
 	top:40px;
 
 }
+#wrap #timetable .pbtn button{
+	outline : none;
+	border:none;
+	background-color:#ffffff;
+	position: relative;
+	left:300px;
+	top:56px;
+	
+}
+#wrap #timetable .nbtn button{
+	outline : none;
+	border:none;
+	background-color:#ffffff;
+	position: relative;
+	left:400px;
+
+	
+}
+#wrap #timetable .nbtn button{
+	outline : none;
+	border:none;
+	background-color:#ffffff;
+	position: relative;
+	left:800px;
+
+	
+}
 #wrap #timetable #colors button{
 	outline: none;
 	border: none;
@@ -75,7 +102,7 @@
 	height:70%;
 	position: relative;
 	left : 20%;
-	top:60px;
+	top:20px;
 	
 
 }

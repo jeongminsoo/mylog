@@ -36,9 +36,7 @@ public class TimetableController {
 	@RequestMapping(value="view", method=RequestMethod.GET)
 	public String tableMake(Model model, Timetable timetable, HttpSession session) {
 		Date day = timetable.getTdate();
-		System.out.println(day);
 		Date next = new Date(day.getTime() + (60*60*24*1000));
-		System.out.println(next);
 		Date prev = new Date(day.getTime() - (60*60*24*1000));
 		model.addAttribute("tableIdList",ttableservice.tableList(session, timetable));
 		model.addAttribute("next",next);

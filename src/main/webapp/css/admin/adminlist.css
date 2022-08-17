@@ -28,6 +28,7 @@
 	position: relative;
 	left: 20%;
 	top: 10%;
+	
 }
 
 #main_wrap #wrap #list {
@@ -36,6 +37,28 @@
 	text-align: center;
 	left: 20%;
 	top: 20%;
+}
+#main_wrap #wrap #list .write {
+	width:100px;
+	height:30px;
+	position:relative;
+	outline : none;
+	border:none;
+	background-color: #03045e;
+	color:#ffffff;
+	margin-bottom:20px;
+	left:35%;
+	font-weight: bold;
+}
+
+#main_wrap #wrap #list .ad {
+	width:100px;
+	height:25px;
+	outline : none;
+	border:none;
+	background-color: #03045e;
+	color:#ffffff;
+	font-weight: bold;
 }
 
 #main_wrap #wrap #list table {

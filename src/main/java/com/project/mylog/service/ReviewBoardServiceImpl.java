@@ -39,7 +39,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	@Autowired
 	private HashtagDao hashtagDao;
 
-	String backupPath = "D:\\LDSwebPro\\source\\0809\\mylog\\src\\main\\webapp\\ReviewImgUpload/";
+	String backupPath = "D:\\LDSwebPro\\source\\09_2nd Project\\mylog\\src\\main\\webapp\\ReviewImgUpload/";
 
 	@Override
 	public int reviewWrite(HttpSession session, HttpServletRequest request, MultipartHttpServletRequest mRequest,
@@ -159,12 +159,10 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 //			int hno = hashtagDao.getHno(reviewBoard.getShname());
 //			reviewBoard.setHno(hno);
 //		}
-		System.out.println(2);
 		ReviewPaging rp = new ReviewPaging(reviewCount(session, reviewBoard), pageNum);
 		reviewBoard.setStartRow(rp.getStartRow());
 		reviewBoard.setEndRow(rp.getEndRow());
 		reviewBoard.setRtitle(reviewBoard.getShname());
-		System.out.println("검색 전(Rtitle) : " + reviewBoard);
 		return rboardDao.reviewList(reviewBoard);
 	}
 
