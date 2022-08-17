@@ -49,7 +49,7 @@
 			<div class="btn_wrap">
 				<input type="submit" value="등록" class="btn">
 				<input type="reset" value="초기화" class="btn">
-				<input type="button" value="목록" class="btn" onclick="location.href='${conPath}/qna/list.laf?pageNum=${param.pageNum }'">
+				<input type="button" value="목록" class="btn" onclick="location.href='${conPath}/qna/list.do?pageNum=${param.pageNum }'">
 			</div>
 		</form>
 		</div>
