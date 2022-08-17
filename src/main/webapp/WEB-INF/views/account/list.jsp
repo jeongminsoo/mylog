@@ -133,7 +133,7 @@
 											수입
 										</c:if>
 									</span>
-									<span class="content">${list.acontent }</span>
+									<span class="content"><p>${list.acontent }</p></span>
 									<span class="money">${list.aprice }원</span>
 									<button class="modify_button" id="${list.ano }">수정</button>
 									<button onclick="location.href='${conPath}/account/delete.do?ano=${list.ano }&nowDate=${nowDate }'">삭제</button>

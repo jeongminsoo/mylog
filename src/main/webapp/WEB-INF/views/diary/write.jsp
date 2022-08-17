@@ -18,6 +18,12 @@
 			});
 		});
 	</script>
+	<script>
+		$(document).ready(function(){
+			//인덱스
+			$('#myList').addClass('nowIndex');
+		});
+	</script>
 </head>
 <body>
 	<div id="main_wrap">
@@ -61,6 +67,7 @@
 				</div>
 			</form>
 		</div>
+		<jsp:include page="../main/header.jsp"/>
 	</div>
 </body>
 </html>

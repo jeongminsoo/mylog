@@ -237,6 +237,9 @@
 	/* 글씨 */
 	font-size: 16px;
 	line-height: 50px;
+	
+	/* 속성 */
+	display: inline-block;
 }
 #main_wrap #wrap #account_wrap #account_list #list .account_one .content{
 	/* 크기 */
@@ -244,9 +247,6 @@
 	
 	/* 속성 */
 	display: inline-block;
-	white-space : nowrap;
-	overflow : hidden;
-	text-overflow : ellipsis;
 }
 #main_wrap #wrap #account_wrap #account_list #list .account_one .money{
 	/* 크기 */
