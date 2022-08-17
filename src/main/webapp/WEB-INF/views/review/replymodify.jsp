@@ -14,7 +14,7 @@
 <script>
 	$(document).ready(function() {
 
-		$('.modify').click(function() {
+		/* $('.modify').click(function() {
 			//$(this).attr('id')
 			//var rpnum = $('input[name=rpnum]').val();
 			//var rnum = $('input[name=rnum]').val();
@@ -32,19 +32,18 @@
 				},
 
 			})
-		});
+		}); */
 
 	});
 </script>
 </head>
 <body>
 
-	<form id="mform" class="r_modify">
+	<form id="mform" action="${conPath}/reply/modify.do" method="post" class="r_modify">
 		<input type="hidden" name="rpnum" value="${replymview.rpnum }">
 		<input type="hidden" name="rnum" value="${replymview.rnum }">
-		<textarea rows="10" cols="100" name="rpcontent" style="width:80%; height:70px;">${replymview.rpcontent }</textarea>
-		<button id="${replymview.rpnum }" class="modify">수정완료</button>
-		<button onclick="history.back()">취소</button>
+		<textarea rows="10" cols="100" name="rpcontent" style="margin-top:10px;width:85%; height:70px;">${replymview.rpcontent }</textarea>
+		<button id="${replymview.rpnum }" class="modify cbtn">수정</button>
 	</form>
 
 </body>

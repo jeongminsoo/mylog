@@ -51,4 +51,6 @@ public class CalendarController {
 		model.addAttribute("ddate", ddate);
 		return "forward:../diary/myList.do?ddate="+ddate;
 	}
+	
+	
 }
