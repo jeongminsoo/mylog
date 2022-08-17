@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>MyLog : My List</title>
+	<title>MyLog : Today</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
@@ -169,7 +169,7 @@
 								<a href="${conPath }/diary/myList.do?ddate=${nowDate }&tdPageNum=${i}&pageNum=${paging.currentPage }">[ ${i } ]</a>
 							</c:if>
 						</c:forEach>
-						<c:if test="${ paging.endPage < paging.pageCnt }">
+						<c:if test="${ todoPaging.endPage < todoPaging.pageCnt }">
 							<a href="${conPath }/diary/myList.do?ddate=${nowDate }&tdPageNum=${todoPaging.endPage + 1 }&pageNum=${paging.currentPage }">[ 다음 ]</a>
 						</c:if>
 					</div>

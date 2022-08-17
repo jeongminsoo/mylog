@@ -177,6 +177,8 @@
 	
 	/* 글씨체 설정 */
 	
+	/* 글씨 */
+	font-size: 16px;
 }
 #main_wrap #wrap #list_wrap #diary_wrap #diaryList .list .title{
 	/* 위치 */
@@ -187,20 +189,13 @@
 	font-weight : bold;
 	
 }
-#main_wrap #wrap #list_wrap #diary_wrap #diaryList .list .status{
-	
+#main_wrap #wrap #list_wrap #diary_wrap #diaryList .list .drdate{
 	/* 글씨 */
-	font-size: 16px;
+	font-size: 13px;
 }
 #main_wrap #wrap #list_wrap #diary_wrap #diaryList .list .hit{
-	
 	/* 글씨 */
-	font-size: 16px;
-}
-#main_wrap #wrap #list_wrap #diary_wrap #diaryList .list .drdate{
-	
-	/* 글씨 */
-	font-size: 16px;
+	font-size: 13px;
 }
 
 /* 글 작성 버튼 */

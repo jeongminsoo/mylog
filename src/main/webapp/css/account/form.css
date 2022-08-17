@@ -1,0 +1,61 @@
+@charset "UTF-8";
+#form{
+}
+#form #table{
+	width : 100%;
+	height: 100%;
+}
+#form #table .title{
+	margin: 18px;
+	
+	font-size: 18px;
+	line-height: 20px;
+}
+#form #table #astatus{
+	margin: 18px;
+	
+	text-align: center;
+}
+#form #table #content input{
+	margin: 18px;
+	
+	width : 70%;
+	height: 20px;
+}
+#form #table #aprice input{
+	margin-left : 18px;
+	
+	width : 70%;
+	height: 20px;
+}
+#form #table #category select{
+	margin: 18px;
+	
+	width : 65%;
+	height: 20px;
+	
+	font-size: 17px;
+	line-height: 20px;
+}
+
+#form #table #date input{
+	height: 20px;
+}
+#form #table #date select{
+	height: 20px;
+	line-height: 20px;
+}
+#form #table #button{
+	width: 90%;
+	margin : 5px auto;
+}
+#form #table #button input{
+	width: 100%;
+	height : 30px;
+	
+	/* 디자인 */
+	color : white;
+	outline: none;
+	border: 1px solid white;
+	background-color: #03045E;
+}

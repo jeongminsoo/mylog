@@ -58,10 +58,10 @@ public class DiaryController {
 	public String content(int dnum, String returnInt, HttpSession session, Model model) {
 		DiaryBoard diaryboard = dbService.diaryContent(dnum);
 		if(diaryboard.getDtodoin() == 1) {
-			model.addAttribute("todoList", todoService.todoList(session, diaryboard.getDdate()));
+			model.addAttribute("todoList", todoService.todoInList(session, diaryboard.getDdate()));
 		}
 		model.addAttribute("diary", diaryboard);
-		return "forward:../diaryReply/replyList.do";
+		return "forward:../diaryReply/replyList.do?returnInt"+returnInt;
 	}
 	
 	@RequestMapping(value = "write", method = RequestMethod.GET)

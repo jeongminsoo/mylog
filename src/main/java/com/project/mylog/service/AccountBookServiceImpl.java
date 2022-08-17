@@ -28,7 +28,7 @@ public class AccountBookServiceImpl implements AccountBookService {
 		AccountBook accountBook = new AccountBook();
 		accountBook.setMid(((Member) session.getAttribute("member")).getMid());
 		accountBook.setAdate(Timestamp.valueOf(adate+ " 00:00:00"));
-		Paging paging =  new Paging(abDao.dailyAccountCnt(accountBook), pageNum, 15, 10);
+		Paging paging =  new Paging(abDao.dailyAccountCnt(accountBook), pageNum, 9, 10);
 		accountBook.setStartRow(paging.getStartRow());
 		accountBook.setEndRow(paging.getEndRow());
 		return abDao.dailyAccount(accountBook);
@@ -42,7 +42,7 @@ public class AccountBookServiceImpl implements AccountBookService {
 		AccountBook accountBook = new AccountBook();
 		accountBook.setMid(((Member) session.getAttribute("member")).getMid());
 		accountBook.setAdate(Timestamp.valueOf(adate+ " 00:00:00"));
-		Paging paging =  new Paging(abDao.monthlyAccountCnt(accountBook), pageNum, 15, 10);
+		Paging paging =  new Paging(abDao.monthlyAccountCnt(accountBook), pageNum, 9, 10);
 		accountBook.setStartRow(paging.getStartRow());
 		accountBook.setEndRow(paging.getEndRow());
 		return abDao.monthlyAccount(accountBook);
