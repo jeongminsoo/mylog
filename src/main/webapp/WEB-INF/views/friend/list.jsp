@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${conPath }/css/friendList.css" rel="stylesheet">
+<link href="${conPath }/css/friend/friendList.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function() {
@@ -174,7 +174,7 @@
 					<div class="alert_list">
 						<form name="frm2">
 							<table>
-								<caption><input type="submit" value="모든알림읽음"></caption>
+								<caption><input type="submit" value="모든알림읽음" class="btn"></caption>
 								<c:if test="${empty alerts }">
 									<tr>
 										<td>알림이 없습니다</td>
@@ -198,7 +198,7 @@
 							</table>
 						</form>
 						<div id="appendDiv"></div>
-						<button class="appendAlert">더보기</button>
+						<div class="appendBtn"><button class="appendAlert">더보기</button></div>
 					</div>
 				</div>
 			</div>

@@ -31,6 +31,7 @@ li {
 
 .write {
 	padding-top : 20px;
+	margin-bottom : 30px;
 	float : left;
 }
 
@@ -92,7 +93,7 @@ input:not(.btn) {
 .btn_wrap {
 	text-align: left;
 	width: 500px;
-	margin: 20px 0 0 0;
+	margin-top : 30px;
 }
 #sub_nav {
 	float : left;
