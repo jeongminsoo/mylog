@@ -19,11 +19,11 @@ public class TodoServiceImpl implements TodoService {
 	private TodoDao todoDao;
 	
 	@Override
-	public List<Todo> todoList(HttpSession session, Date tdrdate) {
+	public List<Todo> todoInList(HttpSession session, Date tdrdate) {
 		Todo todo = new Todo();
 		todo.setMid(((Member) session.getAttribute("member")).getMid());
 		todo.setTdrdate(tdrdate);
-		return todoDao.todoList(todo);
+		return todoDao.todoInList(todo);
 	}
 	
 	@Override

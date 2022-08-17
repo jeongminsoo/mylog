@@ -1,18 +1,17 @@
 --DAO QUERY
--- ★ ADMIN
-    -- 관리자 등록
+-- ADMIN
+    -- admin
     INSERT INTO ADMIN (aID, aPW, aGRADE)
         VALUES ('ADMINaaa', '111', 0);
-    -- 일반 관리자
-    -- 로그인
+    -- login admin
     SELECT * FROM ADMIN WHERE AID='aaa' AND APW='111';
-    -- 회원 탈퇴 시키기
+    -- member return
     UPDATE MEMBER SET mSTATUS = 0
         WHERE mID='aaa';
-    -- 회원 복구
+    -- member drawal
     UPDATE MEMBER SET mSTATUS = 1
         WHERE mID='aaa';
-    -- 회원 리스트 출력
+    -- memberList
     SELECT * FROM 
         (SELECT ROWNUM RN, A.* FROM 
             (SELECT M.* FROM MEMBER M
@@ -47,13 +46,13 @@
     SELECT * FROM 
 		(SELECT ROWNUM RN, A.* FROM 
             (SELECT T.*, M.mNAME FROM TEAM T, MEMBER M
-                WHERE T.MID = M.MID AND (T.tNAME LIKE '%'||'박'||'%' OR M.mNAME LIKE '%'||'박'||'%')
+                WHERE T.MID = M.MID AND (T.tNAME LIKE '%'||'�?'||'%' OR M.mNAME LIKE '%'||'�?'||'%')
 		        ORDER BY TNO DESC) A)
             WHERE RN BETWEEN 1 AND 1;
     -- (7) teamTotCnt
     SELECT COUNT(*) FROM TEAM;
     
--- ★ TEAM_MEMBER(join team)
+-- TEAM_MEMBER(join team)
     -- (1) myTeamList
     SELECT T.*, M.mNAME 
         FROM TEAM_MEMBER TM, TEAM T, MEMBER M 
@@ -94,7 +93,7 @@
     -- (12) deleteTeamMember
     DELETE FROM TEAM_MEMBER WHERE tNO=1;
 
--- ★ TEAM_TODO
+-- TEAM_TODO
     -- (1) teamTodoList
     SELECT TT.*, TM.mID, M.mNAME 
         FROM TEAM_TODO TT, TEAM_MEMBER TM, TEAM T, MEMBER M
@@ -106,11 +105,11 @@
         WHERE TT.tmNO=TM.tmNO AND TM.mID=M.mID AND TTNO=1;
     -- (3) makeTeamTodo
     INSERT INTO TEAM_TODO (ttNO, tNO, ttCONTENT, ttCHECK, tmNO, ttORDER, ttRDATE)
-        VALUES (TEAM_TODO_SEQ.NEXTVAL, 1, '다하자', 0, 1, TEAM_TODO_SEQ.CURRVAL, '2022-08-18');
+        VALUES (TEAM_TODO_SEQ.NEXTVAL, 1, '?��?��?��', 0, 1, TEAM_TODO_SEQ.CURRVAL, '2022-08-18');
     -- (4) deleteTeamTodo
     DELETE FROM TEAM_TODO WHERE ttNO=1;
     -- (5) modifyTeamTodo
-    UPDATE TEAM_TODO SET ttCONTENT='다하기!',
+    UPDATE TEAM_TODO SET ttCONTENT='?��?���?!',
         tmNO=1
         WHERE ttNO = 1 AND tNO=1;
     -- (6) orderingTeamTodo
@@ -122,7 +121,7 @@
     -- (8) deleteTeamTodoList
     DELETE FROM TEAM_TODO WHERE tNO=1;
                     
--- ★ TEAMBOARD
+-- TEAMBOARD
     -- (1) teamBoardList
     SELECT * FROM 
         (SELECT ROWNUM RN, A.* FROM 
@@ -150,7 +149,7 @@
     -- (7) teamBoardDelete
     DELETE FROM TEAMBOARD WHERE tNUM=1;
 
--- ★ TEAM_COMMENTBOARD
+-- TEAM_COMMENTBOARD
     -- (1) teamCommentList
     SELECT * FROM 
         (SELECT ROWNUM RN, A.* FROM 

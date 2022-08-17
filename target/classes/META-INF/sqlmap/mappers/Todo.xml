@@ -12,6 +12,13 @@
 		<result property="tdrdate" column="tdrdate"/>
 	</resultMap>
 	
+	<select id="todoInList" parameterType="Todo" resultMap="TodoResult">
+		SELECT * FROM TODO
+		      WHERE MID = #{mid}
+		         AND TDRDATE = #{tdrdate}
+		      ORDER BY TDCHECK, TDNO
+	</select>
+	
 	<select id="todoList" parameterType="Todo" resultMap="TodoResult">
 		SELECT * 
 		    FROM (SELECT ROWNUM RN, A.*
