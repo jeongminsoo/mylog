@@ -78,6 +78,11 @@
 	
 	/* 디자인 */
 	border-bottom : none;
+	
+	/* 속성 */
+	white-space : nowrap;
+	overflow : hidden;
+	text-overflow : ellipsis;
 }
 #main_wrap #wrap #content_wrap #content .writer{
 	/* 위치 */

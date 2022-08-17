@@ -61,6 +61,14 @@ public class DiaryController {
 			model.addAttribute("todoList", todoService.todoInList(session, diaryboard.getDdate()));
 		}
 		model.addAttribute("diary", diaryboard);
+		if(diaryboard.getDstatus() == 0) {
+			if(returnInt != null) {
+				model.addAttribute("path", "diaryList.do");
+			}else {
+				model.addAttribute("path", "myList.do");
+			}
+			return "diary/privateContent";
+		}
 		return "forward:../diaryReply/replyList.do?returnInt"+returnInt;
 	}
 	

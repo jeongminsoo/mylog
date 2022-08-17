@@ -29,6 +29,7 @@
 <body>
 	<form action="${conPath }/account/write.do" method="post" id="form">
 		<div id="table">
+			<div id="table_title">ACCOUNT BOOK WRITE</div>
 			<div id="content">
 				<span class="title">내용</span>
 				<input type="text" id="acontent" name="acontent"  required="required">

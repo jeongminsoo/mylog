@@ -21,7 +21,7 @@
 				let writeWindow 
 					= window.open("${conPath}/account/write.do?nowDate="+nowDate,
 									"MyLog : Account Write",
-									"width=500, height=400, top=400px, left=900")
+									"width=500, height=350, top=400px, left=900")
 			});
 			// 수정 폼 띄우기
 			$('.modify_button').click(function(){
@@ -29,7 +29,7 @@
 				let modifyWindow 
 					= window.open("${conPath}/account/modify.do?ano="+ano,
 									"MyLog : Account Modify",
-									"width=500, height=400, top=400px, left=900")
+									"width=500, height=350, top=400px, left=900")
 			});
 			
 			//인덱스

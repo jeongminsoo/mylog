@@ -240,10 +240,13 @@
 }
 #main_wrap #wrap #account_wrap #account_list #list .account_one .content{
 	/* 크기 */
-	width : 430px;
+	width : 420px;
 	
 	/* 속성 */
 	display: inline-block;
+	white-space : nowrap;
+	overflow : hidden;
+	text-overflow : ellipsis;
 }
 #main_wrap #wrap #account_wrap #account_list #list .account_one .money{
 	/* 크기 */
@@ -251,6 +254,18 @@
 	
 	/* 속성 */
 	display: inline-block;
+}
+#main_wrap #wrap #account_wrap #account_list #list .account_one button{
+	/* 크기 */
+	width : 50px;
+	height: 30px;
+	
+	/* 디자인 */
+	outline : none;
+	border : none;
+	color: white;
+	cursor : pointer;
+	background-color: #03045E;
 }
 
 #main_wrap #wrap #account_wrap #account_list #write_button{

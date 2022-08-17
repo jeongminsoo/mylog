@@ -36,15 +36,25 @@
 					}
 				});
 			});
+			
+			$('form').submit(function(){
+				$.ajax({
+					url : '${conPath}/alert/read.do',
+					type : 'get',
+					dataType : 'html',
+					success : function(data){
+						$('#list').html(data);
+					}
+				});
+			});
 		});
 	</script>
 </head>
 <body>
-	<a href="${conPath }/main/main.do">홈으로</a>
-	<div>
-		<form action="${conPath }/alert/read.do" method="post">
+	<div id="list">
+		<form>
 			<table>
-				<caption><input type="submit" value="모두읽음처리"></caption>
+				<caption><input type="submit" value="모든알림읽음"></caption>
 				<c:if test="${empty alerts }">
 					<tr>
 						<td>알림이 없습니다</td>
@@ -68,8 +78,8 @@
 					</c:forEach>
 				</c:if>
 			</table>
-			<div id="appendDiv"></div>
 		</form>
+		<div id="appendDiv"></div>
 		<button class="appendAlert">더보기</button>
 	</div>
 </body>

@@ -64,7 +64,7 @@
 							<button onclick="location.href='${conPath}/diary/delete.do?dnum=${diary.dnum}&returnInt=1'">삭제</button>
 							<button onclick="location.href='${conPath}/diary/modify.do?dnum=${diary.dnum}&returnInt=1'">수정</button>
 						</c:if>
-						<button onclick="location.href='${conPath}/diary/diaryList.do?pageNum=${param.pageNum}'">목록</button>
+						<button onclick="location.href='${conPath}/diary/diaryList.do?pageNum=${param.pageNum }'">목록</button>
 					</div>
 					<div class="content_title">내용</div>
 					<div class="content">

@@ -99,10 +99,18 @@
 	/* 위치 */
 	margin-left : 30px;
 	
+	/* 크기 */
+	width : 500px;
+	
 	/* 글씨 */
 	font-size: 20px;
 	font-weight : bold;
 	
+	/* 속성 */
+	display : inline-block;
+	white-space : nowrap;
+	overflow : hidden;
+	text-overflow : ellipsis;
 }
 #main_wrap #wrap #diary_wrap #diaryList .list .drdate{
 	/* 글씨 */

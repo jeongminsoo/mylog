@@ -56,9 +56,9 @@
 						<span>${diary.dtitle }</span>
 					</div>
 					<div class="button">
-						<button onclick="location.href='${conPath}/diary/myList.do?ddate=${diary.ddate }'">목록</button>
-						<button onclick="location.href='${conPath}/diary/modify.do?dnum=${diary.dnum}&ddate=${diary.ddate }'">수정</button>
 						<button onclick="location.href='${conPath}/diary/delete.do?dnum=${diary.dnum}&ddate=${diary.ddate }'">삭제</button>
+						<button onclick="location.href='${conPath}/diary/modify.do?dnum=${diary.dnum}&ddate=${diary.ddate }'">수정</button>
+						<button onclick="location.href='${conPath}/diary/myList.do?ddate=${diary.ddate }'">목록</button>
 					</div>
 					<div class="content_title">내용</div>
 					<div class="content">

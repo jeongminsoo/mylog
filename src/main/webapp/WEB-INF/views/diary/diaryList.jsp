@@ -24,7 +24,7 @@
 				<div id="diaryList">
 					<div id="title">DIARY LIST</div>
 					<c:forEach var="diary" items="${diaryList }">
-						<div class="list" onclick="location.href='${conPath }/diary/content.do?dnum=${diary.dnum }&pageNum=${param.pageNum }&returnInt=1'">
+						<div class="list" onclick="location.href='${conPath }/diary/content.do?dnum=${diary.dnum }&pageNum=${paging.currentPage }&returnInt=1'">
 							<span class="title">${diary.dtitle }</span>
 							<span class="writer">작성자 | ${diary.mname }</span>
 							<c:if test="${diary.dstatus eq 0 }">

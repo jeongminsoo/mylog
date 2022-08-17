@@ -149,6 +149,7 @@
 	/* 디자인 */
 	color : white;
 	background-color: #03045E;
+	
 }
 #main_wrap #wrap #list_wrap #diary_wrap #diaryList .list{
 	/* 위치 */
@@ -184,10 +185,18 @@
 	/* 위치 */
 	margin-left : 15px;
 	
+	/* 크기 */
+	width : 300px;
+	
 	/* 글씨 */
 	font-size: 20px;
 	font-weight : bold;
 	
+	/* 속성 */
+	display : inline-block;
+	white-space : nowrap;
+	overflow : hidden;
+	text-overflow : ellipsis;
 }
 #main_wrap #wrap #list_wrap #diary_wrap #diaryList .list .drdate{
 	/* 글씨 */
