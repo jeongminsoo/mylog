@@ -111,21 +111,39 @@ SELECT D.*, MNAME
     WHERE D.MID=F.FID AND M.MID=F.FID AND DSTATUS > 0 AND F.MID='aaa';
 
 -- 나에게 공개된 글 (전체공개/친구공개) 모두 보기(diaryList)
-SELECT A.* 
-    FROM (SELECT ROWNUM RN, D.*, MNAME
-                FROM DIARYBOARD D, FRIEND F, MEMBER M
-                WHERE (D.MID=M.MID AND DSTATUS = 2 AND MSTATUS=1)  OR
-                            (D.MID=F.FID AND M.MID=F.FID AND DSTATUS = 1 AND F.MID='aaa' AND MSTATUS=1) OR
-                            (D.MID=M.MID AND M.MID='aaa')
-                ORDER BY DRDATE DESC) A
+SELECT B.* 
+    FROM (SELECT ROWNUM RN, A.*
+                FROM (SELECT DISTINCT DNUM, DTITLE, DHIT, DRDATE, MNAME, DSTATUS
+                            FROM DIARYBOARD D, FRIEND F, MEMBER M
+                                WHERE (D.MID=M.MID AND DSTATUS = 2 AND MSTATUS=1)  OR
+                                            (D.MID=F.FID AND M.MID=F.FID AND DSTATUS = 1 AND F.MID='aaa' AND MSTATUS=1) OR
+                                            (D.MID=M.MID AND M.MID=F.MID AND DSTATUS = 0 AND M.MID='aaa' )
+                                ORDER BY DRDATE DESC) A ) B
     WHERE RN BETWEEN 1 AND 10;
+
+SELECT * FROM DIARYBOARD;
+-- 전체공개
+SELECT DISTINCT DNUM, DTITLE, DHIT, DRDATE, MNAME
+    FROM DIARYBOARD D, MEMBER M, FRIEND F
+    WHERE D.MID=M.MID AND M.MID=F.MID AND M.MID = 'aaa' AND DSTATUS = 2;
+
+-- 친구 공개
+SELECT D.*, MNAME
+    FROM DIARYBOARD D, MEMBER M, FRIEND F
+    WHERE D.MID=F.FID AND M.MID=F.FID AND F.MID = 'aaa' AND DSTATUS = 1;
+    
+    
+select * from diaryboard;
 
 -- 나에게 공개된 글 전체 갯수(diaryCnt)
 SELECT COUNT(*) CNT
-    FROM DIARYBOARD D, FRIEND F, MEMBER M
-    WHERE (D.MID=M.MID AND DSTATUS = 2 AND MSTATUS=1)  OR
-                (D.MID=F.FID AND M.MID=F.FID AND DSTATUS = 1 AND F.MID='aaa' AND MSTATUS=1) OR
-                (D.MID=M.MID AND M.MID='aaa');
+    FROM (SELECT ROWNUM RN, A.*
+                FROM (SELECT DISTINCT DNUM, DTITLE, DHIT, DRDATE, MNAME, DSTATUS
+                            FROM DIARYBOARD D, FRIEND F, MEMBER M
+                                WHERE (D.MID=F.MID AND M.MID=F.MID AND DSTATUS = 2 AND M.MID = 'aaa' AND MSTATUS=1)  OR
+                                            (D.MID=F.FID AND M.MID=F.FID AND DSTATUS = 1 AND F.MID='aaa' AND MSTATUS=1) OR
+                                            (D.MID=M.MID AND M.MID=F.MID AND DSTATUS = 0 AND M.MID='aaa' )
+                                ORDER BY DRDATE DESC) A ) B;
 
 
 
