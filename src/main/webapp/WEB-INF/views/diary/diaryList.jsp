@@ -20,23 +20,29 @@
 <body>
 	<div id="main_wrap">
 		<div id="wrap">
-			<div id="diaryList">
-				<c:forEach var="diary" items="${diaryList }">
-					<div class="list" onclick="location.href='${conPath }/diary/content.do?dnum=${diary.dnum }&pageNum=${param.pageNum }&returnInt=1'">
-						<span>${diary.dtitle }</span>
-						<c:if test="${diary.dstatus eq 0 }">
-							<span class="status">비밀 일기</span>
-						</c:if>
-						<c:if test="${diary.dstatus eq 1 }">
-							<span class="status">친구 공개</span>
-						</c:if>
-						<c:if test="${diary.dstatus eq 2 }">
-							<span class="status">전체 공개</span>
-							<span class="hit">조회수 : ${diary.dhit }</span>
-						</c:if>
-						<span class="drdate">작성일 : ${diary.drdate }</span>
-					</div>
-				</c:forEach>
+			<div id="diary_wrap">
+				<div id="diaryList">
+					<div id="title">DIARY LIST</div>
+					<c:forEach var="diary" items="${diaryList }">
+						<div class="list" onclick="location.href='${conPath }/diary/content.do?dnum=${diary.dnum }&pageNum=${paging.currentPage }&returnInt=1'">
+							<span class="title">${diary.dtitle }</span>
+							<span class="writer">작성자 | ${diary.mname }</span>
+							<c:if test="${diary.dstatus eq 0 }">
+								<span class="status">비밀 일기</span>
+							</c:if>
+							<c:if test="${diary.dstatus eq 1 }">
+								<span class="status">친구 공개</span>
+							</c:if>
+							<c:if test="${diary.dstatus eq 2 }">
+								<span class="status">전체 공개</span>
+							</c:if>
+							<span class="drdate">작성일 | <fmt:formatDate value="${diary.drdate }" pattern="yyyy.MM.dd"/></span>
+							<c:if test="${diary.dstatus >= 1 }">
+								<span class="hit">조회수 | ${diary.dhit }</span>
+							</c:if>
+						</div>
+					</c:forEach>
+				</div>
 				<div class="paging">
 					<c:if test="${paging.startPage > paging.blockSize }">
 						<a href="${conPath }/diary/diaryList.do?pageNum=${paging.startPage-1 }">[ 이전 ]</a>
