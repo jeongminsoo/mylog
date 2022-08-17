@@ -85,16 +85,9 @@
 		SELECT B.* FROM(
     		SELECT ROWNUM RN, A.* FROM(SELECT DISTINCT RSTATUS, RNUM,RTITLE, MNAME, RRDATE,RFILENAME,(SELECT COUNT(*)FROM RPBOARD B WHERE B.RNUM= R.RNUM)AS RCNT FROM RBOARD R, MEMBER M, FRIEND F
                 WHERE(R.MID = F.MID AND M.MID = F.MID AND MSTATUS =1 AND RSTATUS=0 AND RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%') 
-                 OR (R.MID=F.FID AND M.MID=F.FID AND MSTATUS =1  AND F.MID=#{mid} AND RSTATUS = 1 AND RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%')
+                 OR (R.MID=F.FID AND M.MID=F.FID AND MSTATUS =1 AND F.MID=#{mid} AND RSTATUS = 1 AND RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%')
                   OR (R.MID=M.MID AND M.MID=F.MID AND M.MID=#{mid} AND RSTATUS = 2 AND RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%' ) ORDER BY RRDATE DESC )A)B
 			WHERE RN BETWEEN #{startRow} AND #{endRow}
-	
-<!-- 			SELECT * -->
-<!-- 			FROM(SELECT ROWNUM RN, A.* -->
-<!-- 				FROM(SELECT R.*, MNAME,(SELECT COUNT(*)FROM RPBOARD B WHERE B.RNUM= R.RNUM)AS -->
-<!-- 				cnt FROM RBOARD R, MEMBER M WHERE M.MID = R.MID AND RTITLE LIKE -->
-<!-- 				'%'||#{rtitle, jdbcType=VARCHAR}||'%' ORDER BY RRDATE DESC)A) -->
-<!-- 			WHERE RN BETWEEN #{startRow} AND #{endRow} -->
 		</if>
 	</select>
 
@@ -128,16 +121,16 @@
 		<if test="shoption=='rtitle'">
 		
 		SELECT COUNT(DISTINCT RNUM)CNT FROM RBOARD R, MEMBER M, FRIEND F 
-    WHERE (R.MID = F.MID AND M.MID = F.MID AND MSTATUS =1 AND RSTATUS=0 AND  RTITLE LIKE '%'|||#{rtitle, jdbcType=VARCHAR}||'%') 
-        OR (R.MID=F.FID AND M.MID=F.FID AND MSTATUS =1 AND RSTATUS = 1 AND F.MID=#{mid} AND  RTITLE LIKE '%'|||#{rtitle, jdbcType=VARCHAR}||'%') 
-        OR (R.MID=M.MID AND M.MID=F.MID AND R.MID=#{mid} AND RSTATUS =2 AND  RTITLE LIKE '%'|||#{rtitle, jdbcType=VARCHAR}||'%'); 
+    WHERE (R.MID = F.MID AND M.MID = F.MID AND MSTATUS =1 AND RSTATUS=0 AND  RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%') 
+        OR (R.MID=F.FID AND M.MID=F.FID AND MSTATUS =1 AND RSTATUS = 1 AND F.MID=#{mid} AND RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%') 
+        OR (R.MID=M.MID AND M.MID=F.MID AND R.MID=#{mid} AND RSTATUS =2 AND  RTITLE LIKE '%'||#{rtitle, jdbcType=VARCHAR}||'%')
 			
 		
 		</if>
 
 
 		<if test="shoption=='hname'">
-			SELECT COUNT(*) CNT FROM(SELECT H.HNAME FROM BOARD_TAG B, HASHTAG H WHERE B.HNO = H.HNO AND B.HNO =#{hno});
+			SELECT COUNT(*) CNT FROM(SELECT H.HNAME FROM BOARD_TAG B, HASHTAG H WHERE B.HNO = H.HNO AND B.HNO =#{hno})
 		</if>
 
 
