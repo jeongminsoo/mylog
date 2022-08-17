@@ -71,6 +71,11 @@
 #main_wrap #wrap #content_wrap .rbtn{
 	width:30%;
 	height:60%;
+	outline:none;
+	border:none;
+	background-color: #03045e;
+	color:#ffffff;
+	font-weight: bold;
 	
 }
 
@@ -87,11 +92,28 @@
 	width:90%;
 	height:70%;
 	position: relative;
-	top:5%;
+	top:2%;
 }
+#main_wrap #wrap #comment #cmt .idt1{
+	width:85%;
+	position: relative;
+	left:5%;
+}
+
 #main_wrap #wrap #comment #cmt .reply{
 
 	margin-top:2%;		
+}
+#main_wrap #wrap #comment .cbtn{
+	width:50px;
+	height:22px;
+	margin-top:2px;
+	outline:none;
+	border:none;
+	background-color: #03045e;
+	color:#ffffff;
+	font-weight: bold;
+
 }
 #main_wrap #wrap #comment #cmt #paging{
 	width:50%;
