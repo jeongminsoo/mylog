@@ -40,7 +40,6 @@ div.myTeamListHeader div:nth-child(2) a:hover{
 	border-bottom: 1px solid black;
 }
 div.myList {
-	border:1px solid green;
 	clear: both;
 	overflow: hidden;
 }
