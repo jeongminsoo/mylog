@@ -70,6 +70,13 @@
 				</td></tr>
 			</c:if>
 		</table>
+		<script>
+			$(document).ready(function(){
+				//인덱스
+				$('#group').addClass('nowIndex');
+		  	});
+		</script>
+	<jsp:include page="../main/header.jsp"/>
 	</div>
 </body>
 </html>

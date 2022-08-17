@@ -9,6 +9,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link href="${conPath}/css/team/teamDetail.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<div class="wrap" style="background-image: url('../img/main_wraper.png'); border: 1px solid white">
@@ -39,6 +40,13 @@
 			</table>
 		</form>
 	</div>
+		<script>
+			$(document).ready(function(){
+				//인덱스
+				$('#teamboard').addClass('nowIndex');
+	  		});
+		</script>
+		<jsp:include page="../main/header.jsp"/>
 	</div>
 </body>
 </html>
