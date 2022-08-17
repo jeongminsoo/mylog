@@ -223,18 +223,6 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 		return rboardDao.myReviewCnt(reviewBoard);
 	}
 
-//	@Override
-//	public List<ReviewBoard> rSearchList(String pageNum, String shname) {
-//		ReviewPaging rp = new ReviewPaging(reviewCount(shname), pageNum);
-//		System.out.println(shname);
-//		ReviewBoard reviewBoard = new ReviewBoard();
-//		reviewBoard.setStartRow(rp.getStartRow());
-//		reviewBoard.setEndRow(rp.getEndRow());
-//		System.out.println(hashtagDao.getHno(shname));
-//		int hno = hashtagDao.getHno(shname);
-//		reviewBoard.setHno(hno);
-//
-//		return rboardDao.rSearchList(reviewBoard);
-//	}
+
 
 }
