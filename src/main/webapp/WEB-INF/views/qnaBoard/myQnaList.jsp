@@ -15,6 +15,69 @@
 			$('#qna').addClass('nowIndex');
 		});
 	</script>
+	<style>
+	a {
+		text-decoration : none;
+		color : black;
+	}
+	li {
+		list-style: none;
+		font-size : 1.2em;
+		font-weight : bold;
+		margin : 20px 0;
+	}
+		#main_wrap {
+	width: 1600px;
+	height: 850px;
+	margin: 60px 35px;
+	background-image : url(../img/main_wraper.png);
+	position : absolute;
+}
+
+#wrap {
+	width: 1000px;
+	height: 600px;
+	margin : 50px 0 0 150px;
+	border: 1px solid white;
+	text-align: center;
+	position : relative;
+}
+
+#qnaList table {
+	border-collapse: collapse;
+	font-size : 1.2em;
+}
+#qnaList table caption {
+	text-align : left;
+}
+#qnaList table th {
+	background-color : #DFF6FF;
+}
+
+#qnaList table .title {
+	padding-left : 10px;
+	text-align : left;
+}
+
+#qnaList table .bottom {
+	background-color : #DFF6FF;
+}
+
+#qnaList table tr {
+	height : 50px;
+}
+
+.paging {
+	margin : 30px 0 0 30px; 
+	font-size : 1.2em;
+}
+
+#sub_nav {
+	position : absolute;
+	top : 100px;
+	right : 300px;
+}
+	</style>
 </head>
 <body>
 	<div id="main_wrap">
@@ -78,6 +141,17 @@
 					</c:if>
 				</c:forEach>
 				<a href="${conPath }/qna/myList.do?pageNum=${paging.endPage == paging.pageCnt ? paging.endPage : paging.endPage + 1 }"><img src="${conPath }/img/btn0010.gif" height="25"></a>
+<<<<<<< HEAD
+=======
+		</div>
+		</div>
+		<div id="sub_nav">
+			<ul>
+				<li><a href="${conPath }/qna/list.do?pageNum=1">Q&A목록</a></li>
+				<li><a href="${conPath }/qna/writeView.do">Q&A작성</a></li>
+				<li><a href="${conPath }/qna/myList.do">My Q&A List</a></li>
+			</ul>
+>>>>>>> 5b36680540e33d2b8b9fda9a1dd3bc2ebf16a14c
 		</div>
 		</div>
 		<div id="sub_nav">

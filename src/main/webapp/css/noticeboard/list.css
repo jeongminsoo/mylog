@@ -63,6 +63,10 @@ li {
 }
 
 #sub_nav {
+<<<<<<< HEAD
+=======
+	position: absolute;
+>>>>>>> 5b36680540e33d2b8b9fda9a1dd3bc2ebf16a14c
 	top: 100px;
 	right: 300px;
 }
