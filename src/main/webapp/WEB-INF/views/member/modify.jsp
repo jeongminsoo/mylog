@@ -48,10 +48,6 @@
 				}
 			});
 			
-			$('input[name="logout"]').click(function(){
-				location.href='${conPath}/member/logout.do';
-			});
-			
 			$('#mypage').addClass('nowIndex');
 		});
 	</script>
@@ -122,7 +118,6 @@
 						<input type="submit" value="정보수정" class="btn">
 						<input type="button" value="취소" class="btn" onclick="location.href='../main.do'">
 						<input type="button" value="회원탈퇴" id="${myInfo.mid }" class="btn" name="outMember">
-						<input type="button" value="로그아웃" name="logout" class="btn">
 					</div>
 				</form>
 			</div>

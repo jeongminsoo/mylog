@@ -67,12 +67,13 @@ li {
 }
 
 input:not(.btn) {
-	width: 90%;
-	height: 100%;
+	width: 95%;
+	height : 70%;
 }
 
-.ncontent {
+.qcontent {
 	width: 95%;
+	height : 90%;
 	resize: none;
 }
 
@@ -95,7 +96,7 @@ input:not(.btn) {
 }
 #sub_nav {
 	float : left;
-	margin : 50px 0 0 247px;
+	margin : 50px 0 0 285px;
 }
 
 .sc {

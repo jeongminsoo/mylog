@@ -122,6 +122,10 @@ button {
 	width : 50%;
 	height : 90%;
 	font-weight : bold;
+	color : white;
+	background-color : #03045E;
+	border : none;
+	border-radius : 15px;
 }
 
 #alert_icon {

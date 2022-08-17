@@ -8,83 +8,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${conPath }/css/style.css" rel="stylesheet">
+	<link href="${conPath }/css/qnaboard/form.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			
+			$('#qna').addClass('nowIndex');
 		});
 	</script>
-	<style>
-		a {
-		text-decoration : none;
-		color : black;
-	}
-	li {
-		list-style: none;
-		font-size : 1.2em;
-		font-weight : bold;
-		margin : 20px 0;
-	}
-		#main_wrap {
-	width: 1600px;
-	height: 850px;
-	margin: 60px 35px;
-	background-image : url(../img/main_wraper.png);
-	position : absolute;
-}
-
-#wrap {
-	width: 1000px;
-	height: 600px;
-	margin : 50px 0 0 150px;
-	border: 1px solid white;
-	text-align: center;
-	position : relative;
-}
-
-.write table {
-	font-size : 1.2em;
-}
-.write table caption {
-	text-align : left;
-}
-.write table th {
-	background-color : #DFF6FF;
-}
-
-#sub_nav {
-	position : absolute;
-	top : 100px;
-	right : 300px;
-}
-
-input:not(.btn) {
-	width : 90%;
-	height : 90%;
-}
-.qcontent {
-	width : 95%;
-	resize: none;
-}
-
-.btn {
-	width: 80px;
-	border: none;
-	height: 30px;
-	border-radius: 10px;
-	background-color: #03045E;
-	color: white;
-	margin-left: 5px;
-	font-weight : bold;
-	font-size : 1em;
-}
-.btn_wrap {
-	text-align : left;
-	width : 500px;
-	margin : 20px 0 0 0;
-}
-	</style>
 </head>
 <body>
 	<div id="main_wrap">
@@ -103,16 +33,16 @@ input:not(.btn) {
 					<col style="width : 600px;">
 					<tr>
 						<th>제목</th>
-						<td><input type="text" name="qtitle" class="qtitle" value="RE:${qna.qtitle }"></td>
+						<td class="sc"><input type="text" name="qtitle" class="qtitle" value="RE:${qna.qtitle }"></td>
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<td><input type="text" name="qwriter" class="qwriter"
+						<td class="sc"><input type="text" name="qwriter" class="qwriter"
 							value="관리자" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td  style="height : 200px; padding : 10px;"><textarea name="qcontent" class="qcontent" rows="15" cols="10"></textarea></td>
+						<td class="sc" style="height : 200px; padding : 10px;"><textarea name="qcontent" class="qcontent" rows="15" cols="10"></textarea></td>
 					</tr>
 				</table>
 			</div>
@@ -123,6 +53,7 @@ input:not(.btn) {
 			</div>
 		</form>
 		</div>
+		<jsp:include page="../main/header.jsp" />
 	</div>
 </body>
 </html>

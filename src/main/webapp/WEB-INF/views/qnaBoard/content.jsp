@@ -51,12 +51,12 @@
 				</table>
 				<div class="btn_wrap">
 					<c:if test="${member != null && member.mid eq qna.mid }">
-						<button onclick="location.href='${conPath}/qna/updateView.do?qNo=${qna.qno }&pageNum=${param.pageNum}'">수정</button>
-						<button onclick="location.href='${conPath}/qna/delete.do?qNo=${qna.qno }&pageNum=${param.pageNum}'">삭제</button>
+						<button onclick="location.href='${conPath}/qna/updateView.do?qno=${qna.qno }&pageNum=${param.pageNum}'">수정</button>
+						<button onclick="location.href='${conPath}/qna/delete.do?qno=${qna.qno }&pageNum=${param.pageNum}'">삭제</button>
 					</c:if>
 					<c:if test="${admin != null && member.mid eq qna.aid }">
-						<button onclick="location.href='${conPath}/qna/updateView.do?qNo=${qna.qno }&pageNum=${param.pageNum}'">수정</button>
-						<button onclick="location.href='${conPath}/qna/delete.do?qNo=${qna.qno }&pageNum=${param.pageNum}'">삭제</button>
+						<button onclick="location.href='${conPath}/qna/updateView.do?qno=${qna.qno }&pageNum=${param.pageNum}'">수정</button>
+						<button onclick="location.href='${conPath}/qna/delete.do?qno=${qna.qno }&pageNum=${param.pageNum}'">삭제</button>
 					</c:if>
 					<c:if test="${admin != null }">
 						<button onclick="location.href='${conPath}/qna/replyView.do?qno=${qna.qno }&pageNum=${param.pageNum}'">답글작성</button>
