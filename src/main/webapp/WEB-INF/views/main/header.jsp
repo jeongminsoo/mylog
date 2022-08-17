@@ -17,7 +17,7 @@
 	    	<a id="calendar" href="${conPath }/calendar.do">CALENDAR</a>
 		    <a id="myList" href="${conPath }/diary/myList.do?ddate=${today }">TODAY</a>
 		    <a id="diary" href="${conPath }/diary/diaryList.do">DIARY LIST</a>
-	    	<a id="daily" href="${conPath }/timetable/view.do?">DAILY</a>
+	    	<a id="daily" href="${conPath }/timetable/view.do">DAILY</a>
 	    	<a id="review" href="${conPath }/review/list.do">REVIEW</a>
 	    	<a id="account" href="${conPath }/account/list.do">ACCOUNT</a>
 		   	<a id="group" href="${conPath}/teammember/myteamList.do">GROUP</a>
