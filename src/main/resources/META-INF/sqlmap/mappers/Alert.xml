@@ -10,6 +10,11 @@
 		<result column="alcode" property="alcode"/>
 		<result column="alcheck" property="alcheck"/>
 		<result column="aldate" property="aldate"/>
+		<result column="codename" property="codename"/>
+		<result column="midname" property="midname"/>
+		<result column="fidname" property="fidname"/>
+		<result column="startRow" property="startRow"/>
+		<result column="endRow" property="endRow"/>
 	</resultMap>
 	<select id="myAlertList" parameterType="Alert" resultMap="AlertResult">
 		SELECT * 
@@ -27,7 +32,7 @@
 		SELECT COUNT(*) FROM (SELECT * FROM ALERT WHERE (MID = #{mid} OR FID = #{mid}) AND ALCHECK = 0)
 	</select>
 	<insert id="makeAlert" parameterType="Alert">
-		INSERT INTO ALERT (ALNO, MID, FID, ALCODE)
+		INSERT INTO ALERT (ALNO, MID, FID, ALCODE) 
 			VALUES (ALERT_SEQ.NEXTVAL, #{mid}, #{fid}, #{alcode})
 	</insert>
 	<update id="readAlert" parameterType="int">
