@@ -22,7 +22,7 @@
             		FROM (SELECT AL.*, CODENAME, M1.MNAME MIDNAME, M2.MNAME FIDNAME
                     		FROM ALERT AL, ALERT_CODE AC, MEMBER M1, MEMBER M2
                     		WHERE M1.MID = AL.MID AND AL.FID = M2.MID AND AL.ALCODE = AC.ALCODE AND (AL.MID = #{mid} OR AL.FID = #{mid})
-                    		ORDER BY ALDATE DESC) A)
+                    		ORDER BY ALCHECK, ALDATE DESC) A)
     		WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>
 	<select id="countMyAlert" parameterType="String" resultType="int">
