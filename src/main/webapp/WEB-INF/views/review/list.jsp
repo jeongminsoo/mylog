@@ -13,7 +13,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	$(document).ready(function() {
-
+		//인덱스
+		$('#review').addClass('nowIndex');
 	});
 </script>
 </head>
@@ -27,10 +28,11 @@
 			<button id="mylist" onclick="location.href='${conPath}/review/myReview.do'"><img class ="menu_img" src="${conPath }/img/reviewuser.png" title="내 글 보기"></button>
 
 			<div id="allList">
-
+			<div class="">
 				<c:if test="${empty reviewList }">
-			해당 글이 존재하지 않습니다
-		</c:if>
+					해당 글이 존재하지 않습니다
+				</c:if>
+			</div>
 				<c:if test="${not empty reviewList }">
 					<c:forEach var="review" items="${reviewList }">
 						<div class="rlist">
@@ -43,7 +45,7 @@
 							</c:if>
 							<div class="info">
 							
-								<a href="${conPath }/review/content.do?rnum=${review.rnum}&pageNum=${reviewPaging.currentPage}&repageNum=1">${review.rtitle }</a>(${review.cnt })
+								<a href="${conPath }/review/content.do?rnum=${review.rnum}&pageNum=${reviewPaging.currentPage}&repageNum=1">${review.rtitle }</a>(${review.rcnt })
 								<br>
 								${review.mname }<br>
 								${review.rrdate }<br>
@@ -90,6 +92,7 @@
 				</div>
 			</div>
 		</div>
+		<jsp:include page="../main/header.jsp"/>
 	</div>
 </body>
 </html>
